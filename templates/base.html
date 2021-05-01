@@ -12,8 +12,18 @@
     </title>
 </head>
 <body>
-    {% include "partials/header.html" %}
+    <header>
+    {% include "partials/nav.html" %}
 
+    
+    {% block search-bar %}
+        
+        <form method="get" action="{% url "studios:search" %}">
+            <input name="name" placeholder="Search by Name" />
+        </form>
+
+    {% endblock search-bar %}
+    </header> 
     
     {% block content %}
         
