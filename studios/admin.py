@@ -17,6 +17,7 @@ class StudioAdmin(admin.ModelAdmin):
 
     list_display = (
         "name",
+        "en_name",
         "phone_number",
         "kakao_chat",
         "city",
