@@ -1,8 +1,10 @@
 {% extends "base.html" %}
 
-{%block page_name%}
+{%block page_title%}
 
-{%endblock page_name%}
+    Home
+
+{%endblock page_title%}
 
 
 {% block content %} 
@@ -10,8 +12,11 @@
     
     {% for studio in studios %}
         <h1>
-            {{studio.name}}
+            <a href="{% url "studios:concept" studio.pk%}">
+                {{studio.name}}
+            </a>
         </h1>
+        <p>{{studio.bio}}</p>
     {% endfor %}
         
 

@@ -9,6 +9,7 @@ class Studio(core_models.TimeStampedModel):
     """Studio Model Definition"""
 
     name = models.CharField(max_length=50)
+    en_name = models.CharField(max_length=50, default="")
     phone_number = PhoneNumberField(default="")
     kakao_chat = models.CharField(max_length=140, blank=True)
     city = models.CharField(max_length=80)
