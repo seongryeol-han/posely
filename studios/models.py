@@ -23,6 +23,7 @@ class Studio(core_models.TimeStampedModel):
         related_name="studios",
         limit_choices_to={"studio": True},
         on_delete=models.CASCADE,
+        default=False,
     )
 
     def __str__(self):
