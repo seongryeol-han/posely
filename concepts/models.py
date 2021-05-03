@@ -13,7 +13,10 @@ class Photo(core_models.TimeStampedModel):
         "Concept", related_name="photos", on_delete=models.CASCADE
     )
     studio = models.ForeignKey(
-        "studios.Studio", related_name="photos", on_delete=models.CASCADE
+        "studios.Studio",
+        related_name="photos",
+        on_delete=models.CASCADE,
+        default=False,
     )
 
     def __str__(self):
@@ -31,6 +34,7 @@ class Concept(core_models.TimeStampedModel):
         "studios.Studio",
         related_name="concepts",  # studio에서 concept을 "concepts"으로 사용하면 된다.
         on_delete=models.CASCADE,
+        default=False,
     )
 
     def __str__(self):

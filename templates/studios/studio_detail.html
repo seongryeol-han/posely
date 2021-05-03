@@ -2,7 +2,7 @@
 
 {%block page_title%}
 
-    Home
+    {{studio.name}}
 
 {%endblock page_title%}
 
@@ -14,8 +14,12 @@
 </div>   
 
 
-{% for a in studio.concepts.all  %}
-        <li>{{a.name}} {{a.price}} !sex! {{a.concept_description}}</li>
+{% for concept in studio.concepts.all  %}
+    <h1>
+        <a href="{% url "concepts:concept" concept.pk%}">
+            {{concept.name}}
+        </a>
+    </h1>
 
 {% endfor %}
 
