@@ -41,7 +41,7 @@ DJANGO_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
-    "phonenumber_field",
+    # "phonenumber_field",
 ]
 
 PROJECT_APPS = [

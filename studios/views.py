@@ -1,4 +1,4 @@
-from django.views.generic import ListView, View,DetailView
+from django.views.generic import ListView, View, DetailView
 from django.shortcuts import render
 from django.core.paginator import Paginator
 from . import models, forms
@@ -14,9 +14,11 @@ class HomeView(ListView):
     ordering = "created"
     context_object_name = "studios"
 
+
 class SelectStudio(DetailView):
     model = models.Studio
-    pk_url_kwarg = "potato"
+    pk_url_kwarg = "pk"
+
 
 class SearchView(View):
     """SearchView Definition"""

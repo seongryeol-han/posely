@@ -18,7 +18,7 @@ class User(AbstractUser):
     )
 
     avatar = models.ImageField(upload_to="avatars", blank=True)
-    phone_number = PhoneNumberField(default="")
+    phone_number = models.CharField(max_length=10, blank=True)
     gender = models.CharField(choices=GENDER_CHOICES, max_length=10, blank=True)
     birthdate = models.DateField(blank=True, null=True)
     studio = models.BooleanField(default=False)
