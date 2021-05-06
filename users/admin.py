@@ -24,6 +24,7 @@ class CustomUserAdmin(UserAdmin):
 
     list_display = (
         "username",
+        "first_name",
         "gender",
         "studio",
     )
