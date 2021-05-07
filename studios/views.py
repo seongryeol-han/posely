@@ -24,36 +24,34 @@ class SearchView(View):
     """SearchView Definition"""
 
     def get(self, request):
+        
+        form = forms.SearchForm(request.GET)
 
-        name = request.GET.get("name")
-        address = request.GET.get("address")
+        if form.is_valid() :
+            
+            search_data = form.cleaned_data.get("search_name_address")
+            
+            if len(search_data)!=0:
+                filter_args1 = {}
+                filter_args2 = {}
 
-        if bool(name) or bool(address):
+                filter_args1["name__startswith"] = search_data
 
-            form = forms.SearchForm(request.GET)
+                filter_args2["address__contains"] = search_data
 
-            if form.is_valid():
-                name = form.cleaned_data.get("name")
-                address = form.cleaned_data.get("address")
-                filter_args = {}
-
-                if name is not None:
-                    filter_args["name__startswith"] = name
-
-                if address is not None:
-                    filter_args["address__contains"] = address
-
-                qs = models.Studio.objects.filter(**filter_args).order_by("-created")
-
+                qs1 = models.Studio.objects.filter(**filter_args1).order_by("-created")
+                qs2 = models.Studio.objects.filter(**filter_args2).order_by("-created")
+                
+                qs = qs1|qs2
+                
                 paginator = Paginator(qs, 10, orphans=5)
 
                 page = request.GET.get("page", 1)
-
+            
                 studios = paginator.get_page(page)
                 return render(
                     request, "studios/search.html", {"form": form, "studios": studios}
                 )
 
-        else:
-            form = forms.SearchForm()
-            return render(request, "studios/search.html", {"form": form})
+        form = forms.SearchForm()
+        return render(request, "studios/search.html", {"form": form})
