@@ -3,5 +3,5 @@ from . import models
 
 
 class SearchForm(forms.Form):
-    name = forms.CharField(required=False)
-    address = forms.CharField(required=False)
+    search_name_address = forms.CharField(required=False,label="search!")
+    

@@ -25,34 +25,31 @@ class SearchView(View):
 
     def get(self, request):
 
-        name = request.GET.get("name")
-        address = request.GET.get("address")
+        search_data = request.GET.get("search_name_address")
 
-        if bool(name) or bool(address):
+        form = forms.SearchForm(request.GET)
 
-            form = forms.SearchForm(request.GET)
+        if form.is_valid():
+            filter_args1 = {}
+            filter_args2 = {}
 
-            if form.is_valid():
-                name = form.cleaned_data.get("name")
-                address = form.cleaned_data.get("address")
-                filter_args = {}
+            filter_args1["name__startswith"] = search_data
 
-                if name is not None:
-                    filter_args["name__startswith"] = name
+            filter_args2["address__contains"] = search_data
 
-                if address is not None:
-                    filter_args["address__contains"] = address
+            qs1 = models.Studio.objects.filter(**filter_args1).order_by("-created")
+            qs2 = models.Studio.objects.filter(**filter_args2).order_by("-created")
+            
+            qs = qs1|qs2
+            
+            paginator = Paginator(qs, 10, orphans=5)
 
-                qs = models.Studio.objects.filter(**filter_args).order_by("-created")
-
-                paginator = Paginator(qs, 10, orphans=5)
-
-                page = request.GET.get("page", 1)
-
-                studios = paginator.get_page(page)
-                return render(
-                    request, "studios/search.html", {"form": form, "studios": studios}
-                )
+            page = request.GET.get("page", 1)
+           
+            studios = paginator.get_page(page)
+            return render(
+                request, "studios/search.html", {"form": form, "studios": studios}
+            )
 
         else:
             form = forms.SearchForm()
