@@ -24,14 +24,9 @@ class SearchView(View):
     """SearchView Definition"""
 
     def get(self, request):
-
-        #search_data = request.GET.get("search_name_address")
         
         form = forms.SearchForm(request.GET)
-        
-        #print("@@@@@@@@@@@@@")
-        #print(form)
-        #print("@@@@@@@@@@@@@")
+
         if form.is_valid() :
             
             search_data = form.cleaned_data.get("search_name_address")
