@@ -77,9 +77,6 @@ def kakao_callback(request):
             headers={"Authorization": f"Bearer {access_token}"},
         )
         profile_json = profile_request.json()
-        print("@@@@@@@@@@@@@@@")
-        print(profile_json)
-        print("@@@@@@@@@@@@@@@")
         email = profile_json.get("kakao_account").get("email")
         if email is None:
             raise KakaoException()
@@ -109,3 +106,13 @@ def kakao_callback(request):
         return redirect(reverse("core:home"))
     except KakaoException:
         return redirect(reverse("users:login"))
+
+#네이버 파트 로그인 
+def naver_login(request):
+    pass
+
+class NaverException(Exception):
+    pass
+
+def naver_callback(request):
+    pass

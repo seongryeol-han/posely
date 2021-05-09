@@ -8,6 +8,8 @@ urlpatterns = [
     path("logout", views.log_out, name="logout"),
     path("login/kakao", views.kakao_login, name="kakao-login"),
     path("login/kakao/callback", views.kakao_callback, name="kakao-callback"),
+    path("login/naver", views.kakao_login, name="naver-login"),
+    path("login/naver/callback", views.kakao_callback, name="naver-callback"),
     path("signup", views.SignUpView.as_view(), name="signup"),
     # path("verify/<str:key>", views.complete_verification, name="complete-verification"),
 ]
