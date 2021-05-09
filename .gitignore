@@ -139,5 +139,5 @@ cython_debug/
 
 
 #0509
-/migrations
+*/migrations
 db.sqlite3 
