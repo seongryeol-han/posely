@@ -137,6 +137,7 @@ dmypy.json
 cython_debug/
 
 
-#eomjunseung
-config/settings.py
+
+#0509
+/migrations
 db.sqlite3 

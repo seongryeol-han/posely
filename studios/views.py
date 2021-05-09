@@ -35,7 +35,7 @@ class SearchView(View):
         if form.is_valid() :
             
             search_data = form.cleaned_data.get("search_name_address")
-            
+        
             if len(search_data)!=0:
                 filter_args1 = {}
                 filter_args2 = {}
