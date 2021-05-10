@@ -51,7 +51,7 @@ class SignUpForm(forms.ModelForm):  # model에 채우는 폼, uniqueness를 검�
         try:
             user = models.User.objects.get(email=email)
             self.add_error(
-                "email", forms.ValidationError("이미 가입된 이메일입니다. 다른 이메일을 입력해 주세요.")
+                "email", forms.ValidationError("이미 가입된 이메일입니다. 다른 이메일을 입력해주세요.")
             )
 
         except models.User.DoesNotExist:
