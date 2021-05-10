@@ -9,6 +9,8 @@ black = "*"
 pillow = "*"
 django-address = "*"
 django-phonenumber-field = {extras = ["phonenumberslite"], version = "*"}
+requests = "*"
+django-dotenv = "*"
 
 [dev-packages]
 flake8 = "*"

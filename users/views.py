@@ -2,13 +2,14 @@ import os
 import requests
 from django.views.generic import FormView
 from django.urls import reverse_lazy
-from django.shortcuts import redirect, reverse,render
+from django.shortcuts import redirect, reverse, render
 from django.contrib.auth import authenticate, login, logout
 from . import forms, models
 from django.core.files.base import ContentFile
 from django.contrib.auth.forms import User
 
 # Create your views here.
+
 
 class LoginView(FormView):
     template_name = "users/login.html"
@@ -46,9 +47,12 @@ class SignUpView(FormView):
         return super().form_valid(form)
 
 
-#카카오 파트 05.09 
+# 카카오 파트 05.09
 def kakao_login(request):
     client_id = os.environ.get("KAKAO_ID")
+    print("@@@@@@@@@@@")
+    print(client_id)
+    print("@@@@@@@@@@@")
     redirect_uri = "http://127.0.0.1:8000/users/login/kakao/callback"
     return redirect(
         f"https://kauth.kakao.com/oauth/authorize?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code"
@@ -63,6 +67,7 @@ def kakao_callback(request):
     try:
         code = request.GET.get("code")
         client_id = os.environ.get("KAKAO_ID")
+        print(client_id)
         redirect_uri = "http://127.0.0.1:8000/users/login/kakao/callback"
         token_request = requests.get(
             f"https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id={client_id}&redirect_uri={redirect_uri}&code={code}"
