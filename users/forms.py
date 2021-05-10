@@ -1,10 +1,16 @@
 from django import forms
+from django.contrib.auth import password_validation
 from . import models
 
 
 class LoginForm(forms.Form):
-    email = forms.EmailField()
-    password = forms.CharField(widget=forms.PasswordInput)
+    email = forms.EmailField(
+        widget=forms.TextInput(attrs={"type": "email", "placeholder": ("이메일 주소")}),
+        label="",
+    )
+    password = forms.CharField(
+        widget=forms.PasswordInput(attrs={"placeholder": "비밀번호"}), label=""
+    )
 
     def clean(self):
         email = self.cleaned_data.get("email")
@@ -24,19 +30,51 @@ class LoginForm(forms.Form):
 class SignUpForm(forms.ModelForm):  # model에 채우는 폼, uniqueness를 검증한다.
     class Meta:
         model = models.User
-        fields = ("first_name", "email", "phone_number")
+        fields = ("email", "first_name", "phone_number")
+        widgets = {
+            "first_name": forms.TextInput(attrs={"placeholder": "이름"}),
+            "email": forms.EmailInput(attrs={"placeholder": "이메일"}),
+            "phone_number": forms.TextInput(attrs={"placeholder": "휴대폰 번호"}),
+        }
+        labels = {"first_name": "", "email": "", "phone_number": ""}
 
     # password는 따로 적어줘야함. 암호화 되어있기 때문에. 그리고 model에 없으니까.
-    password = forms.CharField(widget=forms.PasswordInput)
-    password1 = forms.CharField(widget=forms.PasswordInput, label="Confirm Password")
+    password = forms.CharField(
+        widget=forms.PasswordInput(attrs={"placeholder": "비밀번호"}), label=""
+    )
+    password1 = forms.CharField(
+        widget=forms.PasswordInput(attrs={"placeholder": "비밀번호 확인"}), label=""
+    )
+
+    def clean_email(self):
+        email = self.cleaned_data.get("email")
+        try:
+            user = models.User.objects.get(email=email)
+            self.add_error(
+                "email", forms.ValidationError("이미 가입된 이메일입니다. 다른 이메일을 입력해주세요.")
+            )
+
+        except models.User.DoesNotExist:
+            return email
 
     def clean_password1(self):
         password = self.cleaned_data.get("password")
         password1 = self.cleaned_data.get("password1")
         if password != password1:
-            raise forms.ValidationError("Password confirmation does not match")
+            raise forms.ValidationError("확인 비밀번호가 일치하지 않습니다.")
         else:
             return password
+
+    def _post_clean(self):
+        super()._post_clean()
+        # Validate the password after self.instance is updated with form data
+        # by super().
+        password = self.cleaned_data.get("password1")
+        if password:
+            try:
+                password_validation.validate_password(password, self.instance)
+            except forms.ValidationError as error:
+                self.add_error("password1", error)
 
     # model에서 username에 email 넣고 password 저장하고
     def save(self, *args, **kwargs):

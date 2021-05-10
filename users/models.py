@@ -7,7 +7,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 class User(AbstractUser):
 
-    """ Custom User Model """
+    """Custom User Model"""
 
     GENDER_MALE = "male"
     GENDER_FEMALE = "female"
@@ -28,14 +28,14 @@ class User(AbstractUser):
     )
 
     avatar = models.ImageField(upload_to="avatars", blank=True)
-    phone_number = models.CharField(max_length=10, blank=True)
+    phone_number = models.CharField(max_length=13, blank=True)
     gender = models.CharField(choices=GENDER_CHOICES, max_length=10, blank=True)
     birthdate = models.DateField(blank=True, null=True)
     studio = models.BooleanField(default=False)
 
-    #05.09 social login check
+    # 05.09 social login check
     email_verified = models.BooleanField(default=False)
 
     login_method = models.CharField(
-       max_length=50, choices=LOGIN_CHOICES, default=LOGIN_EMAIL
+        max_length=50, choices=LOGIN_CHOICES, default=LOGIN_EMAIL
     )
