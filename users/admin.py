@@ -6,7 +6,7 @@ from . import models
 @admin.register(models.User)
 class CustomUserAdmin(UserAdmin):
 
-    """ Custom User Admin """
+    """Custom User Admin"""
 
     fieldsets = UserAdmin.fieldsets + (
         (
@@ -14,9 +14,11 @@ class CustomUserAdmin(UserAdmin):
             {
                 "fields": (
                     "avatar",
-                    "gender",
-                    "birthdate",
+                    "nickname",
+                    "petname",
+                    "phone_number",
                     "studio",
+                    "bio",
                 )
             },
         ),
@@ -24,7 +26,7 @@ class CustomUserAdmin(UserAdmin):
 
     list_display = (
         "username",
-        "first_name",
-        "gender",
+        "nickname",
+        "petname",
         "studio",
     )

@@ -30,13 +30,13 @@ class LoginForm(forms.Form):
 class SignUpForm(forms.ModelForm):  # model에 채우는 폼, uniqueness를 검증한다.
     class Meta:
         model = models.User
-        fields = ("email", "first_name", "phone_number")
+        fields = ("email", "nickname", "phone_number")
         widgets = {
-            "first_name": forms.TextInput(attrs={"placeholder": "이름"}),
             "email": forms.EmailInput(attrs={"placeholder": "이메일"}),
+            "nickname": forms.TextInput(attrs={"placeholder": "닉네임"}),
             "phone_number": forms.TextInput(attrs={"placeholder": "휴대폰 번호"}),
         }
-        labels = {"first_name": "", "email": "", "phone_number": ""}
+        labels = {"email": "", "nickname": "", "phone_number": ""}
 
     # password는 따로 적어줘야함. 암호화 되어있기 때문에. 그리고 model에 없으니까.
     password = forms.CharField(
