@@ -37,3 +37,14 @@ class Concept(core_models.TimeStampedModel):
 
     def __str__(self):
         return self.name
+
+    def all_photo(self):
+        photo = self.photos.all()  # ,를 찍으면 파이썬이 첫번째 array 요소를 원하는구나라는것을 알게됨
+        return photo
+
+    def first_photo(self):
+        try:  # try한 이유는. room을 만들 때 사진을 안넣어주면 에러가 나서 사진이 없더라도 그냥 return None 내보내게 함.
+            (photo,) = self.photos.all()[:1]
+            return photo.file.url
+        except ValueError:
+            return None

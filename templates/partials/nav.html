@@ -1,12 +1,14 @@
 <header>
-    <a href="{% url "core:home" %}">Posely</a>
     <ul>
         {% if user.is_authenticated %}
-            <li><a href="{% url "users:logout"%}">Log out</a></li>
+            <li>
+                <a href="{% url "users:logout"%}">
+                    <div class= "{{h_and_w|default:"h-6 w-6"}} rounded-full bg-cover" style="background-image: url({{user.avatar.url}});"></div>
+                </a>
+            </li>
             
         {% else %}
-            <li><a href="{% url "users:login"%}">Log in</a></li>
-            <li><a href="{% url "users:signup"%}">Sign up</a></li>
+            <li><a style="font-size:20px; color:#1a202c;" href="{% url "users:login"%}"><i class="fas fa-sign-in-alt"></i></a></li>
             
         {% endif %}
     </ul>
