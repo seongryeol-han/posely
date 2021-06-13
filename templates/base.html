@@ -1,28 +1,32 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en,kr">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-    {% block page_title %}
-
-    {% endblock page_title %}
-    | Posely
-    </title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <title>{% block page_title %}{% endblock page_title %} | Posely</title>
 </head>
-<body>
-    <header>
-    {% include "partials/nav.html" %}
+<body class="mt-14 mb-14 bg-gray-100 mobile:mt-32px ">
+    <header class="z-10 container max-w-full inset-0 flex justify-center px-4 mobile:pb-px mobile:px-2 h-14 mobile:h-32px border-b  border-gray-400 fixed bg-white">
+        <div class="flex items-center justify-between w-600px px-2 small:px-0">
+            
+                <a href="{% url "core:home" %}">
+                    <img class="w-8 rounded-md mobile:w-6" src="{%static 'img/logo.png' %}" />
+                </a>
 
-    
-    {% block search-bar %}
-        
-        <form method="get" action="{% url "studios:search" %}">
-            <input name="search_name_address" placeholder="Search by Name" />
-        </form>
+                {% block search-bar %}
+                <form class="flex items-center" method="get" action="{% url "studios:search" %}">
+                    <input class="border px-6 font-medium text-xs mobile:text-xxs bg-gray-100 text-gray-900 placeholder-gray-500 py-1 mobile:py-px rounded-md w-72 focus:outline-none " name="search_name_address" placeholder="사진관 지역, 이름 검색" />
+                </form>
+                {% endblock search-bar %}
 
-    {% endblock search-bar %}
+
+                {% include "partials/nav.html" %}
+        </div>
     </header> 
     
     {% block content %}
@@ -30,6 +34,25 @@
     {% endblock content%}
     
     {% include "partials/footer.html" %}
+
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+  
+      var swiper = new Swiper('.swiper-container', {
+        autoHeight: true,
+        pagination: {
+          el: '.swiper-pagination',
+          dynamicBullets: true,
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+      });
+    </script>
     
 </body>
 </html>
