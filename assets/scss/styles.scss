@@ -1,3 +1,35 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.swiper-button-next {
+    background: url(/static/img/chevron-circle-right-solid.svg) no-repeat;
+    background-size:50% auto;
+    background-position: center;
+    opacity: 0.9;
+}
+
+.swiper-button-prev {
+    background: url(/static/img/chevron-circle-left-solid.svg) no-repeat;
+    background-size:50% auto;
+    background-position: center;
+    opacity: 0.9;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+    display: none;
+}
+
+.swiper-pagination{
+    width: 14px; height: 14px;
+}
+
+.swiper-pagination-bullet{
+    width: 12px; height: 12px;
+}
+
+.swiper-pagination-bullet-active{
+    width: 12px; height: 12px;
+    background: black;
+}
