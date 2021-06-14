@@ -140,6 +140,3 @@ cython_debug/
 #eomjunseung
 config/settings.py
 db.sqlite3
-
-#tailwind css
-node_modules/
