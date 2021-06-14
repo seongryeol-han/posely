@@ -9,7 +9,7 @@
 {% endblock search-bar %}
 
 {% block content %}
-    {% include 'partials/social_login.html' %}
+   <!-- {% include 'partials/social_login.html' %} MVP에는 안넣어도 됨 -->
     <form method="POST" action="{% url "users:login" %}">
         {% csrf_token %} <!--다른 브라우저에서 내 브라우저 접근을 막는거라고 생각하면 됨. -->
         {{form.as_p}}

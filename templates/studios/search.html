@@ -5,24 +5,13 @@
     Search
 {% endblock page_title %}
 
-{% block search-bar %}
-{% endblock search-bar %}
 
 {% block content %}
 
-    <h2>Search!</h2>
-
-    <form method="get" action="{% url "studios:search" %}">  <!--input에서 받을 걸 url에다가 준다.-->
-        {{form.as_p}}
-        <button>Search</button>
-    </form>
-
-    <h3>Results</h3>
-    
+<div class="mx-auto flex flex-col items-center overflow-auto">
     {% for studio in studios %}
-        <h3>{{studio.name}}</h3>
-        <p>{{studio.bio}}</p>
+        {%include "mixins/studio_card.html" with studio=studio %}
     {% endfor %}
-        
+</div>    
     
 {% endblock content %}

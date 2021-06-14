@@ -1,0 +1,38 @@
+<div class="mt-4 w-600px small:w-full border border-gray-400 rounded-lg bg-white small:border-none small:bg-gray-100 ">
+    <div class="flex items-center justify-between h-16 px-4">
+        <div class="flex items-center">
+            {% include "mixins/author_avatar.html" with studio=studio %}
+            <div class="mx-3 font-semibold text-sm" style="color:#1a202c;" >{{studio}}</div>
+        </div>
+        <div class="flex items-center">
+            <div style="color:#1a202c;"><i class="fas fa-camera fa-lg"></i></div>
+            <p class="ml-1 font-semibold text-sm" style="color:#1a202c;">예약하기</p>
+        </div>
+    </div>
+
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+
+            {% for concept in studio.concepts.all %}
+                <div class="swiper-slide">
+                    <img src="{{concept.first_photo}}" style="width: 100%;">
+                </div>
+            {% endfor %}
+        
+        </div>
+        <div class="swiper-pagination bg-gray-400"></div> <!--swiper-container의 맨 밑에다가 놓는다.-->
+        <div class="h-8 pt-2 flex items-center justify-between">
+            <div class="ml-4 flex items-center"><i class="far fa-heart fa-lg"></i></div>
+        </div>
+        
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </div>
+    
+    <div class="overflow-auto mx-4 mb-6 small:mb-0">
+        <p class="font-semibold mb-2">좋아요 365개</p>
+        <div class="font-semibold text-sm mb-1" style="color:#1a202c;" >{{studio}}</div>
+        <div class=" text-sm" style="color:#1a202c;" >{{studio.introduction | linebreaksbr}}</div>
+    </div>
+</div>
+
