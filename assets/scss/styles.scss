@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.swiper-button-next {
+    background: url(/static/img/chevron-circle-right-solid.svg) no-repeat;
+    background-size:50% auto;
+    background-position: center;
+    opacity: 0.9;
+}
+
+.swiper-button-prev {
+    background: url(/static/img/chevron-circle-left-solid.svg) no-repeat;
+    background-size:50% auto;
+    background-position: center;
+    opacity: 0.9;
+}
+
+@media (max-width: 450px) {
+    .swiper-button-next {
+      display: none !important;
+    }
+    .swiper-button-prev {
+        display: none !important;
+      }
+  } 
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+    display: none;
+}
+
+
+
+.swiper-container-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet {
+    margin: 0 2px !important;
+}
+
+.swiper-pagination-bullet {
+    width: 7px !important;
+    height: 7px !important;
+}

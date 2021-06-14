@@ -9,21 +9,18 @@ class Studio(core_models.TimeStampedModel):
     """Studio Model Definition"""
 
     name = models.CharField(max_length=50)
-    en_name = models.CharField(max_length=50, default="")
-    phone_number = PhoneNumberField(default="")
+    phone_number = models.CharField(max_length=11)
     kakao_chat = models.CharField(max_length=140, blank=True)
-    city = models.CharField(max_length=80)
     address = models.CharField(max_length=140)
     open_time = models.TimeField()
     close_time = models.TimeField()
-    bio = models.TextField(default="", blank=True)
-    file = models.ImageField(upload_to="studio_photos", default="")
+    introduction = models.TextField(default="", blank=True)
+    using_info = models.TextField(default="", blank=True)
+    file = models.ImageField(upload_to="studio_photos", default="", blank=True)
     author = models.ForeignKey(
         "users.User",
         related_name="studios",
-        limit_choices_to={"studio": True},
         on_delete=models.CASCADE,
-        default=False,
     )
 
     def __str__(self):

@@ -17,13 +17,13 @@ class StudioAdmin(admin.ModelAdmin):
 
     list_display = (
         "name",
-        "en_name",
         "phone_number",
         "kakao_chat",
-        "city",
         "address",
         "open_time",
         "close_time",
+        "introduction",
+        "using_info",
         "file",
         "author",
         "count_concepts",

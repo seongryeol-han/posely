@@ -9,29 +9,29 @@ class User(AbstractUser):
 
     """Custom User Model"""
 
-    GENDER_MALE = "male"
-    GENDER_FEMALE = "female"
-
-    GENDER_CHOICES = (
-        (GENDER_MALE, "male"),
-        (GENDER_FEMALE, "female"),
-    )
-
     LOGIN_EMAIL = "email"
-    LOGIN_GITHUB = "github"
+    LOGIN_NAVER = "naver"
     LOGING_KAKAO = "kakao"
 
     LOGIN_CHOICES = (
         (LOGIN_EMAIL, "Email"),
-        (LOGIN_GITHUB, "Github"),
+        (LOGIN_NAVER, "naver"),
         (LOGING_KAKAO, "Kakao"),
     )
 
     avatar = models.ImageField(upload_to="avatars", blank=True)
-    phone_number = models.CharField(max_length=13, blank=True)
-    gender = models.CharField(choices=GENDER_CHOICES, max_length=10, blank=True)
-    birthdate = models.DateField(blank=True, null=True)
+    phone_number = models.CharField(max_length=11)
+    nickname = models.CharField(
+        max_length=30,
+        null=False,
+        unique=True,
+        error_messages={
+            "unique": "A user with that nickname already exists.",
+        },
+    )
+    petname = models.CharField(max_length=30, blank=True)
     studio = models.BooleanField(default=False)
+    bio = models.TextField(default="", blank=True)
 
     # 05.09 social login check
     email_verified = models.BooleanField(default=False)
