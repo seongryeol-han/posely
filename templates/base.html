@@ -10,17 +10,20 @@
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <title>{% block page_title %}{% endblock page_title %} | Posely</title>
 </head>
-<body class="mt-14 mb-14 bg-gray-100 mobile:mt-32px ">
-    <header class="z-10 container max-w-full inset-0 flex justify-center px-4 mobile:pb-px mobile:px-2 h-14 mobile:h-32px border-b  border-gray-400 fixed bg-white">
+<body class="mt-14 mb-14 bg-gray-100 mobile:bg-white mobile:mt-32px ">
+    <header class="z-10 container max-w-full inset-0 flex justify-center px-4 mobile:pb-px h-14 mobile:h-12 border-b  border-gray-400 fixed bg-white">
         <div class="flex items-center justify-between w-600px px-2 small:px-0">
             
                 <a href="{% url "core:home" %}">
-                    <img class="w-8 rounded-md mobile:w-6" src="{%static 'img/logo.png' %}" />
+                    <img class="w-8 rounded-md mobile:w-7" src="{%static 'img/logo.png' %}" />
                 </a>
 
                 {% block search-bar %}
                 <form class="flex items-center" method="get" action="{% url "studios:search" %}">
-                    <input class="border px-6 font-medium text-xs mobile:text-xxs bg-gray-100 text-gray-900 placeholder-gray-500 py-1 mobile:py-px rounded-md w-72 focus:outline-none " name="search_name_address" placeholder="사진관 지역, 이름 검색" />
+                  <div class="border px-6 flex items-center bg-gray-100">
+                    <div style="color:#a0aec0; margin: 0 6px 0 6px; "><i class="fas fa-search fa-sm"></div></i> 
+                    <input class=" font-medium text-xs mobile:text-xxs  text-gray-900 bg-gray-100 placeholder-gray-500 py-1 mobile:py-1 rounded-md w-72 focus:outline-none " name="search_name_address" placeholder="사진관 지역, 이름 검색" />
+                  </div>
                 </form>
                 {% endblock search-bar %}
 

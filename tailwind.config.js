@@ -13,6 +13,8 @@ module.exports = {
                 "32px": "32px",
                 "14": "3.5rem",
                 "9": "36px",
+                "0.5": "2px",
+                "7": "1.75rem",
             },
         },
         screens: {
