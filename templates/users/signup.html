@@ -2,18 +2,16 @@
 
 
 {% block page_title %}
-    Sign up
+    회원가입
 {% endblock page_title %}
 
-{% block search-bar %}
-{% endblock search-bar %}
+{% block nav-bar %}
+{% endblock nav-bar %}
 
 {% block content %}
 
-    <form method="POST" action="{% url "users:signup" %}">
-        {% csrf_token %} <!--다른 브라우저에서 내 브라우저 접근을 막는거라고 생각하면 됨. -->
-        {{form.as_p}}
-        <button>Sign up</button>
-    </form>
+    <div class="container w-350px mobile:w-full mx-auto flex flex-col items-center justify-center border p-6 pb-10 bg-white border-gray-400 mobile:border-none">
+        {% include "mixins/auth/auth_form.html" with form=form cta="회원가입"%}
+    </div>
     
 {% endblock content %}
