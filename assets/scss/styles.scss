@@ -40,3 +40,12 @@
     width: 7px !important;
     height: 7px !important;
 }
+
+
+
+.login-input-field{
+    @apply font-medium text-xs text-gray-900 bg-gray-100 w-full h-full;
+    &:focus {
+      @apply outline-none;
+    }
+}

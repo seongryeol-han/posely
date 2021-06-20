@@ -1,14 +1,17 @@
+{% load static %}
 <header>
     <ul>
         {% if user.is_authenticated %}
             <li>
                 <a href="{% url "users:logout"%}">
-                    <div class= "{{h_and_w|default:"h-6 w-6 "}} rounded-full bg-cover" style="background-image: url({{user.avatar.url}});"></div>
+                    <div class= "h-6 w-6 mobile:w-5 mobile:h-5 rounded-full bg-cover" style="background-image: url({{user.avatar.url}});"></div>
                 </a>
             </li>
             
         {% else %}
-            <li><a style="font-size:20px; color:#1a202c;" href="{% url "users:login"%}"><i class="fas fa-sign-in-alt"></i></a></li>
+            <li><a class="w-7 mobile:w-5 text-gray-700" href="{% url "users:login"%}">
+                <i class="fas fa-user-circle fa-lg"></i>
+            </a></li>
             
         {% endif %}
     </ul>

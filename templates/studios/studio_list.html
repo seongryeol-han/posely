@@ -2,7 +2,7 @@
 
 {%block page_title%}
 
-    Home
+    반려동물 사진관 예약하기
 
 {%endblock page_title%}
 
@@ -12,7 +12,7 @@
 <div class="mx-auto flex flex-col items-center overflow-auto">
     
     {% for studio in studios %}
-        {%include "mixins/studio_card.html" with studio=studio %}
+        {%include "mixins/studio/studio_card.html" with studio=studio %}
     {% endfor %}
     
 </div>

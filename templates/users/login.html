@@ -2,18 +2,21 @@
 
 
 {% block page_title %}
-    Log In
+    로그인
 {% endblock page_title %}
 
-{% block search-bar %}
-{% endblock search-bar %}
+{% block nav-bar %}
+{% endblock nav-bar %}
 
 {% block content %}
    <!-- {% include 'partials/social_login.html' %} MVP에는 안넣어도 됨 -->
-    <form method="POST" action="{% url "users:login" %}">
-        {% csrf_token %} <!--다른 브라우저에서 내 브라우저 접근을 막는거라고 생각하면 됨. -->
-        {{form.as_p}}
-        <button>Login</button>
-    </form>
+   <div class="container w-350px mobile:w-full mx-auto flex flex-col items-center justify-center border p-6 pb-10 bg-white border-gray-400 mobile:border-none">
+        {% include "mixins/auth/auth_form.html" with form=form cta="로그인"%}
+        <div class="mt-5">
+            <span class="mr-2 text-sm">계정이 없으신가요?</span>
+            <a href="{% url 'users:signup' %}" class="text-blue-500 font-semibold text-sm">회원가입</a>
+        </div>
+
+    </div>  
     
 {% endblock content %}

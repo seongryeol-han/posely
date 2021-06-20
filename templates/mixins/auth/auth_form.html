@@ -1,0 +1,22 @@
+<form method="POST"  class="w-full" enctype="multipart/form-data"> <!--enctype 이걸 써야 프로필에서 사진 변경할 때 변경이 됨.-->
+    {% csrf_token %} <!--다른 브라우저에서 내 브라우저 접근을 막는거라고 생각하면 됨. -->
+    {% if form.non_field_errors %}
+        {% for error in form.non_field_errors %}
+            <span class="text-red-700 font-medium text-sm">{{error}}</span>
+        {% endfor %}
+    {% endif %}
+    <div class="font-semibold text-lg mb-10 text-center flex flex-col items-center" style="color:#1a202c;">
+        <a class="bg-center" href="{% url "core:home" %}">
+            <p class="mt-5 mb-5 font-bold text-36px w-40" style="color: #fe629f;">POSELY</p>
+        </a>
+        <p class="mb-1">반려동물 인생샷</p>
+        <p>스튜디오 예약</p>
+    </div>
+    
+    {% for field in form %}
+        {% include "mixins/auth/form_input.html" with field=field %}
+    {% endfor %}
+    
+    <button style="background-color: #fe629f;" class=" h-10 rounded-md font-semibold text-sm text-white w-full mb-2">{{cta}}</button>
+
+</form>
