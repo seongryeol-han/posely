@@ -6,22 +6,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-    <title>{% block page_title %}{% endblock page_title %} | Posely</title>
+    <link rel="shortcut icon" sizes="16x16 32x32 64x64" href="{%static 'img/posely_logo2.png' %}" />
+    <title>포즐리 {% block page_title %}{% endblock page_title %}</title>
 </head>
 <body class="mt-14 mb-14 bg-gray-100 mobile:bg-white mobile:mt-32px ">
-    <header class="z-10 container max-w-full inset-0 flex justify-center px-4 mobile:pb-px h-14 mobile:h-12 border-b  border-gray-400 fixed bg-white">
-        <div class="flex items-center justify-between w-600px px-2 small:px-0">
+  {% block nav-bar %}
+  <header class="z-10 container max-w-full inset-0 flex justify-center px-4 mobile:pb-px h-14 mobile:h-12 border-b  border-gray-400 fixed bg-white">
+        <div class="flex items-center justify-between w-600px px-4 small:px-0">
             
-                <a href="{% url "core:home" %}">
-                    <img class="w-8 rounded-md mobile:w-7" src="{%static 'img/logo.png' %}" />
+                <a class="flex items-center" href="{% url "core:home" %}">
+                    <img class="w-8 mobile:w-7 rounded-md" src="{%static 'img/posely_logo1.jpg' %}" />
                 </a>
 
                 {% block search-bar %}
                 <form class="flex items-center" method="get" action="{% url "studios:search" %}">
                   <div class="border px-6 flex items-center bg-gray-100">
-                    <div style="color:#a0aec0; margin: 0 6px 0 6px; "><i class="fas fa-search fa-sm"></div></i> 
+                    <div style="color:#a0aec0; margin: 0 6px 0 6px; "><i class="fas fa-search fa-sm"></i></div>
                     <input class=" font-medium text-xs mobile:text-xxs  text-gray-900 bg-gray-100 placeholder-gray-500 py-1 mobile:py-1 rounded-md w-72 focus:outline-none " name="search_name_address" placeholder="사진관 지역, 이름 검색" />
                   </div>
                 </form>
@@ -30,8 +33,9 @@
 
                 {% include "partials/nav.html" %}
         </div>
+
     </header> 
-    
+    {% endblock nav-bar %}
     {% block content %}
         
     {% endblock content%}

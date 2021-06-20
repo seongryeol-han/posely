@@ -3,12 +3,20 @@ module.exports = {
         fontSize: {
             "xxs": ".50rem",
             'xs': '.75rem',
-            "sm": ".0.875rem"
+            "sm": ".0.875rem",
+            "lg": "1.125rem",
+            "xl": "1.5rem",
+            "10px": "10px",
+            "36px": "36px",
+            "50px": "50px",
+            "75px": "75px",
+            "100px": "100px",
         },
         extend: {
             spacing: {
                 "800px": "800px",
                 "600px": "600px",
+                "350px": "350px",
                 "50px": "50px",
                 "32px": "32px",
                 "14": "3.5rem",
