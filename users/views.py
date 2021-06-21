@@ -4,14 +4,14 @@ from django.views.generic import FormView
 from django.urls import reverse_lazy
 from django.shortcuts import redirect, reverse, render
 from django.contrib.auth import authenticate, login, logout
-from . import forms, models
+from . import forms, models, mixins
 from django.core.files.base import ContentFile
 from django.contrib.auth.forms import User
 
 # Create your views here.
 
 
-class LoginView(FormView):
+class LoginView(mixins.LoggedOutOnlyView, FormView):
     template_name = "users/login.html"
     form_class = forms.LoginForm
     # success_url = reverse_lazy("core:home")
@@ -37,7 +37,7 @@ def log_out(request):
     return redirect(reverse("core:home"))
 
 
-class SignUpView(FormView):
+class SignUpView(mixins.LoggedOutOnlyView, FormView):
     template_name = "users/signup.html"
     form_class = forms.SignUpForm
     success_url = reverse_lazy("core:home")

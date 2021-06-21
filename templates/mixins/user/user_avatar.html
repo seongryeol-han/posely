@@ -1,0 +1,7 @@
+{% if user.avatar %}
+    <div class= "{{h_and_w|default:"h-6 w-6"}} rounded-full bg-cover" style="background-image: url({{user.avatar.url}});">
+{% else %}
+    <div><a class="flex items-center justify-center border-4 border-white mobile:border-none hover:border-green-400 rounded-full w-6 h-6 text-green-400" href="{% url "users:logout"%}">
+        <i class="fas fa-user-circle fa-lg"></i></a>
+{% endif %}
+    </div>  

@@ -1,7 +1,9 @@
 {%load widget_tweaks%}
 
-<div class="border rounded px-2 flex items-center bg-gray-100 w-full h-10 mb-2 ">
-    {{ field|add_class:"login-input-field" }}
+<div class="border rounded px-2 flex items-center bg-gray-100 w-full h-10 mt-2 input-error">
+    {{ field|add_class:"input-field" }}
+</div>
+<div>
     {% if field.errors %}
         {% for error in field.errors %}
             <span class="text-red-700 font-medium text-sm w-full">{{error}}</span> 

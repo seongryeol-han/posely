@@ -26,7 +26,7 @@ class User(AbstractUser):
         null=False,
         unique=True,
         error_messages={
-            "unique": "A user with that nickname already exists.",
+            "unique": "이미 존재하는 닉네임입니다.",
         },
     )
     petname = models.CharField(max_length=30, blank=True)

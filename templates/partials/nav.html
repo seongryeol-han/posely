@@ -4,15 +4,14 @@
         {% if user.is_authenticated %}
             <li>
                 <a href="{% url "users:logout"%}">
-                    <div class= "h-6 w-6 mobile:w-5 mobile:h-5 rounded-full bg-cover" ></div>
+                    {%include "mixins/user/user_avatar.html"%}
                 </a>
             </li>
             
         {% else %}
-            <li><a class="w-7 mobile:w-5 text-gray-700" href="{% url "users:login"%}">
+            <li><a class="flex items-center justify-center border-4 border-white mobile:border-none hover:border-green-400 rounded-full w-6 h-6 text-gray-600 " href="{% url "users:login"%}">
                 <i class="fas fa-user-circle fa-lg"></i>
-            </a></li>
-            
+            </a></li>   
         {% endif %}
     </ul>
 </header>
