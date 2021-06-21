@@ -9,7 +9,7 @@
 
 {% block content %} 
     
-<div class="mx-auto flex flex-col items-center overflow-auto">
+<div class="mx-auto flex flex-col items-center overflow-auto mobile:mb-10">
     
     {% for studio in studios %}
         {%include "mixins/studio/studio_card.html" with studio=studio %}

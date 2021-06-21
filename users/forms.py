@@ -21,7 +21,7 @@ class LoginForm(forms.Form):
                 return self.cleaned_data
 
             else:
-                self.add_error("passwod", forms.ValidationError("비밀번호가 틀렸습니다."))
+                self.add_error("password", forms.ValidationError("비밀번호가 틀렸습니다."))
 
         except models.User.DoesNotExist:
             self.add_error("email", forms.ValidationError("사용자가 존재하지 않습니다."))
