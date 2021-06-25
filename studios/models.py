@@ -23,5 +23,13 @@ class Studio(core_models.TimeStampedModel):
         on_delete=models.CASCADE,
     )
 
+    # 스듀디오 좋아요 요소
+    likes_user = models.ManyToManyField(
+        "users.User", blank=True, related_name="likes_user"
+    )
+
+    def count_likes_user(self):  # 좋아요 수 카운트
+        return self.likes_user.count()
+
     def __str__(self):
         return self.name
