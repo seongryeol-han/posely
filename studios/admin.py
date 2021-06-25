@@ -24,7 +24,7 @@ class StudioAdmin(admin.ModelAdmin):
         "close_time",
         "introduction",
         "using_info",
-        "file",
+        "studio_avatar",
         "author",
         "count_concepts",
     )

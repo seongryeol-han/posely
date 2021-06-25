@@ -99,3 +99,8 @@ def studio_like(request):
         message = "좋아요"
     context = {"likes_count": studio.count_likes_user(), "message": message}
     return HttpResponse(json.dumps(context), content_type="application/json")
+
+
+class StudioProfileView(DetailView):
+    model = models.Studio
+    template_name = "studios/studio_profile.html"
