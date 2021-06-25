@@ -1,6 +1,7 @@
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 from core import models as core_models
+from django.shortcuts import reverse
 
 # Create your models here.
 
@@ -16,7 +17,7 @@ class Studio(core_models.TimeStampedModel):
     close_time = models.TimeField()
     introduction = models.TextField(default="", blank=True)
     using_info = models.TextField(default="", blank=True)
-    file = models.ImageField(upload_to="studio_photos", default="", blank=True)
+    studio_avatar = models.ImageField(upload_to="studio_photos", default="", blank=True)
     author = models.ForeignKey(
         "users.User",
         related_name="studios",

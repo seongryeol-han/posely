@@ -3,7 +3,7 @@
     <ul>
         {% if user.is_authenticated %}
             <li>
-                <a href="{% url "users:logout"%}">
+                <a href="{{user.get_absolute_url}}">
                     {%include "mixins/user/user_avatar.html"%}
                 </a>
             </li>
