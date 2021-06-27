@@ -1,12 +1,13 @@
 import json
-from django.views.generic import ListView, View, DetailView
-from django.shortcuts import render
+from django.views.generic import ListView, View, DetailView, UpdateView
+from django.shortcuts import render, reverse
 from django.core.paginator import Paginator
 from . import models, forms
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
+from users import mixins as user_mixins
 
 # Create your views here.
 
@@ -104,3 +105,42 @@ def studio_like(request):
 class StudioProfileView(DetailView):
     model = models.Studio
     template_name = "studios/studio_profile.html"
+
+
+class EditStudioView(user_mixins.LoggedInOnlyView, UpdateView):
+    model = models.Studio
+    template_name = "studios/studio_edit.html"
+    fields = (
+        "name",
+        "studio_avatar",
+        "phone_number",
+        "kakao_chat",
+        "address",
+        "open_time",
+        "close_time",
+        "introduction",
+        "using_info",
+    )
+
+    def get_object(self, queryset=None):  # 룸 호스트랑 요청하는 사람이랑 같은지
+        studio = super().get_object(queryset=queryset)
+        if studio.author.pk != self.request.user.pk:
+            return reverse("core:home")
+        return studio
+
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class=form_class)
+        form.fields["phone_number"].widget.attrs = {"placeholder": "- 제외"}
+        form.fields["open_time"].widget.attrs = {"placeholder": "10:00"}
+        form.fields["close_time"].widget.attrs = {"placeholder": "20:00"}
+
+        form.fields["name"].label = "사진관 이름"
+        form.fields["studio_avatar"].label = "사진관 대표사진"
+        form.fields["address"].label = "사진관 주소"
+        form.fields["phone_number"].label = "전화번호"
+        form.fields["kakao_chat"].label = "카카오톡 오픈채팅 주소"
+        form.fields["open_time"].label = "오픈 시간"
+        form.fields["close_time"].label = "마감 시간"
+        form.fields["introduction"].label = "사진관 소개"
+        form.fields["using_info"].label = "사진관 이용안내"
+        return form

@@ -1,20 +1,47 @@
 {% extends "base.html" %}
 
 {% block page_title %}
-    Profile
+    Studio
 {% endblock page_title %}
 
 
 {% block content %}
+    <div class="mx-auto flex flex-col items-center overflow-auto mobile:mb-10">
+        <div class="mt-4 w-600px small:w-full border-b">                
+            <div class=" px-10 pb-8">
+                <div class="flex items-center ">
+                    <div class="my-3">
+                        {% include 'mixins/user/user-profile_avatar.html' with user=user_obj%}
+                    </div>
 
-    <div class="min-h-75vh">
-        <div class="container lg:w-5/12 md:w-1/2 xl:w-1/4 mx-auto my-10 flex flex-col items-center border p-6 border-gray-400 ">
-            
+                    <div class="ml-8 flex flex-col">
+                        <div class="text-28px font-thin text-gray-700 mb-1">
+                            {{user_obj.nickname}}
+                        </div>    
+                    </div>
+                </div>
 
-            {% include 'mixins/user/user_avatar.html' with user=user_obj %}
-            
+                <div class="my-2">
+                    <div class="font-semibold text-lg mb-1">
+                        {{user_obj.petname}}
+                    </div>
+                    <div class="">
+                        {{user_obj.bio | linebreaksbr}}
+                    </div>    
+                </div>
+                
+                {%if user_obj == user %}
+                <a href="">
+                    <div class="border border-gray-400 rounded-md text-center font-semibold py-1 px-10 mt-6">
+                        프로필 편집
+                    </div>
+                </a>    
+                {%endif%}
+
+            </div>
+
         </div>
-            
 
+        
     </div>
 {% endblock content %}
