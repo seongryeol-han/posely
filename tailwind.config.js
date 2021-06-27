@@ -7,6 +7,8 @@ module.exports = {
             "lg": "1.125rem",
             "xl": "1.5rem",
             "10px": "10px",
+            "15px": "15px",
+            "20px": "20px",
             "28px": "28px",
             "36px": "36px",
             "42px": "42px",

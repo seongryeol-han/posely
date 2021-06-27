@@ -50,6 +50,13 @@
     }
 }
 
+.studio-input-field{
+    @apply font-medium text-gray-900 bg-gray-100 w-full h-full;
+    &:focus {
+      @apply outline-none;
+    }
+}
+
 .input-error:focus-within {
     border-color: #90cdf4;
 }

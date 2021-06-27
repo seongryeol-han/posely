@@ -34,3 +34,6 @@ class Studio(core_models.TimeStampedModel):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse("studios:profile", kwargs={"pk": self.pk})
