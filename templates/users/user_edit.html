@@ -2,18 +2,18 @@
 
 
 {%block page_title%}
-    스튜디오 편집
+    프로필 편집
 
 {%endblock page_title%}
 
 {% block search-bar %}
-    <div class="font-semibold text-sm">스튜디오 편집</div>
+    <div class="font-semibold text-sm">프로필 편집</div>
 {% endblock search-bar %}
 
 {%block content%}
 <div class="mx-auto flex flex-col items-center overflow-auto mobile:mb-10">
     <div class="mt-4 w-600px mobile:w-full mx-auto flex flex-col items-center justify-center border rounded-md p-6 pb-10 bg-white border-gray-400 mobile:border-none">
-        {% include "mixins/studio/studio_form.html" with form=form cta="Update studio" %}
+        {% include "mixins/user/user_form.html" with form=form cta="Update profile" %}
         
     </div>
 </div>

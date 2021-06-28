@@ -17,7 +17,14 @@
                     <div class="ml-8 flex flex-col">
                         <div class="text-28px font-thin text-gray-700 mb-1">
                             {{user_obj.nickname}}
-                        </div>    
+                        </div>
+                        {%if user_obj == user %}
+                        <a href="{%url "users:edit" user.pk%}" class="">    
+                            <div class="border rounded-md text-center text-white py-1 px-14 mr-2 bg-blue-500">
+                                프로필 편집
+                            </div>
+                        </a>
+                        {%endif%}    
                     </div>
                 </div>
 
@@ -31,9 +38,10 @@
                 </div>
                 
                 {%if user_obj == user %}
-                <a href="">
+                <a href="" class="">
+                    
                     <div class="border border-gray-400 rounded-md text-center font-semibold py-1 px-10 mt-6">
-                        프로필 편집
+                        내 사진관
                     </div>
                 </a>    
                 {%endif%}

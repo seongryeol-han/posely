@@ -1,0 +1,15 @@
+{%load widget_tweaks%}
+
+<div class="border rounded px-2 py-1 bg-gray-100 input-error mb-4 text-xs">
+    {{field|add_class:"input-field"}}
+    
+    {% if field.errors %}
+        
+        {% for error in field.errors %}
+            <span class="text-red-700 font-medium text-sm">{{error}}</span>
+        {% endfor %}
+            
+    {% endif %}
+        
+
+</div>
