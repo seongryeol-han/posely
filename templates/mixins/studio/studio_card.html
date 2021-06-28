@@ -19,7 +19,7 @@
         <div class="swiper-wrapper">
 
             {% for concept in studio.concepts.all %}
-                <div class="img_like swiper-slide">
+                <div class="img_like swiper-slide" name="{{ studio.pk }}" >
                     <img src="{{concept.first_photo}}" style="width: 100%;">
                 </div>
             {% endfor %}
