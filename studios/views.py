@@ -27,10 +27,11 @@ class HomeView(ListView):
 
 def main_list(request):
     studios = models.Studio.objects.filter()
-
+    temp = {}
     if request.user.is_authenticated:  # 로그인 되면 실행됨 # 로그인 X 시 스킵
         check_exist = models.Studio.objects.filter(likes_user=request.user).values_list(
-            "pk", flat=True
+            "pk",
+            flat=True,
         )
 
         return render(
@@ -38,7 +39,14 @@ def main_list(request):
             "studios/studio_list.html",
             {"studios": studios, "check_exist": check_exist},
         )
-    return render(request, "studios/studio_list.html", {"studios": studios})
+    return render(
+        request,
+        "studios/studio_list.html",
+        {
+            "studios": studios,
+            "check_exist": temp,
+        },
+    )
 
 
 class SelectStudio(DetailView):
