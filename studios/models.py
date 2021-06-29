@@ -18,6 +18,9 @@ class Studio(core_models.TimeStampedModel):
     introduction = models.TextField(default="", blank=True)
     using_info = models.TextField(default="", blank=True)
     studio_avatar = models.ImageField(upload_to="studio_photos", default="", blank=True)
+    studio_best_photo = models.ImageField(
+        upload_to="studio_photos", default="", blank=False
+    )
     author = models.ForeignKey(
         "users.User",
         related_name="studios",
@@ -37,3 +40,7 @@ class Studio(core_models.TimeStampedModel):
 
     def get_absolute_url(self):
         return reverse("studios:profile", kwargs={"pk": self.pk})
+
+    def all_photo(self):
+        photo = self.photos.all()  # ,를 찍으면 파이썬이 첫번째 array 요소를 원하는구나라는것을 알게됨
+        return photo

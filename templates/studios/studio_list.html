@@ -28,7 +28,7 @@
                 data: { 'pk': pk, 'csrfmiddlewaretoken': '{{ csrf_token }}' }, // 서버로 데이터 전송시 옵션, pk를 넘겨야 어떤 studio인지 알 수 있음
                 dataType: "json",
                 success: function (response) { // 성공
-                    alert(response.message); //이 부분을 지우면 메세지 안뜹니다. 
+                    //alert(response.message); //이 부분을 지우면 메세지 안뜹니다. 
                     $("#count-" + pk).html("좋아요&nbsp;" + response.likes_count + "개"); // 좋아요 개수 변경
                     if (response.message == "좋아요")         
                     {

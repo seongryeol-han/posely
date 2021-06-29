@@ -16,6 +16,11 @@
     <div class="swiper-container">
         <div class="swiper-wrapper">
 
+
+            <div class="img_like swiper-slide" name="{{ studio.pk }}" >
+                <img src="{{studio.studio_best_photo.url}}" style="width: 100%;">
+            </div>
+            
             {% for concept in studio.concepts.all %}
                 <div class="img_like swiper-slide" name="{{ studio.pk }}" >
                     <img src="{{concept.first_photo}}" style="width: 100%;">
@@ -46,15 +51,15 @@
         {% comment %} <div class="font-semibold text-sm mb-1" style="color:#1a202c;" >{{studio}}</div>
         <div class=" text-sm" style="color:#1a202c;" >{{studio.introduction | linebreaksbr}}</div> {% endcomment %}
         
-            <button style="" class="like" name="{{ studio.pk }}" value="Like">
+            <button class="like focus:border-none focus:outline-none" name="{{ studio.pk }}" value="Like">
                 <!--내가 좋아요 누른 이미지에 대하여 로그인하자마자  하트 체크 -->
                 <!--check_exist 는 studios\\view.py\\main_list 에서 전달 받음  -->  
                 <div class="h-8 pt-2 border-none flex items-center justify-between ">
-                    <div class="flex items-center" style="font-size: 0.5rem;">
+                    <div class="flex items-center" style="font-size: 0.5rem; color:#fe629f;">
                         {% if studio.pk in check_exist%}
-                            <i id="check-{{studio.pk}}" class="fas fa-heart fa-3x "></i>
+                            <i id="check-{{studio.pk}}" class="fas fa-heart fa-3x"></i>
                         {% else %}
-                            <i id="check-{{studio.pk}}" class="far fa-heart fa-3x "></i>
+                            <i id="check-{{studio.pk}}" class="far fa-heart fa-3x"></i>   
                         {% endif %}
                     </div>
                 </div>

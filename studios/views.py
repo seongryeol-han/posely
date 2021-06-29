@@ -121,6 +121,7 @@ class EditStudioView(user_mixins.LoggedInOnlyView, UpdateView):
     fields = (
         "name",
         "studio_avatar",
+        "studio_best_photo",
         "phone_number",
         "kakao_chat",
         "address",
@@ -143,7 +144,8 @@ class EditStudioView(user_mixins.LoggedInOnlyView, UpdateView):
         form.fields["close_time"].widget.attrs = {"placeholder": "20:00"}
 
         form.fields["name"].label = "사진관 이름"
-        form.fields["studio_avatar"].label = "사진관 대표사진"
+        form.fields["studio_avatar"].label = "사진관 프로필 사진"
+        form.fields["studio_best_photo"].label = "작가님의 베스트 사진"
         form.fields["address"].label = "사진관 주소"
         form.fields["phone_number"].label = "전화번호"
         form.fields["kakao_chat"].label = "카카오톡 오픈채팅 주소"
