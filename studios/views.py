@@ -1,6 +1,6 @@
 import json
-from django.views.generic import ListView, View, DetailView, UpdateView
-from django.shortcuts import render, reverse
+from django.views.generic import ListView, View, DetailView, UpdateView, FormView
+from django.shortcuts import render, reverse, redirect
 from django.core.paginator import Paginator
 from . import models, forms
 from django.contrib.auth.decorators import login_required
@@ -152,3 +152,15 @@ class EditStudioView(user_mixins.LoggedInOnlyView, UpdateView):
         form.fields["introduction"].label = "사진관 소개"
         form.fields["using_info"].label = "사진관 이용안내"
         return form
+
+
+class CreateStudioView(user_mixins.LoggedInOnlyView, FormView):
+
+    form_class = forms.CreateStudioForm
+    template_name = "studios/studio_create.html"
+
+    def form_valid(self, form):
+        studio = form.save()
+        studio.author = self.request.user
+        studio.save()
+        return redirect(reverse("studios:profile", kwargs={"pk": studio.pk}))
