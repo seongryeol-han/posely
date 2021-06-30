@@ -1,3 +1,4 @@
+
 <div class="mt-4 w-600px small:w-full border border-gray-400 mobile:bg-white rounded-lg bg-white small:border-none small:bg-gray-100 ">
     <div class="flex items-center justify-between h-16 mobile:h-14 px-4">
         <div class="flex items-center">
@@ -15,8 +16,7 @@
 
     <div class="swiper-container">
         <div class="swiper-wrapper">
-
-
+        
             <div class="img_like swiper-slide" name="{{ studio.pk }}" >
                 <img src="{{studio.studio_best_photo.url}}" style="width: 100%;">
             </div>
@@ -31,29 +31,12 @@
         <div class="swiper-pagination"></div> <!--swiper-container의 맨 밑에다가 놓는다.-->
         <div class="swiper-button-next"></div>
         <div class="swiper-button-prev"></div>
-       
-        {% comment %} 
-        성렬 작성 하트 css\\ 혹시나 해서 남겨둠 
-        <div class="h-8 pt-2 flex items-center justify-between ">
-            <div class="ml-4 flex items-center" style="font-size: 0.5rem;">
-                <i class="far fa-heart fa-3x"></i>
-            </div> 
-        </div> 
-        {% endcomment %}
-        
-        
-        
+              
     </div>
     
     <div class="overflow-auto mt-0.5 mx-4 mb-6 small:mb-0">
-        
-        {% comment %} <p class="font-extrabold mt-1 mb-2 text-sm">좋아요 365개</p> {% endcomment %}
-        {% comment %} <div class="font-semibold text-sm mb-1" style="color:#1a202c;" >{{studio}}</div>
-        <div class=" text-sm" style="color:#1a202c;" >{{studio.introduction | linebreaksbr}}</div> {% endcomment %}
-        
+
             <button class="like focus:border-none focus:outline-none" name="{{ studio.pk }}" value="Like">
-                <!--내가 좋아요 누른 이미지에 대하여 로그인하자마자  하트 체크 -->
-                <!--check_exist 는 studios\\view.py\\main_list 에서 전달 받음  -->  
                 <div class="h-8 pt-2 border-none flex items-center justify-between ">
                     <div class="flex items-center" style="font-size: 0.5rem; color:#fe629f;">
                         {% if studio.pk in check_exist%}

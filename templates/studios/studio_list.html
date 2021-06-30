@@ -8,16 +8,35 @@
 
 
 {% block content %} 
-    
-<div class="mx-auto flex flex-col items-center overflow-auto mobile:mb-10">
-    
-    {% for studio in studios %}
-        {%include "mixins/studio/studio_card.html" with studio=studio check_exist=check_exist%}
-    {% endfor %}
-    
+   
+<div class="container mx-auto flex flex-col items-center overflow-auto mobile:mb-10">
+    {% if studios %}
+        <div class ="book-list card">
+            {% for studio in studios %}
+                {%include "mixins/studio/studio_card.html" with studio=studio check_exist=check_exist%}
+            {% endfor %}
+            {% if page_obj.has_next %}
+                <p class="pagination">
+                    <a class="next-page" href="?page={{ page_obj.next_page_number }}">다음으로</a>
+                </p>
+            {% endif %}
+        </div>
+    {% else %}
+        <p>There are no any books uploaded yet!!!</p>
+    {% endif %}
 </div>
 
-
+<script>
+    jQuery(function ($) {
+        var $list = $('.book-list');
+        $list.jscroll({
+            padding: 100,
+            pagingSelector: '.pagination',
+            nextSelector: 'a.next-page:last',
+            contentSelector: '.card,.pagination'
+        });
+    });
+</script>
 <!-- ajax jqeury 통신 -->
 <script type="text/javascript">
     var like_press = function () { // .like 버튼을 클릭 감지
@@ -45,8 +64,8 @@
                 },
             });
         }
-    $(".like").click(like_press)
-    $(".img_like").dblclick(like_press)
+    $(document).on("click",".like",like_press)    
+    $(document).on("dblclick",".img_like",like_press)    
 </script>
 
 

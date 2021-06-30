@@ -16,13 +16,30 @@ class HomeView(ListView):
     """StudioView Definition"""
 
     model = models.Studio
-    paginate_by = 10
+    paginate_by = 2
     ordering = "created"
     context_object_name = "studios"
+    template_name = "studios/studio_list.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        print(self.request.user)
+        temp = {}
+        if self.request.user.is_authenticated:  # 로그인 되면 실행됨 # 로그인 X 시 스킵
+            aa = models.Studio.objects.filter(likes_user=self.request.user).values_list(
+                "pk", flat=True
+            )
+            print(aa)
+            context["check_exist"] = aa
+        else:
+            context["check_exist"] = temp
+        return context
 
 
-# HomeView--> main_list로 대체
+# HomeView--> main_list로 대체`
 # 사유 : 로그인 했는지 안했는지의 차이를 두기 위해
+# 2021-06-30  다시 HomeView 사용
+# 사유 : 페이지네이션 사용편이
 
 
 def main_list(request):
