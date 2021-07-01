@@ -1,5 +1,5 @@
 
-{% comment %} <div class="mt-4 w-600px small:w-full border border-gray-400 mobile:bg-white rounded-lg bg-white small:border-none small:bg-gray-100 "> {% endcomment %}
+<div class="mt-4 border border-gray-400 mobile:bg-white rounded-lg bg-white small:border-none small:bg-gray-100 ">
     <div class="flex items-center justify-between h-16 mobile:h-14 px-4">
         <div class="flex items-center">
             <a href="{% url 'studios:profile' studio.pk%}">
@@ -52,12 +52,12 @@
                 좋아요&nbsp;{{ studio.likes_user.all.count }}개
             </p>
 
-            <div class="overflow-auto mt-0.5 mb-6 small:mb-0">
+            <div class="overflow-auto mt-0.5 mb-4 small:mb-0">
                 <div class="font-semibold text-sm mb-1" style="color:#1a202c;" >{{studio}}</div>
                 <div class=" text-sm" style="color:#1a202c;" >{{studio.introduction | linebreaksbr}}</div>
             </div> 
     </div>
 
-{% comment %} </div> {% endcomment %}
+</div>
 
 
