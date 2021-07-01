@@ -11,6 +11,7 @@
    
 <div class="container mx-auto flex flex-col items-center overflow-auto mobile:mb-10">
     {% if studios %}
+        <div class="mt-4 w-600px small:w-full border border-gray-400 mobile:bg-white rounded-lg bg-white small:border-none small:bg-gray-100 ">
         <div class ="book-list card">
             {% for studio in studios %}
                 {%include "mixins/studio/studio_card.html" with studio=studio check_exist=check_exist%}
@@ -21,22 +22,11 @@
                 </p>
             {% endif %}
         </div>
-    {% else %}
-        <p>There are no any books uploaded yet!!!</p>
+        </div>
     {% endif %}
 </div>
 
-<script>
-    jQuery(function ($) {
-        var $list = $('.book-list');
-        $list.jscroll({
-            padding: 100,
-            pagingSelector: '.pagination',
-            nextSelector: 'a.next-page:last',
-            contentSelector: '.card,.pagination'
-        });
-    });
-</script>
+
 <!-- ajax jqeury 통신 -->
 <script type="text/javascript">
     var like_press = function () { // .like 버튼을 클릭 감지

@@ -9,14 +9,12 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from users import mixins as user_mixins
 
-# Create your views here.
-
 
 class HomeView(ListView):
     """StudioView Definition"""
 
     model = models.Studio
-    paginate_by = 2
+    paginate_by = 1
     ordering = "created"
     context_object_name = "studios"
     template_name = "studios/studio_list.html"
@@ -41,29 +39,28 @@ class HomeView(ListView):
 # 2021-06-30  다시 HomeView 사용
 # 사유 : 페이지네이션 사용편이
 
+# def main_list(request):
+#     studios = models.Studio.objects.filter()
+#     temp = {}
+#     if request.user.is_authenticated:  # 로그인 되면 실행됨 # 로그인 X 시 스킵
+#         check_exist = models.Studio.objects.filter(likes_user=request.user).values_list(
+#             "pk",
+#             flat=True,
+#         )
 
-def main_list(request):
-    studios = models.Studio.objects.filter()
-    temp = {}
-    if request.user.is_authenticated:  # 로그인 되면 실행됨 # 로그인 X 시 스킵
-        check_exist = models.Studio.objects.filter(likes_user=request.user).values_list(
-            "pk",
-            flat=True,
-        )
-
-        return render(
-            request,
-            "studios/studio_list.html",
-            {"studios": studios, "check_exist": check_exist},
-        )
-    return render(
-        request,
-        "studios/studio_list.html",
-        {
-            "studios": studios,
-            "check_exist": temp,
-        },
-    )
+#         return render(
+#             request,
+#             "studios/studio_list.html",
+#             {"studios": studios, "check_exist": check_exist},
+#         )
+#     return render(
+#         request,
+#         "studios/studio_list.html",
+#         {
+#             "studios": studios,
+#             "check_exist": temp,
+#         },
+#     )
 
 
 class SelectStudio(DetailView):
@@ -111,7 +108,7 @@ class SearchView(View):
 @login_required
 @require_POST
 def studio_like(request):
-    print("@@@@@@@@@@@@")  # 통신하는지 않하는 체크하려고 두었습니다리
+    print("@@@@@@@@@@@@")  # 통신하는지 않하는 체크하려고 둠.
     pk = request.POST.get("pk", None)
     studio = get_object_or_404(models.Studio, pk=pk)
     user = request.user
