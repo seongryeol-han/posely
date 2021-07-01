@@ -1,4 +1,5 @@
 import json
+from django.http import Http404
 from django.views.generic import ListView, View, DetailView, UpdateView, FormView
 from django.shortcuts import render, reverse, redirect
 from django.core.paginator import Paginator
@@ -151,7 +152,7 @@ class EditStudioView(user_mixins.LoggedInOnlyView, UpdateView):
     def get_object(self, queryset=None):  # 룸 호스트랑 요청하는 사람이랑 같은지
         studio = super().get_object(queryset=queryset)
         if studio.author.pk != self.request.user.pk:
-            return reverse("core:home")
+            raise Http404
         return studio
 
     def get_form(self, form_class=None):

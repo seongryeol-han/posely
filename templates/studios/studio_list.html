@@ -9,8 +9,7 @@
 
 {% block content %} 
    
-<div class="container mx-auto flex flex-col items-center overflow-auto mobile:mb-10">
-    {% if studios %}
+<div class="mx-auto flex flex-col items-center overflow-auto mobile:mb-10">
         <div class ="book-list card">
             {% for studio in studios %}
                 {%include "mixins/studio/studio_card.html" with studio=studio check_exist=check_exist%}
@@ -21,9 +20,6 @@
                 </p>
             {% endif %}
         </div>
-    {% else %}
-        <p>There are no any books uploaded yet!!!</p>
-    {% endif %}
 </div>
 
 <script>
