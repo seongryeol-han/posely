@@ -219,14 +219,22 @@ class CreateStudioView(user_mixins.LoggedInOnlyView, FormView):
 #         return redirect(reverse("core:home"))
 
 
-# 여기다가 둬야지 room의 pk를 이용 가능
+# 여기다가 둬야지 concept의 pk를 이용 가능
 class CreateConceptView(user_mixins.LoggedInOnlyView, FormView):
 
     form_class = forms.CreateConceptForm
     template_name = "concepts/concept_create.html"
 
-    def form_valid(self, form):
-        pk = self.kwargs.get("pk")  # form으로 pk를 갖다줘야해서 pk를 설정 (room의 pk).
-        form.save(pk)  # pk를 줌 form에다가
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class=form_class)
 
+        form.fields["name"].label = "컨셉 이름"
+        form.fields["concept_description"].label = "컨셉 설명"
+        form.fields["service_config"].label = "컨셉 이용안내"
+        form.fields["price"].label = "가격"
+        return form
+
+    def form_valid(self, form):
+        pk = self.kwargs.get("pk")  # form으로 pk를 갖다줘야해서 pk를 설정 (concept의 pk).
+        form.save(pk)  # pk를 줌 form에다가
         return redirect(reverse("concepts:edit-list"))

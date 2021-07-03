@@ -43,7 +43,7 @@ class Concept(core_models.TimeStampedModel):
         return photo
 
     def first_photo(self):
-        try:  # try한 이유는. room을 만들 때 사진을 안넣어주면 에러가 나서 사진이 없더라도 그냥 return None 내보내게 함.
+        try:  # try한 이유는. concept을 만들 때 사진을 안넣어주면 에러가 나서 사진이 없더라도 그냥 return None 내보내게 함.
             (photo,) = self.photos.all()[:1]
             return photo.file.url
         except ValueError:
