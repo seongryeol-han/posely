@@ -22,5 +22,17 @@ class LoggedOutOnlyView(UserPassesTestMixin):
         return redirect("core:home")
 
 
+class CreateStudioLimitView(UserPassesTestMixin):
+    def test_func(self):
+        if self.request.user.has_studio is None:
+            return True
+        else:
+            return False
+
+    def handle_no_permission(self):
+        messages.error(self.request, "Can't go there")
+        return redirect("core:home")
+
+
 class LoggedInOnlyView(LoginRequiredMixin):
     login_url = reverse_lazy("users:login")

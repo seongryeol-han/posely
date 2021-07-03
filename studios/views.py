@@ -171,7 +171,9 @@ class EditStudioView(user_mixins.LoggedInOnlyView, UpdateView):
         return form
 
 
-class CreateStudioView(user_mixins.LoggedInOnlyView, FormView):
+class CreateStudioView(
+    user_mixins.LoggedInOnlyView, user_mixins.CreateStudioLimitView, FormView
+):
 
     form_class = forms.CreateStudioForm
     template_name = "studios/studio_create.html"

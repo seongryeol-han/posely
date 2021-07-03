@@ -37,13 +37,13 @@ class User(AbstractUser):
     # 05.09 social login check
     email_verified = models.BooleanField(default=False)
 
-    # has_studio = models.ForeignKey(
-    #     "studios.Studio",
-    #     related_name="studios",
-    #     on_delete=models.CASCADE,
-    #     blank=True,
-    #     null=True,
-    # )
+    has_studio = models.ForeignKey(
+        "studios.Studio",
+        related_name="has_studio",
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+    )
 
     login_method = models.CharField(
         max_length=50, choices=LOGIN_CHOICES, default=LOGIN_EMAIL
