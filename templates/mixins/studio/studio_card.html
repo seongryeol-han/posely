@@ -33,6 +33,18 @@
             {% endfor %}
         
         </div>
+        
+        <button class="like focus:border-none focus:outline-none ml-4" name="{{ studio.pk }}" value="Like">
+            <div class="h-8 pt-2 border-none flex items-center justify-between ">
+                <div class="flex items-center" style="font-size: 0.5rem; color:#fe629f;">
+                    {% if studio.pk in check_exist%}
+                        <i id="check-{{studio.pk}}" class="fas fa-heart fa-3x"></i>
+                    {% else %}
+                        <i id="check-{{studio.pk}}" class="far fa-heart fa-3x"></i>   
+                    {% endif %}
+                </div>
+            </div>
+        </button>
         <div class="swiper-pagination"></div> <!--swiper-container의 맨 밑에다가 놓는다.-->
         <div class="swiper-button-next"></div>
         <div class="swiper-button-prev"></div>
@@ -41,18 +53,6 @@
     
     <div class="overflow-auto mt-0.5 mx-4 mb-6 small:mb-0">
 
-            <button class="like focus:border-none focus:outline-none" name="{{ studio.pk }}" value="Like">
-                <div class="h-8 pt-2 border-none flex items-center justify-between ">
-                    <div class="flex items-center" style="font-size: 0.5rem; color:#fe629f;">
-                        {% if studio.pk in check_exist%}
-                            <i id="check-{{studio.pk}}" class="fas fa-heart fa-3x"></i>
-                        {% else %}
-                            <i id="check-{{studio.pk}}" class="far fa-heart fa-3x"></i>   
-                        {% endif %}
-                    </div>
-                </div>
-            </button>
-            
             <p id="count-{{ studio.pk }}" class="font-extrabold mt-1 mb-2 text-sm">
                 좋아요&nbsp;{{ studio.likes_user.all.count }}개
             </p>
