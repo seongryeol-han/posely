@@ -45,11 +45,14 @@
         </div>
 
         <div class="w-600px small:w-full flex justify-center px-10"> 
-            <div class="px-3 mt-6 w-full bor small:w-full mobile:bg-white rounded-lg bg-gray-100 small:border-none small:bg-gray-100 ">
+            <div class="px-3 mt-6 w-full small:w-full mobile:bg-white rounded-lg bg-gray-100 small:border-none small:bg-gray-100 ">
 
                 {% for concept in studio.concepts.all %}
-                    {%include "mixins/concept/concept_card.html" with concept=concept %}
-                    <div class="mb-12"></div>
+                    
+                    {% if concept.first_photo  %}
+                        {%include "mixins/concept/concept_card.html" with concept=concept %}
+                        <div class="mb-12"></div>
+                    {% endif %}
                 {% endfor %}
     
             </div>

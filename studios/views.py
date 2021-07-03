@@ -177,7 +177,56 @@ class CreateStudioView(user_mixins.LoggedInOnlyView, FormView):
     template_name = "studios/studio_create.html"
 
     def form_valid(self, form):
+
         studio = form.save()
         studio.author = self.request.user
         studio.save()
         return redirect(reverse("studios:profile", kwargs={"pk": studio.pk}))
+
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class=form_class)
+        form.fields["phone_number"].widget.attrs = {"placeholder": "- 제외"}
+        form.fields["open_time"].widget.attrs = {"placeholder": "10:00"}
+        form.fields["close_time"].widget.attrs = {"placeholder": "20:00"}
+
+        form.fields["name"].label = "사진관 이름"
+        form.fields["studio_avatar"].label = "사진관 프로필 사진"
+        form.fields["studio_best_photo"].label = "작가님의 베스트 사진"
+        form.fields["address"].label = "사진관 주소"
+        form.fields["phone_number"].label = "전화번호"
+        form.fields["kakao_chat"].label = "카카오톡 오픈채팅 주소"
+        form.fields["open_time"].label = "오픈 시간"
+        form.fields["close_time"].label = "마감 시간"
+        form.fields["introduction"].label = "사진관 소개"
+        form.fields["using_info"].label = "사진관 이용안내"
+        return form
+
+    # def get(self, request, *args, **kwargs):
+    #     if self.request.user.count_has_studio() is False:
+    #         return redirect("core:home")
+    #     return redirect(self.request, "studios/studio_create.html")
+
+
+# def CreateStudioRenew(request,name,studio_avatar,studio_best_photo,phone_number,kakao_chat,
+# address,open_time,close_time,introduction,using_info):
+#     try:
+#         if not request.user.is_authenticated :
+#             raise LoginError()
+#             if  request.user.count_has_studio()>=1:
+#                 raise have_Sutdio_Error()
+#         #
+#     except(have_Sutdio_Error,LoginError):
+#         return redirect(reverse("core:home"))
+
+
+# 여기다가 둬야지 room의 pk를 이용 가능
+class CreateConceptView(user_mixins.LoggedInOnlyView, FormView):
+
+    form_class = forms.CreateConceptForm
+    template_name = "concepts/concept_create.html"
+
+    def form_valid(self, form):
+        pk = self.kwargs.get("pk")  # form으로 pk를 갖다줘야해서 pk를 설정 (room의 pk).
+        form.save(pk)  # pk를 줌 form에다가
+
+        return redirect(reverse("concepts:edit-list"))

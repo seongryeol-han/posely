@@ -37,9 +37,23 @@ class User(AbstractUser):
     # 05.09 social login check
     email_verified = models.BooleanField(default=False)
 
+    # has_studio = models.ForeignKey(
+    #     "studios.Studio",
+    #     related_name="studios",
+    #     on_delete=models.CASCADE,
+    #     blank=True,
+    #     null=True,
+    # )
+
     login_method = models.CharField(
         max_length=50, choices=LOGIN_CHOICES, default=LOGIN_EMAIL
     )
 
     def get_absolute_url(self):
         return reverse("users:profile", kwargs={"pk": self.pk})
+
+    # def count_has_studio(self):  # 좋아요 수 카운트
+    #     if self.has_studio is None:
+    #         return True
+    #     else:
+    #         return False

@@ -12,4 +12,9 @@ urlpatterns = [
     path("<int:pk>/", views.StudioProfileView.as_view(), name="profile"),
     path("<int:pk>/edit/", views.EditStudioView.as_view(), name="edit"),
     path("create/", views.CreateStudioView.as_view(), name="create"),
+    path(
+        "<int:pk>/concept-create/",
+        views.CreateConceptView.as_view(),
+        name="concept-create",
+    ),
 ]

@@ -26,8 +26,8 @@ class Concept(core_models.TimeStampedModel):
     """Concept Model Definition"""
 
     name = models.CharField(max_length=30)
-    concept_description = models.TextField(default="", blank=True)
-    service_config = models.TextField(default="", blank=True)
+    concept_description = models.TextField(default="", blank=False)
+    service_config = models.TextField(default="", blank=False)
     price = models.DecimalField(max_digits=6, decimal_places=0)
     studio = models.ForeignKey(
         "studios.Studio",

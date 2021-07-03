@@ -22,9 +22,14 @@
             </div>
             
             {% for concept in studio.concepts.all %}
+            
+                {% if concept.first_photo %}
+                
                 <div class="img_like swiper-slide" name="{{ studio.pk }}" >
                     <img src="{{concept.first_photo}}" style="width: 100%;">
                 </div>
+                
+                {% endif %}
             {% endfor %}
         
         </div>
