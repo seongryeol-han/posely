@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.db.models.deletion import SET_NULL
 from phonenumber_field.modelfields import PhoneNumberField
 from django.shortcuts import reverse
 
@@ -40,7 +41,7 @@ class User(AbstractUser):
     has_studio = models.ForeignKey(
         "studios.Studio",
         related_name="has_studio",
-        on_delete=models.CASCADE,
+        on_delete=SET_NULL,
         blank=True,
         null=True,
     )

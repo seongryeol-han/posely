@@ -183,6 +183,8 @@ class CreateStudioView(
         studio = form.save()
         studio.author = self.request.user
         studio.save()
+        self.request.user.has_studio = studio
+        self.request.user.save()
         return redirect(reverse("studios:profile", kwargs={"pk": studio.pk}))
 
     def get_form(self, form_class=None):
