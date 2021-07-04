@@ -96,3 +96,17 @@ class AddPhotoView(user_mixins.LoggedInOnlyView, FormView):
         pk = self.kwargs.get("pk")  # form으로 pk를 갖다줘야해서 pk를 설정 (concept의 pk).
         form.save(pk)  # pk를 줌 form에다가
         return redirect(reverse("concepts:photos", kwargs={"pk": pk}))
+
+
+@login_required  # 만약 로그인이 안되어 있으면, setting에서 LOGIN_URL 로 이동한다 (이거 설정해둬야함.)
+def delete_concept(request, concept_pk):  # url.py에 등록되어있는거.
+    user = request.user
+    try:
+        concept = models.Concept.objects.get(pk=concept_pk)
+        if concept.studio.author.pk != user.pk:
+            Http404()
+        else:
+            models.Concept.objects.filter(pk=concept_pk).delete()
+        return redirect(reverse("concepts:edit-list"))
+    except models.Concept.studio.DoesNotExist:  # concept이 없음
+        return redirect(reverse("core:home"))

@@ -14,4 +14,9 @@ urlpatterns = [
         views.delete_photo,
         name="delete-photo",
     ),
+    path(
+        "<int:concept_pk>/delete/",
+        views.delete_concept,
+        name="delete-concept",
+    ),
 ]

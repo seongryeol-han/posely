@@ -63,7 +63,6 @@
     }
 
     var swiper = new Swiper('.swiper-container', options);
-    console.log(swiper)
 
     /*
     // swiper destroy and create  
@@ -81,14 +80,8 @@
     */
 
     function renewswiper(){ 
-      console.log(typeof(swiper))
-      console.log("1") // f12 키 console창에 테스트용 로그 출력
-      swiper.destroy(true,true) 
-      console.log(swiper)
-      console.log("2") // f12 키 console창에 테스트용 로그 출력
-      var aaa = new Swiper('.swiper-container', options);
-      console.log(aaa)
-      console.log("3") // f12 키 console창에 테스트용 로그 출력
+
+      Swiper('.swiper-container', options);
       
     }
 
