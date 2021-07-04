@@ -43,3 +43,4 @@ class CreateConceptForm(forms.ModelForm):
         studio = models.Studio.objects.get(pk=pk)
         concept.studio = studio
         concept.save()
+        return concept

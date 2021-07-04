@@ -8,6 +8,7 @@ urlpatterns = [
     path("edit-list", views.ConceptEditListView.as_view(), name="edit-list"),
     path("<int:pk>/edit/", views.EditConceptView.as_view(), name="edit"),
     path("<int:pk>/photos/", views.ConceptPhotosView.as_view(), name="photos"),
+    path("<int:pk>/photos/add", views.AddPhotoView.as_view(), name="add-photo"),
     path(
         "<int:concept_pk>/photos/<int:photo_pk>/delete/",
         views.delete_photo,

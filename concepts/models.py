@@ -16,6 +16,8 @@ class Photo(core_models.TimeStampedModel):
         "studios.Studio",
         related_name="photos",
         on_delete=models.CASCADE,
+        default="",
+        blank=True,
     )
 
     def __str__(self):

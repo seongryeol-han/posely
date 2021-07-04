@@ -15,7 +15,8 @@
         </div>
         
 {% else %}
-        <div class="bg-red-400 w-full text-center text-white py-40">컨셉 사진을 추가해주세요.</div>
-        
+    <a href="{%url "concepts:photos" concept.pk %}" class="w-full">
+        <div class="bg-red-400 w-full text-center text-white py-40">클릭해서 컨셉 사진 추가</div>
+    </a>    
 {%endif%}
 

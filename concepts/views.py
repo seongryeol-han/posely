@@ -39,6 +39,11 @@ class EditConceptView(user_mixins.LoggedInOnlyView, UpdateView):
         "price",
     )
 
+    def form_valid(self, form):
+        pk = self.kwargs.get("pk")  # form으로 pk를 갖다줘야해서 pk를 설정 (concept의 pk).
+        form.save(pk)  # pk를 줌 form에다가
+        return redirect(reverse("concepts:edit-list"))
+
     def get_object(self, queryset=None):
         concept = super().get_object(queryset=queryset)
         if concept.studio.author.pk != self.request.user.pk:
@@ -78,3 +83,16 @@ def delete_photo(request, concept_pk, photo_pk):  # url.py에 등록되어있는
         return redirect(reverse("concepts:photos", kwargs={"pk": concept_pk}))
     except models.Concept.DoesNotExist:  # concept이 없음
         return redirect(reverse("core:home"))
+
+
+class AddPhotoView(user_mixins.LoggedInOnlyView, FormView):
+
+    model = models.Photo
+    template_name = "concepts/photo_create.html"
+    fields = "file"
+    form_class = forms.CreatePhotoForm
+
+    def form_valid(self, form):
+        pk = self.kwargs.get("pk")  # form으로 pk를 갖다줘야해서 pk를 설정 (concept의 pk).
+        form.save(pk)  # pk를 줌 form에다가
+        return redirect(reverse("concepts:photos", kwargs={"pk": pk}))
