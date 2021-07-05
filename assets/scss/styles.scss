@@ -57,6 +57,10 @@
     }
 } 
 
+.swiper-button-next.swiper-button-disabled, .swiper-button-prev.swiper-button-disabled{
+    opacity: 0 !important;
+}
+
 
 
 .input-field{

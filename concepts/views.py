@@ -1,4 +1,4 @@
-from django.views.generic import DetailView, ListView, FormView, UpdateView
+from django.views.generic import DetailView, ListView, FormView, UpdateView, View
 from django.shortcuts import render, redirect, reverse
 from . import models, forms
 from django.contrib.auth.decorators import (

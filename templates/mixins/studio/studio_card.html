@@ -9,9 +9,9 @@
                 <div class="mx-3 font-semibold text-sm" style="color:#1a202c;" >{{studio}}</div>
             </a>
         </div>
-        <div class="flex items-center py-2">
+        <a href="{% url 'studios:concept-select' studio.pk %}" class="flex items-center py-2">
             <p class="ml-1 font-semibold text-sm text-blue-500">예약하기</p>
-        </div>
+        </a>
     </div>
 
     <div class="swiper-container">
