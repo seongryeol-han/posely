@@ -30,7 +30,7 @@
                 <form class="flex items-center" method="get" action="{% url "studios:search" %}">
                   <div class="border px-6 flex items-center bg-gray-100">
                     <div style="color:#a0aec0; margin: 0 6px 0 6px; "><i class="fas fa-search fa-sm"></i></div>
-                    <input class=" font-medium text-xs mobile:text-xxs  text-gray-900 bg-gray-100 placeholder-gray-500 py-1 mobile:py-1 rounded-md w-72 focus:outline-none " name="search_name_address" placeholder="사진관 지역, 이름 검색" />
+                    <input class=" font-medium text-xs mobile:text-xxs  text-gray-900 bg-gray-100 placeholder-gray-500 py-1 mobile:py-1 rounded-md w-72 focus:outline-none " name="search_name_address" placeholder="사진관 이름, 지역 검색" />
                   </div>
                 </form>
                 {% endblock search-bar %}
@@ -53,7 +53,7 @@
         autoHeight: true,
         pagination: {
           el: '.swiper-pagination',
-          dynamicBullets: true,
+          type: "fraction"
         },
         navigation: {
           nextEl: '.swiper-button-next',

@@ -4,18 +4,14 @@
 
 .swiper-button-next {
     background: url(/static/img/chevron-circle-right-solid.svg) no-repeat;
-    background-size:50% auto;
     background-position: center;
     opacity: 0.9;
-
 }
 
 .swiper-button-prev {
     background: url(/static/img/chevron-circle-left-solid.svg) no-repeat;
-    background-size:50% auto;
     background-position: center;
     opacity: 0.9;
-
 }
 
 /*
@@ -36,15 +32,30 @@
 }
 
 
-
-.swiper-container-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet {
-    margin: 0 2px !important;
+.swiper-container-horizontal>.swiper-pagination-fraction {
+    margin: 0 0 0 0;
+    font-size: small;
+    color:white;
+    width: 50px !important;
+    background-color: gray;
+    border-radius: 25px;
+    top: 10px !important;
+    right: 10px !important;
+    bottom: unset !important;
+    left: unset !important;
+    opacity: 0.8;
+    padding: 4px 0 6px 0;
+    display: flex;
+    justify-content: center;
 }
 
-.swiper-pagination-bullet {
-    width: 7px !important;
-    height: 7px !important;
-}
+@media (max-width: 450px) {
+    .swiper-container-horizontal>.swiper-pagination {
+        font-size: 8px;
+        width: 35px!important;
+        padding: 2px 0 4px;
+    }
+} 
 
 
 
