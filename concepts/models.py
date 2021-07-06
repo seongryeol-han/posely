@@ -27,8 +27,8 @@ class Photo(core_models.TimeStampedModel):
 class Concept(core_models.TimeStampedModel):
     """Concept Model Definition"""
 
-    name = models.CharField(max_length=30)
-    concept_description = models.TextField(default="", blank=False)
+    name = models.CharField(max_length=15)
+    concept_description = models.TextField(max_length=160, default="", blank=False)
     service_config = models.TextField(default="", blank=False)
     price = models.DecimalField(max_digits=6, decimal_places=0)
     studio = models.ForeignKey(
