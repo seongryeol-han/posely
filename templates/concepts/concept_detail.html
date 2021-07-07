@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load humanize %}
 
 
 {%block page_title%}
@@ -7,11 +8,49 @@
 
 {%endblock page_title%}
 
+{% block search-bar %}
+    <div class="font-semibold text-sm">컨셉 예약</div>
+{% endblock search-bar %}
 
 
 {% block content %}
-<div>
-    <h1>{{concept.name}}</h1>
+<div class="mx-auto flex flex-col items-center overflow-auto mobile:mb-10">
+    <div class="mt-4 w-600px mobile:w-full mx-auto flex flex-col items-center justify-center border rounded-md p-6 pb-10 bg-white border-gray-400 mobile:border-none">
+        <div class="w-full text-lg font-semibold mb-2">{{concept.name}}</div>
+
+        <div class="w-full mb-6 border-b pb-6">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    {% for photo in concept.all_photo %}
+                    <div class="swiper-slide">
+                        <img src="{{photo.file.url}}" style="width: 100%;">
+                    </div>
+                    {% endfor %}
+                </div>
+        
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            
+            </div>
+        </div>
+
+        <div class="w-full mb-6 border-b pb-6">
+            <div class="font-semibold mb-6">컨셉 설명</div>
+            <div class="text-sm mx-6">{{concept.concept_description | linebreaksbr}}</div>
+        </div>
+
+        <div class="w-full mb-6 border-b pb-6 ">
+            <div class="font-semibold mb-6">이용 안내</div>
+            <div class="text-sm mx-6">{{concept.service_config}}</div>
+            <div class=" text-right font-semibold">{{concept.price|intcomma}}원</div>
+        </div>
+
+        <div class="w-full ">
+            <div class="rounded-md bg-blue-500 py-2 text-white text-center">예약하기</div>
+            
+        </div>
+    </div>
 </div>
     
 {% endblock content %}
