@@ -176,9 +176,9 @@ class CreateStudioView2(View):
     def post(self, request):
         print("여기는 포스트")
         name = request.POST["name"]
-        # studio_avatar = request.POST["studio_avatar"]
-        # studio_best_photo = request.POST["studio_best_photo"]
-        address = request.POST["address"]
+        studio_avatar = request.FILES["studio_avatar"]
+        studio_best_photo = request.FILES["studio_best_photo"]
+        # address = request.POST["address"]
         phone_number = request.POST["phone_number"]
         kakao_chat = request.POST["kakao_chat"]
         open_time = request.POST["open_time"]
@@ -187,7 +187,7 @@ class CreateStudioView2(View):
         using_info = request.POST["using_info"]
         studio = models.Studio.objects.create(
             name=name,
-            address=address,
+            # address=address,
             phone_number=phone_number,
             kakao_chat=kakao_chat,
             open_time=open_time,
@@ -195,6 +195,8 @@ class CreateStudioView2(View):
             introduction=introduction,
             using_info=using_info,
             author=request.user,
+            studio_best_photo=studio_best_photo,
+            studio_avatar=studio_avatar,
         )
         self.request.user.has_studio = studio
         self.request.user.save()

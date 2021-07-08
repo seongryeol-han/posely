@@ -17,9 +17,11 @@ class Studio(core_models.TimeStampedModel):
     close_time = models.TimeField()
     introduction = models.TextField(default="", blank=True)
     using_info = models.TextField(default="", blank=True)
-    studio_avatar = models.ImageField(upload_to="studio_photos", default="", blank=True)
+    studio_avatar = models.ImageField(
+        upload_to="studio_photos", default="", blank=True, null=True
+    )
     studio_best_photo = models.ImageField(
-        upload_to="studio_photos", default="", blank=True
+        upload_to="studio_photos", default="", blank=True, null=True
     )
     author = models.ForeignKey(
         "users.User",
