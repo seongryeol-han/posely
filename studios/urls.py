@@ -11,7 +11,7 @@ urlpatterns = [
     ),  # 좋아요 누를시 통신하는 url 따로 페이지가 뜨는 것은 아닙니다.
     path("<int:pk>/", views.StudioProfileView.as_view(), name="profile"),
     path("<int:pk>/edit/", views.EditStudioView.as_view(), name="edit"),
-    path("create/", views.CreateStudioView.as_view(), name="create"),
+    path("create/", views.CreateStudioView2.as_view(), name="create"),
     path(
         "<int:pk>/concept-create/",
         views.CreateConceptView.as_view(),

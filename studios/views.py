@@ -171,44 +171,91 @@ class EditStudioView(user_mixins.LoggedInOnlyView, UpdateView):
         return form
 
 
-class CreateStudioView(
-    user_mixins.LoggedInOnlyView, user_mixins.CreateStudioLimitView, FormView
-):
-
-    form_class = forms.CreateStudioForm
-    template_name = "studios/studio_create.html"
-
-    def form_valid(self, form):
-
-        studio = form.save()
-        studio.author = self.request.user
-        studio.save()
+# 아직 이미지,경도,위도, 안받아옵니다.(model image, blank=True 처리함 )
+class CreateStudioView2(View):
+    def post(self, request):
+        print("여기는 포스트")
+        name = request.POST["name"]
+        # studio_avatar = request.POST["studio_avatar"]
+        # studio_best_photo = request.POST["studio_best_photo"]
+        address = request.POST["address"]
+        phone_number = request.POST["phone_number"]
+        kakao_chat = request.POST["kakao_chat"]
+        open_time = request.POST["open_time"]
+        close_time = request.POST["close_time"]
+        introduction = request.POST["introduction"]
+        using_info = request.POST["using_info"]
+        studio = models.Studio.objects.create(
+            name=name,
+            address=address,
+            phone_number=phone_number,
+            kakao_chat=kakao_chat,
+            open_time=open_time,
+            close_time=close_time,
+            introduction=introduction,
+            using_info=using_info,
+            author=request.user,
+        )
         self.request.user.has_studio = studio
         self.request.user.save()
-        return redirect(reverse("studios:profile", kwargs={"pk": studio.pk}))
 
-    def get_form(self, form_class=None):
-        form = super().get_form(form_class=form_class)
-        form.fields["phone_number"].widget.attrs = {"placeholder": "- 제외"}
-        form.fields["open_time"].widget.attrs = {"placeholder": "10:00"}
-        form.fields["close_time"].widget.attrs = {"placeholder": "20:00"}
+        return redirect("/")
 
-        form.fields["name"].label = "사진관 이름"
-        form.fields["studio_avatar"].label = "사진관 프로필 사진"
-        form.fields["studio_best_photo"].label = "작가님의 베스트 사진"
-        form.fields["address"].label = "사진관 주소"
-        form.fields["phone_number"].label = "전화번호"
-        form.fields["kakao_chat"].label = "카카오톡 오픈채팅 주소"
-        form.fields["open_time"].label = "오픈 시간"
-        form.fields["close_time"].label = "마감 시간"
-        form.fields["introduction"].label = "사진관 소개"
-        form.fields["using_info"].label = "사진관 이용안내"
-        return form
+    def get(self, request):
+        if request.user.is_authenticated:
+            if self.request.user.has_studio is None:
+                # studio_form = forms.CreateStudioForm
+                return render(
+                    request,
+                    "studios/studio_create2.html",
+                    # {"studio_form": studio_form},
+                )
 
-    # def get(self, request, *args, **kwargs):
-    #     if self.request.user.count_has_studio() is False:
-    #         return redirect("core:home")
-    #     return redirect(self.request, "studios/studio_create.html")
+        return render(
+            request,
+            "studios/error_.html",
+        )
+
+
+# 0708 블락 처리 : 사유 , 유연한 form 컨트롤
+# class CreateStudioView(
+#     user_mixins.LoggedInOnlyView, user_mixins.CreateStudioLimitView, FormView
+# ):
+
+#     form_class = forms.CreateStudioForm
+#     template_name = "studios/studio_create.html"
+
+#     def form_valid(self, form):
+
+#         studio = form.save()
+#         studio.author = self.request.user
+#         studio.save()
+#         self.request.user.has_studio = studio
+#         self.request.user.save()
+#         return redirect(reverse("studios:profile", kwargs={"pk": studio.pk}))
+
+#     def get_form(self, form_class=None):
+#         form = super().get_form(form_class=form_class)
+#         form.fields["phone_number"].widget.attrs = {"placeholder": "- 제외"}
+#         form.fields["open_time"].widget.attrs = {"placeholder": "10:00"}
+#         form.fields["close_time"].widget.attrs = {"placeholder": "20:00"}
+
+#         form.fields["name"].label = "사진관 이름"
+#         form.fields["studio_avatar"].label = "사진관 프로필 사진"
+#         form.fields["studio_best_photo"].label = "작가님의 베스트 사진"
+#         form.fields["address"].label = "사진관 주소"
+#         form.fields["phone_number"].label = "전화번호"
+#         form.fields["kakao_chat"].label = "카카오톡 오픈채팅 주소"
+#         form.fields["open_time"].label = "오픈 시간"
+#         form.fields["close_time"].label = "마감 시간"
+#         form.fields["introduction"].label = "사진관 소개"
+#         form.fields["using_info"].label = "사진관 이용안내"
+#         return form
+
+#     # def get(self, request, *args, **kwargs):
+#     #     if self.request.user.count_has_studio() is False:
+#     #         return redirect("core:home")
+#     #     return redirect(self.request, "studios/studio_create.html")
 
 
 # def CreateStudioRenew(request,name,studio_avatar,studio_best_photo,phone_number,kakao_chat,

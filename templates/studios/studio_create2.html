@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+
+{%block page_title%}
+    스튜디오 만들기
+
+{%endblock page_title%}
+
+{% block search-bar %}
+    <div class="font-semibold text-sm">스튜디오 만들기</div>
+{% endblock search-bar %}
+
+{%block content%}
+<div class="mx-auto flex flex-col items-center overflow-auto mobile:mb-10">
+    <div class="mt-4 w-600px mobile:w-full mx-auto flex flex-col items-center justify-center border rounded-md p-6 pb-10 bg-white border-gray-400 mobile:border-none">
+     
+        <form action="{% url 'studios:create' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="mb-1 ml-1 text-xs font-semibold">
+                <label for="name">사진관 이름</label>
+            </div>
+            <div class="border rounded px-2 py-1 bg-gray-100 input-error mb-4 text-xs">
+                <input name="name" type="text"  id="name" placeholder="이메일을 입력하세요">
+            </div>
+            <div class="mb-1 ml-1 text-xs font-semibold">
+                <label for="studio_avatar">사진관 프로필 사진</label>
+            </div>
+            <div class="border rounded px-2 py-1 bg-gray-100 input-error mb-4 text-xs">
+                <input name="studio_avatar" type="text"  id="studio_avatar" placeholder="">
+            </div>
+            <div class="mb-1 ml-1 text-xs font-semibold">
+                <label for="studio_best_photo">작가님의 베스트 사진</label>
+            </div>
+            <div class="border rounded px-2 py-1 bg-gray-100 input-error mb-4 text-xs">
+                <input name="studio_best_photo" type="text"  id="studio_best_photo" placeholder="">
+            </div>
+            <div class="mb-1 ml-1 text-xs font-semibold">
+                <label for="address">사진관 주소</label>
+            </div>
+            <div class="border rounded px-2 py-1 bg-gray-100 input-error mb-4 text-xs">
+                <input name="address" type="text"  id="address" placeholder="">
+            </div>
+            <div class="mb-1 ml-1 text-xs font-semibold">
+                <label for="phone_number">전화번호</label>
+            </div>
+            <div class="border rounded px-2 py-1 bg-gray-100 input-error mb-4 text-xs">
+                <input name="phone_number" type="text"  id="phone_number" placeholder="- 제외">
+            </div>
+            <div class="mb-1 ml-1 text-xs font-semibold">
+                <label for="kakao_chat">카카오 오픈채팅 주소</label>
+            </div>
+            <div class="border rounded px-2 py-1 bg-gray-100 input-error mb-4 text-xs">
+                <input name="kakao_chat" type="text"  id="kakao_chat" placeholder="오픈 채팅방을 등록해주세요!">
+            </div>
+            <div class="mb-1 ml-1 text-xs font-semibold">
+                <label for="open_time">오픈 시간</label>
+            </div>
+              <div class="border rounded px-2 py-1 bg-gray-100 input-error mb-4 text-xs">
+                <input name="open_time" type="text"  id="open_time" placeholder="10:00">
+            </div>
+            <div class="mb-1 ml-1 text-xs font-semibold">
+                <label for="close_time">마감 시간</label>
+            </div>
+              <div class="border rounded px-2 py-1 bg-gray-100 input-error mb-4 text-xs">
+                <input name="close_time" type="text"  id="close_time" placeholder="20:00"  >
+            </div>
+            <div class="mb-1 ml-1 text-xs font-semibold">
+                <label for="introduction">사진관 소개</label>
+            </div>
+              <div class="border rounded px-2 py-1 bg-gray-100 input-error mb-4 text-xs">
+                <input name="introduction" type="text"  id="introduction" placeholder="">
+            </div>
+            <div class="mb-1 ml-1 text-xs font-semibold">
+                <label for="using_info">사진관 이용안내</label>
+            </div>
+              <div class="border rounded px-2 py-1 bg-gray-100 input-error mb-4 text-xs">
+                <input name="using_info" type="text"  id="using_info" placeholder="">
+            </div>
+<!--
+form.fields["phone_number"].widget.attrs = {"placeholder": "- 제외"}
+        form.fields["open_time"].widget.attrs = {"placeholder": "10:00"}
+        form.fields["close_time"].widget.attrs = {"placeholder": "20:00"}
+
+        form.fields["name"].label = "사진관 이름"
+        form.fields["studio_avatar"].label = "사진관 프로필 사진"
+        form.fields["studio_best_photo"].label = "작가님의 베스트 사진"
+        form.fields["address"].label = "사진관 주소"
+        form.fields["phone_number"].label = "전화번호"
+        form.fields["kakao_chat"].label = "카카오톡 오픈채팅 주소"
+        form.fields["open_time"].label = "오픈 시간"
+        form.fields["close_time"].label = "마감 시간"
+        form.fields["introduction"].label = "사진관 소개"
+        form.fields["using_info"].label = "사진관 이용안내"
+
+-->
+
+            <button  type="submit" class=" bg-red-500 text-white">생성하기</button> 
+        </form>
+    </div>
+</div>
+
+{%endblock content%}
+    

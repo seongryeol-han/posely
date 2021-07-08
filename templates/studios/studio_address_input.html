@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+    <title>한국주소 좌표변환 - korea address to geocode</title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <style type="text/css">
+      body, html, h1, h2, h3, h4, p, ul, ol, li, dl, dt, dd {padding:0;margin:0;font-size:.95em;}
+      img {border:0;}
+      a {text-decoration:none;}
+      table {border-spacing:0;padding:0;border-top:1px solid #ddd;border-left:1px solid #ddd;width:100%;}
+      td, th {border-right:1px solid #ddd;border-bottom:1px solid #ddd;padding:3px;}
+      th {background-color:#f5f5f5;text-align:left;}
+      #inputAddr th {background-color:#f5e7ed}
+      input[type=text] {height:20px;line-height:20px;}
+      input[type=button] {border:1px solid #222;background-color:#444;color:#fff;line-height:22px;}
+      #inputAddr, #result {width:100%;margin:0 auto;}
+      #result {max-height:250px;overflow-y:auto;border-bottom:1px solid #ddd;}
+    </style>
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=iqj2g6f0df&submodules=geocoder"></script>
+    <script>
+      function searchAddressToCoordinate(address) {
+        naver.maps.Service.geocode({
+          address: address
+        }, function(status, response) {
+          if (status === naver.maps.Service.Status.ERROR) {
+            return alert('주소를 확인후 다시 시도 바랍니다.');
+          }
+          $("#resultNum").text(response.result.items.length+"개");
+          for(i=0;i<response.result.items.length;i++){
+            var item=response.result.items[i];
+            addrType = item.isRoadAddress ? '[도로명 주소]' : '[지번 주소]';
+            str = "<tr><th rowspan=2>"+(i+1)+"</th><th>변환주소</th><td>"+addrType+item.address+"</td></tr><tr><th>좌표</th><td>lat-"+item.point.y+", lng-"+item.point.x+"</td></tr>";
+            $("#result table tbody").append(str);
+          }     
+        });
+      }
+      function sendAddr(){
+        if(!$('#address').val()){
+          alert("변환할 주소를 입력해주세요.");
+          $("#address").focus();
+        }else{
+          $("#result table tbody, #resultNum").html("");
+          searchAddressToCoordinate($('#address').val());
+        }
+      }
+      $(function(){
+        $("#address").focus();
+      });
+    </script>
+  </head>
+  <body>
+    <div id="inputAddr">
+      <table>
+        <colgroup>
+          <col width="110" />
+          <col width="*" />
+        </colgroup>
+        <tbody>
+          <tr>
+            <th>변환할 주소</th>
+            <td>
+              <input type="text" id="address" placeholder="예)송파대로 100" value="" onkeyup="if(window.event.keyCode == 13){sendAddr();}">
+              <input type="button" id="submit" value="변환" onClick="sendAddr()">
+            </td>
+          </tr>
+          <tr>
+            <th>검색수</th>
+            <td id="resultNum"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div id="result">
+      <table>
+      <colgroup>
+          <col width="30" />
+          <col width="80" />
+          <col width="*" />
+        </colgroup>
+        <tbody>
+        </tbody>    
+      </table>
+    </div>
+  </body>
+</html>
