@@ -178,16 +178,21 @@ class CreateStudioView2(View):
         name = request.POST["name"]
         studio_avatar = request.FILES["studio_avatar"]
         studio_best_photo = request.FILES["studio_best_photo"]
-        # address = request.POST["address"]
+        zonecode = request.POST["zonecode"]
+        addr = request.POST["addr"]
+        detail = request.POST["detail"]
+        address = zonecode + " " + addr + " " + detail
         phone_number = request.POST["phone_number"]
         kakao_chat = request.POST["kakao_chat"]
         open_time = request.POST["open_time"]
         close_time = request.POST["close_time"]
         introduction = request.POST["introduction"]
         using_info = request.POST["using_info"]
+        studio_lat = request.POST["studio_lat"]
+        studio_lng = request.POST["studio_lng"]
         studio = models.Studio.objects.create(
             name=name,
-            # address=address,
+            address=address,
             phone_number=phone_number,
             kakao_chat=kakao_chat,
             open_time=open_time,
@@ -197,6 +202,8 @@ class CreateStudioView2(View):
             author=request.user,
             studio_best_photo=studio_best_photo,
             studio_avatar=studio_avatar,
+            studio_lat=studio_lat,
+            studio_lng=studio_lng,
         )
         self.request.user.has_studio = studio
         self.request.user.save()
