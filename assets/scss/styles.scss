@@ -14,6 +14,10 @@
     opacity: 0.9;
 }
 
+.swiper-container {
+    z-index: 0 !important;
+}
+
 /*
 @media (max-width: 450px) {
     .swiper-button-next {
@@ -79,4 +83,9 @@
 
 .input-error:focus-within {
     border-color: #90cdf4;
+}
+
+
+.hidden {
+    display: none;
 }

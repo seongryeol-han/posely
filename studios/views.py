@@ -154,7 +154,7 @@ class EditStudioView(user_mixins.LoggedInOnlyView, UpdateView):
 
     def get_form(self, form_class=None):
         form = super().get_form(form_class=form_class)
-        form.fields["phone_number"].widget.attrs = {"placeholder": "- 제외"}
+        form.fields["phone_number"].widget.attrs = {"placeholder": "010-0000-0000"}
         form.fields["open_time"].widget.attrs = {"placeholder": "10:00"}
         form.fields["close_time"].widget.attrs = {"placeholder": "20:00"}
 

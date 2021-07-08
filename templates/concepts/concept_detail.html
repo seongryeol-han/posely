@@ -43,15 +43,44 @@
         <div class="w-full mb-6 border-b pb-6 ">
             <div class="font-semibold mb-6">이용 안내</div>
             <div class="text-sm mx-6">{{concept.service_config}}</div>
-            <div class=" text-right font-semibold">{{concept.price|intcomma}}원</div>
+            <div class=" text-right font-semibold mx-6">{{concept.price|intcomma}}원</div>
         </div>
 
         <div class="w-full ">
-            <div class="rounded-md bg-blue-500 py-2 text-white text-center">예약하기</div>
-            
+            <div id="reservation_button" class="rounded-md bg-blue-500 py-2 text-white text-center cursor-pointer">촬영 예약하기</div> 
         </div>
     </div>
 </div>
+
+<div class="modal hidden fixed top-0 left-0 w-full h-full flex justify-center items-center">
+    <div class="modal_overlay bg-black opacity-50 w-full h-full absolute"></div>
+    <div class="modal_content relative top-0 shadow-2xl rounded-xl bg-white h-56 w-350px p-6">
+        <div class="text-sm font-semibold">촬영 예약 문의</div>
+        <div class="flex flex-col justify-center h-full pb-4">
+            <a href="{{concept.studio.kakao_chat}}" target="popup" class="bg-yellow-500 text-sm text-white text-center py-2 rounded-md">카카오톡 문의</a>
+            <a href="tel:{{concept.studio.phone_number}}" class="bg-blue-500 text-sm text-white text-center py-2 mt-3 rounded-md hidden mobile:block">전화 문의</a>
+            <a class=" text-xs text-center py-2 rounded-md font-semibold mobile:hidden"> 전화번호 {{concept.studio.phone_number}}</a>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    const openButton = document.getElementById("reservation_button");
+    const modal = document.querySelector(".modal");
+    const overlay = modal.querySelector(".modal_overlay");
+    const openModal = () => {
+        modal.classList.remove("hidden");
+
+    }
+    const closeModal = () => {
+        modal.classList.add("hidden");
+    }
+    overlay.addEventListener("click", closeModal);
+    openButton.addEventListener("click", openModal);
+
+</script>
+
     
 {% endblock content %}
 
