@@ -91,12 +91,12 @@
     marker = new naver.maps.Marker({ 
       map : map,
       position : latlng,
-      icon : {
-        content : "<div class ='marker'></div>",
-        anchor : new naver.maps.Point(10,12), //marker width: 20px; height: 20px라 
-      },  
+      //icon : {
+       // content : "<div class ='marker'></div>",
+      //anchor : new naver.maps.Point(10,12), //marker width: 20px; height: 20px라 
+      //},  
     });
-    map.setZoom(14,false); // lv,14 animation X
+    map.setZoom(16,false); // lv,14 animation X
     map.panTo(latlng); //이동
     //계속된 현재위치 클릭방지
     let currentUse = true;
@@ -110,10 +110,10 @@
           marker = new naver.maps.Marker({
             map:map,
             position: latlng,
-            icon:{
-              content : '<img class="pulse" draggable="false" unselectable="on" src="http://myfirstmap.s3.ap-northeast-2.amazonaws.com/circle.png" >',
-              anchor : new naver.maps.Point(11,11),  //중심좌표 11,11
-            }
+            //icon:{
+            // content : '<img class="pulse" draggable="false" unselectable="on" src="http://myfirstmap.s3.ap-northeast-2.amazonaws.com/circle.png" >',
+            //  anchor : new naver.maps.Point(11,11),  //중심좌표 11,11
+            //}
           });
           currentUse=false;
         }
