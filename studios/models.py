@@ -13,6 +13,8 @@ class Studio(core_models.TimeStampedModel):
     phone_number = models.CharField(max_length=13)
     kakao_chat = models.CharField(max_length=140, blank=True)
     address = models.CharField(max_length=140)
+    addr_detail = models.CharField(max_length=140, blank=True)
+    addr_short = models.CharField(max_length=140, blank=True)
     open_time = models.TimeField()
     close_time = models.TimeField()
     introduction = models.TextField(default="", blank=True)

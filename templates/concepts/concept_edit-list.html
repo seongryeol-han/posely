@@ -17,7 +17,7 @@
         {% for studio in user.studios.all %} 
             <div class="mb-4 w-full flex items-center justify-end">
                 <a href="{% url "studios:concept-create" studio.pk%}">
-                    <div class="border rounded-md text-center text-xs text-white py-1 px-6 bg-blue-500">컨셉 추가</div>
+                    <div class="border rounded-md text-center text-sm text-white py-1 px-4 bg-blue-500">컨셉 추가</div>
                 </a>
             </div>
 

@@ -154,9 +154,13 @@ class EditStudioView(user_mixins.LoggedInOnlyView, UpdateView):
 
     def get_form(self, form_class=None):
         form = super().get_form(form_class=form_class)
-        form.fields["phone_number"].widget.attrs = {"placeholder": "010-0000-0000"}
+        form.fields["phone_number"].widget.attrs = {"placeholder": "- 를 포함해주세요."}
         form.fields["open_time"].widget.attrs = {"placeholder": "10:00"}
         form.fields["close_time"].widget.attrs = {"placeholder": "20:00"}
+        form.fields["address"].widget.attrs = {"readonly": True}
+        form.fields["kakao_chat"].widget.attrs = {
+            "placeholder": "오픈 채팅방 주소(URL)를 등록해주세요."
+        }
 
         form.fields["name"].label = "사진관 이름"
         form.fields["studio_avatar"].label = "사진관 프로필 사진"
@@ -175,13 +179,14 @@ class EditStudioView(user_mixins.LoggedInOnlyView, UpdateView):
 class CreateStudioView2(View):
     def post(self, request):
         print("여기는 포스트")
+
         name = request.POST["name"]
         studio_avatar = request.FILES["studio_avatar"]
         studio_best_photo = request.FILES["studio_best_photo"]
         zonecode = request.POST["zonecode"]
-        addr = request.POST["addr"]
-        detail = request.POST["detail"]
-        address = zonecode + " " + addr + " " + detail
+        addr_short = request.POST["addr_short"]
+        addr_detail = request.POST["addr_detail"]
+        address = zonecode + " " + addr_short + " " + addr_detail
         phone_number = request.POST["phone_number"]
         kakao_chat = request.POST["kakao_chat"]
         open_time = request.POST["open_time"]
@@ -190,8 +195,11 @@ class CreateStudioView2(View):
         using_info = request.POST["using_info"]
         studio_lat = request.POST["studio_lat"]
         studio_lng = request.POST["studio_lng"]
+
         studio = models.Studio.objects.create(
             name=name,
+            addr_short=addr_short,
+            addr_detail=addr_detail,
             address=address,
             phone_number=phone_number,
             kakao_chat=kakao_chat,
@@ -207,18 +215,20 @@ class CreateStudioView2(View):
         )
         self.request.user.has_studio = studio
         self.request.user.save()
+        pk = self.kwargs.get("pk")
 
-        return redirect("/")
+        return redirect(reverse("studios:concept-create", kwargs={"pk": studio.pk}))
 
     def get(self, request):
         if request.user.is_authenticated:
-            if self.request.user.has_studio is None:
-                # studio_form = forms.CreateStudioForm
-                return render(
-                    request,
-                    "studios/studio_create2.html",
-                    # {"studio_form": studio_form},
-                )
+            if self.request.user.studio is True:
+                if self.request.user.has_studio is None:
+                    # studio_form = forms.CreateStudioForm
+                    return render(
+                        request,
+                        "studios/studio_create2.html",
+                        # {"studio_form": studio_form},
+                    )
 
         return render(
             request,
