@@ -9,8 +9,8 @@
             </li>
             
         {% else %}
-            <li><a class="flex items-center justify-center mt-1 rounded-full w-6 h-6 text-gray-600 " href="{% url "users:login"%}">
-                <i class="fas fa-user-circle fa-lg"></i>
+            <li><a class="text-sm text-gray-600 font-semibold hover:text-black " href="{% url "users:login"%}">
+                <div>로그인</div>
             </a></li>   
         {% endif %}
     </ul>

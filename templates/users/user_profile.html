@@ -38,7 +38,7 @@
                 </div>
 
                 {%if user_obj == user %}
-                    {%if user_obj.studios.count > 0%}
+                    {%if user.studios.count > 0%}
                         {% for studio in user_obj.studios.all %}
                         <a href="{% url 'studios:profile' studio.pk %}" class="">    
                             <div class="border border-gray-400 rounded-md text-center font-semibold py-1 px-10 mt-6">
@@ -47,11 +47,15 @@
                         </a>
                         {%endfor%}
                     {%else%}
-                        <a href="{% url 'studios:create' %}" class="">    
+                        
+                        {% if user.studio == True %}
+                        <a href="{% url 'studios:create' %}" >    
                             <div class="border border-gray-400 rounded-md text-center font-semibold py-1 px-10 mt-6">
                                 사진관 만들기
                             </div>
                         </a>
+                        {% endif %}
+                            
                     {%endif%}
                     
                 {%endif%}

@@ -18,9 +18,10 @@
         {% include "mixins/user/user_input.html" with field=field %}   
     {% endfor %}
     
-    <div><a href="{% url "users:logout"%}">로그아웃</a></div>
-
-    <button class=" bg-red-500 text-white">{{cta}}</button>        
+    <div class="flex justify-between">
+        <a class=" bg-white text-red-600 text-sm rounded-md px-4 py-1" href="{% url "users:logout"%}">로그아웃</a>
+        <button class="bg-gray-white border border-gray-500 text-gray-800 text-sm rounded-md px-4 py-1">편집 완료</button>        
+    </div>
 
 
 </form>

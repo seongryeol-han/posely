@@ -14,75 +14,86 @@
 <div class="mx-auto flex flex-col items-center overflow-auto mobile:mb-10">
     <div class="mt-4 w-600px mobile:w-full mx-auto flex flex-col items-center justify-center border rounded-md p-6 pb-10 bg-white border-gray-400 mobile:border-none">
      
-        <form action="{% url 'studios:create' %}" method="POST" enctype="multipart/form-data">
+        <form class="w-full" action="{% url 'studios:create' %}" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
 
             <div class="mb-1 ml-1 text-xs font-semibold">
                 <label for="name">사진관 이름</label>
             </div>
-            <div class="border rounded px-2 py-1 bg-gray-100 input-error mb-4 text-xs">
-                <input name="name" type="text"  id="name" placeholder="이메일을 입력하세요">
+            <div class="border rounded px-2 py-1 bg-gray-100 input-click mb-4 text-xs">
+                <input class="studio-input-field" name="name" type="text"  id="name" required placeholder="사진관 이름을 입력해주세요.">
             </div>
             <div class="mb-1 ml-1 text-xs font-semibold">
                 <label for="studio_avatar">사진관 프로필 사진</label>
             </div>
-            <div class="border rounded px-2 py-1 bg-gray-100 input-error mb-4 text-xs">
-                <input name="studio_avatar" type="file"  id="studio_avatar"  placeholder="">
+            <div class="border rounded px-2 py-1 bg-gray-100 input-click mb-4 text-xs">
+                <input class="studio-input-field" name="studio_avatar" type="file" id="studio_avatar" required>
             </div>
             <div class="mb-1 ml-1 text-xs font-semibold">
                 <label for="studio_best_photo">작가님의 베스트 사진</label>
             </div>
-            <div class="border rounded px-2 py-1 bg-gray-100 input-error mb-4 text-xs">
-                <input name="studio_best_photo" type="file"  id="studio_best_photo" placeholder="">
+            <div class="border rounded px-2 py-1 bg-gray-100 input-click mb-4 text-xs">
+                <input class="studio-input-field" name="studio_best_photo" type="file"  id="studio_best_photo" required>
             </div>
+
             <div class="mb-1 ml-1 text-xs font-semibold">
                 <label for="address">사진관 주소</label>
             </div>
-            <input type="button" id="find_button" value="주소 찾기"></br>
-            <input type="text" name="zonecode" id="zonecode" placeholder="우편번호" readonly >
-            <input type="text" name="addr" id="addr" placeholder="도로명주소" readonly>
-            <input type="text" name="detail" id="detail" placeholder="상세주소">
+            
+            <input style="background-color: #E5E5E5;" class="w-16 my-1 text-xs border rounded-sm text-black border-gray-700 cursor-pointer py-1" type="button" id="find_button" value="주소 찾기" required>
+            
+            <div class="border rounded px-2 py-1 bg-gray-100 mb-4 text-xs">  
+                <input class="readonly studio-input-field" type="text" name="zonecode" id="zonecode" placeholder="우편번호"  required >
+            </div>
+            <div class="border rounded px-2 py-1 bg-gray-100 mb-4 text-xs">  
+                <input class="readonly studio-input-field" type="text" name="addr_short" id="addr_short" placeholder="도로명주소" required >
+            </div>
+            <div class="border rounded px-2 py-1 bg-gray-100 input-click mb-4 text-xs">
+                <input class="studio-input-field" type="text" name="addr_detail" id="addr_detail" required placeholder="상세주소를 입력해주세요.">
+            </div>
 
             <div class="mb-1 ml-1 text-xs font-semibold">
                 <label for="phone_number">전화번호</label>
             </div>
-            <div class="border rounded px-2 py-1 bg-gray-100 input-error mb-4 text-xs">
-                <input name="phone_number" type="text"  id="phone_number" placeholder="- 제외">
+            <div class="border rounded px-2 py-1 bg-gray-100 input-click mb-4 text-xs">
+                <input class="studio-input-field" name="phone_number" type="text"  id="phone_number" required placeholder=" - 를 포함해주세요.">
             </div>
             <div class="mb-1 ml-1 text-xs font-semibold">
                 <label for="kakao_chat">카카오 오픈채팅 주소</label>
             </div>
-            <div class="border rounded px-2 py-1 bg-gray-100 input-error mb-4 text-xs">
-                <input name="kakao_chat" type="text"  id="kakao_chat" placeholder="오픈 채팅방을 등록해주세요!">
+            <div class="border rounded px-2 py-1 bg-gray-100 input-click mb-4 text-xs">
+                <input class="studio-input-field" name="kakao_chat" type="text"  id="kakao_chat" placeholder="오픈 채팅방 주소(URL)를 등록해주세요.">
             </div>
             <div class="mb-1 ml-1 text-xs font-semibold">
                 <label for="open_time">오픈 시간</label>
             </div>
-              <div class="border rounded px-2 py-1 bg-gray-100 input-error mb-4 text-xs">
-                <input name="open_time" type="text"  id="open_time" placeholder="10:00">
+              <div class="border rounded px-2 py-1 bg-gray-100 input-click mb-4 text-xs">
+                <input class="studio-input-field" name="open_time" type="text"  id="open_time" required placeholder="10:00">
             </div>
             <div class="mb-1 ml-1 text-xs font-semibold">
                 <label for="close_time">마감 시간</label>
             </div>
-              <div class="border rounded px-2 py-1 bg-gray-100 input-error mb-4 text-xs">
-                <input name="close_time" type="text"  id="close_time" placeholder="20:00"  >
+              <div class="border rounded px-2 py-1 bg-gray-100 input-click mb-4 text-xs">
+                <input class="studio-input-field" name="close_time" type="text"  id="close_time" required placeholder="20:00"  >
             </div>
             <div class="mb-1 ml-1 text-xs font-semibold">
                 <label for="introduction">사진관 소개</label>
             </div>
-              <div class="border rounded px-2 py-1 bg-gray-100 input-error mb-4 text-xs">
-                <input name="introduction" type="text"  id="introduction" placeholder="">
+              <div class="border rounded px-2 py-1 bg-gray-100 input-click mb-4 text-xs">
+                <textarea class="studio-input-field" style="height: 120px;" name="introduction" type="text"  id="introduction" required placeholder=""></textarea>
             </div>
             <div class="mb-1 ml-1 text-xs font-semibold">
                 <label for="using_info">사진관 이용안내</label>
             </div>
-              <div class="border rounded px-2 py-1 bg-gray-100 input-error mb-4 text-xs">
-                <input name="using_info" type="text"  id="using_info" placeholder="">
+              <div class="border rounded px-2 py-1 bg-gray-100 input-click mb-4 text-xs">
+                <textarea class="studio-input-field" style="height: 120px;" name="using_info" type="text"  id="using_info" required placeholder=""></textarea>
             </div>
+
             <input type="hidden" id="studio_lat" name ="studio_lat" value="">
             <input type="hidden" id="studio_lng" name ="studio_lng" value="">
-            
-            <button  type="submit" class=" bg-red-500 text-white">생성하기</button> 
+            <div class="flex justify-end">
+                <button type="submit" class=" bg-blue-500 text-white text-sm rounded-md px-4 py-1">생성하기</button> 
+            </div>
         </form>
     </div>
 </div>
@@ -92,8 +103,8 @@
             new daum.Postcode({
                 oncomplete: function(data) {
                     jQuery('#zonecode').val(data.zonecode);
-                    jQuery('#addr').val(data.address);
-                    jQuery('#detail').focus();
+                    jQuery('#addr_short').val(data.address);
+                    jQuery('#addr_detail').focus();
                     var geocoder = new kakao.maps.services.Geocoder();
 
                     geocoder.addressSearch(data.address, function(result, status) {
@@ -111,6 +122,11 @@
              }).open();
         });
     })
+
+    //readonly랑  required랑 같이 안써져서 이거 추가함 (class="readonly")
+    $(".readonly").keydown(function(e){
+        e.preventDefault();
+    });
 </script>
 {%endblock content%}
     
