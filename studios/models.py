@@ -36,8 +36,8 @@ class Studio(core_models.TimeStampedModel):
         "users.User", blank=True, related_name="likes_user"
     )
     # map
-    studio_lat = models.CharField(max_length=50, blank=True)
-    studio_lng = models.CharField(max_length=50, blank=True)
+    studio_lat = models.FloatField(blank=True)
+    studio_lng = models.FloatField(blank=True)
 
     def count_likes_user(self):  # 좋아요 수 카운트
         return self.likes_user.count()

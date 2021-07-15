@@ -9,6 +9,7 @@ from django.views.decorators.http import require_POST
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from users import mixins as user_mixins
+from django.db.models import Count
 
 
 class HomeView(ListView):
@@ -22,6 +23,37 @@ class HomeView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        print(self.request.user)
+        temp = {}
+        if self.request.user.is_authenticated:  # 로그인 되면 실행됨 # 로그인 X 시 스킵
+            aa = models.Studio.objects.filter(likes_user=self.request.user).values_list(
+                "pk", flat=True
+            )
+            print(aa)
+            context["check_exist"] = aa
+        else:
+            context["check_exist"] = temp
+        return context
+
+
+class HomeView2(ListView):
+    """StudioView Definition"""
+
+    # model = models.Studio
+    # model = models.Studio
+    paginate_by = 1
+    queryset = models.Studio.objects.annotate(like_count=Count("likes_user")).order_by(
+        "-like_count",
+    )
+    # num_like = Count("likes_user")
+
+    context_object_name = "studios"
+    template_name = "studios/studio_list.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        print("2222")
         print(self.request.user)
         temp = {}
         if self.request.user.is_authenticated:  # 로그인 되면 실행됨 # 로그인 X 시 스킵
