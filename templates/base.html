@@ -18,6 +18,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jscroll/2.4.1/jquery.jscroll.min.js"></script>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
+    
     <!-- 지도붙이는 곳  -->
     <!--map-->
     <!--다음 지도 -->
@@ -27,6 +28,8 @@
     <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=iqj2g6f0df"></script>
 
     <title>포즐리 {% block page_title %}{% endblock page_title %}</title>
+
+
 
 </head>
 <body class="mt-14 mb-14 bg-gray-100 mobile:bg-white mobile:mt-32px ">
@@ -108,6 +111,20 @@
               callback: renewswiper,
           });
     });
+
+    function AAA(){
+      if($(".text").hasClass("show-more-height")) {
+            $(this).text("(Show Less)");
+        } else {
+            $(this).text("(Show More)");
+        }
+
+        $(".text").toggleClass("show-more-height");
+    }
+
+    
+    $(document).on("click",".show-more",AAA) 
+
   </script>
     
 </body>

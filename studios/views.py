@@ -120,8 +120,20 @@ class SearchView(View):
 
                 filter_args2["address__contains"] = search_data
 
-                qs1 = models.Studio.objects.filter(**filter_args1).order_by("-created")
-                qs2 = models.Studio.objects.filter(**filter_args2).order_by("-created")
+                qs1 = (
+                    models.Studio.objects.filter(**filter_args1)
+                    .annotate(like_count=Count("likes_user"))
+                    .order_by(
+                        "-like_count",
+                    )
+                )
+                qs2 = (
+                    models.Studio.objects.filter(**filter_args2)
+                    .annotate(like_count=Count("likes_user"))
+                    .order_by(
+                        "-like_count",
+                    )
+                )
 
                 qs = qs1 | qs2
 

@@ -1,3 +1,19 @@
+<style type="text/css">
+#profile-description {
+    width: 690px; margin-top: 50px; position:relative;
+}
+#profile-description .text {
+    width: 660px; margin-bottom: 5px; color: #777; padding: 0 15px; position:relative; font-family: Arial; font-size: 14px; display: block;
+}
+#profile-description .show-more {
+    width: 690px; color: #777; position:relative; font-size: 12px; padding-top: 5px; height: 20px; text-align: center; background: #f1f1f1; cursor: pointer;
+}
+#profile-description .show-more:hover { 
+    color: #1779dd;
+}
+#profile-description .show-more-height { height: 30px; overflow:hidden; }
+</style>
+
 
 <div class="mt-4 border border-gray-400 mobile:bg-white rounded-lg bg-white small:border-none small:bg-gray-100 ">
     <div class="flex items-center justify-between h-16 mobile:h-14 px-4">
@@ -67,10 +83,12 @@
 
             <div class="overflow-auto mt-0.5 mb-4 small:mb-0">
                 <div class="font-semibold text-sm mb-1" style="color:#1a202c;" >{{studio}}</div>
-                <div class=" text-sm" style="color:#1a202c;" >{{studio.introduction | linebreaksbr}}</div>
+                <div id="profile-description">
+                    <div class="text show-more-height text-sm" style="color:#1a202c;" >{{studio.introduction | linebreaksbr}}</div>
+                    <div class="show-more">(Show More)</div>
+                </div>
             </div> 
     </div>
 
 </div>
-
 
