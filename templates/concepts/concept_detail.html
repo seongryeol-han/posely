@@ -14,13 +14,14 @@
 
 
 {% block content %}
+
 <div class="mx-auto flex flex-col items-center overflow-auto mobile:mb-10">
     <div class="mt-4 w-600px mobile:w-full mx-auto flex flex-col items-center justify-center border rounded-md p-6 pb-10 bg-white border-gray-400 mobile:border-none">
         <div class="w-full text-lg font-semibold mb-2">{{concept.name}}</div>
-
+        
         <div class="w-full mb-6 border-b pb-6">
             <div class="swiper-container">
-                <div class="swiper-wrapper">
+                <div class="swiper-wrapper " >
                     {% for photo in concept.all_photo %}
                     <div class="swiper-slide">
                         <img src="{{photo.file.url}}" style="width: 100%;">

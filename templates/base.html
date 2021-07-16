@@ -78,7 +78,7 @@
     }
 
     var swiper = new Swiper('.swiper-container', options);
-
+    
     /*
     // swiper destroy and create  
     function renewswiper(){ 
@@ -93,11 +93,10 @@
       
     }
     */
-
     function renewswiper(){ 
-
-      Swiper('.swiper-container', options);
-      
+      var pizza = $('.APPLE').last().attr('name')
+      console.log(pizza)
+      new Swiper(".ssss_"+pizza,options) 
     }
 
     //inifinite scroll
