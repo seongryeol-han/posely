@@ -113,13 +113,15 @@
     });
 
     function AAA(){
-      if($(".text").hasClass("show-more-height")) {
-            $(this).text("(Show Less)");
-        } else {
-            $(this).text("(Show More)");
+      var pk = $(this).attr('name')
+
+      if($(".text-"+pk).hasClass("show-more-height")) {
+            //$(this).text("");
+        //} else {
+            $(this).text("");
         }
 
-        $(".text").toggleClass("show-more-height");
+        $(".text-"+pk).toggleClass("show-more-height");
     }
 
     
