@@ -17,7 +17,7 @@ class HomeView(ListView):
 
     model = models.Studio
     paginate_by = 1
-    ordering = "created"
+    ordering = "?"
     context_object_name = "studios"
     template_name = "studios/studio_list.html"
 
