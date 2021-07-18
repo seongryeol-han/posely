@@ -17,9 +17,9 @@
                         <div class="text-28px mobile:text-20px font-thin text-gray-700">
                             {{studio}}
                         </div>
-                        <div class="text-blue-500 text-xs mb-3 mobile:mb-1">
+                        <a href="{% url 'studios:concept-select' studio.pk%}#location" class="text-blue-500 text-xs mb-3 mobile:mb-1">
                             <i class="fas fa-map-marker-alt"></i> {{studio.addr_short}} {{studio.addr_detail}}
-                        </div> 
+                        </a> 
                         <div class="flex">
                             <a href="{% url 'studios:concept-select' studio.pk %}" class="border rounded-md text-center text-white py-1 px-14 mr-2 bg-blue-500 mobile:text-sm mobile:py-0.5">
                                 예약하기
