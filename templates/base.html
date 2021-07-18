@@ -103,6 +103,9 @@
     $(document).ready(function () { 
       var list = $('.book-list');
           list.jscroll({
+              loadingHtml: '<div class="text-center">' +
+                '<img src="{% static 'img/loading_ani.gif' %}" alt="Loading" />' +
+                '</div>',
               padding: 1000,
               pagingSelector: '.pagination',
               nextSelector: 'a.next-page:last',
