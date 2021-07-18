@@ -135,8 +135,8 @@ class EditProfileView(user_mixins.LoggedInOnlyView, UpdateView):
     template_name = "users/user_edit.html"
     fields = (
         "nickname",
-        "avatar",
         "phone_number",
+        "avatar",
         "petname",
         "bio",
     )
@@ -149,8 +149,8 @@ class EditProfileView(user_mixins.LoggedInOnlyView, UpdateView):
         form.fields["phone_number"].widget.attrs = {"placeholder": "- 제외"}
 
         form.fields["nickname"].label = "닉네임"
-        form.fields["avatar"].label = "프로필 사진"
         form.fields["phone_number"].label = "전화번호"
+        form.fields["avatar"].label = "내 반려동물 사진"
         form.fields["petname"].label = "내 반려동물 이름"
-        form.fields["bio"].label = "반려동물에게 하고 싶은 말"
+        form.fields["bio"].label = "내 반려동물에게 하고 싶은 말"
         return form

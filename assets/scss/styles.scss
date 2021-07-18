@@ -6,12 +6,14 @@
     background: url(/static/img/chevron-circle-right-solid.svg) no-repeat;
     background-position: center;
     opacity: 0.9;
+    outline: none;
 }
 
 .swiper-button-prev {
     background: url(/static/img/chevron-circle-left-solid.svg) no-repeat;
     background-position: center;
     opacity: 0.9;
+    outline: none;
 }
 
 .swiper-container {
@@ -55,7 +57,7 @@
 
 @media (max-width: 450px) {
     .swiper-container-horizontal>.swiper-pagination {
-        font-size: 8px;
+        font-size: 12px;
         width: 35px!important;
         padding: 2px 0 4px;
     }
