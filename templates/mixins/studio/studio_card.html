@@ -5,7 +5,7 @@
 </style>
 
 
-<div class="mt-4 border border-gray-400 mobile:bg-white rounded-lg bg-white small:border-none small:bg-gray-100 ">
+<div class="mt-4 border border-gray-400 mobile:border-gray-300 mobile:border-l-0 mobile:border-r-0 mobile:bg-white rounded-lg bg-white small:bg-gray-100 ">
     <div class="flex items-center justify-between h-16 mobile:h-14 px-4">
         
         <div class="flex items-center">
@@ -13,16 +13,14 @@
                 {% include "mixins/studio/studio_avatar.html" with studio=studio %}
             </a>
             <div>
-                <a href="{% url 'studios:profile' studio.pk%}">
-                    <div class="mx-3 font-semibold text-sm" style="color:#1a202c;" >{{studio}}</div>
-                </a>
-                <div class="mx-3 text-xs text-blue-500" ><i class="fas fa-map-marker-alt"></i> {{studio.addr_short}}</div>
+                <a href="{% url 'studios:profile' studio.pk%}" class="mx-3 font-semibold text-sm" style="color:#1a202c;" >{{studio}}</a>
+                <div class="mx-3 text-xs text-blue-500 mobile:text-blue-400" ><i class="fas fa-map-marker-alt"></i> {{studio.addr_short}}</div>
             </div>
         </div>
         
-        <a href="{% url 'studios:concept-select' studio.pk %}" class="flex items-center py-2">
-            <p class="ml-1 font-semibold text-sm text-blue-500 hover:text-blue-600">예약하기</p>
-        </a>
+        <div class="flex items-center py-2">
+            <a href="{% url 'studios:concept-select' studio.pk %}" class="ml-1 font-semibold mobile:font-medium text-sm text-blue-500 hover:text-blue-600">예약하기</a>
+        </div>
 
     </div>
 
@@ -65,17 +63,17 @@
               
     </div>
     
-    <div class="mt-0.5 mx-4 mb-6 small:mb-0">
+    <div class="mt-0.5 mx-4 small:mb-0">
 
             <p id="count-{{ studio.pk }}" class="font-extrabold mt-1 mb-2 text-sm">
                 좋아요&nbsp;{{ studio.likes_user.all.count }}개
             </p>
 
-            <div class="w-full mt-0.5 mb-4 small:mb-0">
-                <div class="font-semibold text-sm mb-1" style="color:#1a202c;" >{{studio}}</div>
+            <div class="w-full mt-0.5">
+                <a href="{% url 'studios:profile' studio.pk%}" class="font-semibold text-sm mb-1" style="color:#1a202c;" >{{studio}}</a>
                 <div id="profile-description">
-                    <div class="text-{{studio.pk }} show-more-height text-sm" style="color:#1a202c;" >{{studio.introduction | linebreaksbr}}</div>
-                    <div name="{{ studio.pk }}" class="show-more text-sm text-blue-500 text-center cursor-pointer">펼치기</div>
+                    <div class="text-{{studio.pk }} show-more-height text-sm pb-4" style="color:#1a202c;" >{{studio.introduction | linebreaksbr}}</div>
+                    <div name="{{ studio.pk }}" class="show-more text-gray-600 text-center cursor-pointer"><i class="fas fa-chevron-down"></i></div>
                 </div>
             </div> 
     </div>
