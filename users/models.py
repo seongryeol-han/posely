@@ -44,6 +44,7 @@ class User(AbstractUser):
         on_delete=SET_NULL,
         blank=True,
         null=True,
+        
     )
 
     login_method = models.CharField(

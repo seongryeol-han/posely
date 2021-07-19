@@ -9,15 +9,16 @@ from django.views.decorators.http import require_POST
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from users import mixins as user_mixins
-from django.db.models import Count
+from django.db.models import Count,F,Sum
+import math
 
-
+# sort by default
 class HomeView(ListView):
     """StudioView Definition"""
 
     model = models.Studio
     paginate_by = 1
-    ordering = "?"
+    ordering = "-created"
     context_object_name = "studios"
     template_name = "studios/studio_list.html"
 
@@ -35,7 +36,7 @@ class HomeView(ListView):
             context["check_exist"] = temp
         return context
 
-
+# sort by like
 class HomeView2(ListView):
     """StudioView Definition"""
 
@@ -53,7 +54,7 @@ class HomeView2(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        print("2222")
+        print("sort by like")
         print(self.request.user)
         temp = {}
         if self.request.user.is_authenticated:  # 로그인 되면 실행됨 # 로그인 X 시 스킵
@@ -66,6 +67,60 @@ class HomeView2(ListView):
             context["check_exist"] = temp
         return context
 
+# sort by distance
+class HomeView3(ListView):
+    """StudioView Definition"""
+
+    model = models.Studio
+    paginate_by = 1
+    context_object_name = "studios"
+    template_name = "studios/studio_list.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        print("sort by distance_get_context_data_part")
+        print(self.request.user)
+        temp = {}
+        if self.request.user.is_authenticated:  # 로그인 되면 실행됨 # 로그인 X 시 스킵
+            aa = models.Studio.objects.filter(likes_user=self.request.user).values_list(
+                "pk", flat=True
+            )
+            print(aa)
+            context["check_exist"] = aa
+        else:
+            context["check_exist"] = temp
+        return context
+    
+    def get_queryset(self):   
+
+        if(self.request.GET.get("lat")):
+            now_lat = (float(self.request.GET.get("lat"))+100)
+            now_lng = (float(self.request.GET.get("lng"))+100)
+            self.request.session['lat'] = now_lat
+            self.request.session['lng'] = now_lng
+        # print(type(now_lat))
+        print("view sorted by distance_get_queryset_part")
+        
+        # 좌표 공식 적요 but F( ) 로 인해 math 연산 error
+        lng1 = self.request.session.get('lng')
+        lat1 = self.request.session.get('lat')
+        # ps_with_avg = models.Studio.objects.annotate(
+        #             dist = math.acos(math.sin((lat1)* math.pi / 180.0) * math.sin((F('studio_lat')* math.pi / 180.0) + math.cos(F('studio_lat')) * math.cos((F('studio_lat'))* math.pi / 180.0) * math.cos((lng1 - F('studio_lng'))* math.pi / 180.0))* 180 / math.pi * 60*1.1515*1.609344
+        #         ) )
+        # ordered_ps = ps_with_avg.order_by('-dist')
+
+        ###################################
+        ps_with_avg = models.Studio.objects.annotate(
+                    dist = lng1+lat1-(F('studio_lat')+F('studio_lng'))
+                )
+        ordered_ps = ps_with_avg.order_by('dist')
+        ########################################
+        print(ordered_ps)
+        # qs = super().get_queryset().order_by("created")
+        
+        return ordered_ps
+        
 
 # HomeView--> main_list로 대체`
 # 사유 : 로그인 했는지 안했는지의 차이를 두기 위해
