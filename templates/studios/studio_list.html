@@ -9,7 +9,11 @@
 
 {% block content %} 
    
-<div class="container mx-auto flex flex-col items-center overflow-auto mobile:mb-4">
+<div class="container mx-auto flex flex-col items-center overflow-auto mobile:mb-10">
+    <button type="button" id= "distance_sort_btn">거리순</button>
+    <button type="button" onclick="location.href='{% url "core:home_sorted_likes" %}'"> 좋아요순</button>
+    <button type="button" onclick="location.href='{% url "core:home" %}'"> 랜덤순</button>
+
     {% if studios %}
     <div class="w-600px small:w-full">
         <div class ="book-list card ">
@@ -57,6 +61,25 @@
         }
     $(document).on("click",".like",like_press)    
     $(document).on("dblclick",".img_like",like_press)    
+
+    $("#distance_sort_btn").click((request)=>{
+        if('geolocation' in navigator){
+                navigator.geolocation.getCurrentPosition(function(position,request){ //position에 위도와 경도같은 정보가 담김 
+                var lat1 = position.coords.latitude;
+                var lng1 = position.coords.longitude;
+                //print(request.session)
+                //request.session['lat1'] =lat1
+                //sessionStorage.clear();
+                sessionStorage.setItem("lat",lat1);
+                sessionStorage.setItem("lng",lng1);
+                //request.session["lat"] =lat1
+                //request.session["lng"] =lng
+
+                location.href="/b/?lat="+lat1+"&lng="+lng1
+                
+            }
+        )}
+    })
 </script>
 
 
