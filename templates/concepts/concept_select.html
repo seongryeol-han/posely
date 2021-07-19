@@ -11,8 +11,8 @@
 {% endblock search-bar %}
 
 {%block content%}
-<div class="mx-auto flex flex-col items-center overflow-auto mobile:mb-10">
-    <div class="mt-4 w-600px mobile:w-full mx-auto flex flex-col items-center justify-center border rounded-md p-6 pb-10 bg-white border-gray-400 mobile:border-none">
+<div class="mx-auto flex flex-col items-center overflow-auto mobile:mb-4">
+    <div class="mt-4 w-600px mobile:w-full mx-auto flex flex-col items-center justify-center border rounded-md p-6 bg-white border-gray-400 mobile:border-none mobile:p-4">
         
         {% for concept in studio.concepts.all %}
             
@@ -34,10 +34,9 @@
               
         {% endfor %}
 
-        <div class="w-full mb-6 border-b pb-6">
+        <div class="w-full mb-4 border-b pb-4">
             <div class="font-semibold mb-6">사진관 이용안내</div>
             <div class="text-sm mx-6">{{studio.using_info | linebreaksbr}}</div>
-            <div id="location"></div>
         </div>
         <div class="w-full border-b pb-6 ">
             <div class="font-semibold mb-2 ">사진관 위치</div>

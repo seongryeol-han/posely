@@ -10,24 +10,24 @@
 
 {% block content %}
 
-<div class="mx-auto flex flex-col items-center overflow-auto mobile:mb-10">
-    <div class="mt-4 w-600px small:w-full mx-auto flex flex-col items-center justify-center border rounded-md p-6 px-16 pb-10 bg-white border-gray-400 mobile:border-none">
+<div class="mx-auto flex flex-col items-center overflow-auto mobile:mb-4">
+    <div class="mt-4 w-600px small:w-full mx-auto flex flex-col items-center justify-center border rounded-md p-6 px-4 bg-white border-gray-400 mobile:border-none">
             
-        <div class="mb-4 w-full flex items-center justify-between">
+        <div class="mb-4 w-3/4 flex items-center justify-between mobile:w-full">
             <a href="{% url 'concepts:add-photo' concept.pk %}">
                 <div class="border rounded-md text-center text-sm text-white py-1 px-4 bg-blue-500">사진 추가</div>
             </a>
-            <a href="{% url 'concepts:edit' concept.pk %}">
-                <div class="bg-white border border-gray-500 text-gray-800 text-sm rounded-md px-4 py-1">편집 완료</div>
+            <a href="{% url 'concepts:edit-list' %}">
+                <div class="bg-white border border-gray-500 text-gray-800 text-sm rounded-md px-4 py-1">수정 완료</div>
             </a>
             
         </div>
 
-        <div class="flex flex-col items-center w-64">
+        <div class="flex flex-col items-center w-3/4">
         
         {% if concept.first_photo %}
             {% for photo in concept.photos.all  %}
-                <div class="mb-5 p-3">
+                <div class="p-3">
                     <img src="{{photo.file.url}}" class="w-full mb-1" />
                     <div class=" flex justify-end">
                         <a class="border rounded-md text-center text-xs text-white px-4 py-1 bg-red-500" href="{%url "concepts:delete-photo" concept.pk photo.pk%}">삭제</a>

@@ -6,9 +6,9 @@
 
 
 {% block content %}
-    <div class="mx-auto flex flex-col items-center overflow-auto mobile:mb-10">
-        <div class="mt-4 w-600px small:w-full border-b">                
-            <div class=" px-10 pb-8 mobile:px-4 mobile:pb-4">
+    <div class="mx-auto flex flex-col items-center overflow-auto mobile:mb-4 mobile:px-4">
+        <div class="mt-4 w-600px small:w-full border-b px-10 mobile:px-0">                
+            <div class="pb-4">
                 <div class="flex items-center ">
                     <div class="my-3">
                         {% include 'mixins/studio/studio-profile_avatar.html'%}
@@ -17,22 +17,17 @@
                         <div class="text-28px mobile:text-20px font-thin text-gray-700">
                             {{studio}}
                         </div>
-                        <a href="{% url 'studios:concept-select' studio.pk%}#location" class="text-blue-500 text-xs mb-3 mobile:mb-1">
+                        <a href="{% url 'studios:profile' studio.pk%}#location" class="text-blue-500 text-xs mb-3 mobile:mb-1">
                             <i class="fas fa-map-marker-alt"></i> {{studio.addr_short}} {{studio.addr_detail}}
-                        </a> 
-                        <div class="flex">
-                            <a href="{% url 'studios:concept-select' studio.pk %}" class="border rounded-md text-center text-white py-1 px-14 mr-2 bg-blue-500 mobile:text-sm mobile:py-0.5">
-                                예약하기
-                            </a>
-                        </div>
-
+                        </a>
                     </div>
                 </div>
 
                 <div class="my-2 mb-6">  
                     <div class="text-sm">
                         {{studio.introduction | linebreaksbr}}
-                    </div>    
+                    </div>
+                    <div id="concept-select"></div>    
                 </div>
                 
                 {%if studio.author == user %}
@@ -44,23 +39,120 @@
                 {%endif%}
 
             </div>
+            
 
         </div>
 
-        <div class="w-600px small:w-full flex justify-center px-8 mobile:px-2"> 
-            <div class="px-3 mt-6 mobile:mt-4 w-full small:w-full rounded-lg">
+        <div class="w-600px small:w-full flex justify-center border-b mb-4 mobile:mb-4"> 
+            <div class="px-10 mobile:px-0 mt-4 mobile:mt-4 w-full small:w-full rounded-lg">
 
                 {% for concept in studio.concepts.all %}
                     
                     {% if concept.first_photo  %}
                         {%include "mixins/concept/concept_card.html" with concept=concept %}
-                        <div class="mb-12 mobile:mb-6"></div>
+                        <div class="mb-8 mobile:mb-6"></div>
                     {% endif %}
                 {% endfor %}
-    
+            </div>
+        </div>
+
+        <div class="w-600px px-10 mobile:px-0 small:w-full justify-center">
+            <div class="w-full mb-4 border-b pb-4">
+                <div class="font-semibold mb-2 mobile:mb-1">사진관 이용안내</div>
+                <div class="text-sm">{{studio.using_info | linebreaksbr}}</div>
+                <div id="location"></div> <!--여기에 location을 놓아야지 사진관 위치가 잘 나온다.-->
+            </div>
+            <div class="w-full border-b pb-6 ">
+                <div class="font-semibold mb-2 mobile:mb-1 ">사진관 위치</div>
+                <div class="text-blue-500 text-sm mb-1"><i class="fas fa-map-marker-alt"></i> {{studio.addr_short}} {{studio.addr_detail}}</div>
+                <div id="current">현재위치</div>
+                <div class="text-sm bg-gray-600 h-350px">
+                    <div id="map" style="width:100%; height:100%;" class="focus:outline-none"></div>
+                </div>
             </div>
         </div>
     </div>
-        
+    
+<style>
+.marker {
+    border: 1px solid black;
+    background: green;
+    opacity: 0.8;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+  }
+  #current{
+    display: none;
+    top:300px;
+    z-index: 10000;
+    background:white;
+    left:725px;
+    padding : 10px;
+    border : 1px solid rgba(0,0,0,0.2);
+    border-radius: 4px;
+    text-align: center;
+    cursor: pointer;
+    font-weight: bolder;
+  }
+  .pulse{
+    display: block;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 0 rgb(255,0,0);
+    animation : pulse 1.7s infinite;
+  }
+  </style>
+      
+  <script>
+      var mapOptions = {
+        center: new naver.maps.LatLng(37.3595704, 127.105399),
+        zoom: 10
+      };
+      
+      var map = new naver.maps.Map('map', mapOptions);
+  
+      var latlng = new naver.maps.LatLng({{studio.studio_lat}},{{studio.studio_lng}}); 
+      marker = new naver.maps.Marker({ 
+        map : map,
+        position : latlng,
+        //icon : {
+         // content : "<div class ='marker'></div>",
+        //anchor : new naver.maps.Point(10,12), //marker width: 20px; height: 20px라 
+        //},  
+      });
+      map.setZoom(16,false); // lv,14 animation X
+      map.panTo(latlng); //이동
+      //계속된 현재위치 클릭방지
+      let currentUse = true;
+      $("#current").click(()=>{
+      if('geolocation' in navigator){
+        navigator.geolocation.getCurrentPosition(function(position){ //position에 위도와 경도같은 정보가 담김 
+          const lat = position.coords.latitude;
+          const lng = position.coords.longitude;
+          const latlng = new naver.maps.LatLng(lat,lng);
+          if(currentUse){
+            marker = new naver.maps.Marker({
+              map:map,
+              position: latlng,
+              //icon:{
+              // content : '<img class="pulse" draggable="false" unselectable="on" src="http://myfirstmap.s3.ap-northeast-2.amazonaws.com/circle.png" >',
+              //  anchor : new naver.maps.Point(11,11),  //중심좌표 11,11
+              //}
+            });
+            currentUse=false;
+          }
+          
+          map.setZoom(14,false); // lv,14 animation X
+          map.panTo(latlng); //이동
+  
+        });
+      }else{
+        alert('위치정보 사용 불가능')
+      }
+    })
+  </script>
     
 {% endblock content %}

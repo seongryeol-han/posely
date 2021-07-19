@@ -17,9 +17,4 @@ urlpatterns = [
         views.CreateConceptView.as_view(),
         name="concept-create",
     ),
-    path(
-        "<int:pk>/concept-select/",
-        views.ConceptSelectView.as_view(),
-        name="concept-select",
-    ),
 ]
