@@ -12,6 +12,9 @@ django-phonenumber-field = {extras = ["phonenumberslite"], version = "*"}
 requests = "*"
 django-dotenv = "*"
 django-widget-tweaks = "*"
+haversine = "*"
+geopy = "*"
+psycopg2 = "==2.8.6"
 
 [dev-packages]
 flake8 = "*"

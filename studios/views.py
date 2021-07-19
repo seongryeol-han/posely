@@ -9,8 +9,10 @@ from django.views.decorators.http import require_POST
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from users import mixins as user_mixins
-from django.db.models import Count,F,Sum
+from django.db.models import Count,F,Func
 import math
+from haversine import haversine
+
 
 # sort by default
 class HomeView(ListView):
@@ -67,6 +69,17 @@ class HomeView2(ListView):
             context["check_exist"] = temp
         return context
 
+class Sin(Func):
+    function = 'SIN'
+
+class Cos(Func):
+    function = 'COS'
+
+class Acos(Func):
+    function = 'ACOS'
+
+class Radians(Func):
+    function = 'RADIANS'
 # sort by distance
 class HomeView3(ListView):
     """StudioView Definition"""
@@ -95,31 +108,23 @@ class HomeView3(ListView):
     def get_queryset(self):   
 
         if(self.request.GET.get("lat")):
-            now_lat = (float(self.request.GET.get("lat"))+100)
-            now_lng = (float(self.request.GET.get("lng"))+100)
+            now_lat = (float(self.request.GET.get("lat")))
+            now_lng = (float(self.request.GET.get("lng")))
+            self.request.session.clear()
             self.request.session['lat'] = now_lat
             self.request.session['lng'] = now_lng
-        # print(type(now_lat))
-        print("view sorted by distance_get_queryset_part")
-        
-        # 좌표 공식 적요 but F( ) 로 인해 math 연산 error
+       
         lng1 = self.request.session.get('lng')
         lat1 = self.request.session.get('lat')
-        # ps_with_avg = models.Studio.objects.annotate(
-        #             dist = math.acos(math.sin((lat1)* math.pi / 180.0) * math.sin((F('studio_lat')* math.pi / 180.0) + math.cos(F('studio_lat')) * math.cos((F('studio_lat'))* math.pi / 180.0) * math.cos((lng1 - F('studio_lng'))* math.pi / 180.0))* 180 / math.pi * 60*1.1515*1.609344
-        #         ) )
-        # ordered_ps = ps_with_avg.order_by('-dist')
-
-        ###################################
-        ps_with_avg = models.Studio.objects.annotate(
-                    dist = lng1+lat1-(F('studio_lat')+F('studio_lng'))
-                )
-        ordered_ps = ps_with_avg.order_by('dist')
-        ########################################
-        print(ordered_ps)
-        # qs = super().get_queryset().order_by("created")
-        
-        return ordered_ps
+        radlat = Radians(lat1) # given latitude
+        radlong = Radians(lng1) # given longitude
+        radflat = Radians(F('studio_lat'))
+        radflong = Radians(F('studio_lng'))
+        Expression = 3959.0 * Acos(Cos(radlat) * Cos(radflat) *
+                           Cos(radflong - radlong) +
+                           Sin(radlat) * Sin(radflat))  
+        ps_with_avg = models.Studio.objects.annotate(distance=Expression).order_by('distance')    
+        return ps_with_avg
         
 
 # HomeView--> main_list로 대체`
