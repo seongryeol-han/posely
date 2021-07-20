@@ -30,10 +30,6 @@
 
     <div class="swiper-container swiper_distinction swiper_dis_{{ studio.pk }}" name="{{ studio.pk }}">
         <div class="swiper-wrapper">
-        
-            <div class="img_like swiper-slide" name="{{ studio.pk }}" >
-                <img src="{{studio.studio_best_photo.url}}" style="width: 100%;">
-            </div>
             
             {% for concept in studio.concepts.all %}
             

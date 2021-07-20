@@ -22,9 +22,6 @@ class Studio(core_models.TimeStampedModel):
     studio_avatar = models.ImageField(
         upload_to="studio_photos", default="", blank=True, null=True
     )
-    studio_best_photo = models.ImageField(
-        upload_to="studio_photos", default="", blank=True, null=True
-    )
     author = models.ForeignKey(
         "users.User",
         related_name="studios",
@@ -51,3 +48,10 @@ class Studio(core_models.TimeStampedModel):
     def all_photo(self):
         photo = self.photos.all()  # ,를 찍으면 파이썬이 첫번째 array 요소를 원하는구나라는것을 알게됨
         return photo
+
+    def first_concept(self):
+        try:
+            (concept,) = self.concepts.all()[:1]
+            return concept
+        except ValueError:
+            return None

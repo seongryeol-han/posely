@@ -237,7 +237,6 @@ class EditStudioView(user_mixins.LoggedInOnlyView, UpdateView):
     fields = (
         "name",
         "studio_avatar",
-        "studio_best_photo",
         "phone_number",
         "kakao_chat",
         "address",
@@ -265,7 +264,6 @@ class EditStudioView(user_mixins.LoggedInOnlyView, UpdateView):
 
         form.fields["name"].label = "사진관 이름"
         form.fields["studio_avatar"].label = "사진관 프로필 사진"
-        form.fields["studio_best_photo"].label = "작가님의 베스트 사진"
         form.fields["address"].label = "사진관 주소"
         form.fields["phone_number"].label = "전화번호"
         form.fields["kakao_chat"].label = "카카오톡 오픈채팅 주소"
@@ -283,7 +281,6 @@ class CreateStudioView2(View):
 
         name = request.POST["name"]
         studio_avatar = request.FILES["studio_avatar"]
-        studio_best_photo = request.FILES["studio_best_photo"]
         zonecode = request.POST["zonecode"]
         addr_short = request.POST["addr_short"]
         addr_detail = request.POST["addr_detail"]
@@ -309,7 +306,6 @@ class CreateStudioView2(View):
             introduction=introduction,
             using_info=using_info,
             author=request.user,
-            studio_best_photo=studio_best_photo,
             studio_avatar=studio_avatar,
             studio_lat=studio_lat,
             studio_lng=studio_lng,
@@ -362,7 +358,6 @@ class CreateStudioView2(View):
 
 #         form.fields["name"].label = "사진관 이름"
 #         form.fields["studio_avatar"].label = "사진관 프로필 사진"
-#         form.fields["studio_best_photo"].label = "작가님의 베스트 사진"
 #         form.fields["address"].label = "사진관 주소"
 #         form.fields["phone_number"].label = "전화번호"
 #         form.fields["kakao_chat"].label = "카카오톡 오픈채팅 주소"
@@ -378,7 +373,7 @@ class CreateStudioView2(View):
 #     #     return redirect(self.request, "studios/studio_create.html")
 
 
-# def CreateStudioRenew(request,name,studio_avatar,studio_best_photo,phone_number,kakao_chat,
+# def CreateStudioRenew(request,name,studio_avatar,phone_number,kakao_chat,
 # address,open_time,close_time,introduction,using_info):
 #     try:
 #         if not request.user.is_authenticated :

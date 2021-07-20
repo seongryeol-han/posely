@@ -13,7 +13,6 @@ class CreateStudioForm(forms.ModelForm):
         fields = (
             "name",
             "studio_avatar",
-            "studio_best_photo",
             "phone_number",
             "kakao_chat",
             "address",
