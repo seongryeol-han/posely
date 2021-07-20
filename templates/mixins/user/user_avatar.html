@@ -1,8 +1,8 @@
 {% if user.avatar %}
-        <div class= "{{h_and_w|default:"h-6 w-6"}} rounded-full bg-cover" style="background-image: url({{user.avatar.url}});"></div> 
+        <div class= "h-6 w-6 rounded-full bg-cover" style="background-image: url({{user.avatar.url}});"></div> 
 {% else %}
-    <div class="flex items-center justify-center mt-1 rounded-full w-6 h-6 text-gray-500">
-        <i class="fas fa-user-circle fa-lg"></i>
+    <div class="flex items-center justify-center mt-1 rounded-full text-xl text-gray-500 mobile:mt-0">
+        <i class="fas fa-user-circle"></i>
     </div>
 {% endif %}
          

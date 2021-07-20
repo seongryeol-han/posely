@@ -1,17 +1,16 @@
 {% load static %}
-<header>
-    <ul>
-        {% if user.is_authenticated %}
-            <li>
-                <a href="{{user.get_absolute_url}}">
-                    {%include "mixins/user/user_avatar.html"%}
-                </a>
-            </li>
+<header class="flex items-center">
+    <button type="button" id="distance_sort_btn" style="color: #999999;" class="mr-5 text-22px focus:outline-none mobile:text-20px mobile:mr-4"><i class="fas fa-search"></i></button>
+    <button type="button" id="distance_sort_btn" style="color: #999999;" class="mr-5 text-22px focus:outline-none mobile:text-20px mobile:mr-4"><i class="fas fa-map-marker-alt"></i></button>
+    
+    {% if user.is_authenticated %}
+        <a href="{{user.get_absolute_url}}">
+            {%include "mixins/user/user_avatar.html"%}
+        </a>
             
-        {% else %}
-            <li><a class="text-sm text-gray-600 font-semibold mobile:font-medium hover:text-black " href="{% url "users:login"%}">
-                <div>로그인</div>
-            </a></li>   
-        {% endif %}
-    </ul>
+    {% else %}
+        <a class="text-sm text-gray-600 font-semibold mobile:font-medium hover:text-black " href="{% url "users:login"%}">
+            <div>로그인</div>
+        </a> 
+    {% endif %}
 </header>
