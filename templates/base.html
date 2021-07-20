@@ -42,7 +42,7 @@
                 </a>
 
                 {% block search-bar %}
-                <form class="search_bar hidden flex items-center ml-20 mobile:ml-2" method="get" action="{% url "studios:search" %}">
+                <form class="search_bar hidden fade-in-box flex items-center ml-10 mobile:ml-2" method="get" action="{% url "studios:search" %}">
                   <div class="border rounded-lg px-6 pl-14 mobile:px-2 mobile:pl-5 flex items-center justify-center bg-gray-100">
                     <div style="color:#a0aec0; margin: 0 6px 0 6px;" class="text-sm mobile:text-xs"><i class="fas fa-search"></i></div>
                     <input class=" text-xs text-gray-900 bg-gray-100 placeholder-gray-500 py-1 rounded-md focus:outline-none w-40 mobile:w-32" name="search_name_address" placeholder="사진관 이름, 지역 검색" />
@@ -152,8 +152,8 @@
     const searchBar = document.querySelector(".search_bar");
     const toggleSearchBar = () => {
         searchBar.classList.remove("hidden");
-        searchBar.classList.add("button-appear");
-        searchButton.classList.toggle("hidden")
+        searchBar.classList.add("fade-in-box");
+        searchButton.classList.toggle("hidden");
     }
 
     searchButton.addEventListener("click", toggleSearchBar);
