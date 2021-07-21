@@ -61,7 +61,7 @@
                       {% elif page_sorted == "like" %}
                           <button type="button" id="distance_sort_btn" style="color: #999999;" class="NOT_DISTANCE mr-5 text-22px focus:outline-none mobile:text-20px mobile:mr-4"><i class="fas fa-map-marker-alt"></i></button>
                       {% elif page_sorted == "distance" %}
-                          <button type="button" id="distance_sort_btn"  style="color: red;" class="mr-5 text-22px focus:outline-none mobile:text-20px mobile:mr-4 "><i class="fas fa-map-marker-alt"></i></button>
+                          <button type="button" id="distance_sort_btn" class="text-gray-900 mr-5 text-22px focus:outline-none mobile:text-20px mobile:mr-4 "><i class="fas fa-map-marker-alt"></i></button>
                       {% elif page_sorted == "search" %}
                       {% endif %}
                   {% endblock nav-icons %}
@@ -148,8 +148,10 @@
     searchButton.addEventListener("click", toggleSearchBar)
     
     //map_maker_btn
-    $("#distance_sort_btn").click((request)=>{   
+    $("#distance_sort_btn").click((request)=>{
+        console.log("kkkk")   
         if($("#distance_sort_btn").hasClass("NOT_DISTANCE")){
+              console.log("mmmm")
               if('geolocation' in navigator){
                       navigator.geolocation.getCurrentPosition(function(position,request){ //position에 위도와 경도같은 정보가 담김 
                       var lat1 = position.coords.latitude;

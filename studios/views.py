@@ -34,7 +34,7 @@ class HomeView(ListView):
             context["check_exist"] = aa
         else:
             context["check_exist"] = temp
-        context["page_sorted"]="created"
+        context["page_sorted"] = "created"
         return context
 
 
@@ -67,20 +67,26 @@ class HomeView2(ListView):
             context["check_exist"] = aa
         else:
             context["check_exist"] = temp
-        context["page_sorted"]="like"
+        context["page_sorted"] = "like"
         return context
 
+
 class Sin(Func):
-    function = 'SIN'
+    function = "SIN"
+
 
 class Cos(Func):
-    function = 'COS'
+    function = "COS"
+
 
 class Acos(Func):
-    function = 'ACOS'
+    function = "ACOS"
+
 
 class Radians(Func):
-    function = 'RADIANS'
+    function = "RADIANS"
+
+
 # sort by distance
 class HomeView3(ListView):
     """StudioView Definition"""
@@ -104,26 +110,30 @@ class HomeView3(ListView):
             context["check_exist"] = aa
         else:
             context["check_exist"] = temp
-        context["page_sorted"]="distance"
+        context["page_sorted"] = "distance"
         return context
-    def get_queryset(self):   
-        if(self.request.GET.get("lat")):
-            now_lat = (float(self.request.GET.get("lat")))
-            now_lng = (float(self.request.GET.get("lng")))
+
+    def get_queryset(self):
+        if self.request.GET.get("lat"):
+            now_lat = float(self.request.GET.get("lat"))
+            now_lng = float(self.request.GET.get("lng"))
             self.request.session.clear()
-            self.request.session['lat'] = now_lat
-            self.request.session['lng'] = now_lng
-       
-        lng1 = self.request.session.get('lng')
-        lat1 = self.request.session.get('lat')
-        radlat = Radians(lat1) # given latitude
-        radlong = Radians(lng1) # given longitude
-        radflat = Radians(F('studio_lat'))
-        radflong = Radians(F('studio_lng'))
-        Expression = 3959.0 * Acos(Cos(radlat) * Cos(radflat) *
-                           Cos(radflong - radlong) +
-                           Sin(radlat) * Sin(radflat))  
-        ps_with_avg = models.Studio.objects.annotate(distance=Expression).order_by('distance')    
+            self.request.session["lat"] = now_lat
+            self.request.session["lng"] = now_lng
+
+        lng1 = self.request.session.get("lng")
+        lat1 = self.request.session.get("lat")
+        radlat = Radians(lat1)  # given latitude
+        radlong = Radians(lng1)  # given longitude
+        radflat = Radians(F("studio_lat"))
+        radflong = Radians(F("studio_lng"))
+        Expression = 3959.0 * Acos(
+            Cos(radlat) * Cos(radflat) * Cos(radflong - radlong)
+            + Sin(radlat) * Sin(radflat)
+        )
+        ps_with_avg = models.Studio.objects.annotate(distance=Expression).order_by(
+            "distance"
+        )
         return ps_with_avg
 
 
@@ -188,19 +198,29 @@ class SearchView(View):
                     )
                 )
                 qs = qs1 | qs2
-                
+
                 paginator = Paginator(qs, 10, orphans=5)
                 page = request.GET.get("page", 1)
                 studios = paginator.get_page(page)
-                if qs.count()>0:
+                if qs.count() > 0:
                     return render(
-                        request, "studios/search.html", {"form": form, "studios": studios,"page_sorted":"search"}
+                        request,
+                        "studios/search.html",
+                        {"form": form, "studios": studios, "page_sorted": "search"},
                     )
-                elif qs.count()==0:
+                elif qs.count() == 0:
                     form = forms.SearchForm()
-                    return render(request, "studios/search.html", {"form": form, "empty_search":"ok","page_sorted":"search"})    
+                    return render(
+                        request,
+                        "studios/search.html",
+                        {"form": form, "empty_search": "ok", "page_sorted": "search"},
+                    )
         form = forms.SearchForm()
-        return render(request, "studios/search.html", {"form": form, "empty_search":"ok","page_sorted":"search"})
+        return render(
+            request,
+            "studios/search.html",
+            {"form": form, "empty_search": "ok", "page_sorted": "search"},
+        )
 
 
 @login_required
