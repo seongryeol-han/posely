@@ -33,8 +33,8 @@
 
 </head>
 <body class="mt-14 mb-4 bg-gray-100 mobile:mt-10 ">
-  {% block nav-bar %}
-  <header class="z-10 container max-w-full inset-0 flex justify-center px-4 mobile:pb-px h-14 mobile:h-12 border-b mobile:border-none border-gray-400 fixed bg-white">
+{% block nav-bar %}
+<header class="z-10 container max-w-full inset-0 flex justify-center px-4 mobile:pb-px h-14 mobile:h-12 border-b mobile:border-none border-gray-400 fixed bg-white">
         <div class="flex items-center justify-between w-600px px-4 small:px-0">
             
                 <a class="flex items-center" href="{% url "core:home" %}">
@@ -54,8 +54,16 @@
 
                 <header class="flex items-center">
                   {% block nav-icons %}
-                  <button type="button" style="color: #999999;" class="search_button mr-5 text-22px focus:outline-none mobile:text-20px mobile:mr-4"><i class="fas fa-search"></i></button>
-                  <button type="button" id="distance_sort_btn" style="color: #999999;" class="mr-5 text-22px focus:outline-none mobile:text-20px mobile:mr-4"><i class="fas fa-map-marker-alt"></i></button>
+                      <button type="button" style="color: #999999;" class="search_button mr-5 text-22px focus:outline-none mobile:text-20px mobile:mr-4"><i class="fas fa-search"></i></button>
+                      
+                      {% if page_sorted == "created" %}
+                          <button type="button" id="distance_sort_btn" style="color: #999999;" class="NOT_DISTANCE mr-5 text-22px focus:outline-none mobile:text-20px mobile:mr-4"><i class="fas fa-map-marker-alt"></i></button>
+                      {% elif page_sorted == "like" %}
+                          <button type="button" id="distance_sort_btn" style="color: #999999;" class="NOT_DISTANCE mr-5 text-22px focus:outline-none mobile:text-20px mobile:mr-4"><i class="fas fa-map-marker-alt"></i></button>
+                      {% elif page_sorted == "distance" %}
+                          <button type="button" id="distance_sort_btn"  style="color: red;" class="mr-5 text-22px focus:outline-none mobile:text-20px mobile:mr-4 "><i class="fas fa-map-marker-alt"></i></button>
+                      {% elif page_sorted == "search" %}
+                      {% endif %}
                   {% endblock nav-icons %}
                   
                   {% if user.is_authenticated %}
@@ -80,6 +88,7 @@
   <!--{% include "partials/footer.html" %}-->
 
   <script>
+    
     //swiper options    
     var options={
         autoHeight: true,
@@ -96,20 +105,6 @@
 
     var swiper = new Swiper('.swiper-container', options);
     
-    /*
-    // swiper destroy and create  
-    function renewswiper(){ 
-      console.log(swiper)
-      console.log("1") // f12 키 console창에 테스트용 로그 출력
-      swiper.destroy() 
-      console.log(swiper)
-      console.log("2") // f12 키 console창에 테스트용 로그 출력
-      swiper = Swiper('.swiper-container', options);
-      console.log(swiper)
-      console.log("3") // f12 키 console창에 테스트용 로그 출력
-      
-    }
-    */
     function renewswiper(){ 
       var num = $('.swiper_distinction').last().attr('name')
       console.log("new swiper num:"+num)
@@ -135,17 +130,12 @@
       var pk = $(this).attr('name')
 
       if($(".text-"+pk).hasClass("show-more-height")) {
-            //$(this).text("");
-        //} else {
             $(this).text("");
         }
-
         $(".text-"+pk).toggleClass("show-more-height");
     }
-
     
     $(document).on("click",".show-more",TextReadMore) 
-
 
     //돋보기 버튼
     const searchButton = document.querySelector(".search_button");
@@ -155,9 +145,26 @@
         searchBar.classList.add("fade-in-box");
         searchButton.classList.toggle("hidden");
     }
-
-    searchButton.addEventListener("click", toggleSearchBar);
-
+    searchButton.addEventListener("click", toggleSearchBar)
+    
+    //map_maker_btn
+    $("#distance_sort_btn").click((request)=>{   
+        if($("#distance_sort_btn").hasClass("NOT_DISTANCE")){
+              if('geolocation' in navigator){
+                      navigator.geolocation.getCurrentPosition(function(position,request){ //position에 위도와 경도같은 정보가 담김 
+                      var lat1 = position.coords.latitude;
+                      var lng1 = position.coords.longitude;
+                      sessionStorage.setItem("lat",lat1);
+                      sessionStorage.setItem("lng",lng1);
+                      location.href="/distance/?lat="+lat1+"&lng="+lng1
+                  }
+              )}
+          }
+        else{
+          var url="{% url 'core:home' %}"
+              window.location.href = url 
+        }
+    })
 
   </script>
     

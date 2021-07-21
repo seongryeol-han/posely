@@ -9,7 +9,7 @@ from django.views.decorators.http import require_POST
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from users import mixins as user_mixins
-from django.db.models import Count, F, Sum
+from django.db.models import Count, F, Func
 import math
 
 # sort by default
@@ -34,6 +34,7 @@ class HomeView(ListView):
             context["check_exist"] = aa
         else:
             context["check_exist"] = temp
+        context["page_sorted"]="created"
         return context
 
 
@@ -66,9 +67,20 @@ class HomeView2(ListView):
             context["check_exist"] = aa
         else:
             context["check_exist"] = temp
+        context["page_sorted"]="like"
         return context
 
+class Sin(Func):
+    function = 'SIN'
 
+class Cos(Func):
+    function = 'COS'
+
+class Acos(Func):
+    function = 'ACOS'
+
+class Radians(Func):
+    function = 'RADIANS'
 # sort by distance
 class HomeView3(ListView):
     """StudioView Definition"""
@@ -92,36 +104,27 @@ class HomeView3(ListView):
             context["check_exist"] = aa
         else:
             context["check_exist"] = temp
+        context["page_sorted"]="distance"
         return context
-
-    def get_queryset(self):
-
-        if self.request.GET.get("lat"):
-            now_lat = float(self.request.GET.get("lat")) + 100
-            now_lng = float(self.request.GET.get("lng")) + 100
-            self.request.session["lat"] = now_lat
-            self.request.session["lng"] = now_lng
-        # print(type(now_lat))
-        print("view sorted by distance_get_queryset_part")
-
-        # 좌표 공식 적요 but F( ) 로 인해 math 연산 error
-        lng1 = self.request.session.get("lng")
-        lat1 = self.request.session.get("lat")
-        # ps_with_avg = models.Studio.objects.annotate(
-        #             dist = math.acos(math.sin((lat1)* math.pi / 180.0) * math.sin((F('studio_lat')* math.pi / 180.0) + math.cos(F('studio_lat')) * math.cos((F('studio_lat'))* math.pi / 180.0) * math.cos((lng1 - F('studio_lng'))* math.pi / 180.0))* 180 / math.pi * 60*1.1515*1.609344
-        #         ) )
-        # ordered_ps = ps_with_avg.order_by('-dist')
-
-        ###################################
-        ps_with_avg = models.Studio.objects.annotate(
-            dist=lng1 + lat1 - (F("studio_lat") + F("studio_lng"))
-        )
-        ordered_ps = ps_with_avg.order_by("dist")
-        ########################################
-        print(ordered_ps)
-        # qs = super().get_queryset().order_by("created")
-
-        return ordered_ps
+    def get_queryset(self):   
+        if(self.request.GET.get("lat")):
+            now_lat = (float(self.request.GET.get("lat")))
+            now_lng = (float(self.request.GET.get("lng")))
+            self.request.session.clear()
+            self.request.session['lat'] = now_lat
+            self.request.session['lng'] = now_lng
+       
+        lng1 = self.request.session.get('lng')
+        lat1 = self.request.session.get('lat')
+        radlat = Radians(lat1) # given latitude
+        radlong = Radians(lng1) # given longitude
+        radflat = Radians(F('studio_lat'))
+        radflong = Radians(F('studio_lng'))
+        Expression = 3959.0 * Acos(Cos(radlat) * Cos(radflat) *
+                           Cos(radflong - radlong) +
+                           Sin(radlat) * Sin(radflat))  
+        ps_with_avg = models.Studio.objects.annotate(distance=Expression).order_by('distance')    
+        return ps_with_avg
 
 
 # HomeView--> main_list로 대체`
@@ -162,21 +165,14 @@ class SearchView(View):
     """SearchView Definition"""
 
     def get(self, request):
-
         form = forms.SearchForm(request.GET)
-
         if form.is_valid():
-
             search_data = form.cleaned_data.get("search_name_address")
-
             if len(search_data) != 0:
                 filter_args1 = {}
                 filter_args2 = {}
-
                 filter_args1["name__startswith"] = search_data
-
                 filter_args2["address__contains"] = search_data
-
                 qs1 = (
                     models.Studio.objects.filter(**filter_args1)
                     .annotate(like_count=Count("likes_user"))
@@ -191,20 +187,20 @@ class SearchView(View):
                         "-like_count",
                     )
                 )
-
                 qs = qs1 | qs2
-
+                
                 paginator = Paginator(qs, 10, orphans=5)
-
                 page = request.GET.get("page", 1)
-
                 studios = paginator.get_page(page)
-                return render(
-                    request, "studios/search.html", {"form": form, "studios": studios}
-                )
-
+                if qs.count()>0:
+                    return render(
+                        request, "studios/search.html", {"form": form, "studios": studios,"page_sorted":"search"}
+                    )
+                elif qs.count()==0:
+                    form = forms.SearchForm()
+                    return render(request, "studios/search.html", {"form": form, "empty_search":"ok","page_sorted":"search"})    
         form = forms.SearchForm()
-        return render(request, "studios/search.html", {"form": form})
+        return render(request, "studios/search.html", {"form": form, "empty_search":"ok","page_sorted":"search"})
 
 
 @login_required

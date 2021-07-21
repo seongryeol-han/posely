@@ -6,7 +6,6 @@
 
 {%endblock page_title%}
 
-
 {% block content %} 
    
 <div class="container mx-auto flex flex-col items-center overflow-auto mobile:mb-10">
@@ -62,27 +61,6 @@
                 },
             });
         }
-    $(document).on("click",".like",like_press)    
-    $(document).on("dblclick",".img_like",like_press)    
-
-    $("#distance_sort_btn").click((request)=>{
-        if('geolocation' in navigator){
-                navigator.geolocation.getCurrentPosition(function(position,request){ //position에 위도와 경도같은 정보가 담김 
-                var lat1 = position.coords.latitude;
-                var lng1 = position.coords.longitude;
-                //print(request.session)
-                //request.session['lat1'] =lat1
-                //sessionStorage.clear();
-                sessionStorage.setItem("lat",lat1);
-                sessionStorage.setItem("lng",lng1);
-                //request.session["lat"] =lat1
-                //request.session["lng"] =lng
-
-                location.href="/b/?lat="+lat1+"&lng="+lng1
-                
-            }
-        )}
-    })
 </script>
 
 
