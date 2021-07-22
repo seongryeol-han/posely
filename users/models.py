@@ -52,6 +52,7 @@ class User(AbstractUser):
     )
 
     objects = core_managers.CustomModelManager()
+    objects = core_managers.CustomUserManager()
 
     def get_absolute_url(self):
         return reverse("users:profile", kwargs={"pk": self.pk})

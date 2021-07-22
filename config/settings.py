@@ -44,7 +44,7 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     # "phonenumber_field",
     "widget_tweaks",
-    "storages",
+    # "storages",
 ]
 
 PROJECT_APPS = [
@@ -159,17 +159,15 @@ MEDIA_URL = "/media/"
 
 LOGIN_URL = "/users/login"
 
-if not DEBUG:
+# if not DEBUG:
 
-    DEFAULT_FILE_STORAGE = "config.custom_storages.UploadStorage"
-    STATICFILES_STORAGE = "config.custom_storages.StaticStorage"
-    AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
-    AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
-    AWS_STORAGE_BUCKET_NAME = "posely-eomhan"
-    AWS_DEFAULT_ACL = "public-read"
+#     DEFAULT_FILE_STORAGE = "config.custom_storages.UploadStorage"
+#     STATICFILES_STORAGE = "config.custom_storages.StaticStorage"
+#     AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
+#     AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
+#     AWS_STORAGE_BUCKET_NAME = "posely-eomhan"
+#     AWS_DEFAULT_ACL = "public-read"
 
-    AWS_S3_OBJECT_PARAMETERS = {"CacheControl": "max-age=86400"}
-    AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.ap-northeast-2.amazonaws.com"
-    STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/static/"
-
-    )
+#     AWS_S3_OBJECT_PARAMETERS = {"CacheControl": "max-age=86400"}
+#     AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.ap-northeast-2.amazonaws.com"
+#     STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/static/"
