@@ -6,60 +6,168 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-    <link rel="shortcut icon" sizes="16x16 32x32 64x64" href="{%static 'img/posely_logo2.png' %}" />
+    <link rel="shortcut icon" sizes="16x16 32x32 64x64" href="{%static 'img/posely_logo3.png' %}" />
+
+    
+    {% comment %} <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jscroll/2.4.1/jquery.jscroll.min.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script> {% endcomment %}
+    <script type="text/javascript" src="/static/js/swiper-bundle.min.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.jscroll.min.js"></script>
+    
+    <!-- 지도붙이는 곳  -->
+    <!--map-->
+    <!--다음 지도 -->
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=652ca34caa7350d44ad066a820418984&libraries=services"></script>    
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <!--네이버 지도-->
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=iqj2g6f0df"></script>
+
     <title>포즐리 {% block page_title %}{% endblock page_title %}</title>
+
+
+
 </head>
-<body class="mt-14 mb-14 bg-gray-100 mobile:bg-white mobile:mt-32px ">
-  {% block nav-bar %}
-  <header class="z-10 container max-w-full inset-0 flex justify-center px-4 mobile:pb-px h-14 mobile:h-12 border-b  border-gray-400 fixed bg-white">
+<body class="mt-14 mb-4 bg-gray-100 mobile:mt-10 ">
+{% block nav-bar %}
+<header class="z-10 container max-w-full inset-0 flex justify-center px-4 mobile:pb-px h-14 mobile:h-12 border-b mobile:border-none border-gray-400 fixed bg-white">
         <div class="flex items-center justify-between w-600px px-4 small:px-0">
             
                 <a class="flex items-center" href="{% url "core:home" %}">
-                    <img class="w-8 mobile:w-7 rounded-md" src="{%static 'img/posely_logo1.jpg' %}" />
+                    <img class="w-8 rounded-md" src="{%static 'img/posely_logo3.png' %}" />
                 </a>
 
                 {% block search-bar %}
-                <form class="flex items-center" method="get" action="{% url "studios:search" %}">
-                  <div class="border px-6 flex items-center bg-gray-100">
-                    <div style="color:#a0aec0; margin: 0 6px 0 6px; "><i class="fas fa-search fa-sm"></i></div>
-                    <input class=" font-medium text-xs mobile:text-xxs  text-gray-900 bg-gray-100 placeholder-gray-500 py-1 mobile:py-1 rounded-md w-72 focus:outline-none " name="search_name_address" placeholder="사진관 지역, 이름 검색" />
+                <form class="search_bar hidden fade-in-box flex items-center ml-10 mobile:ml-2" method="get" action="{% url "studios:search" %}">
+                  <div class="border rounded-lg px-6 pl-14 mobile:px-2 mobile:pl-5 flex items-center justify-center bg-gray-100">
+                    <div style="color:#a0aec0; margin: 0 6px 0 6px;" class="text-sm mobile:text-xs"><i class="fas fa-search"></i></div>
+                    <input class=" text-xs text-gray-900 bg-gray-100 placeholder-gray-500 py-1 rounded-md focus:outline-none w-40 mobile:w-32" name="search_name_address" placeholder="사진관 이름, 지역 검색" />
                   </div>
                 </form>
                 {% endblock search-bar %}
 
+                <!--{% include "partials/nav.html" %}-->
 
-                {% include "partials/nav.html" %}
+                <header class="flex items-center">
+                  {% block nav-icons %}
+                      <button type="button" style="color: #999999;" class="search_button mr-5 text-22px focus:outline-none mobile:text-20px mobile:mr-4"><i class="fas fa-search"></i></button>
+                      
+                      {% if page_sorted == "created" %}
+                          <button type="button" id="distance_sort_btn" style="color: #999999;" class="NOT_DISTANCE mr-5 text-22px focus:outline-none mobile:text-20px mobile:mr-4"><i class="fas fa-map-marker-alt"></i></button>
+                      {% elif page_sorted == "like" %}
+                          <button type="button" id="distance_sort_btn" style="color: #999999;" class="NOT_DISTANCE mr-5 text-22px focus:outline-none mobile:text-20px mobile:mr-4"><i class="fas fa-map-marker-alt"></i></button>
+                      {% elif page_sorted == "distance" %}
+                          <button type="button" id="distance_sort_btn" class="text-gray-900 mr-5 text-22px focus:outline-none mobile:text-20px mobile:mr-4 "><i class="fas fa-map-marker-alt"></i></button>
+                      {% elif page_sorted == "search" %}
+                      {% endif %}
+                  {% endblock nav-icons %}
+                  
+                  {% if user.is_authenticated %}
+                      <a href="{{user.get_absolute_url}}">
+                          {%include "mixins/user/user_avatar.html"%}
+                      </a>
+                          
+                  {% else %}
+                      <a class="text-sm text-gray-600 font-semibold mobile:font-medium hover:text-black " href="{% url "users:login"%}">
+                          <div>로그인</div>
+                      </a> 
+                  {% endif %}
+              </header>
         </div>
 
-    </header> 
-    {% endblock nav-bar %}
-    {% block content %}
-        
-    {% endblock content%}
-    
-    {% include "partials/footer.html" %}
+  </header> 
+  {% endblock nav-bar %}
 
-
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-
-    <!-- Initialize Swiper -->
-    <script>
+  {% block content %}    
+  {% endblock content%}
   
-      var swiper = new Swiper('.swiper-container', {
+  <!--{% include "partials/footer.html" %}-->
+
+  <script>
+    
+    //swiper options    
+    var options={
         autoHeight: true,
         pagination: {
           el: '.swiper-pagination',
-          dynamicBullets: true,
+          type: "fraction"
         },
         navigation: {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev',
         },
-      });
-    </script>
+        allowTouchMove: true,
+    }
+
+    var swiper = new Swiper('.swiper-container', options);
+    
+    function renewswiper(){ 
+      var num = $('.swiper_distinction').last().attr('name')
+      console.log("new swiper num:"+num)
+      new Swiper(".swiper_dis_"+num,options) 
+    }
+
+    //inifinite scroll
+    $(document).ready(function () { 
+      var list = $('.book-list');
+          list.jscroll({
+              loadingHtml: '<div class="flex justify-center mt-3">' +
+                '<img src="{% static 'img/loading4.gif' %}" alt="Loading" />' +
+                '</div>',
+              padding: 1000,
+              pagingSelector: '.pagination',
+              nextSelector: 'a.next-page:last',
+              contentSelector: '.card,.pagination',
+              callback: renewswiper,
+          });
+    });
+
+    function TextReadMore(){
+      var pk = $(this).attr('name')
+
+      if($(".text-"+pk).hasClass("show-more-height")) {
+            $(this).text("");
+        }
+        $(".text-"+pk).toggleClass("show-more-height");
+    }
+    
+    $(document).on("click",".show-more",TextReadMore) 
+
+    //돋보기 버튼
+    const searchButton = document.querySelector(".search_button");
+    const searchBar = document.querySelector(".search_bar");
+    const toggleSearchBar = () => {
+        searchBar.classList.remove("hidden");
+        searchBar.classList.add("fade-in-box");
+        searchButton.classList.toggle("hidden");
+    }
+    searchButton.addEventListener("click", toggleSearchBar)
+    
+    //map_maker_btn
+    $("#distance_sort_btn").click((request)=>{
+        console.log("kkkk")   
+        if($("#distance_sort_btn").hasClass("NOT_DISTANCE")){
+              console.log("mmmm")
+              if('geolocation' in navigator){
+                      navigator.geolocation.getCurrentPosition(function(position,request){ //position에 위도와 경도같은 정보가 담김 
+                      var lat1 = position.coords.latitude;
+                      var lng1 = position.coords.longitude;
+                      sessionStorage.setItem("lat",lat1);
+                      sessionStorage.setItem("lng",lng1);
+                      location.href="/distance/?lat="+lat1+"&lng="+lng1
+                  }
+              )}
+          }
+        else{
+          var url="{% url 'core:home' %}"
+              window.location.href = url 
+        }
+    })
+
+  </script>
     
 </body>
 </html>

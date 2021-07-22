@@ -4,18 +4,23 @@
 
 .swiper-button-next {
     background: url(/static/img/chevron-circle-right-solid.svg) no-repeat;
-    background-size:50% auto;
     background-position: center;
     opacity: 0.9;
+    outline: none;
 }
 
 .swiper-button-prev {
     background: url(/static/img/chevron-circle-left-solid.svg) no-repeat;
-    background-size:50% auto;
     background-position: center;
     opacity: 0.9;
+    outline: none;
 }
 
+.swiper-container {
+    z-index: 0 !important;
+}
+
+/*
 @media (max-width: 450px) {
     .swiper-button-next {
       display: none !important;
@@ -24,6 +29,8 @@
         display: none !important;
       }
   } 
+*/
+
 
 .swiper-button-next::after,
 .swiper-button-prev::after {
@@ -31,21 +38,103 @@
 }
 
 
-
-.swiper-container-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet {
-    margin: 0 2px !important;
+.swiper-container-horizontal>.swiper-pagination-fraction {
+    margin: 0 0 0 0;
+    font-size: small;
+    color:white;
+    width: 50px !important;
+    background-color: gray;
+    border-radius: 25px;
+    top: 10px !important;
+    right: 10px !important;
+    bottom: unset !important;
+    left: unset !important;
+    opacity: 0.8;
+    padding: 4px 0 6px 0;
+    display: flex;
+    justify-content: center;
 }
 
-.swiper-pagination-bullet {
-    width: 7px !important;
-    height: 7px !important;
+@media (max-width: 450px) {
+    .swiper-container-horizontal>.swiper-pagination {
+        font-size: 12px;
+        width: 35px!important;
+        padding: 2px 0 4px;
+    }
+} 
+
+.swiper-button-next.swiper-button-disabled, .swiper-button-prev.swiper-button-disabled{
+    opacity: 0 !important;
 }
 
 
 
-.login-input-field{
+.input-field{
     @apply font-medium text-xs text-gray-900 bg-gray-100 w-full h-full;
     &:focus {
       @apply outline-none;
     }
 }
+
+.studio-input-field{
+    @apply font-medium text-gray-900 bg-gray-100 w-full h-full;
+    &:focus {
+      @apply outline-none;
+    }
+}
+
+.input-click:focus-within {
+    border-color: #90cdf4;
+}
+
+
+.hidden {
+    display: none;
+}
+
+
+#profile-description 
+.show-more-height { 
+    height: 30px; 
+    overflow:hidden; 
+}
+
+
+.fade-in-box {
+    animation: fadein 0.5s;
+    -moz-animation: fadein 0.5s; /* Firefox */
+    -webkit-animation: fadein 0.5s; /* Safari and Chrome */
+    -o-animation: fadein 0.5s; /* Opera */
+  }
+  @keyframes fadein {
+      from {
+          opacity: 0;
+      }
+      to {
+          opacity: 1;
+      }
+  }
+  @-moz-keyframes fadein { /* Firefox */
+      from {
+          opacity: 0;
+      }
+      to {
+          opacity: 1;
+      }
+  }
+  @-webkit-keyframes fadein { /* Safari and Chrome */
+      from {
+          opacity: 0;
+      }
+      to {
+          opacity: 1;
+      }
+  }
+  @-o-keyframes fadein { /* Opera */
+      from {
+          opacity: 0;
+      }
+      to {
+          opacity: 1;
+      }
+    }

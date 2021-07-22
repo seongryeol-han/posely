@@ -1,17 +1,18 @@
 import os
 import requests
-from django.views.generic import FormView
+from django.views.generic import FormView, DetailView, UpdateView
 from django.urls import reverse_lazy
 from django.shortcuts import redirect, reverse, render
 from django.contrib.auth import authenticate, login, logout
-from . import forms, models
+from . import forms, models, mixins
 from django.core.files.base import ContentFile
 from django.contrib.auth.forms import User
+from users import mixins as user_mixins
 
 # Create your views here.
 
 
-class LoginView(FormView):
+class LoginView(mixins.LoggedOutOnlyView, FormView):
     template_name = "users/login.html"
     form_class = forms.LoginForm
     # success_url = reverse_lazy("core:home")
@@ -37,7 +38,7 @@ def log_out(request):
     return redirect(reverse("core:home"))
 
 
-class SignUpView(FormView):
+class SignUpView(mixins.LoggedOutOnlyView, FormView):
     template_name = "users/signup.html"
     form_class = forms.SignUpForm
     success_url = reverse_lazy("core:home")
@@ -121,3 +122,35 @@ def kakao_callback(request):
         return redirect(reverse("core:home"))
     except KakaoException:
         return redirect(reverse("users:login"))
+
+
+class UserProfileView(DetailView):
+    model = models.User
+    context_object_name = "user_obj"
+    template_name = "users/user_profile.html"
+
+
+class EditProfileView(user_mixins.LoggedInOnlyView, UpdateView):
+    model = models.User
+    template_name = "users/user_edit.html"
+    fields = (
+        "nickname",
+        "phone_number",
+        "avatar",
+        "petname",
+        "bio",
+    )
+
+    def get_object(self, queryset=None):  # 룸 호스트랑 요청하는 사람이랑 같은지
+        return self.request.user
+
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class=form_class)
+        form.fields["phone_number"].widget.attrs = {"placeholder": "- 제외"}
+
+        form.fields["nickname"].label = "닉네임"
+        form.fields["phone_number"].label = "전화번호"
+        form.fields["avatar"].label = "내 반려동물 사진"
+        form.fields["petname"].label = "내 반려동물 이름"
+        form.fields["bio"].label = "내 반려동물에게 하고 싶은 말"
+        return form

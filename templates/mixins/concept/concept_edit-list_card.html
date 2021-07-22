@@ -1,0 +1,22 @@
+
+<div class="flex items-center justify-between w-full h-10">
+    <div class="flex items-center">
+        <div class="font-semibold mr-3" style="color:#1a202c;" >{{concept}}</div>
+    </div>
+    <a href="{%url "concepts:edit" concept.pk%}" class="flex items-center">
+        <p class="px-1 pt-1 font-semibold text-sm text-blue-500 "> 컨셉 수정 </p>
+    </a>
+</div>
+
+{% if concept.first_photo %}
+    
+        <div class="mb-6">
+            <img src="{{concept.first_photo}}" style="width: 100%;">
+        </div>
+        
+{% else %}
+    <a href="{%url "concepts:photos" concept.pk %}" class="w-full">
+        <div class="bg-red-400 w-full text-center text-white py-40">클릭해서 컨셉 사진 추가</div>
+    </a>    
+{%endif%}
+

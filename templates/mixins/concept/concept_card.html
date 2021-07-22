@@ -1,0 +1,25 @@
+    <div class="flex items-center justify-between h-12 mobile:h-8 px-1">
+        <div class="flex items-center">
+            <div class="font-semibold" style="color:#1a202c;" >{{concept}}</div>
+        </div>
+        <a href="{% url "concepts:detail" concept.pk %}" class="flex items-center">
+            <p class="text-blue-500 font-semibold text-sm"> 컨셉 선택 </p>
+        </a>
+    </div>
+
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            {% for photo in concept.all_photo %}
+            <div class="swiper-slide">
+                <img src="{{photo.file.url}}" style="width: 100%;" class="rounded-lg">
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+       
+        
+    </div>
+

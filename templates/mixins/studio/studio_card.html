@@ -1,37 +1,82 @@
-<div class="mt-4 w-600px small:w-full border border-gray-400 mobile:bg-white rounded-lg bg-white small:border-none small:bg-gray-100 ">
+<style type="text/css">
+
+#profile-description .show-more-height { height: 30px; overflow:hidden; }
+
+</style>
+
+
+<div class="mt-4 border border-gray-400 mobile:border-gray-300 mobile:border-l-0 mobile:border-r-0 mobile:bg-white rounded-lg bg-white small:bg-gray-100 ">
     <div class="flex items-center justify-between h-16 mobile:h-14 px-4">
+        
         <div class="flex items-center">
-            {% include "mixins/studio/author_avatar.html" with studio=studio %}
-            <div class="mx-3 font-semibold text-sm" style="color:#1a202c;" >{{studio}}</div>
+            <a href="{% url 'studios:profile' studio.pk%}">
+                {% include "mixins/studio/studio_avatar.html" with studio=studio %}
+            </a>
+            <div>
+                <a href="{% url 'studios:profile' studio.pk%}" class="mx-3 font-semibold text-sm" style="color:#1a202c;" >{{studio}}</a>
+                <div  class="mx-3 text-xs text-blue-500 mobile:text-blue-400" >
+                    <a href="{% url 'studios:profile' studio.pk%}#location">
+                        <i class="fas fa-map-marker-alt"></i> {{studio.addr_short}}
+                    </a>
+                </div>
+            </div>
         </div>
+        
         <div class="flex items-center py-2">
-            <p class="ml-1 font-semibold text-sm text-blue-500">예약하기</p>
+            <a href="{% url 'studios:profile' studio.pk %}#concept-select" class="ml-1 font-semibold mobile:font-medium text-sm text-blue-500 hover:text-blue-600">예약하기</a>
         </div>
+
     </div>
 
-    <div class="swiper-container">
+    <div class="swiper-container swiper_distinction swiper_dis_{{ studio.pk }}" name="{{ studio.pk }}">
         <div class="swiper-wrapper">
-
+            
             {% for concept in studio.concepts.all %}
-                <div class="swiper-slide">
+            
+                {% if concept.first_photo %}
+                
+                <div class="img_like swiper-slide" name="{{ studio.pk }}" >
                     <img src="{{concept.first_photo}}" style="width: 100%;">
                 </div>
+                
+                
+                {% endif %}
             {% endfor %}
-        
-        </div>
-        <div class="swiper-pagination"></div> <!--swiper-container의 맨 밑에다가 놓는다.-->
-        <div class="h-8 pt-2 flex items-center justify-between ">
-            <div class="ml-4 flex items-center" style="font-size: 0.5rem;"><i class="far fa-heart fa-3x"></i></div>
+            
         </div>
         
+        <button class="like focus:border-none focus:outline-none ml-4" name="{{ studio.pk }}" value="Like">
+            <div class="h-8 pt-2 border-none flex items-center justify-between ">
+                <div class="flex items-center" style="font-size: 0.5rem; color:#fe629f;">
+                    {% if studio.pk in check_exist%}
+                        <i id="check-{{studio.pk}}" class="fas fa-heart fa-3x"></i>
+                    {% else %}
+                        <i id="check-{{studio.pk}}" class="far fa-heart fa-3x"></i>   
+                    {% endif %}
+                </div>
+            </div>
+        </button>
+        
+        <div class="swiper-pagination"></div>
         <div class="swiper-button-next"></div>
         <div class="swiper-button-prev"></div>
+              
     </div>
     
-    <div class="overflow-auto mt-0.5 mx-4 mb-6 small:mb-0">
-        <p class="font-extrabold mb-2 text-sm">좋아요 365개</p>
-        <div class="font-semibold text-sm mb-1" style="color:#1a202c;" >{{studio}}</div>
-        <div class=" text-sm" style="color:#1a202c;" >{{studio.introduction | linebreaksbr}}</div>
+    <div class="mt-0.5 mx-4 small:mb-0">
+
+            <p id="count-{{ studio.pk }}" class="font-extrabold mt-1 mb-2 text-sm">
+                좋아요&nbsp;{{ studio.likes_user.all.count }}개
+            </p>
+
+            <div class="w-full mt-0.5">
+                <a href="{% url 'studios:profile' studio.pk%}" class="font-semibold text-sm mb-1" style="color:#1a202c;" >{{studio}}</a>
+                <div id="profile-description">
+                    <div class="text-{{studio.pk }} show-more-height text-sm pb-4" style="color:#1a202c;" >{{studio.introduction | linebreaksbr}}</div>
+                    <div name="{{ studio.pk }}" class="show-more text-gray-600 text-center cursor-pointer"><i class="fas fa-chevron-down"></i></div>
+                </div>
+            </div> 
     </div>
+
 </div>
 

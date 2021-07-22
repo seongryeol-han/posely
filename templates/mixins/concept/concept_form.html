@@ -1,0 +1,30 @@
+<form method="POST" class="w-full" enctype="multipart/form-data">
+    {%csrf_token%}
+
+    
+    {% if form.non_field_errors %}
+        
+        {% for error in form.non_field_errors %}
+            <span class="text-red-700 font-medium text-sm">{{error}}</span>
+        {% endfor %}
+                
+    {% endif %}
+    
+    <div class="flex justify-end">
+        <a class="border rounded-md text-center text-sm text-white py-1 px-4 bg-blue-500" href="{%url "concepts:photos" concept.pk %}">컨셉사진 수정</a>    
+    </div>
+
+    {% for field in form %}
+        <div class="mb-1 ml-1 text-xs font-semibold">
+            {{field.label}}
+        </div>
+        {% include "mixins/concept/concept_input.html" with field=field %}   
+    {% endfor %}
+
+
+    <div class="flex justify-between">
+        <a class = "bg-white text-red-600 text-sm rounded-md px-4 py-1" href="{%url "concepts:delete-concept" concept.pk %}">컨셉삭제</a>
+        <button class="focus:outline-none bg-white border border-gray-500 text-gray-800 text-sm rounded-md px-4 py-1">{{cta}}</button>        
+    </div>
+
+</form>

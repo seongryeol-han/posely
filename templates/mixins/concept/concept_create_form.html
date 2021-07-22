@@ -1,0 +1,27 @@
+<form method="POST" class="w-full" enctype="multipart/form-data">
+    {%csrf_token%}
+
+    
+    {% if form.non_field_errors %}
+        
+        {% for error in form.non_field_errors %}
+            <span class="text-red-700 font-medium text-sm">{{error}}</span>
+        {% endfor %}
+                
+    {% endif %}
+    
+
+    {% for field in form %}
+        <div class="mb-1 ml-1 text-xs font-semibold">
+            {{field.label}}
+        </div>
+        {% include "mixins/concept/concept_input.html" with field=field %}   
+    {% endfor %}
+
+
+    <div class="flex justify-end">
+        <button class="focus:outline-none bg-white border border-gray-500 text-gray-800 text-sm rounded-md px-4 py-1">{{cta}}</button>        
+    </div>       
+
+
+</form>

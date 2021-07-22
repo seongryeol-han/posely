@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load humanize %}
 
 
 {%block page_title%}
@@ -7,12 +8,96 @@
 
 {%endblock page_title%}
 
+{% block search-bar %}
+    <div class="font-semibold text-sm">컨셉 예약</div>
+{% endblock search-bar %}
 
+{% block nav-icons %}
+{% endblock nav-icons %}
 
 {% block content %}
-<div>
-    <h1>{{concept.name}}</h1>
+
+<div class="mx-auto flex flex-col items-center overflow-auto mobile:mb-4">
+    <div class="absolute mt-4 w-600px mobile:w-full mx-auto flex flex-col items-center justify-center border rounded-md p-6 px-4 bg-white border-gray-400 mobile:border-none mobile:p-4">
+        <div class="w-full text-lg font-semibold mb-2">{{concept.name}}</div>
+        
+        <div class="w-full mb-6 border-b pb-6">
+            <div class="swiper-container">
+                <div class="swiper-wrapper " >
+                    {% for photo in concept.all_photo %}
+                    <div class="swiper-slide">
+                        <img src="{{photo.file.url}}" style="width: 100%;" class="rounded-lg">
+                    </div>
+                    {% endfor %}
+                </div>
+        
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            
+            </div>
+        </div>
+
+        <div class="w-full mb-4 border-b pb-4">
+            <div class="font-semibold mb-2 mobile:mb-1">컨셉 설명</div>
+            <div class="text-sm mx-2">{{concept.concept_description | linebreaksbr}}</div>
+        </div>
+
+        <div class="w-full mb-4 border-b pb-4 ">
+            <div class="font-semibold mb-2 mobile:mb-1">이용 안내</div>
+            <div class="text-sm mx-2">{{concept.service_config}}</div>
+            <div class=" text-right font-semibold mx-6">{{concept.price|intcomma}}원</div>
+        </div>
+
+        <div class="h-8 mobile:h-10"></div>
+        
+    </div>
 </div>
+
+<div class="fixed bottom-0 left-0 w-full flex justify-center items-end">
+    <div class="relative top-0 border border-t-0 border-b-0 border-gray-400 bg-white w-600px px-4 mobile:border-none">
+        <div class="flex flex-col justify-center h-full pt-2 pb-4">
+            <div id="reservation_button" class="rounded-md bg-blue-500 py-2 text-white text-center cursor-pointer">촬영 예약하기</div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal hidden fixed top-0 left-0 w-full h-full flex justify-center items-center">
+    <div class="modal_overlay bg-black opacity-50 w-full h-full absolute"></div>
+    <div class="modal_content relative top-0 shadow-2xl rounded-xl bg-white h-48 w-350px p-6">
+        <div class="flex justify-between">
+            <div class="text-sm font-semibold">촬영 예약 문의</div>
+            <div class="modal_close_button text-sm font-semibold cursor-pointer"><i class="fas fa-times"></i></div>
+        </div>
+        <div class="flex flex-col justify-center h-full pb-4">
+            <a href="{{concept.studio.kakao_chat}}" target="popup" class="bg-yellow-500 text-sm text-white text-center py-2 rounded-md hidden">카카오톡 문의</a>
+            <a href="sms:{{concept.studio.phone_number}}" class="bg-green-500 text-sm text-white text-center py-2 mt-3 rounded-md hidden mobile:block"><i class="fas fa-envelope"></i><p class="inline ml-2">문자 문의</p></a>
+            <a href="tel:{{concept.studio.phone_number}}" class="bg-blue-500 text-sm text-white text-center py-2 mt-3 rounded-md hidden mobile:block"><i class="fas fa-phone-alt"></i><p class="inline ml-2">전화 문의</p></a>
+            <a class=" text-sm text-center py-2 rounded-md font-semibold mobile:hidden"> 전화번호 {{concept.studio.phone_number}}</a>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    const openButton = document.getElementById("reservation_button");
+    const modal = document.querySelector(".modal");
+    const modalCloseButton = document.querySelector(".modal_close_button");
+    const overlay = modal.querySelector(".modal_overlay");
+    const openModal = () => {
+        modal.classList.remove("hidden");
+
+    }
+    const closeModal = () => {
+        modal.classList.add("hidden");
+    }
+    overlay.addEventListener("click", closeModal);
+    modalCloseButton.addEventListener("click", closeModal);
+    openButton.addEventListener("click", openModal);
+
+</script>
+
     
 {% endblock content %}
 

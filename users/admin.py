@@ -19,6 +19,7 @@ class CustomUserAdmin(UserAdmin):
                     "phone_number",
                     "studio",
                     "bio",
+                    "has_studio",
                 )
             },
         ),

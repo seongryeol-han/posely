@@ -26,7 +26,7 @@ SECRET_KEY = "%9ec@=u6wcl=e4t9n+gu0(suc2$yrx@82z8dp96rsb5uf4!*d#"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -38,6 +38,7 @@ DJANGO_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.humanize",
 ]
 
 THIRD_PARTY_APPS = [
@@ -142,3 +143,6 @@ AUTH_USER_MODEL = "users.User"
 MEDIA_ROOT = BASE_DIR / "uploads"
 
 MEDIA_URL = "/media/"
+
+
+LOGIN_URL = "/users/login"

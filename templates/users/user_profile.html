@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+    Studio
+{% endblock page_title %}
+
+{% block search-bar %}
+    <div class="font-semibold text-sm">{{user_obj.nickname}}</div>
+{% endblock search-bar %}
+
+{% block nav-icons %}
+{% endblock nav-icons %}
+
+
+{% block content %}
+    <div class="mx-auto flex flex-col items-center overflow-auto mobile:mb-4">
+        <div class="mt-4 w-600px small:w-full border-b">                
+            <div class=" px-10 pb-8 mobile:px-4 mobile:pb-4">
+                <div class="flex items-center ">
+                    <div class="my-3">
+                        {% include 'mixins/user/user-profile_avatar.html' with user=user_obj%}
+                    </div>
+
+                    <div class="ml-8 mobile:ml-4 flex flex-col">
+                        <div class="text-28px mobile:text-20px font-thin text-gray-700">
+                            {{user_obj.nickname}}
+                        </div>
+                        {%if user_obj == user %}
+                        <div class="flex" >    
+                            <a href="{%url "users:edit" %}" class="border rounded-md text-center text-white py-1 px-14 mr-2 bg-blue-500 mobile:text-sm mobile:py-0.5">
+                                프로필 설정
+                            </a>
+                        </div>
+                        {%endif%}    
+                    </div>
+                </div>
+
+                <div class="my-2">
+                    <div class="font-semibold mb-1">
+                        {{user_obj.petname}}
+                    </div>
+                    <div class="text-sm">
+                        {{user_obj.bio | linebreaksbr}}
+                    </div>    
+                </div>
+
+                {%if user_obj == user %}
+                    {%if user.studios.count > 0%}
+                        {% for studio in user_obj.studios.all %}
+                        <a href="{% url 'studios:profile' studio.pk %}">    
+                            <div  class="border border-gray-400 rounded-md text-center font-semibold py-1 px-10 mobile:text-sm">
+                                내 사진관
+                            </div>
+                        </a>
+                        {%endfor%}
+                    {%else%}
+                        
+                        {% if user.studio == True %}
+                        <a href="{% url 'studios:create' %}" >    
+                            <div class="border border-gray-400 rounded-md text-center font-semibold py-1 px-10 mt-6">
+                                사진관 만들기
+                            </div>
+                        </a>
+                        {% endif %}
+                            
+                    {%endif%}
+                    
+                {%endif%}
+            </div>
+
+        </div>
+
+        
+    </div>
+{% endblock content %}

@@ -16,7 +16,10 @@ class StudioAdmin(admin.ModelAdmin):
     inlines = (ConceptInline,)
 
     list_display = (
+        
         "name",
+        "studio_lat",
+        "studio_lng",
         "phone_number",
         "kakao_chat",
         "address",
@@ -24,7 +27,7 @@ class StudioAdmin(admin.ModelAdmin):
         "close_time",
         "introduction",
         "using_info",
-        "file",
+        "studio_avatar",
         "author",
         "count_concepts",
     )
