@@ -16,6 +16,7 @@ pipenv-to-requirements = "*"
 python-dotenv = "*"
 django-storages = "*"
 boto3 = "*"
+awscli = "*"
 
 [dev-packages]
 flake8 = "*"
