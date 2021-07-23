@@ -153,10 +153,11 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
 AUTH_USER_MODEL = "users.User"
 
-MEDIA_ROOT = BASE_DIR / "uploads"
+MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")
 
 MEDIA_URL = "/media/"
 
+LOCALE_PATHS = [os.path.join(BASE_DIR, "locale")]
 
 LOGIN_URL = "/users/login"
 
