@@ -13,6 +13,8 @@ requests = "*"
 django-dotenv = "*"
 django-widget-tweaks = "*"
 pipenv-to-requirements = "*"
+django-storages = "*"
+boto3 = "*"
 
 [dev-packages]
 flake8 = "*"
