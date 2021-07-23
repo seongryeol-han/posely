@@ -14,6 +14,7 @@ django-dotenv = "*"
 django-widget-tweaks = "*"
 pipenv-to-requirements = "*"
 python-dotenv = "*"
+django-storages = "*"
 
 [dev-packages]
 flake8 = "*"
