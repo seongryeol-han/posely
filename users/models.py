@@ -56,6 +56,10 @@ class User(AbstractUser):
         max_length=50, choices=LOGIN_CHOICES, default=LOGIN_EMAIL
     )
 
+<<<<<<< HEAD
+=======
+    # objects = core_managers.CustomModelManager()
+>>>>>>> 7954ff5d616504ae073560d3b06519d3c1b63215
     objects = core_managers.CustomUserManager()
 
     def get_absolute_url(self):
