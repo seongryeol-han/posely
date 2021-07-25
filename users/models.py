@@ -26,6 +26,7 @@ class User(AbstractUser):
     avatar = ProcessedImageField(
         upload_to="avatars",
         blank=True,
+        default="",
         format="JPEG",
         options={"quality": 60},
     )

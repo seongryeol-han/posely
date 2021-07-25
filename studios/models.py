@@ -26,7 +26,7 @@ class Studio(core_models.TimeStampedModel):
         blank=True,
         null=True,
         format="JPEG",
-        options={"quality": 60},
+        options={"quality": 80},
     )
     author = models.ForeignKey(
         "users.User",
