@@ -12,7 +12,6 @@ class Photo(core_models.TimeStampedModel):
     file = ProcessedImageField(
         upload_to="concept_photos",
         format="JPEG",
-        options={"quality": 80},
     )
     concept = models.ForeignKey(
         "Concept", related_name="photos", on_delete=models.CASCADE
