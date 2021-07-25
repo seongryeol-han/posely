@@ -12,6 +12,7 @@
             {% for photo in concept.all_photo %}
             <div class="swiper-slide">
                 <img src="{{photo.file.url}}" style="width: 100%;" class="rounded-lg">
+                {{concept.first_photo.width}} / {{concept.first_photo.height}}
             </div>
             {% endfor %}
         </div>

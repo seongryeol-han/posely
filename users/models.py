@@ -23,12 +23,10 @@ class User(AbstractUser):
         (LOGING_KAKAO, "Kakao"),
     )
 
-    avatar = ProcessedImageField(
+    avatar = models.ImageField(
         upload_to="avatars",
         blank=True,
         default="",
-        format="JPEG",
-        options={"quality": 60},
     )
     phone_number = models.CharField(max_length=11)
     nickname = models.CharField(
