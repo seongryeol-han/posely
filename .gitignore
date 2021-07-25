@@ -141,6 +141,8 @@ cython_debug/
 config/settings.py
 db.sqlite3
 .vscode
+blob/
+
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
