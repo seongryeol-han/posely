@@ -25,6 +25,7 @@ SECRET_KEY = os.environ.get("DJANGO_SECRET", "pokzxcjix2y")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.environ.get("DEBUG"))
+# DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -45,6 +46,7 @@ THIRD_PARTY_APPS = [
     # "phonenumber_field",
     "widget_tweaks",
     "storages",
+    "imagekit",
 ]
 
 PROJECT_APPS = [

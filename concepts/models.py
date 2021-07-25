@@ -1,5 +1,6 @@
 from django.db import models
 from core import models as core_models
+from imagekit.models import ProcessedImageField
 
 # Create your models here.
 
@@ -8,7 +9,11 @@ class Photo(core_models.TimeStampedModel):
     """Photo Model Definition"""
 
     caption = models.CharField(max_length=80, default="")
-    file = models.ImageField(upload_to="concept_photos")  # /uploads/concept_photos에 저장.
+    file = ProcessedImageField(
+        upload_to="concept_photos",
+        format="JPEG",
+        options={"quality": 60},
+    )
     concept = models.ForeignKey(
         "Concept", related_name="photos", on_delete=models.CASCADE
     )

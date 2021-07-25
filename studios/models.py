@@ -2,6 +2,7 @@ from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 from core import models as core_models
 from django.shortcuts import reverse
+from imagekit.models import ProcessedImageField
 
 # Create your models here.
 
@@ -19,8 +20,13 @@ class Studio(core_models.TimeStampedModel):
     close_time = models.TimeField()
     introduction = models.TextField(default="", blank=True)
     using_info = models.TextField(default="", blank=True)
-    studio_avatar = models.ImageField(
-        upload_to="studio_photos", default="", blank=True, null=True
+    studio_avatar = ProcessedImageField(
+        upload_to="studio_photos",
+        default="",
+        blank=True,
+        null=True,
+        format="JPEG",
+        options={"quality": 60},
     )
     author = models.ForeignKey(
         "users.User",
