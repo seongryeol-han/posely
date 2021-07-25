@@ -11,7 +11,6 @@ class Photo(core_models.TimeStampedModel):
     caption = models.CharField(max_length=80, default="")
     file = ProcessedImageField(
         upload_to="concept_photos",
-        format="JPEG",
     )
     concept = models.ForeignKey(
         "Concept", related_name="photos", on_delete=models.CASCADE
