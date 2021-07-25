@@ -17,6 +17,7 @@ django-storages = "*"
 boto3 = "*"
 django-imagekit = "*"
 pilkit = "*"
+awscli = "*"
 
 [dev-packages]
 flake8 = "*"
