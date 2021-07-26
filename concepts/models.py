@@ -1,5 +1,6 @@
 from django.db import models
 from core import models as core_models
+from django_resized import ResizedImageField
 
 # Create your models here.
 
@@ -8,7 +9,13 @@ class Photo(core_models.TimeStampedModel):
     """Photo Model Definition"""
 
     caption = models.CharField(max_length=80, default="")
-    file = models.ImageField(upload_to="concept_photos")  # /uploads/concept_photos에 저장.
+    # file = models.ImageField(upload_to="concept_photos")  # /uploads/concept_photos에 저장.
+    file = ResizedImageField(
+        size=[1024, 1024],
+        upload_to="concept_photos",
+        quality=95,
+    )
+
     concept = models.ForeignKey(
         "Concept", related_name="photos", on_delete=models.CASCADE
     )
@@ -24,7 +31,7 @@ class Photo(core_models.TimeStampedModel):
         return self.caption
 
 
-class Concept(core_models.TimeStampedModel):
+class Concept(core_models.TimeStampedModel, models.Model):
     """Concept Model Definition"""
 
     name = models.CharField(max_length=15)

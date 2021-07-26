@@ -2,6 +2,7 @@ from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 from core import models as core_models
 from django.shortcuts import reverse
+from django_resized import ResizedImageField
 
 # Create your models here.
 
@@ -19,8 +20,16 @@ class Studio(core_models.TimeStampedModel):
     close_time = models.TimeField()
     introduction = models.TextField(default="", blank=True)
     using_info = models.TextField(default="", blank=True)
-    studio_avatar = models.ImageField(
-        upload_to="studio_photos", default="", blank=True, null=True
+    # studio_avatar = models.ImageField(
+    #     upload_to="studio_photos", default="", blank=True, null=True
+    # )
+    studio_avatar = ResizedImageField(
+        size=[1024, 1024],
+        upload_to="studio_photos",
+        quality=95,
+        default="",
+        blank=True,
+        null=True,
     )
     author = models.ForeignKey(
         "users.User",

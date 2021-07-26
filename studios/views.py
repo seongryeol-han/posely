@@ -117,7 +117,7 @@ class HomeView3(ListView):
         if self.request.GET.get("lat"):
             now_lat = float(self.request.GET.get("lat"))
             now_lng = float(self.request.GET.get("lng"))
-            self.request.session.clear()
+
             self.request.session["lat"] = now_lat
             self.request.session["lng"] = now_lng
 
