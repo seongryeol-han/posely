@@ -31,7 +31,7 @@ class User(AbstractUser):
     phone_number = models.CharField(max_length=11)
     nickname = models.CharField(
         max_length=30,
-        null=False,
+        null=True,
         unique=True,
         error_messages={
             "unique": "이미 존재하는 닉네임입니다.",
