@@ -19,6 +19,7 @@ django-imagekit = "*"
 pilkit = "*"
 awscli = "*"
 npm = "*"
+install = "*"
 
 [dev-packages]
 flake8 = "*"
