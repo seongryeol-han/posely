@@ -13,6 +13,8 @@ from django.db.models import Count, F, Func
 import math
 
 # sort by default
+
+
 class HomeView(ListView):
     """StudioView Definition"""
 
@@ -117,7 +119,7 @@ class HomeView3(ListView):
         if self.request.GET.get("lat"):
             now_lat = float(self.request.GET.get("lat"))
             now_lng = float(self.request.GET.get("lng"))
-            self.request.session.clear()
+
             self.request.session["lat"] = now_lat
             self.request.session["lng"] = now_lng
 
@@ -213,7 +215,8 @@ class SearchView(View):
                     return render(
                         request,
                         "studios/search.html",
-                        {"form": form, "empty_search": "ok", "page_sorted": "search"},
+                        {"form": form, "empty_search": "ok",
+                            "page_sorted": "search"},
                     )
         form = forms.SearchForm()
         return render(
@@ -270,7 +273,8 @@ class EditStudioView(user_mixins.LoggedInOnlyView, UpdateView):
 
     def get_form(self, form_class=None):
         form = super().get_form(form_class=form_class)
-        form.fields["phone_number"].widget.attrs = {"placeholder": "- 를 포함해주세요."}
+        form.fields["phone_number"].widget.attrs = {
+            "placeholder": "- 를 포함해주세요."}
         form.fields["open_time"].widget.attrs = {"placeholder": "10:00"}
         form.fields["close_time"].widget.attrs = {"placeholder": "20:00"}
         form.fields["address"].widget.attrs = {"readonly": True}
