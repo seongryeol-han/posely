@@ -25,9 +25,8 @@ SECRET_KEY = os.environ.get("DJANGO_SECRET", "pokzxcjix2y")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
-# DEBUG = True
 
-ALLOWED_HOSTS = [".elasticbeanstalk.com", "localhost", "*"]
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -45,7 +44,7 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     # "phonenumber_field",
     "widget_tweaks",
-    # "storages",
+    "storages",
 ]
 
 PROJECT_APPS = [
@@ -103,10 +102,10 @@ else:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql",
-            "HOST": os.environ.get("RDS_HOST"),
-            "NAME": os.environ.get("RDS_NAME"),
-            "USER": os.environ.get("RDS_USER"),
-            "PASSWORD": os.environ.get("RDS_PASSWORD"),
+            "HOST": "posely-app.ctaswv9k1pnl.ap-northeast-2.rds.amazonaws.com",
+            "NAME": "postgres",
+            "USER": "postgres",
+            "PASSWORD": "z1811625",
             "PORT": "5432",
         }
     }
@@ -149,9 +148,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = "/static/"
-# print("@@@@@@@")
+
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
-# print("!!!!!!!!!!!")
+
 AUTH_USER_MODEL = "users.User"
 
 MEDIA_ROOT = BASE_DIR / "uploads"
@@ -160,15 +159,13 @@ MEDIA_URL = "/media/"
 
 LOGIN_URL = "/users/login"
 
-# print(os.environ.get("AWS_ACCESS_KEY_ID"))
-
-# DEFAULT_FILE_STORAGE = "config.custom_storages.UploadStorage"
-# STATICFILES_STORAGE = "config.custom_storages.StaticStorage"
-# AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
-# AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
-# AWS_STORAGE_BUCKET_NAME = "poselybucket"
-# AWS_DEFAULT_ACL = "public-read"
-
-# AWS_S3_OBJECT_PARAMETERS = {"CacheControl": "max-age=86400"}
-# AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.ap-northeast-2.amazonaws.com"
-# STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/static/"
+if not DEBUG:
+    DEFAULT_FILE_STORAGE = "config.custom_storages.UploadStorage"
+    STATICFILES_STORAGE = "config.custom_storages.StaticStorage"
+    AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
+    AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_ACCESS_PASSWORD_KEY")
+    AWS_STORAGE_BUCKET_NAME = "posely-bucket"
+    AWS_DEFAULT_ACL = "public-read"
+    AWS_S3_OBJECT_PARAMETERS = {"CacheControl": "max-age=86400"}
+    AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.ap-northeast-2.amazonaws.com"
+    STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/static/"
