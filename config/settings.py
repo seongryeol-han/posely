@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "%9ec@=u6wcl=e4t9n+gu0(suc2$yrx@82z8dp96rsb5uf4!*d#"
+SECRET_KEY = os.environ.get("DJANGO_SECRET", "pokzxcjix2y")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -44,6 +44,7 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     # "phonenumber_field",
     "widget_tweaks",
+    "storages",
 ]
 
 PROJECT_APPS = [
@@ -90,12 +91,24 @@ WSGI_APPLICATION = "config.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": str(BASE_DIR / "db.sqlite3"),
+if DEBUG:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": str(BASE_DIR / "db.sqlite3"),
+        }
     }
-}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "HOST": os.environ.get("RDS_HOST"),
+            "NAME": os.environ.get("RDS_NAME"),
+            "USER": os.environ.get("RDS_USER"),
+            "PASSWORD": os.environ.get("RDS_PASSWORD"),
+            "PORT": "5432",
+        }
+    }
 
 
 # Password validation
@@ -144,5 +157,15 @@ MEDIA_ROOT = BASE_DIR / "uploads"
 
 MEDIA_URL = "/media/"
 
-
 LOGIN_URL = "/users/login"
+
+if not DEBUG:
+    DEFAULT_FILE_STORAGE = "config.custom_storages.UploadStorage"
+    STATICFILES_STORAGE = "config.custom_storages.StaticStorage"
+    AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
+    AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_ACCESS_PASSWORD_KEY")
+    AWS_STORAGE_BUCKET_NAME = "posely-bucket"
+    AWS_DEFAULT_ACL = "public-read"
+    AWS_S3_OBJECT_PARAMETERS = {"CacheControl": "max-age=86400"}
+    AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.ap-northeast-2.amazonaws.com"
+    STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/static/"
