@@ -20,6 +20,7 @@ pilkit = "*"
 awscli = "*"
 npm = "*"
 install = "*"
+psycopg2 = "==2.8.6"
 
 [dev-packages]
 flake8 = "*"
