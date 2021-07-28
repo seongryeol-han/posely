@@ -4,7 +4,6 @@ from django.db.models.deletion import SET_NULL
 from phonenumber_field.modelfields import PhoneNumberField
 from django.shortcuts import reverse
 from core import managers as core_managers
-from imagekit.models import ProcessedImageField
 
 # Create your models here.
 
