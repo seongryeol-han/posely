@@ -21,12 +21,13 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-
 SECRET_KEY = os.environ.get("DJANGO_SECRET", "pokzxcjix2y")
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool(os.environ.get("DEBUG"))
 
-ALLOWED_HOSTS = ["*"]
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True
+# DEBUG = True
+
+ALLOWED_HOSTS = [".elasticbeanstalk.com", "localhost", "*"]
 
 
 # Application definition
@@ -44,7 +45,7 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     # "phonenumber_field",
     "widget_tweaks",
-    "storages",
+    # "storages",
 ]
 
 PROJECT_APPS = [
@@ -110,6 +111,7 @@ else:
         }
     }
 
+
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
@@ -147,27 +149,26 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = "/static/"
-
+# print("@@@@@@@")
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
-
+# print("!!!!!!!!!!!")
 AUTH_USER_MODEL = "users.User"
 
 MEDIA_ROOT = BASE_DIR / "uploads"
 
 MEDIA_URL = "/media/"
 
-
 LOGIN_URL = "/users/login"
 
-if not DEBUG:
+# print(os.environ.get("AWS_ACCESS_KEY_ID"))
 
-    DEFAULT_FILE_STORAGE = "config.custom_storages.UploadStorage"
-    STATICFILES_STORAGE = "config.custom_storages.StaticStorage"
-    AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
-    AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
-    AWS_STORAGE_BUCKET_NAME = "posely-eomhan"
-    AWS_DEFAULT_ACL = "public-read"
+# DEFAULT_FILE_STORAGE = "config.custom_storages.UploadStorage"
+# STATICFILES_STORAGE = "config.custom_storages.StaticStorage"
+# AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
+# AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
+# AWS_STORAGE_BUCKET_NAME = "poselybucket"
+# AWS_DEFAULT_ACL = "public-read"
 
-    AWS_S3_OBJECT_PARAMETERS = {"CacheControl": "max-age=86400"}
-    AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.ap-northeast-2.amazonaws.com"
-    STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/static/"
+# AWS_S3_OBJECT_PARAMETERS = {"CacheControl": "max-age=86400"}
+# AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.ap-northeast-2.amazonaws.com"
+# STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/static/"

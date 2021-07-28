@@ -22,11 +22,15 @@ class User(AbstractUser):
         (LOGING_KAKAO, "Kakao"),
     )
 
-    avatar = models.ImageField(upload_to="avatars", blank=True)
+    avatar = models.ImageField(
+        upload_to="avatars",
+        blank=True,
+        default="",
+    )
     phone_number = models.CharField(max_length=11)
     nickname = models.CharField(
         max_length=30,
-        null=False,
+        null=True,
         unique=True,
         error_messages={
             "unique": "이미 존재하는 닉네임입니다.",
@@ -51,7 +55,6 @@ class User(AbstractUser):
         max_length=50, choices=LOGIN_CHOICES, default=LOGIN_EMAIL
     )
 
-    objects = core_managers.CustomModelManager()
     objects = core_managers.CustomUserManager()
 
     def get_absolute_url(self):

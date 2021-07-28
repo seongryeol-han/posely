@@ -8,7 +8,9 @@ class Photo(core_models.TimeStampedModel):
     """Photo Model Definition"""
 
     caption = models.CharField(max_length=80, default="")
-    file = models.ImageField(upload_to="concept_photos")  # /uploads/concept_photos에 저장.
+    file = models.ImageField(
+        upload_to="concept_photos",
+    )
     concept = models.ForeignKey(
         "Concept", related_name="photos", on_delete=models.CASCADE
     )
@@ -47,6 +49,6 @@ class Concept(core_models.TimeStampedModel):
     def first_photo(self):
         try:  # try한 이유는. concept을 만들 때 사진을 안넣어주면 에러가 나서 사진이 없더라도 그냥 return None 내보내게 함.
             (photo,) = self.photos.all()[:1]
-            return photo.file.url
+            return photo.file
         except ValueError:
             return None

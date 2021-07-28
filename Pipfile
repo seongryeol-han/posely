@@ -12,11 +12,11 @@ django-phonenumber-field = {extras = ["phonenumberslite"], version = "*"}
 requests = "*"
 django-dotenv = "*"
 django-widget-tweaks = "*"
+awsebcli = "*"
 pipenv-to-requirements = "*"
-python-dotenv = "*"
 django-storages = "*"
 boto3 = "*"
-awscli = "*"
+psycopg2-binary = "*"
 
 [dev-packages]
 flake8 = "*"

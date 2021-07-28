@@ -20,7 +20,10 @@ class Studio(core_models.TimeStampedModel):
     introduction = models.TextField(default="", blank=True)
     using_info = models.TextField(default="", blank=True)
     studio_avatar = models.ImageField(
-        upload_to="studio_photos", default="", blank=True, null=True
+        upload_to="studio_photos",
+        default="",
+        blank=True,
+        null=True,
     )
     author = models.ForeignKey(
         "users.User",
