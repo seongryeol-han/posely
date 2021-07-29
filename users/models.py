@@ -4,7 +4,7 @@ from django.db.models.deletion import SET_NULL
 from phonenumber_field.modelfields import PhoneNumberField
 from django.shortcuts import reverse
 from core import managers as core_managers
-
+from django_resized import ResizedImageField
 # Create your models here.
 
 
@@ -22,7 +22,12 @@ class User(AbstractUser):
         (LOGING_KAKAO, "Kakao"),
     )
 
-    avatar = models.ImageField(upload_to="avatars", blank=True)
+    avatar = ResizedImageField(
+        size=[1024, 1024],
+        upload_to="avatars",
+        quality=95,
+        blank=True,
+    )
     phone_number = models.CharField(max_length=11)
     nickname = models.CharField(
         max_length=30,

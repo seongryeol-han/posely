@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 SECRET_KEY = os.environ.get("DJANGO_SECRET", "pokzxcjix2y")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -102,10 +102,10 @@ else:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql",
-            "HOST": os.environ.get("RDS_HOST"),
-            "NAME": os.environ.get("RDS_NAME"),
-            "USER": os.environ.get("RDS_USER"),
-            "PASSWORD": os.environ.get("RDS_PASSWORD"),
+            "HOST": "posely-app.ctaswv9k1pnl.ap-northeast-2.rds.amazonaws.com",
+            "NAME": "postgres",
+            "USER": "postgres",
+            "PASSWORD": "z1811625",
             "PORT": "5432",
         }
     }
@@ -169,3 +169,10 @@ if not DEBUG:
     AWS_S3_OBJECT_PARAMETERS = {"CacheControl": "max-age=86400"}
     AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.ap-northeast-2.amazonaws.com"
     STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/static/"
+
+DJANGORESIZED_DEFAULT_SIZE = [1024, 1024]
+DJANGORESIZED_DEFAULT_QUALITY = 95
+DJANGORESIZED_DEFAULT_KEEP_META = True
+DJANGORESIZED_DEFAULT_FORCE_FORMAT = "JPEG"
+DJANGORESIZED_DEFAULT_FORMAT_EXTENSIONS = {"JPEG": ".jpg"}
+DJANGORESIZED_DEFAULT_NORMALIZE_ROTATION = True

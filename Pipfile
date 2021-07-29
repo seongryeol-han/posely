@@ -17,6 +17,7 @@ pipenv-to-requirements = "*"
 django-storages = "*"
 boto3 = "*"
 psycopg2-binary = "*"
+django-resized = "*"
 
 [dev-packages]
 flake8 = "*"

@@ -1,6 +1,6 @@
 from django.db import models
 from core import models as core_models
-
+from django_resized import ResizedImageField
 # Create your models here.
 
 
@@ -8,7 +8,14 @@ class Photo(core_models.TimeStampedModel):
     """Photo Model Definition"""
 
     caption = models.CharField(max_length=80, default="")
-    file = models.ImageField(upload_to="concept_photos")  # /uploads/concept_photos에 저장.
+    # file = models.ImageField(
+    #     upload_to="concept_photos",
+    # )
+    file = ResizedImageField(
+        size=[1024, 1024],
+        upload_to="concept_photos",
+        quality=95,
+    )
     concept = models.ForeignKey(
         "Concept", related_name="photos", on_delete=models.CASCADE
     )
@@ -24,11 +31,12 @@ class Photo(core_models.TimeStampedModel):
         return self.caption
 
 
-class Concept(core_models.TimeStampedModel):
+class Concept(core_models.TimeStampedModel, models.Model):
     """Concept Model Definition"""
 
     name = models.CharField(max_length=15)
-    concept_description = models.TextField(max_length=160, default="", blank=False)
+    concept_description = models.TextField(
+        max_length=160, default="", blank=False)
     service_config = models.TextField(default="", blank=False)
     price = models.DecimalField(max_digits=6, decimal_places=0)
     studio = models.ForeignKey(
@@ -47,6 +55,6 @@ class Concept(core_models.TimeStampedModel):
     def first_photo(self):
         try:  # try한 이유는. concept을 만들 때 사진을 안넣어주면 에러가 나서 사진이 없더라도 그냥 return None 내보내게 함.
             (photo,) = self.photos.all()[:1]
-            return photo.file.url
+            return photo.file
         except ValueError:
             return None

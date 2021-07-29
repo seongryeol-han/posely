@@ -11,4 +11,9 @@ class CustomModelManager(models.Manager):
 
 
 class CustomUserManager(CustomModelManager, UserManager):
-    pass
+    def create_superuser(self, username, email, password, **extra_fields):
+        user = self.model(email=email, username=username, is_staff=True,
+                          is_superuser=True, nickname="master-nick0")
+        user.set_password(password)
+        user.save()
+        return user
