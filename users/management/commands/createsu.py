@@ -8,10 +8,10 @@ class Command(BaseCommand):  # 이거를 통해서 seed 데이터를 미리 만�
 
     # User에 가짜 데이터 넣는법
     def handle(self, *args, **options):
-        admin = User.objects.get_or_none(username="eomhan")
+        admin = User.objects.get_or_none(username="eomhan2")
         if not admin:
             User.objects.create_superuser(
-                "eomhan", "gkstjdfuf17@posely.com", "z1811625")
+                "eomhan2", "gkstjdfuf17@posely.com", "z1811625")
             self.stdout.write(self.style.SUCCESS(f"Superuser created!"))
         else:
             self.stdout.write(self.style.SUCCESS(f"Superuser Exists"))
