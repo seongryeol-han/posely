@@ -103,7 +103,7 @@
                     jQuery('#addr_short').val(data.address);
                     jQuery('#addr_detail').focus();
                     var geocoder = new kakao.maps.services.Geocoder();
-
+                    
                     geocoder.addressSearch(data.address, function(result, status) {
 
                     // 정상적으로 검색이 완료됐으면 
