@@ -55,9 +55,9 @@
                         {%endfor%}
                     {%else%}
                         
-                        {% if user.studio == True %}
-                        <a href="{% url 'studios:create' %}" >    
-                            <div class="border border-gray-400 rounded-md text-center font-semibold py-1 px-10 mt-6">
+                        {% if user.studio == True %} 
+                        <a href="{% url 'studios:create' %}">    
+                            <div  class="border border-gray-400 rounded-md text-center font-semibold py-1 px-10 mobile:text-sm">
                                 사진관 만들기
                             </div>
                         </a>
