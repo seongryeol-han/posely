@@ -16,7 +16,7 @@
                 <a href="{% url 'studios:profile' studio.pk%}" class="mx-3 font-semibold text-sm" style="color:#1a202c;" >{{studio}}</a>
                 <div  class="mx-3 text-xs text-blue-500 mobile:text-blue-400" >
                     <a href="{% url 'studios:profile' studio.pk%}#location">
-                        <i class="fas fa-map-marker-alt"></i> {{studio.addr_short}}
+                        <div><i class="fas fa-map-marker-alt"></i> {{studio.addr_short}}</div>
                     </a>
                 </div>
             </div>
