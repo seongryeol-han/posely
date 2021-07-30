@@ -33,7 +33,7 @@
 
 
 </head>
-<body class="mt-14 mb-4 bg-gray-100 mobile:mt-10 ">
+<body class="mt-14 mb-4 bg-white mobile:mt-10 ">
 {% block nav-bar %}
 <header class="z-10 container max-w-full inset-0 flex justify-center px-4 mobile:pb-px h-14 mobile:h-12 border-b mobile:border-none border-gray-400 fixed bg-white">
         <div class="flex items-center justify-between w-600px px-4 small:px-0">
@@ -55,14 +55,14 @@
 
                 <header class="flex items-center">
                   {% block nav-icons %}
-                      <button type="button" style="color: #999999;" class="search_button mr-5 text-22px focus:outline-none mobile:text-20px mobile:mr-4"><i class="fas fa-search"></i></button>
+                      <button type="button" style="color: #999999;" class="search_button p-1 mr-3 text-22px focus:outline-none mobile:text-20px mobile:mr-2"><i class="fas fa-search"></i></button>
                       
                       {% if page_sorted == "created" %}
-                          <button type="button" id="distance_sort_btn" style="color: #999999;" class="NOT_DISTANCE mr-5 text-22px focus:outline-none mobile:text-20px mobile:mr-4"><i class="fas fa-map-marker-alt"></i></button>
+                          <button type="button" id="distance_sort_btn" style="color: #999999;" class="NOT_DISTANCE p-1 mr-3 text-22px focus:outline-none mobile:text-20px mobile:mr-2"><i class="fas fa-map-marker-alt"></i></button>
                       {% elif page_sorted == "like" %}
-                          <button type="button" id="distance_sort_btn" style="color: #999999;" class="NOT_DISTANCE mr-5 text-22px focus:outline-none mobile:text-20px mobile:mr-4"><i class="fas fa-map-marker-alt"></i></button>
+                          <button type="button" id="distance_sort_btn" style="color: #999999;" class="NOT_DISTANCE p-1 mr-3 text-22px focus:outline-none mobile:text-20px mobile:mr-2"><i class="fas fa-map-marker-alt"></i></button>
                       {% elif page_sorted == "distance" %}
-                          <button type="button" id="distance_sort_btn" class="text-gray-900 mr-5 text-22px focus:outline-none mobile:text-20px mobile:mr-4 "><i class="fas fa-map-marker-alt"></i></button>
+                          <button type="button" id="distance_sort_btn" class="text-gray-900 p-1 mr-3 text-22px focus:outline-none mobile:text-20px mobile:mr-2 "><i class="fas fa-map-marker-alt"></i></button>
                       {% elif page_sorted == "search" %}
                       {% endif %}
                   {% endblock nav-icons %}
