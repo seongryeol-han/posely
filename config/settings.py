@@ -102,10 +102,10 @@ else:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql",
-            "HOST": "posely-app.ctaswv9k1pnl.ap-northeast-2.rds.amazonaws.com",
+            "HOST": os.environ.get("RDS_HOST"),
             "NAME": "postgres",
             "USER": "postgres",
-            "PASSWORD": "z1811625",
+            "PASSWORD": os.environ.get("RDS_PASSWORD"),
             "PORT": "5432",
         }
     }
@@ -175,4 +175,4 @@ DJANGORESIZED_DEFAULT_QUALITY = 95
 DJANGORESIZED_DEFAULT_KEEP_META = True
 DJANGORESIZED_DEFAULT_FORCE_FORMAT = "JPEG"
 DJANGORESIZED_DEFAULT_FORMAT_EXTENSIONS = {"JPEG": ".jpg"}
-DJANGORESIZED_DEFAULT_NORMALIZE_ROTATION = True
+DJANGORESIZED_DEFAULT_NORMALIZE_ROTATION = False

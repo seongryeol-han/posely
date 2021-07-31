@@ -28,7 +28,7 @@
                         {%if user_obj == user %}
                         <div class="flex" >    
                             <a href="{%url "users:edit" %}" class="border rounded-md text-center text-white py-1 px-14 mr-2 bg-blue-500 mobile:text-sm mobile:py-0.5">
-                                프로필 설정
+                                <p>프로필 설정</p>
                             </a>
                         </div>
                         {%endif%}    
@@ -55,9 +55,9 @@
                         {%endfor%}
                     {%else%}
                         
-                        {% if user.studio == True %}
-                        <a href="{% url 'studios:create' %}" >    
-                            <div class="border border-gray-400 rounded-md text-center font-semibold py-1 px-10 mt-6">
+                        {% if user.studio == True %} 
+                        <a href="{% url 'studios:create' %}">    
+                            <div  class="border border-gray-400 rounded-md text-center font-semibold py-1 px-10 mobile:text-sm">
                                 사진관 만들기
                             </div>
                         </a>

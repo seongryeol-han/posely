@@ -1,9 +1,7 @@
 {% if user.avatar %}
         <div class= "h-6 w-6 rounded-full bg-cover bg-cover" style="background-image: url({{user.avatar.url}});"></div> 
 {% else %}
-    <div class="flex items-center justify-center mt-1 rounded-full text-xl text-gray-500 mobile:mt-0">
+    <div class="flex items-center justify-center rounded-full text-xl p-1 pr-0" style="color: #999999;">
         <i class="fas fa-user-circle"></i>
     </div>
 {% endif %}
-         
-    
