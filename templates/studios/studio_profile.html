@@ -1,8 +1,6 @@
 {% extends "base.html" %}
 
-{% block page_title %}
-    Studio
-{% endblock page_title %}
+{% block page_title %}사진관{% endblock page_title %}
 
 {% block search-bar %}
     <div class="font-semibold text-sm">{{studio}}</div>
@@ -39,7 +37,7 @@
                 {%if studio.author == user %}
                 <a href="{%url "studios:edit" studio.pk%}">
                     <div class="border border-gray-400 rounded-md text-center font-semibold py-1 px-10 mobile:text-sm">
-                        스튜디오 편집
+                        사진관 편집
                     </div>
                 </a>    
                 {%endif%}
