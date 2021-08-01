@@ -1,8 +1,6 @@
 {% extends "base.html" %}
 
-{% block page_title %}
-    Studio
-{% endblock page_title %}
+{% block page_title %}{{user_obj.nickname}}{% endblock page_title %}
 
 {% block search-bar %}
     <div class="font-semibold text-sm">{{user_obj.nickname}}</div>
