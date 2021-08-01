@@ -11,8 +11,8 @@
 
 {% block content %}
     <div class="mx-auto flex flex-col items-center overflow-auto mobile:mb-4 mobile:px-4">
-        <div class="mt-4 w-600px small:w-full border-b px-10 mobile:px-0">                
-            <div class="pb-4">
+        <div class="mt-4 w-600px small:w-full px-10 mobile:px-0">                
+            <div class="pb-4 border-b">
                 <div class="flex items-center ">
                     <div class="my-3">
                         {% include 'mixins/studio/studio-profile_avatar.html'%}
@@ -47,14 +47,14 @@
 
         </div>
 
-        <div class="w-600px small:w-full flex justify-center border-b mb-4 mobile:mb-4"> 
+        <div class="w-600px small:w-full flex justify-center mb-4 mobile:mb-4"> 
             <div class="px-10 mobile:px-0 mt-4 mobile:mt-4 w-full small:w-full rounded-lg">
 
                 {% for concept in studio.concepts.all %}
                     
                     {% if concept.first_photo  %}
                         {%include "mixins/concept/concept_card.html" with concept=concept %}
-                        <div class="mb-8 mobile:mb-6"></div>
+                        <div class="pb-8 border-b mobile:pb-6"></div>
                     {% endif %}
                 {% endfor %}
             </div>
