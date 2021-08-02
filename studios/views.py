@@ -50,6 +50,7 @@ class HomeView2(ListView):
     queryset = models.Studio.objects.annotate(like_count=Count("likes_user")).order_by(
         "-like_count",
     )
+    print(queryset)
     # num_like = Count("likes_user")
 
     context_object_name = "studios"
