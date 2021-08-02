@@ -45,7 +45,7 @@ class HomeView2(ListView):
     """StudioView Definition"""
 
     # model = models.Studio
-    model = models.Studio
+    # model = models.Studio
     paginate_by = 1
     # print("#############################")
     # queryset = models.Studio.objects.annotate(like_count=Count("likes_user")).order_by(
@@ -73,12 +73,12 @@ class HomeView2(ListView):
         context["page_sorted"] = "like"
         return context
 
-    # def get_queryset(self):
-    #     ps_with_avg = models.Studio.objects.annotate(like_count=Count("likes_user")).order_by(
-    #         "like_count"
-    #     )
-    #     print(ps_with_avg)
-    #     return ps_with_avg
+    def get_queryset(self):
+        ps_with_avg = models.Studio.objects.annotate(like_count=Count("likes_user")).order_by(
+            "-like_count"
+        )
+        print(ps_with_avg)
+        return ps_with_avg
 
 
 class Sin(Func):
