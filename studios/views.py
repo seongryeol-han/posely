@@ -47,10 +47,11 @@ class HomeView2(ListView):
     # model = models.Studio
     # model = models.Studio
     paginate_by = 1
-    queryset = models.Studio.objects.annotate(like_count=Count("likes_user")).order_by(
-        "-like_count",
-    )
-    print(queryset)
+    # print("#############################")
+    # queryset = models.Studio.objects.annotate(like_count=Count("likes_user")).order_by(
+    #     "-like_count",
+    # )
+    # print(queryset)
     # num_like = Count("likes_user")
 
     context_object_name = "studios"
@@ -59,19 +60,25 @@ class HomeView2(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        print("sort by like")
-        print(self.request.user)
+        # print(self.request.user)
         temp = {}
         if self.request.user.is_authenticated:  # 로그인 되면 실행됨 # 로그인 X 시 스킵
             aa = models.Studio.objects.filter(likes_user=self.request.user).values_list(
                 "pk", flat=True
             )
-            print(aa)
+
             context["check_exist"] = aa
         else:
             context["check_exist"] = temp
         context["page_sorted"] = "like"
         return context
+
+    def get_queryset(self):
+        ps_with_avg = models.Studio.objects.annotate(like_count=Count("likes_user")).order_by(
+            "-like_count"
+        )
+        print(ps_with_avg)
+        return ps_with_avg
 
 
 class Sin(Func):
@@ -137,6 +144,7 @@ class HomeView3(ListView):
         ps_with_avg = models.Studio.objects.annotate(distance=Expression).order_by(
             "distance"
         )
+        print(ps_with_avg)
         return ps_with_avg
 
 
