@@ -76,7 +76,7 @@ class HomeView2(ListView):
     def get_queryset(self):
         ps_with_avg = models.Studio.objects.annotate(like_count=Count("likes_user")).order_by(
             "like_count"
-        )
+        ).distinct()
         print(ps_with_avg)
         return ps_with_avg
 
