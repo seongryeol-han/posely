@@ -32,7 +32,6 @@ class HomeView(ListView):
             aa = models.Studio.objects.filter(likes_user=self.request.user).values_list(
                 "pk", flat=True
             )
-            print(aa)
             context["check_exist"] = aa
         else:
             context["check_exist"] = temp
@@ -77,7 +76,6 @@ class HomeView2(ListView):
         ps_with_avg = models.Studio.objects.annotate(like_count=Count("likes_user")).order_by(
             "-like_count"
         ).distinct()
-        print(ps_with_avg)
         return ps_with_avg
 
 
@@ -116,7 +114,6 @@ class HomeView3(ListView):
             aa = models.Studio.objects.filter(likes_user=self.request.user).values_list(
                 "pk", flat=True
             )
-            print(aa)
             context["check_exist"] = aa
         else:
             context["check_exist"] = temp
@@ -144,7 +141,6 @@ class HomeView3(ListView):
         ps_with_avg = models.Studio.objects.annotate(distance=Expression).order_by(
             "distance"
         )
-        print(ps_with_avg)
         return ps_with_avg
 
 
@@ -238,7 +234,6 @@ class SearchView(View):
 @login_required
 @require_POST
 def studio_like(request):
-    print("@@@@@@@@@@@@")  # 통신하는지 않하는 체크하려고 둠.
     pk = request.POST.get("pk", None)
     studio = get_object_or_404(models.Studio, pk=pk)
     user = request.user

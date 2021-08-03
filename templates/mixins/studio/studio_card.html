@@ -37,7 +37,8 @@
                 {% if concept.first_photo %}
                 
                 <div class="img_like swiper-slide" name="{{ studio.pk }}" >
-                    <img src="{{concept.first_photo.url}}" style="width: 100%;">
+                    <img src="{{concept.first_photo.url}}" style="width: 100%;" class="swiper-lazy"/>
+                    <div class="swiper-lazy-preloader"></div>
                 </div>
                 
                 
