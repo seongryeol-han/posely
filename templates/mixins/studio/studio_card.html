@@ -12,6 +12,7 @@
             <a href="{% url 'studios:profile' studio.pk%}">
                 {% include "mixins/studio/studio_avatar.html" with studio=studio %}
             </a>
+           
             <div>
                 <a href="{% url 'studios:profile' studio.pk%}" class="mx-3 font-semibold text-sm" style="color:#1a202c;" >{{studio}}</a>
                 <div  class="mx-3 text-xs text-blue-500 mobile:text-blue-400" >
@@ -36,7 +37,7 @@
                 {% if concept.first_photo %}
                 
                 <div class="img_like swiper-slide" name="{{ studio.pk }}" >
-                    <img src="{{concept.first_photo.url}}" style="width: 100%;">
+                    <img src="{{concept.first_photo.url}}" style="width: 100%;" />
                 </div>
                 
                 
