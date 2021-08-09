@@ -60,11 +60,11 @@
                       <button type="button" style="color: #999999;" class="search_button p-1 mr-3 text-22px focus:outline-none mobile:text-20px mobile:mr-2"><i class="fas fa-search"></i></button>
                       
                       {% if page_sorted == "created" %}
-                          <button type="button" id="distance_sort_btn" style="color: #999999;" class="NOT_DISTANCE p-1 mr-3 text-22px focus:outline-none mobile:text-20px mobile:mr-2"><i class="fas fa-map-marker-alt"></i></button>
+                          <button type="button" id="distance_sort_btn" style="color: #999999;" class="NOT_DISTANCE p-1 mr-4 text-22px focus:outline-none mobile:text-20px mobile:mr-3"><i class="fas fa-map-marker-alt"></i></button>
                       {% elif page_sorted == "like" %}
-                          <button type="button" id="distance_sort_btn" style="color: #999999;" class="NOT_DISTANCE p-1 mr-3 text-22px focus:outline-none mobile:text-20px mobile:mr-2"><i class="fas fa-map-marker-alt"></i></button>
+                          <button type="button" id="distance_sort_btn" style="color: #999999;" class="NOT_DISTANCE p-1 mr-4 text-22px focus:outline-none mobile:text-20px mobile:mr-3"><i class="fas fa-map-marker-alt"></i></button>
                       {% elif page_sorted == "distance" %}
-                          <button type="button" id="distance_sort_btn" class="text-gray-900 p-1 mr-3 text-22px focus:outline-none mobile:text-20px mobile:mr-2 "><i class="fas fa-map-marker-alt"></i></button>
+                          <button type="button" id="distance_sort_btn" class="text-gray-900 p-1 mr-3 text-22px focus:outline-none mobile:text-20px"><i class="fas fa-map-marker-alt"></i></button>
                       {% elif page_sorted == "search" %}
                       {% endif %}
                   {% endblock nav-icons %}
