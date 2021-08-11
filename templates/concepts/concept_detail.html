@@ -41,7 +41,7 @@
 
         <div class="w-full mb-4 border-b pb-4 ">
             <div class="font-semibold mb-2 mobile:mb-1" style="color:#1a202c;">이용 안내</div>
-            <div class="text-sm" style="color:#1a202c; line-height: 120%;">{{concept.service_config}}</div>
+            <div class="text-sm" style="color:#1a202c; line-height: 120%;">{{concept.service_config | linebreaksbr}}</div>
             <div class=" text-right font-semibold" style="color:#1a202c;">{{concept.price|intcomma}}원</div>
         </div>
 
@@ -61,13 +61,16 @@
 
 <div class="modal hidden fixed top-0 left-0 w-full h-full flex justify-center items-center">
     <div class="modal_overlay bg-black opacity-50 w-full h-full absolute"></div>
-    <div class="modal_content relative top-0 shadow-2xl rounded-xl bg-white h-48 w-350px p-6">
+    <div class="modal_content relative top-0 shadow-2xl rounded-xl bg-white w-350px p-6">
         <div class="flex justify-between">
             <div class="text-sm font-semibold">촬영 예약 문의</div>
             <div class="modal_close_button text-sm font-semibold cursor-pointer"><i class="fas fa-times"></i></div>
         </div>
-        <div class="flex flex-col justify-center h-full pb-4">
-            <a href="{{concept.studio.kakao_chat}}" target="popup" class="bg-yellow-500 text-sm text-white text-center py-2 rounded-md hidden">카카오톡 문의</a>
+        <div class="flex flex-col justify-center h-full py-4">
+            
+            {% if concept.studio.kakao_chat %}
+            <a href="{{concept.studio.kakao_chat}}" target="popup" class="bg-yellow-500 text-sm text-white text-center py-2 rounded-md"><i class="fas fa-comment"></i><p class="inline ml-2">카카오톡 문의</p></a>
+            {% endif %}
             <a href="sms:{{concept.studio.phone_number}}" class="bg-green-500 text-sm text-white text-center py-2 mt-3 rounded-md hidden mobile:block"><i class="fas fa-envelope"></i><p class="inline ml-2">문자 문의</p></a>
             <a href="tel:{{concept.studio.phone_number}}" class="bg-blue-500 text-sm text-white text-center py-2 mt-3 rounded-md hidden mobile:block"><i class="fas fa-phone-alt"></i><p class="inline ml-2">전화 문의</p></a>
             <a class=" text-sm text-center py-2 rounded-md font-semibold mobile:hidden"> 전화번호 {{concept.studio.phone_number}}</a>
