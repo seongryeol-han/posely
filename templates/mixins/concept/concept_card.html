@@ -11,7 +11,7 @@
         <div class="swiper-wrapper">
             {% for photo in concept.all_photo %}
             <div class="swiper-slide">
-                <img data-src="{{photo.file.url}}" style="width: 100%;" class="rounded-lg swiper-lazy">
+                <img src="{{photo.file.url}}" style="width: 100%;" class="rounded-lg">
             </div>
             {% endfor %}
         </div>
