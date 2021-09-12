@@ -5,6 +5,14 @@ from concepts import models as concept_models
 # Register your models here.
 
 
+@admin.register(models.StudioBadge)
+class ItemAdmin(admin.ModelAdmin):
+
+    """Item Admin Definition"""
+
+    pass
+
+
 class ConceptInline(admin.TabularInline):
     model = concept_models.Concept
 
@@ -16,7 +24,6 @@ class StudioAdmin(admin.ModelAdmin):
     inlines = (ConceptInline,)
 
     list_display = (
-        
         "name",
         "studio_lat",
         "studio_lng",

@@ -70,9 +70,11 @@
             {% if concept.studio.kakao_chat %}
             <a href="{{concept.studio.kakao_chat}}" target="popup" class="bg-yellow-500 text-sm text-white text-center py-2 rounded-md"><i class="fas fa-comment"></i><p class="inline ml-2">카카오톡 문의</p></a>
             {% endif %}
+            {% if concept.studio.phone_number %}
             <a href="sms:{{concept.studio.phone_number}}" class="bg-green-500 text-sm text-white text-center py-2 mt-3 rounded-md hidden mobile:block"><i class="fas fa-envelope"></i><p class="inline ml-2">문자 문의</p></a>
             <a href="tel:{{concept.studio.phone_number}}" class="bg-blue-500 text-sm text-white text-center py-2 mt-3 rounded-md hidden mobile:block"><i class="fas fa-phone-alt"></i><p class="inline ml-2">전화 문의</p></a>
             <a class=" text-sm text-center py-2 rounded-md font-semibold mobile:hidden"> 전화번호 {{concept.studio.phone_number}}</a>
+            {% endif %}
         </div>
     </div>
 </div>
