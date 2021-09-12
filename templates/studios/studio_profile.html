@@ -30,28 +30,31 @@
                 <div class="flex items-center" style="font-size: 14px; color: #ffcc00;">
                     {% for a in studio.studio_badge.all %}
                             {% if a.pk == 2 %}
-                                <div class="mr-3 flex items-center"><i class="fas fa-award"></i><p class="ml-1 font-semibold" style="color:#757575;">{{a}}</p></div>
+                                <div class="mr-2 flex items-center"><i class="fas fa-award"></i><p class="ml-1 font-semibold" style="color:#757575;">{{a}}</p></div>
                             {% endif %}
                             {% if a.pk == 3 %}
-                                <div class="mr-3 flex items-center"><i class="fas fa-asterisk"></i><p class="ml-1 font-semibold" style="color:#757575;">{{a}}</p></div>
+                                <div class="mr-2 flex items-center"><i class="fas fa-asterisk"></i><p class="ml-1 font-semibold" style="color:#757575;">{{a}}</p></div>
                             {% endif %}
                             {% if a.pk == 4 %}
-                                <div class="mr-3 flex items-center"><i class="fas fa-dog"></i><p class="ml-1 font-semibold" style="color:#757575;">{{a}}</p></div>
+                                <div class="mr-2 flex items-center"><i class="fas fa-dog"></i><p class="ml-1 font-semibold" style="color:#757575;">{{a}}</p></div>
                             {% endif %}
                             {% if a.pk == 5 %}
-                                <div class="mr-3 flex items-center"><i class="far fa-thumbs-up"></i><p class="ml-1 font-semibold" style="color:#757575;">{{a}}</p></div>
+                                <div class="mr-2 flex items-center"><i class="far fa-thumbs-up"></i><p class="ml-1 font-semibold" style="color:#757575;">{{a}}</p></div>
                             {% endif %}
                             {% if a.pk == 6 %}
-                                <div class="mr-3 flex items-center"><i class="far fa-smile"></i><p class="ml-1 font-semibold" style="color:#757575;">{{a}}</p></div>
+                                <div class="mr-2 flex items-center"><i class="far fa-smile"></i><p class="ml-1 font-semibold" style="color:#757575;">{{a}}</p></div>
                             {% endif %}
                             {% if a.pk == 7 %}
-                                <div class="mr-3 flex items-center"><i class="far fa-star"></i><p class="ml-1  font-semibold" style="color:#757575;">{{a}}</p></div>
+                                <div class="mr-2 flex items-center"><i class="far fa-star"></i><p class="ml-1  font-semibold" style="color:#757575;">{{a}}</p></div>
                             {% endif %}
                             {% if a.pk == 8 %}
-                                <div class="mr-3 flex items-center"><i class="far fa-check-circle"></i><p class="ml-1  font-semibold" style="color:#757575;">{{a}}</p></div>
+                                <div class="mr-2 flex items-center"><i class="far fa-check-circle"></i><p class="ml-1 font-semibold" style="color:#757575;">{{a}}</p></div>
                             {% endif %}
                             {% if a.pk == 9 %}
-                                <div class="mr-3 flex items-center"><i class="far fa-lightbulb"></i><p class="ml-1 font-semibold" style="color:#757575;">{{a}}</p></div>
+                                <div class="mr-2 flex items-center"><i class="far fa-lightbulb"></i><p class="ml-1 font-semibold" style="color:#757575;">{{a}}</p></div>
+                            {% endif %}
+                            {% if a.pk == 10 %}
+                                <div class="mr-2 flex items-center"><i class="far fa-handshake"></i><p class="ml-1 font-semibold" style="color:#757575;">{{a}}</p></div>
                             {% endif %}
                         {% endfor %}
                 </div>
