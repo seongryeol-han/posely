@@ -70,7 +70,36 @@
             </p>
 
             <div class="w-full">
+                
                 <a href="{% url 'studios:profile' studio.pk%}" class="font-semibold text-sm mb-1" style="color:#1a202c;" >{{studio}}</a>
+                <div class="flex items-center text-blue-500" style="font-size: 12px;">
+                    {% for a in studio.studio_badge.all %}
+                            {% if a.pk == 2 %}
+                                <div class="mr-1 flex items-center"><p class="font-semibold">#{{a}}</p></div>
+                            {% endif %}
+                            {% if a.pk == 3 %}
+                                <div class="mr-1 flex items-center"><p class="font-semibold">#{{a}}</p></div>
+                            {% endif %}
+                            {% if a.pk == 4 %}
+                                <div class="mr-1 flex items-center"><p class=" font-semibold">#{{a}}</p></div>
+                            {% endif %}
+                            {% if a.pk == 5 %}
+                                <div class="mr-1 flex items-center"></div><p class=" font-semibold">#{{a}}</p></div>
+                            {% endif %}
+                            {% if a.pk == 6 %}
+                                <div class="mr-1 flex items-center"><p class=" font-semibold">#{{a}}</p></div>
+                            {% endif %}
+                            {% if a.pk == 7 %}
+                                <div class="mr-1 flex items-center"><p class=" font-semibold">#{{a}}</p></div>
+                            {% endif %}
+                            {% if a.pk == 8 %}
+                                <div class="mr-1 flex items-center"><p class=" font-semibold">#{{a}}</p></div>
+                            {% endif %}
+                            {% if a.pk == 9 %}
+                                <div class="mr-1 flex items-center"><p class=" font-semibold">#{{a}}</p></div>
+                            {% endif %}
+                        {% endfor %}
+                </div>
                 <div id="profile-description">
                     <div class="text-{{studio.pk }} show-more-height text-sm pb-4" style="color:#1a202c; line-height: 130%;" >{{studio.introduction | linebreaksbr}}</div>
                     <div name="{{ studio.pk }}" class="show-more text-gray-600 text-center cursor-pointer"><i class="fas fa-chevron-down"></i></div>

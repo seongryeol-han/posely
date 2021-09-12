@@ -3,14 +3,33 @@ from phonenumber_field.modelfields import PhoneNumberField
 from core import models as core_models
 from django.shortcuts import reverse
 from django_resized import ResizedImageField
+
 # Create your models here.
+class AbstractItem(core_models.TimeStampedModel):
+    """Abstract Item"""
+
+    name = models.CharField(max_length=80)
+
+    class Meta:
+        abstract = True
+
+    def __str__(self):
+        return self.name
+
+
+class StudioBadge(AbstractItem):
+
+    """StudioBadge Model Definition"""
+
+    class Meta:
+        verbose_name = "Studio Badge"
 
 
 class Studio(core_models.TimeStampedModel):
     """Studio Model Definition"""
 
     name = models.CharField(max_length=50)
-    phone_number = models.CharField(max_length=13)
+    phone_number = models.CharField(max_length=13, blank=True)
     kakao_chat = models.CharField(max_length=140, blank=True)
     address = models.CharField(max_length=140)
     addr_detail = models.CharField(max_length=140, blank=True)
@@ -41,6 +60,9 @@ class Studio(core_models.TimeStampedModel):
     # map
     studio_lat = models.FloatField(blank=True)
     studio_lng = models.FloatField(blank=True)
+    studio_badge = models.ManyToManyField(
+        "StudioBadge", related_name="studios", blank=True
+    )
 
     def count_likes_user(self):  # 좋아요 수 카운트
         return self.likes_user.count()

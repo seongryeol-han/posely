@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/5.4.3/css/swiper.min.css">
-    <link rel="shortcut icon" sizes="16x16 32x32 64x64" href="{%static 'img/posely_logo3.png' %}" />
+    <link rel="shortcut icon" sizes="16x16 32x32 64x64" href="{%static 'img/rev_포즐리로고.png' %}" />
 
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
@@ -29,7 +29,7 @@
     <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=iqj2g6f0df"></script>
 
     <title>포즐리 {% block page_title %}{% endblock page_title %}</title>
-    <meta property="og:image" content="https://posely-bucket.s3.ap-northeast-2.amazonaws.com/static/img/posely_logo_kakao_share.png">
+    <meta property="og:image" content="https://posely-bucket.s3.ap-northeast-2.amazonaws.com/static/img/rev_포즐리로고_share.png">
     <meta property="og:title" content="포즐리">
     <meta property="og:description" content="내 반려동물의 가장 사랑스러운 순간을 기록하세요.">
 
@@ -37,11 +37,11 @@
 </head>
 <body class="mt-14 mb-4 bg-white mobile:mt-8 ">
 {% block nav-bar %}
-<header class="z-10 container max-w-full inset-0 flex justify-center px-4 mobile:pb-px h-14 mobile:h-12 border-b mobile:border-none border-gray-400 fixed bg-white">
+<header style="z-index: 9999;" class="container max-w-full inset-0 flex justify-center px-4 mobile:pb-px h-14 mobile:h-12 border-b mobile:border-none border-gray-400 fixed bg-white">
         <div class="flex items-center justify-between w-600px px-4 small:px-0">
             
                 <a class="flex items-center" href="{% url "core:home" %}">
-                    <img class="w-8 rounded-md" src="{%static 'img/posely_logo3.png' %}" />
+                    <img class="w-8 rounded-md" src="{%static 'img/rev_포즐리로고.png' %}" />
                 </a>
 
                 {% block search-bar %}
