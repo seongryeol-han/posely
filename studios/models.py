@@ -38,6 +38,7 @@ class Studio(core_models.TimeStampedModel):
     close_time = models.TimeField()
     introduction = models.TextField(default="", blank=True)
     using_info = models.TextField(default="", blank=True)
+    location = models.CharField(max_length=140, blank=True)
 
     studio_avatar = ResizedImageField(
         size=[1024, 1024],

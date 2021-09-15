@@ -14,7 +14,7 @@
             </a>
             <div>
                 <a href="{% url 'studios:profile' studio.pk%}" class="mx-3 font-semibold text-sm" style="color:#1a202c;" >{{studio}}</a>
-                <div  class="mx-3 text-xs text-blue-500 mobile:text-blue-400" >
+                <div  class="mx-3 text-xs text-blue-400 hover:text-blue-600" >
                     <a href="{% url 'studios:profile' studio.pk%}#location">
                         <div><i class="fas fa-map-marker-alt"></i>&nbsp;{{studio.addr_short}}</div>
                     </a>
@@ -23,7 +23,7 @@
         </div>
         
         <div class="flex items-center py-2">
-            <a href="{% url 'studios:profile' studio.pk %}#concept-select" class="ml-1 font-semibold text-sm text-blue-500 hover:text-blue-600">예약하기</a>
+            <a href="{% url 'studios:profile' studio.pk %}#concept-select" class="ml-1 font-semibold text-sm text-blue-400 hover:text-blue-600">예약하기</a>
         </div>
 
     </div>
@@ -47,7 +47,7 @@
         
         <button class="like focus:border-none focus:outline-none ml-4 mt-3" name="{{ studio.pk }}" value="Like">
             <div class="border-none flex items-center justify-between ">
-                <div class="flex items-center" style="font-size: 0.5rem; color:#fe629f;">
+                <div class="flex items-center" style="font-size: 0.5rem; color:#FE82B1;">
                     {% if studio.pk in check_exist%}
                         <i id="check-{{studio.pk}}" class="fas fa-heart fa-3x"></i>
                     {% else %}
@@ -72,7 +72,7 @@
             <div class="w-full">
                 
                 <a href="{% url 'studios:profile' studio.pk%}" class="font-semibold text-sm mb-1" style="color:#1a202c;" >{{studio}}</a>
-                <div class="flex items-center text-blue-500" style="font-size: 12px;">
+                <div class="flex items-center text-blue-400" style="font-size: 12px;">
                     {% for a in studio.studio_badge.all %}
                             {% if a.pk == 2 %}
                                 <div class="mr-1 flex items-center"><p class="font-semibold">#{{a}}</p></div>

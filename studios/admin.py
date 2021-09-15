@@ -25,16 +25,9 @@ class StudioAdmin(admin.ModelAdmin):
 
     list_display = (
         "name",
-        "studio_lat",
-        "studio_lng",
+        "location",
         "phone_number",
-        "kakao_chat",
         "address",
-        "open_time",
-        "close_time",
-        "introduction",
-        "using_info",
-        "studio_avatar",
         "author",
         "count_concepts",
     )

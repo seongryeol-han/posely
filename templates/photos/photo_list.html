@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% load humanize %}
+
+{%block page_title%}반려동물 사진관 예약하기{%endblock page_title%}
+
+{% block content %} 
+   
+<div class="container mx-auto flex flex-col items-center overflow-auto mt-20 mobile:mb-10">
+    <div class="w-600px small:w-full px-1 ">
+        <div class ="grid" style="width: 100%;">
+                {% for photo in photos %}
+                <a class="grid-item mb-7 px-1" style="width: 50%;" href="{% url "concepts:detail" photo.concept.pk %}">
+                    <img src="{{photo.file.url}}" alt="image" style="border-radius: 18px;">
+                    <div class="mt-1 px-2 ">
+                        <div class=" text-xs flex font-semibold">
+                            <p class="mr-1 text-blue-600 ">
+                                {{photo.studio.location}}
+                            </p>
+                            <p class="mr-1 text-gray-600">
+                                {{photo.studio}}
+                            </p>    
+                        </div>
+                        <div style="font-size: 10px;" class=" text-blue-400 flex h-3 font-semibold" >
+                            {% for a in photo.studio.studio_badge.all %}
+                            {% if a.pk == 2 %}
+                                <div class="mr-1 flex items-center"><p>#{{a}}</p></div>
+                            {% endif %}
+                            {% if a.pk == 3 %}
+                                <div class="mr-1 flex items-center"><p>#{{a}}</p></div>
+                            {% endif %}
+                            {% if a.pk == 4 %}
+                                <div class="mr-1 flex items-center"><p>#{{a}}</p></div>
+                            {% endif %}
+                            {% if a.pk == 5 %}
+                                <div class="mr-1 flex items-center"><p>#{{a}}</p></div>
+                            {% endif %}
+                            {% if a.pk == 6 %}
+                                <div class="mr-1 flex items-center"><p>#{{a}}</p></div>
+                            {% endif %}
+                            {% if a.pk == 7 %}
+                                <div class="mr-1 flex items-center"><p>#{{a}}</p></div>
+                            {% endif %}
+                            {% if a.pk == 8 %}
+                                <div class="mr-1 flex items-center"><p>#{{a}}</p></div>
+                            {% endif %}
+                            {% if a.pk == 9 %}
+                                <div class="mr-1 flex items-center"><p>#{{a}}</p></div>
+                            {% endif %}
+                            {% if a.pk == 10 %}
+                                <div class="mr-1 flex items-center"><p>#{{a}}</p></div>
+                            {% endif %}
+                        {% endfor %}    
+                        </div>
+                        <div class="font-semibold flex" style="font-size: 11px; ">
+                            <p style="color: rgb(165, 165, 165);">
+                                {{photo.concept}}
+                            </p>
+                            <p style="color: rgb(165, 165, 165);">
+                                &nbsp;&nbsp;₩{{photo.concept.price|intcomma}}
+                            </p>
+                        </div>
+                    </div>
+                </a>
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                <p class="pagination1">
+                    <a class="next-page2" href="?page={{ page_obj.next_page_number }}"></a>
+                </p>
+                {% endif %}
+
+        </div>
+    </div>
+</div>
+
+<script>
+
+
+    var elem = document.querySelector('.grid');
+    var msnry = new Masonry( elem, {
+    // options
+    itemSelector: '.grid-item',
+    //gutter: 1,
+    FitWidth: true,
+    });
+
+    //inifinite scroll
+    let elem2 = document.querySelector('.grid');
+    let infScroll = new InfiniteScroll( elem2, {
+    // options
+    path: '.next-page2',
+    append: '.grid-item',
+    //history: false,
+    outlayer: msnry
+    });
+
+</script>
+
+{% endblock content %}

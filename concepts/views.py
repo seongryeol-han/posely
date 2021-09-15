@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import (
     login_required,
 )
 from users import mixins as user_mixins
+import random
 
 # Create your views here.
 
@@ -110,3 +111,25 @@ def delete_concept(request, concept_pk):  # url.py에 등록되어있는거.
         return redirect(reverse("concepts:edit-list"))
     except models.Concept.studio.DoesNotExist:  # concept이 없음
         return redirect(reverse("core:home"))
+
+
+class PhotoHomeView(ListView):
+    """photoHomeView Definition"""
+
+    model = models.Photo
+    paginate_by = 6
+    ordering = "?"
+    context_object_name = "photos"
+    template_name = "photos/photo_list.html"
+
+    def get_context_data(self, **kwargs):
+        print(self.request.GET.get("page", 1))
+        context = super().get_context_data(**kwargs)
+        return context
+
+    # def get_queryset(self):
+    #     page = self.request.GET.get('page', 2)
+    #     ps_with_avg = list(models.Photo.objects.all())[page:page+2]
+    #     random.shuffle(ps_with_avg)
+    #     print(ps_with_avg)
+    #     return ps_with_avg
