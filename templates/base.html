@@ -41,48 +41,30 @@
 </head>
 <body class="mt-14 mb-4 bg-white mobile:mt-8 ">
 {% block nav-bar %}
-<header style="z-index: 9999;" class="container max-w-full inset-0 flex justify-center px-4 mobile:pb-px h-14 mobile:h-12 border-b mobile:border-none border-gray-400 fixed bg-white">
-        <div class="flex items-center justify-between w-600px px-4 small:px-0">
-            
-                <a class="flex items-center" href="{% url "core:home" %}">
-                    <img class="w-8 rounded-md" src="{%static 'img/rev_포즐리로고.png' %}" />
+<header style="z-index: 9999;" class="container max-w-full inset-0 flex justify-center h-14 mobile:h-12 border-b mobile:border-none border-gray-400 fixed bg-white">
+        <div class="flex items-center justify-center w-600px small:px-0 relative">
+
+                <a class="flex items-center absolute left-0" href="{% url "core:home" %}">
+                  <img class="ml-2" style="width:110px" src="{%static 'img/포즐리로고05.png' %}" />
                 </a>
 
                 {% block search-bar %}
-                <form class="search_bar hidden fade-in-box flex items-center ml-10 mobile:ml-2" method="get" action="{% url "studios:search" %}">
-                  <div class="border rounded-lg px-6 pl-14 mobile:px-2 mobile:pl-5 flex items-center justify-center bg-gray-100">
-                    <div style="color:#a0aec0; margin: 0 6px 0 6px;" class="text-sm mobile:text-xs"><i class="fas fa-search"></i></div>
-                    <input class=" text-xs text-gray-900 bg-gray-100 placeholder-gray-500 py-1 rounded-md focus:outline-none w-40 mobile:w-32" name="search_name_address" placeholder="사진관 이름, 지역 검색" />
+                <form class="search_bar hidden fade-in-box flex items-center" method="get" action="{% url "studios:search" %}">
+                  <div class="border rounded-lg flex items-center justify-center">
+                    <div class="flex items-center">
+                      <div class="w-5 ml-3 mr-2"><img src="https://img.icons8.com/fluency-systems-filled/100/888888/search.png"/></div>
+                      <input class="text-sm text-gray-900 placeholder-gray-500 py-1 rounded-md focus:outline-none" style="width:200px" name="search_name_address" placeholder="사진관 이름, 지역 검색" />
+                    </div>
                   </div>
                 </form>
                 {% endblock search-bar %}
 
                 <!--{% include "partials/nav.html" %}-->
 
-                <header class="flex items-center">
-                  {% block nav-icons %}
-                      <button type="button" style="color: #999999;" class="search_button p-1 mr-3 text-22px focus:outline-none mobile:text-20px mobile:mr-2"><i class="fas fa-search"></i></button>
-                      
-                      {% if page_sorted == "created" %}
-                          <button type="button" id="distance_sort_btn" style="color: #999999;" class="NOT_DISTANCE p-1 mr-4 text-22px focus:outline-none mobile:text-20px mobile:mr-3"><i class="fas fa-map-marker-alt"></i></button>
-                      {% elif page_sorted == "like" %}
-                          <button type="button" id="distance_sort_btn" style="color: #999999;" class="NOT_DISTANCE p-1 mr-4 text-22px focus:outline-none mobile:text-20px mobile:mr-3"><i class="fas fa-map-marker-alt"></i></button>
-                      {% elif page_sorted == "distance" %}
-                          <button type="button" id="distance_sort_btn" class="text-gray-900 p-1 mr-3 text-22px focus:outline-none mobile:text-20px"><i class="fas fa-map-marker-alt"></i></button>
-                      {% elif page_sorted == "search" %}
-                      {% endif %}
-                  {% endblock nav-icons %}
+                <header class="flex items-center absolute right-0">
                   
-                  {% if user.is_authenticated %}
-                      <a href="{{user.get_absolute_url}}">
-                          {%include "mixins/user/user_avatar.html"%}
-                      </a>
-                          
-                  {% else %}
-                      <a class="text-sm text-gray-600 font-semibold hover:text-black " href="{% url "users:login"%}">
-                          <div>로그인</div>
-                      </a> 
-                  {% endif %}
+                      <button type="button" style="color: #999999;" class="search_button focus:outline-none w-7 mx-4"><img src="https://img.icons8.com/fluency-systems-filled/100/111111/search.png"/></button>
+
               </header>
         </div>
 

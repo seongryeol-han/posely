@@ -1,13 +1,14 @@
 from django.db import models
 from core import models as core_models
 from django_resized import ResizedImageField
+
 # Create your models here.
 
 
 class Photo(core_models.TimeStampedModel):
     """Photo Model Definition"""
 
-    caption = models.CharField(max_length=80, default="")
+    caption = models.CharField(max_length=80, default="", blank=True)
     # file = models.ImageField(
     #     upload_to="concept_photos",
     # )
@@ -35,8 +36,7 @@ class Concept(core_models.TimeStampedModel, models.Model):
     """Concept Model Definition"""
 
     name = models.CharField(max_length=15)
-    concept_description = models.TextField(
-        max_length=160, default="", blank=False)
+    concept_description = models.TextField(max_length=160, default="", blank=False)
     service_config = models.TextField(default="", blank=False)
     price = models.DecimalField(max_digits=6, decimal_places=0)
     studio = models.ForeignKey(
