@@ -44,8 +44,9 @@
 <header style="z-index: 9999;" class="container max-w-full inset-0 flex justify-center h-14 mobile:h-12 border-b mobile:border-none border-gray-400 fixed bg-white">
         <div class="flex items-center justify-center w-600px small:px-0 relative">
 
-                <a class="flex items-center absolute left-0" href="{% url "core:home" %}">
-                  <img class="ml-2" style="width:130px" src="{%static 'img/포즐리로고07.png' %}" />
+                <a class="logo flex items-center absolute" style="left: 14px;" href="{% url "core:home" %}">
+                  <img style="width: 25px;" src="{%static 'img/posely_logo2.svg' %}" />
+                  <img style="width: 90px;" src="{%static 'img/포즐리로고05.svg' %}" class="ml-1"/>
                 </a>
 
                 {% block search-bar %}
@@ -63,7 +64,7 @@
 
                 <header class="flex items-center absolute right-0">
                   
-                      <button type="button" style="color: #999999;" class="search_button focus:outline-none w-7 mx-4"><img src="https://img.icons8.com/fluency-systems-filled/100/333333/search.png"/></button>
+                      <button type="button" class="search_button focus:outline-none w-7 mx-4"><img src="https://img.icons8.com/fluency-systems-filled/100/444444/search.png"/></button>
 
               </header>
         </div>
@@ -136,10 +137,12 @@
     //돋보기 버튼
     const searchButton = document.querySelector(".search_button");
     const searchBar = document.querySelector(".search_bar");
+    const logo = document.querySelector(".logo");
     const toggleSearchBar = () => {
         searchBar.classList.remove("hidden");
         searchBar.classList.add("fade-in-box");
         searchButton.classList.toggle("hidden");
+        logo.classList.toggle("hidden");
     }
     searchButton.addEventListener("click", toggleSearchBar)
     

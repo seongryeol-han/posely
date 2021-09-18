@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="1280" viewBox="0 0 1280 1280">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fe82b1;
+      }
+
+      .cls-2, .cls-3 {
+        fill: #fff;
+      }
+
+      .cls-3 {
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <rect id="모서리가_둥근_직사각형_1" data-name="모서리가 둥근 직사각형 1" class="cls-1" width="1280" height="1280" rx="250" ry="250"/>
+  <rect id="사각형_1" data-name="사각형 1" class="cls-2" x="340" y="640" width="150" height="640"/>
+  <path id="타원_1" data-name="타원 1" class="cls-3" d="M640,340c165.685,0,300,134.315,300,300S805.685,940,640,940,340,805.685,340,640,474.315,340,640,340Zm0,0c165.685,0,300,134.315,300,300S805.685,940,640,940,340,805.685,340,640,474.315,340,640,340Zm0,0c165.685,0,300,134.315,300,300S805.685,940,640,940,340,805.685,340,640,474.315,340,640,340Z"/>
+  <circle id="타원_2" data-name="타원 2" class="cls-1" cx="640" cy="640" r="150"/>
+  <circle id="타원_4" data-name="타원 4" class="cls-2" cx="1055" cy="225" r="75"/>
+</svg>
