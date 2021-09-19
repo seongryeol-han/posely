@@ -15,9 +15,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jscroll/2.4.1/jquery.jscroll.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/5.4.3/js/swiper.min.js"></script>
     
-    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
-    <script src="https://unpkg.com/infinite-scroll@4/dist/infinite-scroll.pkgd.min.js"></script>
-    <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js"></script>
+    <script src="https://unpkg.com/infinite-scroll@4/dist/infinite-scroll.pkgd.js"></script>
+    <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.js"></script>
     <!--
     <script type="text/javascript" src="/static/js/swiper-bundle.min.js"></script>
     <script type="text/javascript" src="/static/js/jquery.min.js"></script>
@@ -46,7 +46,9 @@
 
                 <a class="logo flex items-center absolute" style="left: 14px;" href="{% url "core:home" %}">
                   <img style="width: 25px;" src="{%static 'img/posely_logo2.svg' %}" />
+                  {% block logo_name %}
                   <img style="width: 90px;" src="{%static 'img/포즐리로고05.svg' %}" class="ml-1"/>
+                  {% endblock logo_name %}   
                 </a>
 
                 {% block search-bar %}
@@ -54,19 +56,19 @@
                   <div class="border rounded-lg flex items-center justify-center">
                     <div class="flex items-center">
                       <div class="w-5 ml-3 mr-2"><img src="https://img.icons8.com/fluency-systems-filled/100/888888/search.png"/></div>
-                      <input class="text-sm text-gray-900 placeholder-gray-500 py-1 rounded-md focus:outline-none" style="width:200px" name="search_name_address" placeholder="사진관 이름, 지역 검색" />
+                      <input class="text-sm text-gray-900 placeholder-gray-500 py-1 rounded-md focus:outline-none" style="width:150px" name="search_name_address" placeholder="사진관 이름, 지역 검색" />
+                      <div class="w-5 ml-3 mr-2 cancel_button"><img src="https://img.icons8.com/fluency-systems-filled/100/bbbbbb/cancel.png"/></div>
                     </div>
                   </div>
                 </form>
                 {% endblock search-bar %}
 
                 <!--{% include "partials/nav.html" %}-->
-
+                {% block nav-icons %}
                 <header class="flex items-center absolute right-0">
-                  
                       <button type="button" class="search_button focus:outline-none w-7 mx-4"><img src="https://img.icons8.com/fluency-systems-filled/100/444444/search.png"/></button>
-
-              </header>
+                </header>
+                {% endblock nav-icons %}
         </div>
 
   </header> 
@@ -137,15 +139,24 @@
     //돋보기 버튼
     const searchButton = document.querySelector(".search_button");
     const searchBar = document.querySelector(".search_bar");
+    const cancelButton = document.querySelector(".cancel_button");
     const logo = document.querySelector(".logo");
-    const toggleSearchBar = () => {
+    const openSearchBar = () => {
         searchBar.classList.remove("hidden");
         searchBar.classList.add("fade-in-box");
         searchButton.classList.toggle("hidden");
         logo.classList.toggle("hidden");
     }
-    searchButton.addEventListener("click", toggleSearchBar)
-    
+    const cancelSearchBar = () => {
+      searchBar.classList.add("hidden");
+      searchButton.classList.toggle("hidden");
+      logo.classList.toggle("hidden");
+    }
+
+    searchButton.addEventListener("click", openSearchBar)
+    cancelButton.addEventListener("click", cancelSearchBar)
+
+
     //map_maker_btn
     $("#distance_sort_btn").click((request)=>{
         console.log("kkkk")   
