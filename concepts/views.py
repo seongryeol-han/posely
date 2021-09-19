@@ -118,7 +118,6 @@ class PhotoHomeView(ListView):
 
     model = models.Photo
     paginate_by = 6
-    ordering = "?"
     context_object_name = "photos"
     template_name = "photos/photo_list.html"
 

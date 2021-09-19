@@ -118,33 +118,43 @@
 <script>
 
     
-    var $grid = $('.grid').masonry({
+    var $grid = $('.grid').isotope({
     // options
     itemSelector: 'none',
-    columnWidth: '.grid__col-sizer',
-    gutter: '.grid__gutter-sizer',
+    masonry:{
+        columnWidth: '.grid__col-sizer',
+        gutter: '.grid__gutter-sizer',
+    },
     percentPosition: true,
     stagger: 30,
     });
     // get Masonry instance
-    var msnry = $grid.data('masonry');
 
     // initial items reveal
     $grid.imagesLoaded( function() {
-    $grid.masonry( 'option', { itemSelector: '.grid-item' });
+    console.log("2222222222222");
+    $grid.isotope( 'option', { itemSelector: '.grid-item' });
     var $items = $grid.find('.grid-item');
-    $grid.masonry( 'appended', $items );
+    
+    $grid.isotope( 'appended', $items );
     });
 
+    var iso = $grid.data('isotope');
+
     //inifinite scroll
-    let elem2 = document.querySelector('.grid');
-    let infScroll = new InfiniteScroll( elem2, {
-    // options
-    path: '.next-page2',
-    append: '.grid-item',
-    //history: false,
-    outlayer: msnry,
-    });
+    var $grid2 = $('.grid').infiniteScroll({
+        path: '.next-page2',
+        append: '.grid-item',
+        outlayer: iso,
+      });
+
+      var infScroll = $grid2.data('infiniteScroll');
+
+      $grid2.on( 'load.infiniteScroll', function() {
+        console.log("111111111111");
+      });
+
+      
 
 </script>
 
