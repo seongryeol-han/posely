@@ -8,7 +8,7 @@
    
 <div class="container mx-auto flex flex-col items-center overflow-auto mt-20 mb-10 mobile:mb-10">
     <div class="w-600px small:w-full px-1 ">
-        <div class ="grid" style="width: 100%;">
+        <div class ="grid opacity-0" style="width: 100%;">
                 <div class="grid__col-sizer" style="width: 49%"></div>
                 <div class="grid__gutter-sizer" style="width: 2%"></div>
                 {% for photo in photos %}
@@ -90,7 +90,7 @@
                 </a>
             </div>
             <div style="width: 33.333%;">
-                <a class=" flex flex-col items-center" href="">
+                <a class=" flex flex-col items-center NOT_DISTANCE" id="distance_sort_btn" style="cursor: pointer;">
                     <img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/marker--v1.png"/>
                     <p style="font-size: 10px; color:#888888">근처사진관</p>
                 </a>
@@ -132,11 +132,12 @@
 
     // initial items reveal
     $grid.imagesLoaded( function() {
-    console.log("2222222222222");
-    $grid.isotope( 'option', { itemSelector: '.grid-item' });
-    var $items = $grid.find('.grid-item');
-    
-    $grid.isotope( 'appended', $items );
+        console.log("2222222222222");
+        $grid.removeClass('opacity-0');
+        $grid.isotope( 'option', { itemSelector: '.grid-item' });
+        var $items = $grid.find('.grid-item');
+        
+        $grid.isotope( 'appended', $items );
     });
 
     var iso = $grid.data('isotope');

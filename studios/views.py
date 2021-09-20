@@ -73,9 +73,11 @@ class HomeView2(ListView):
         return context
 
     def get_queryset(self):
-        ps_with_avg = models.Studio.objects.annotate(like_count=Count("likes_user")).order_by(
-            "-like_count"
-        ).distinct()
+        ps_with_avg = (
+            models.Studio.objects.annotate(like_count=Count("likes_user"))
+            .order_by("-like_count")
+            .distinct()
+        )
         return ps_with_avg
 
 
@@ -103,6 +105,54 @@ class HomeView3(ListView):
     paginate_by = 1
     context_object_name = "studios"
     template_name = "studios/studio_list.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        print("sort by distance_get_context_data_part")
+        print(self.request.user)
+        temp = {}
+        if self.request.user.is_authenticated:  # 로그인 되면 실행됨 # 로그인 X 시 스킵
+            aa = models.Studio.objects.filter(likes_user=self.request.user).values_list(
+                "pk", flat=True
+            )
+            context["check_exist"] = aa
+        else:
+            context["check_exist"] = temp
+        context["page_sorted"] = "distance"
+        return context
+
+    def get_queryset(self):
+        if self.request.GET.get("lat"):
+            now_lat = float(self.request.GET.get("lat"))
+            now_lng = float(self.request.GET.get("lng"))
+
+            self.request.session["lat"] = now_lat
+            self.request.session["lng"] = now_lng
+
+        lng1 = self.request.session.get("lng")
+        lat1 = self.request.session.get("lat")
+        radlat = Radians(lat1)  # given latitude
+        radlong = Radians(lng1)  # given longitude
+        radflat = Radians(F("studio_lat"))
+        radflong = Radians(F("studio_lng"))
+        Expression = 3959.0 * Acos(
+            Cos(radlat) * Cos(radflat) * Cos(radflong - radlong)
+            + Sin(radlat) * Sin(radflat)
+        )
+        ps_with_avg = models.Studio.objects.annotate(distance=Expression).order_by(
+            "distance"
+        )
+        return ps_with_avg
+
+
+class HomeView4(ListView):
+    """StudioView Definition"""
+
+    model = models.Studio
+    paginate_by = 6
+    context_object_name = "studios"
+    template_name = "studios/photo_studio_list.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -220,8 +270,7 @@ class SearchView(View):
                     return render(
                         request,
                         "studios/search.html",
-                        {"form": form, "empty_search": "ok",
-                            "page_sorted": "search"},
+                        {"form": form, "empty_search": "ok", "page_sorted": "search"},
                     )
         form = forms.SearchForm()
         return render(
@@ -277,8 +326,7 @@ class EditStudioView(user_mixins.LoggedInOnlyView, UpdateView):
 
     def get_form(self, form_class=None):
         form = super().get_form(form_class=form_class)
-        form.fields["phone_number"].widget.attrs = {
-            "placeholder": "- 를 포함해주세요."}
+        form.fields["phone_number"].widget.attrs = {"placeholder": "- 를 포함해주세요."}
         form.fields["open_time"].widget.attrs = {"placeholder": "10:00"}
         form.fields["close_time"].widget.attrs = {"placeholder": "20:00"}
         form.fields["address"].widget.attrs = {"readonly": True}
