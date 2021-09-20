@@ -36,10 +36,10 @@ class PhotoAdmin(admin.ModelAdmin):
     """Photo Admin Definition"""
 
     list_display = (
-        "caption",
         "concept",
         "studio",
         "get_thumbnail",
+        "random_int",
     )
 
     raw_id_fields = ("studio",)
