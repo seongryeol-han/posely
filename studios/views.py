@@ -11,6 +11,7 @@ from django.shortcuts import get_object_or_404
 from users import mixins as user_mixins
 from django.db.models import Count, F, Func
 import math
+import random
 
 # sort by default
 
@@ -58,6 +59,13 @@ class HomeView2(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
+        # test_idx가 세션있나 없나 체크
+        if "test_idx" in self.request.session:
+            del self.request.session["test_idx"]
+            self.request.session["test_idx"] = random.randrange(1, 3)
+        else:
+            self.request.session["test_idx"] = random.randrange(1, 3)
 
         # print(self.request.user)
         temp = {}
@@ -483,3 +491,55 @@ class ConceptSelectView(DetailView):
     model = models.Studio
     template_name = "concepts/concept_select.html"
     ordering = "created"
+
+
+class Search2View(View):
+    """SearchView Definition"""
+
+    def get(self, request):
+        form = forms.Search2Form(request.GET)
+        if form.is_valid():
+            search_data = form.cleaned_data.get("search_name_address2")
+            if len(search_data) != 0:
+                filter_args1 = {}
+                filter_args2 = {}
+                filter_args1["name__startswith"] = search_data
+                filter_args2["address__contains"] = search_data
+                qs1 = (
+                    models.Studio.objects.filter(**filter_args1)
+                    .annotate(like_count=Count("likes_user"))
+                    .order_by(
+                        "-like_count",
+                    )
+                )
+                qs2 = (
+                    models.Studio.objects.filter(**filter_args2)
+                    .annotate(like_count=Count("likes_user"))
+                    .order_by(
+                        "-like_count",
+                    )
+                )
+                qs = qs1 | qs2
+
+                paginator = Paginator(qs, 10, orphans=5)
+                page = request.GET.get("page", 1)
+                studios = paginator.get_page(page)
+                if qs.count() > 0:
+                    return render(
+                        request,
+                        "studios/search2.html",
+                        {"form": form, "studios": studios, "page_sorted": "search"},
+                    )
+                elif qs.count() == 0:
+                    form = forms.SearchForm()
+                    return render(
+                        request,
+                        "studios/search2.html",
+                        {"form": form, "empty_search": "ok", "page_sorted": "search"},
+                    )
+        form = forms.SearchForm()
+        return render(
+            request,
+            "studios/search2.html",
+            {"form": form, "empty_search": "ok", "page_sorted": "search"},
+        )

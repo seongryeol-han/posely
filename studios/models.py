@@ -34,11 +34,12 @@ class Studio(core_models.TimeStampedModel):
     address = models.CharField(max_length=140)
     addr_detail = models.CharField(max_length=140, blank=True)
     addr_short = models.CharField(max_length=140, blank=True)
+    location = models.CharField(max_length=140, blank=True)
+    location_dong = models.CharField(max_length=140, blank=True)
     open_time = models.TimeField()
     close_time = models.TimeField()
     introduction = models.TextField(default="", blank=True)
     using_info = models.TextField(default="", blank=True)
-    location = models.CharField(max_length=140, blank=True)
 
     studio_avatar = ResizedImageField(
         size=[1024, 1024],

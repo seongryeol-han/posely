@@ -6,8 +6,8 @@ app_name = "core"
 
 urlpatterns = [
     # path("", studio_view.HomeView.as_view(), name="home"),
-    path("", studio_view.HomeView2.as_view(), name="home"),
-    path("photo", concept_view.PhotoHomeView.as_view(), name="photo_home"),
+    # path("yet", studio_view.HomeView2.as_view(), name="home"),
+    path("", concept_view.PhotoHomeView.as_view(), name="photo_home"),
     path(
         "photo/distance/",
         studio_view.HomeView4.as_view(),

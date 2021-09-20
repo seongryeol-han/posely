@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import (
     login_required,
 )
 from users import mixins as user_mixins
-import random
+import datetime, random
 
 # Create your views here.
 
@@ -83,7 +83,7 @@ def delete_photo(request, concept_pk, photo_pk):  # url.py에 등록되어있는
             models.Photo.objects.filter(pk=photo_pk).delete()
         return redirect(reverse("concepts:photos", kwargs={"pk": concept_pk}))
     except models.Concept.DoesNotExist:  # concept이 없음
-        return redirect(reverse("core:home"))
+        return redirect(reverse("core:photo_home"))
 
 
 class AddPhotoView(user_mixins.LoggedInOnlyView, FormView):
@@ -110,7 +110,7 @@ def delete_concept(request, concept_pk):  # url.py에 등록되어있는거.
             models.Concept.objects.filter(pk=concept_pk).delete()
         return redirect(reverse("concepts:edit-list"))
     except models.Concept.studio.DoesNotExist:  # concept이 없음
-        return redirect(reverse("core:home"))
+        return redirect(reverse("core:photo_home"))
 
 
 class PhotoHomeView(ListView):
@@ -122,13 +122,59 @@ class PhotoHomeView(ListView):
     template_name = "photos/photo_list.html"
 
     def get_context_data(self, **kwargs):
-        print(self.request.GET.get("page", 1))
+        # print(self.request.GET.get("page", 1))
         context = super().get_context_data(**kwargs)
         return context
 
-    # def get_queryset(self):
-    #     page = self.request.GET.get('page', 2)
-    #     ps_with_avg = list(models.Photo.objects.all())[page:page+2]
-    #     random.shuffle(ps_with_avg)
-    #     print(ps_with_avg)
-    #     return ps_with_avg
+    def get_queryset(self):
+        now = datetime.datetime.now()
+        nowTime = now.strftime("%M")
+        if len(nowTime) == 1:
+            nowTime = "0" + nowTime
+        nowTime = nowTime[1:2]
+        # print(nowTime)
+        target_idx = int(nowTime)
+        print(target_idx)
+        print(type(target_idx))
+
+        # test_idx가 세션있나 없나 체크
+        if "test_idx" in self.request.session:
+            if target_idx != self.request.session["test_idx"]:
+                del self.request.session["test_idx"]
+                self.request.session["test_idx"] = target_idx
+        else:
+            self.request.session["test_idx"] = target_idx  # 0~6
+
+        sort_idx = self.request.session.get("test_idx")
+        ps_with_avg = None
+        if sort_idx == 1:
+            print("sort_idx==1")
+            ps_with_avg = models.Photo.objects.all().order_by("random_int")
+        if sort_idx == 2:
+            print("sort_idx==2")
+            ps_with_avg = models.Photo.objects.all().order_by("-created")
+        if sort_idx == 3:
+            print("sort_idx==3")
+            ps_with_avg = models.Photo.objects.all().order_by("created")
+        if sort_idx == 4:
+            print("sort_idx==4")
+            ps_with_avg = models.Photo.objects.all()
+        if sort_idx == 5:
+            print("sort_idx==5")
+            ps_with_avg = models.Photo.objects.all().order_by("created")
+        if sort_idx == 6:
+            print("sort_idx==6")
+            ps_with_avg = models.Photo.objects.all()
+        if sort_idx == 7:
+            print("sort_idx==7")
+            ps_with_avg = models.Photo.objects.all()
+        if sort_idx == 8:
+            print("sort_idx==8")
+            ps_with_avg = models.Photo.objects.all().order_by("created")
+        if sort_idx == 9:
+            print("sort_idx==9")
+            ps_with_avg = models.Photo.objects.all()
+        if sort_idx == 0:
+            print("sort_idx==0")
+            ps_with_avg = models.Photo.objects.all()
+        return ps_with_avg

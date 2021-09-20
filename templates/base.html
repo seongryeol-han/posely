@@ -36,7 +36,7 @@
     <title>포즐리 {% block page_title %}{% endblock page_title %}</title>
     <meta property="og:image" content="https://posely-bucket.s3.ap-northeast-2.amazonaws.com/static/img/rev_포즐리로고_share.png">
     <meta property="og:title" content="포즐리">
-    <meta property="og:description" content="내 반려동물의 가장 사랑스러운 순간을 기록하세요.">
+    <meta property="og:description" content="반려동물의 가장 사랑스러운 순간">
 
 
 </head>
@@ -45,7 +45,7 @@
 <header style="z-index: 9999;" class="container max-w-full inset-0 flex justify-center h-14 mobile:h-12 border-b mobile:border-none border-gray-400 fixed bg-white">
         <div class="flex items-center justify-center w-600px small:px-0 relative">
 
-                <a class="logo flex items-center absolute" style="left: 14px;" href="{% url "core:home" %}">
+                <a class="logo flex items-center absolute" style="left: 14px;" href="{% url "core:photo_home" %}">
                   <img style="width: 25px;" src="{%static 'img/posely_logo2.svg' %}" />
                   {% block logo_name %}
                   <img style="width: 90px;" src="{%static 'img/포즐리로고05.svg' %}" class="ml-1"/>
@@ -53,11 +53,11 @@
                 </a>
 
                 {% block search-bar %}
-                <form class="search_bar hidden fade-in-box flex items-center" method="get" action="{% url "studios:search" %}">
+                <form class="search_bar hidden fade-in-box flex items-center" method="get" action="{% url "studios:photo_studio_search" %}">
                   <div class="border rounded-lg flex items-center justify-center">
                     <div class="flex items-center">
                       <div class="w-5 ml-3 mr-2"><img src="https://img.icons8.com/fluency-systems-filled/100/888888/search.png"/></div>
-                      <input class="text-sm text-gray-900 placeholder-gray-500 py-1 rounded-md focus:outline-none" style="width:150px" name="search_name_address" placeholder="사진관 이름, 지역 검색" />
+                      <input class="text-sm text-gray-900 placeholder-gray-500 py-1 rounded-md focus:outline-none" style="width:150px" name="search_name_address2" placeholder="사진관 이름, 지역 검색" />
                       <div class="w-5 ml-3 mr-2 cancel_button"><img src="https://img.icons8.com/fluency-systems-filled/100/bbbbbb/cancel.png"/></div>
                     </div>
                   </div>
@@ -65,13 +65,12 @@
                 {% endblock search-bar %}
 
                 <!--{% include "partials/nav.html" %}-->
-                {% block nav-icons %}
+                {% block search-icons %}
                 <header class="flex items-center absolute right-0">
-                      <button type="button" class="search_button focus:outline-none w-7 mx-4"><img src="https://img.icons8.com/fluency-systems-filled/100/444444/search.png"/></button>
+                      <button type="button" class="search_button focus:outline-none w-7 mx-4"><img src="https://img.icons8.com/fluency-systems-filled/100/777777/search.png"/></button>
                 </header>
-                {% endblock nav-icons %}
+                {% endblock search-icons %}
         </div>
-
   </header> 
   {% endblock nav-bar %}
 
@@ -174,7 +173,7 @@
               )}
           }
         else{
-          var url="{% url 'core:home' %}"
+          var url="{% url 'core:photo_home' %}"
               window.location.href = url 
         }
     })

@@ -26,6 +26,7 @@ class StudioAdmin(admin.ModelAdmin):
     list_display = (
         "name",
         "location",
+        "location_dong",
         "phone_number",
         "address",
         "author",

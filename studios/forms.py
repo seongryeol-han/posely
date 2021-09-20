@@ -7,6 +7,10 @@ class SearchForm(forms.Form):
     search_name_address = forms.CharField(required=False, label="search!")
 
 
+class Search2Form(forms.Form):
+    search_name_address2 = forms.CharField(required=False, label="search!")
+
+
 class CreateStudioForm(forms.ModelForm):
     class Meta:
         model = models.Studio

@@ -14,12 +14,12 @@
                 {% for photo in photos %}
                 <a class="grid-item mb-9 mobile:mb-7" style="width: 49%;" href="{% url "concepts:detail" photo.concept.pk %}">
                     <img src="{{photo.file.url}}" alt="image" style="border-radius: 18px;">
-                    <div class="mt-1 px-2 ">
+                    <div class="px-2 " style="margin-top: 7px;">
                         <div class=" text-sm mobile:text-xs flex font-semibold">
                             <p class="mr-2 mobile:mr-1 text-blue-600 ">
                                 {{photo.studio.location}}
                             </p>
-                            <p class="mr-1 text-gray-600">
+                            <p class="text-gray-600">
                                 {{photo.studio}}
                             </p>    
                         </div>
@@ -54,14 +54,15 @@
                             {% endif %}
                         {% endfor %}    
                         </div>
-                        <div class="font-semibold flex mt-0.5 mobile:mt-0" style="font-size: 11px; ">
-                            <p style="color: rgb(165, 165, 165);">
+                        <div style=" font-size:12px;" class="text-gray-600 font-semibold flex mt-0.5" >
+                            <p class=" mobile:text-xs">
                                 {{photo.concept}}
                             </p>
-                            <p style="color: rgb(165, 165, 165);">
+                            <p class=" mobile:text-xs">
                                 &nbsp;&nbsp;₩{{photo.concept.price|intcomma}}
                             </p>
                         </div>
+
                     </div>
                 </a>
                 {% endfor %}
@@ -83,7 +84,7 @@
     <div class="relative flex justify-center top-0 bg-white w-600px ">
         <div class="flex justify-between h-full w-full py-1 mobile:pb-0 px-3" style="">
             <div style="width: 33.333%;">
-                <a class=" flex flex-col items-center" href="">
+                <a class=" flex flex-col items-center" href="{% url "core:photo_home" %}">
                     <!--<img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/home.png"/>-->
                     <img class="w-6" src="https://img.icons8.com/fluency-systems-filled/100/FE82B1/home.png"/>
                     <p style="font-size: 10px; color:#FE82B1">홈</p>
@@ -92,14 +93,14 @@
             <div style="width: 33.333%;">
                 <a class=" flex flex-col items-center NOT_DISTANCE" id="distance_sort_btn" style="cursor: pointer;">
                     <img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/marker--v1.png"/>
-                    <p style="font-size: 10px; color:#888888">근처사진관</p>
+                    <p style="font-size: 10px; color:#666666">근처사진관</p>
                 </a>
             </div>
                 {% if user.is_authenticated %}
                     <div style="width: 33.333%;" >
                         <a class="flex flex-col items-center" href="{{user.get_absolute_url}}">
                             <img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/user.png"/>
-                            <p style="font-size: 10px; color:#888888">프로필</p>
+                            <p style="font-size: 10px; color:#666666">프로필</p>
                         </a>
                     </div>
                           
@@ -107,7 +108,7 @@
                     <div style="width: 33.333%;" >
                         <a class="flex flex-col items-center" href="{% url "users:login"%}">
                             <img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/user.png"/>
-                            <p style="font-size: 10px; color:#888888">프로필</p>
+                            <p style="font-size: 10px; color:#666666">로그인</p>
                         </a>
                     </div> 
                 {% endif %}

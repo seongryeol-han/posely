@@ -10,7 +10,7 @@ class EmailLoginOnlyView(UserPassesTestMixin):
 
     def handle_no_permission(self):
         messages.error(self.request, "Can't go there")
-        return redirect("core:home")
+        return redirect("core:photo_home")
 
 
 class LoggedOutOnlyView(UserPassesTestMixin):
@@ -19,7 +19,7 @@ class LoggedOutOnlyView(UserPassesTestMixin):
 
     def handle_no_permission(self):
         messages.error(self.request, "Can't go there")
-        return redirect("core:home")
+        return redirect("core:photo_home")
 
 
 class CreateStudioLimitView(UserPassesTestMixin):
@@ -31,7 +31,7 @@ class CreateStudioLimitView(UserPassesTestMixin):
 
     def handle_no_permission(self):
         messages.error(self.request, "Can't go there")
-        return redirect("core:home")
+        return redirect("core:photo_home")
 
 
 class LoggedInOnlyView(LoginRequiredMixin):

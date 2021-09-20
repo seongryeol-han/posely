@@ -1,35 +1,40 @@
-{% extends "base.html" %}
-{% load humanize %}
+{% extends 'base.html' %}
 
-{%block page_title%}반려동물 사진관 예약하기{%endblock page_title%}
+
+{% block page_title %}검색{% endblock page_title %}
 
 
 {% block content %}
-   
 <div class="container mx-auto flex flex-col items-center overflow-auto mt-20 mb-10 mobile:mb-10">
     <div class="w-600px small:w-full px-1 ">
+        {% if empty_search %}
+        <div class="pt-56 flex flex-col justify-center items-center">
+            <div class="text-gray-800 text-22px font-semibold">요청하신 검색 결과가 없습니다.</div>
+            <div class="mt-2 text-red-500 text-15px">정확한 사진관 이름, 지역을 적어주세요.</div>
+        </div>
                 
+        {% elif studios %}
         <div class ="grid opacity-0" style="width: 100%;">
             <div class="grid__col-sizer" style="width: 49%"></div>
             <div class="grid__gutter-sizer" style="width: 2%"></div>
-            {% for studio in studios %}
-                {%include "mixins/studio/photo_studio_card.html" with studio=studio%}
-            {% endfor %}
+                {% for studio in studios %}
+                    {% if studio.first_concept.first_photo%} <!--사진관 컨셉 없을때 검색시 뜨는거 방지-->
+                        {%include "mixins/studio/photo_studio_card.html" with studio=studio%}
+                    {% endif %}
+                {% endfor %}
+                {% if page_obj.has_next %}
+                    <p class="pagination">
+                        <a class="next-page" href="?page={{ page_obj.next_page_number }}">다음으로</a>
+                    </p>
+                {% endif %}
             
-
-            {% if page_obj.has_next %}
-            <p class="pagination1">
-                <a class="next-page3" href="?page={{ page_obj.next_page_number }}"></a>
-            </p>
-            {% endif %}
         </div>
-                
-
+        {% endif %}
     </div>
-</div>
+</div> 
 
-<!--<button type="button" onclick="$('html').animate({scrollTop:0}, 500)">위로이동</button>-->
-<!--여기가 하단 메뉴바-->
+
+<!-- ajax jqeury 통신 -->
 <div class="fixed bottom-0 left-0 w-full flex justify-center items-end border-t" style="z-index: 9999;">
     <div class="relative flex justify-center top-0 bg-white w-600px ">
         <div class="flex justify-between h-full w-full py-1 mobile:pb-0 px-3" style="">
@@ -62,9 +67,17 @@
                         </a>
                     </div> 
                 {% endif %}
+
+                {% if page_obj.has_next %}
+                    <p class="pagination1">
+                        <a class="next-page3" href="?page={{ page_obj.next_page_number }}"></a>
+                    </p>
+                {% endif %}
         </div>
     </div>
 </div>
+
+
 <script>
 
     
@@ -110,4 +123,3 @@
 </script>
 
 {% endblock content %}
-    
