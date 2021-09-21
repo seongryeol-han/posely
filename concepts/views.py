@@ -167,13 +167,13 @@ class PhotoHomeView(ListView):
             ps_with_avg = models.Photo.objects.all()
         if sort_idx == 7:
             print("sort_idx==7")
-            ps_with_avg = models.Photo.objects.all()
+            ps_with_avg = models.Photo.objects.all().order_by("random_int")
         if sort_idx == 8:
             print("sort_idx==8")
             ps_with_avg = models.Photo.objects.all().order_by("created")
         if sort_idx == 9:
             print("sort_idx==9")
-            ps_with_avg = models.Photo.objects.all()
+            ps_with_avg = models.Photo.objects.all().order_by("-created")
         if sort_idx == 0:
             print("sort_idx==0")
             ps_with_avg = models.Photo.objects.all()

@@ -5,9 +5,74 @@
 
 
 {% block content %}
+
+<style>
+    .wrap {
+        overflow-x:scroll;
+        white-space: nowrap;
+        -ms-overflow-style: none;
+    }
+    .wrap::-webkit-scrollbar{ 
+        display:none; 
+    }
+
+
+    .wrap li {
+        display:inline-block;
+        list-style:none;
+    }
+
+
+</style>
+
    
-<div class="container mx-auto flex flex-col items-center overflow-auto mt-20 mb-10 mobile:mb-10">
-    <div class="w-600px small:w-full px-1 ">
+<div class="container mx-auto flex flex-col items-center overflow-auto mt-14 mobile:mt-12 mb-10 mobile:mb-10">
+    <div class="bg-gray-600 h-14 w-600px small:w-full"></div>
+    <div class="h-12 mb-4 w-600px small:w-full">
+        <ul class="wrap p-2">
+            <li class="px-2 py-1 mr-1 flex items-center text-sm rounded-lg border border-gray-400">
+                <p class="test text-gray-800">
+                    전체사진
+                </p>
+            </li>
+            <li class="px-2 py-1 mr-1 flex items-center text-sm rounded-lg border border-gray-400">
+                <p class="text-gray-800">
+                    보호자와 함께
+                </p>
+            </li>
+            <li class="px-2 py-1 mr-1 flex items-center text-sm rounded-lg border border-gray-400">
+                <p class="text-gray-800">
+                    강아지
+                </p>
+            </li>
+            <li class="px-2 py-1 mr-1 flex items-center text-sm rounded-lg border border-gray-400">
+                <p class="text-gray-800">
+                    고양이
+                </p>
+            </li>
+            <li class="px-2 py-1 mr-1 flex items-center text-sm rounded-lg border border-gray-400">
+                <p class="text-gray-800">
+                    스냅촬영
+                </p>
+            </li>
+            <li class="px-2 py-1 mr-1 flex items-center text-sm rounded-lg border border-gray-400">
+                <p class="text-gray-800">
+                    스냅촬영
+                </p>
+            </li>
+            <li class="px-2 py-1 mr-1 flex items-center text-sm rounded-lg border border-gray-400">
+                <p class="text-gray-800">
+                    스냅촬영
+                </p>
+            </li>
+            <li class="px-2 py-1 mr-1 flex items-center text-sm rounded-lg border border-gray-400">
+                <p class="text-gray-800">
+                    스냅촬영
+                </p>
+            </li>
+        </ul>
+    </div>
+    <div class="w-600px small:w-full px-1 "> 
         <div class ="grid opacity-0" style="width: 100%;">
                 <div class="grid__col-sizer" style="width: 49%"></div>
                 <div class="grid__gutter-sizer" style="width: 2%"></div>
