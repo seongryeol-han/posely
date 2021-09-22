@@ -20,6 +20,7 @@
     .wrap button {
         display:inline-block;
         list-style:none;
+        font-weight: 500;
     }
 
     .wrap a {
@@ -34,59 +35,30 @@
         padding: 7px 8px;
     }
 
+    .clicked {
+        color: gold;
+      }
+
+    .wrap button:focus {
+        outline: 0;
+    }
 
 </style>
 
    
 <div class="container mx-auto flex flex-col items-center overflow-auto mt-14 mobile:mt-12 mb-10 mobile:mb-10">
-    <div class="bg-red-200 h-14 w-600px small:w-full"></div>
+    <div class="bg-red-200 h-14 w-600px small:w-full">
+        
+        {% if request.GET.photo_filter == "감동" %}
+            hello
+        {% endif %}
+            
+        
+        {{request.GET.photo_filter}}
+    </div>
     <div class="h-12 my-1 w-600px small:w-full">
         <form id="scroll" class="wrap px-2 py-1 text-gray-800" style="font-weight: 500;"  method="get" action="{% url "core:photo_filter" %}">
-            <a href="{% url "core:photo_home" %}" style="" class="on mr-1 flex items-center text-xs rounded-lg border border-gray-400">
-                <p class="bg-gray-400">
-                    전체사진
-                </p>
-            </a>
-            <button type="submit" name="photo_filter" value="바이구" style="padding: 6px 8px;" class="item two mr-1 flex items-center text-xs rounded-lg border border-gray-400">
-                <p class="">
-                    보호자와 함께
-                </p>
-            </button>
-            <button type="submit" name="photo_filter" value="감동" style="padding: 6px 8px;" class="item one mr-1 flex items-center text-xs rounded-lg border border-gray-400">
-                <p class="">
-                    강아지
-                </p>
-            </button>
-            <button style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
-                <p class="">
-                    고양이
-                </p>
-            </button>
-            <button style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
-                <p class="">
-                    스냅촬영
-                </p>
-            </button>
-            <button style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
-                <p class="">
-                    귀여운
-                </p>
-            </button>
-            <button style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
-                <p class="">
-                    분위기있는
-                </p>
-            </button>
-            <button style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
-                <p class="">
-                    단정한
-                </p>
-            </button>
-            <button style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
-                <p class="">
-                    창의적인
-                </p>
-            </button>
+            {% include "mixins/photo/photo_filter_button.html"%}
         </form>
     </div>
     <div class="w-600px small:w-full " style="padding-left: 6px; padding-right: 6px;"> 
@@ -263,7 +235,7 @@
     $(function(){
         wheel('#scroll');
     });
-    
+
 </script>
 
 {% endblock content %}

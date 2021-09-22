@@ -252,19 +252,19 @@ class ButtonFilterView(View):
                 if qs.count() > 0:
                     return render(
                         request,
-                        "photos/photo_filter.html",
+                        "photos/photo_list.html",
                         {"form": form, "photos": photos},
                     )
                 elif qs.count() == 0:
                     form = forms.PhotoFilterForm()
                     return render(
                         request,
-                        "photos/photo_filter.html",
+                        "photos/photo_list.html",
                         {"form": form},
                     )
         form = forms.PhotoFilterForm()
         return render(
             request,
-            "photos/photo_filter.html",
+            "photos/photo_list.html",
             {"form": form},
         )
