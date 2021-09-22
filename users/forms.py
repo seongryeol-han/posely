@@ -40,7 +40,8 @@ class SignUpForm(forms.ModelForm):  # model에 채우는 폼, uniqueness를 검�
 
     # password는 따로 적어줘야함. 암호화 되어있기 때문에. 그리고 model에 없으니까.
     password = forms.CharField(
-        widget=forms.PasswordInput(attrs={"placeholder": "비밀번호 (8자 이상)"}), label=""
+        widget=forms.PasswordInput(attrs={"placeholder": "비밀번호 (8자 이상, 문자, 숫자 포함)"}),
+        label="",
     )
     password1 = forms.CharField(
         widget=forms.PasswordInput(attrs={"placeholder": "비밀번호 확인"}), label=""

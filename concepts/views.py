@@ -1,5 +1,6 @@
 from django.views.generic import DetailView, ListView, FormView, UpdateView, View
 from django.shortcuts import render, redirect, reverse
+from django.core.paginator import Paginator
 from . import models, forms
 from django.contrib.auth.decorators import (
     login_required,
@@ -178,3 +179,92 @@ class PhotoHomeView(ListView):
             print("sort_idx==0")
             ps_with_avg = models.Photo.objects.all()
         return ps_with_avg
+
+
+class ButtonFilterView(View):
+    """SearchView Definition"""
+
+    def get(self, request):
+        form = forms.PhotoFilterForm(request.GET)
+        if form.is_valid():
+            search_data = form.cleaned_data.get("photo_filter")
+            if len(search_data) != 0:
+                filter_args = {}
+                filter_args["button_filter__contains"] = search_data
+
+                now = datetime.datetime.now()
+                nowTime = now.strftime("%M")
+                if len(nowTime) == 1:
+                    nowTime = "0" + nowTime
+                nowTime = nowTime[1:2]
+                # print(nowTime)
+                target_idx = int(nowTime)
+                print(target_idx)
+                print(type(target_idx))
+
+                # test_idx가 세션있나 없나 체크
+                if "test_idx" in self.request.session:
+                    if target_idx != self.request.session["test_idx"]:
+                        del self.request.session["test_idx"]
+                        self.request.session["test_idx"] = target_idx
+                else:
+                    self.request.session["test_idx"] = target_idx  # 0~6
+
+                sort_idx = self.request.session.get("test_idx")
+                if sort_idx == 1:
+                    print("sort_idx==1")
+                    qs = models.Photo.objects.filter(**filter_args).order_by(
+                        "random_int"
+                    )
+                if sort_idx == 2:
+                    print("sort_idx==2")
+                    qs = models.Photo.objects.filter(**filter_args).order_by("-created")
+                if sort_idx == 3:
+                    print("sort_idx==3")
+                    qs = models.Photo.objects.filter(**filter_args).order_by("created")
+                if sort_idx == 4:
+                    print("sort_idx==4")
+                    qs = models.Photo.objects.filter(**filter_args)
+                if sort_idx == 5:
+                    print("sort_idx==5")
+                    qs = models.Photo.objects.filter(**filter_args).order_by("created")
+                if sort_idx == 6:
+                    print("sort_idx==6")
+                    qs = models.Photo.objects.filter(**filter_args)
+                if sort_idx == 7:
+                    print("sort_idx==7")
+                    qs = models.Photo.objects.filter(**filter_args).order_by(
+                        "random_int"
+                    )
+                if sort_idx == 8:
+                    print("sort_idx==8")
+                    qs = models.Photo.objects.filter(**filter_args).order_by("created")
+                if sort_idx == 9:
+                    print("sort_idx==9")
+                    qs = models.Photo.objects.filter(**filter_args).order_by("-created")
+                if sort_idx == 0:
+                    print("sort_idx==0")
+                    qs = models.Photo.objects.filter(**filter_args)
+
+                paginator = Paginator(qs, 6, orphans=3)
+                page = request.GET.get("page", 1)
+                photos = paginator.get_page(page)
+                if qs.count() > 0:
+                    return render(
+                        request,
+                        "photos/photo_filter.html",
+                        {"form": form, "photos": photos},
+                    )
+                elif qs.count() == 0:
+                    form = forms.PhotoFilterForm()
+                    return render(
+                        request,
+                        "photos/photo_filter.html",
+                        {"form": form},
+                    )
+        form = forms.PhotoFilterForm()
+        return render(
+            request,
+            "photos/photo_filter.html",
+            {"form": form},
+        )

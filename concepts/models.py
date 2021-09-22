@@ -13,6 +13,9 @@ class Photo(core_models.TimeStampedModel):
     # file = models.ImageField(
     #     upload_to="concept_photos",
     # )
+
+    button_filter = models.CharField(max_length=80, default="", blank=True)
+
     file = ResizedImageField(
         size=[1024, 1024],
         upload_to="concept_photos",

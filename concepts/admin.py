@@ -37,6 +37,7 @@ class PhotoAdmin(admin.ModelAdmin):
 
     list_display = (
         "concept",
+        "button_filter",
         "studio",
         "get_thumbnail",
         "random_int",

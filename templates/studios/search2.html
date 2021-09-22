@@ -5,10 +5,11 @@
 
 
 {% block content %}
-<div class="container mx-auto flex flex-col items-center overflow-auto mt-20 mb-10 mobile:mb-10">
-    <div class="w-600px small:w-full px-1 ">
+<div class="container mx-auto flex flex-col items-center overflow-auto mt-14 mobile:mt-12 mb-10 mobile:mb-10">
+    <div class="bg-red-200 h-14 w-600px small:w-full"></div>
+    <div class="w-600px small:w-full mt-4" style="padding-left: 6px; padding-right: 6px;">
         {% if empty_search %}
-        <div class="pt-56 flex flex-col justify-center items-center">
+        <div class="pt-40 flex flex-col justify-center items-center">
             <div class="text-gray-800 text-22px font-semibold">요청하신 검색 결과가 없습니다.</div>
             <div class="mt-2 text-red-500 text-15px">정확한 사진관 이름, 지역을 적어주세요.</div>
         </div>
@@ -46,9 +47,9 @@
                 </a>
             </div>
             <div style="width: 33.333%;">
-                <a class=" flex flex-col items-center" href="">
-                    <img class="w-6" src="https://img.icons8.com/fluency-systems-filled/100/FE82B1/marker.png"/>
-                    <p style="font-size: 10px; color:#FE82B1">근처사진관</p>
+                <a class=" flex flex-col items-center NOT_DISTANCE" id="distance_sort_btn" style="cursor: pointer;">
+                    <img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/marker--v1.png"/>
+                    <p style="font-size: 10px; color:#666666">근처사진관</p>
                 </a>
             </div>
                 {% if user.is_authenticated %}

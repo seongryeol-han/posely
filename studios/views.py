@@ -531,13 +531,13 @@ class Search2View(View):
                         {"form": form, "studios": studios, "page_sorted": "search"},
                     )
                 elif qs.count() == 0:
-                    form = forms.SearchForm()
+                    form = forms.Search2Form()
                     return render(
                         request,
                         "studios/search2.html",
                         {"form": form, "empty_search": "ok", "page_sorted": "search"},
                     )
-        form = forms.SearchForm()
+        form = forms.Search2Form()
         return render(
             request,
             "studios/search2.html",
