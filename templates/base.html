@@ -14,6 +14,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jscroll/2.4.1/jquery.jscroll.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/5.4.3/js/swiper.min.js"></script>
+
+
+
+    <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
+    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js"></script>
+    <script src="https://unpkg.com/infinite-scroll@4/dist/infinite-scroll.pkgd.js"></script>
+    <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.js"></script>
     <!--
     <script type="text/javascript" src="/static/js/swiper-bundle.min.js"></script>
     <script type="text/javascript" src="/static/js/jquery.min.js"></script>
@@ -31,57 +38,74 @@
     <title>포즐리 {% block page_title %}{% endblock page_title %}</title>
     <meta property="og:image" content="https://posely-bucket.s3.ap-northeast-2.amazonaws.com/static/img/rev_포즐리로고_share.png">
     <meta property="og:title" content="포즐리">
-    <meta property="og:description" content="내 반려동물의 가장 사랑스러운 순간을 기록하세요.">
+    <meta property="og:description" content="반려동물의 가장 사랑스러운 순간">
+    
+    <!--구글폰트-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
+
+
+    <style>
+      html {
+        font-family: 'Noto Sans KR', sans-serif !important;
+        font-size: 16px;
+      }
+      
+      @media (max-width:300px) {
+        html{ font-size: 12px;}
+        p{ font-size: 8px;}  
+      }
+
+      @media (min-width:300px) {
+        html{ font-size: 14px;}  
+      }
+
+      @media (min-width:360px) {
+        html{ font-size: 16px;}  
+      }
+
+      @media (min-width:600px) {
+        html{ font-size: 18px;}  
+      }
+          
+      </style>
 
 
 </head>
 <body class="mt-14 mb-4 bg-white mobile:mt-8 ">
+
 {% block nav-bar %}
-<header style="z-index: 9999;" class="container max-w-full inset-0 flex justify-center px-4 mobile:pb-px h-14 mobile:h-12 border-b mobile:border-none border-gray-400 fixed bg-white">
-        <div class="flex items-center justify-between w-600px px-4 small:px-0">
-            
-                <a class="flex items-center" href="{% url "core:home" %}">
-                    <img class="w-8 rounded-md" src="{%static 'img/rev_포즐리로고.png' %}" />
+<header style="z-index: 9999;" class="container max-w-full inset-0 flex justify-center h-14 mobile:h-12 border-b mobile:border-none border-gray-400 fixed bg-white">
+        <div class="flex items-center justify-center w-600px small:px-0 relative">
+
+                <a class="logo flex items-center absolute" style="left: 14px;" href="{% url "core:photo_home" %}">
+                  <img style="width: 1.5rem;" src="{%static 'img/posely_logo2.svg' %}" />
+                  {% block logo_name %}
+                  <img style="width: 5rem;" src="{%static 'img/포즐리로고05.svg' %}" class="ml-1"/>
+                  {% endblock logo_name %}   
                 </a>
 
                 {% block search-bar %}
-                <form class="search_bar hidden fade-in-box flex items-center ml-10 mobile:ml-2" method="get" action="{% url "studios:search" %}">
-                  <div class="border rounded-lg px-6 pl-14 mobile:px-2 mobile:pl-5 flex items-center justify-center bg-gray-100">
-                    <div style="color:#a0aec0; margin: 0 6px 0 6px;" class="text-sm mobile:text-xs"><i class="fas fa-search"></i></div>
-                    <input class=" text-xs text-gray-900 bg-gray-100 placeholder-gray-500 py-1 rounded-md focus:outline-none w-40 mobile:w-32" name="search_name_address" placeholder="사진관 이름, 지역 검색" />
+                <form class="search_bar hidden fade-in-box flex items-center" method="get" action="{% url "studios:photo_studio_search" %}">
+                  <div class="border rounded-lg flex items-center justify-center">
+                    <div class="flex items-center">
+                      <div class="w-5 ml-3 mr-2"><img src="https://img.icons8.com/fluency-systems-filled/100/888888/search.png"/></div>
+                      <input class="text-sm text-gray-900 placeholder-gray-500 py-1 rounded-md focus:outline-none" style="width:10rem" name="search_name_address2" placeholder="사진관 이름, 지역 검색" />
+                      <div class="w-5 ml-3 mr-2 cancel_button"><img src="https://img.icons8.com/fluency-systems-filled/100/bbbbbb/cancel.png"/></div>
+                    </div>
                   </div>
                 </form>
                 {% endblock search-bar %}
-
+                
                 <!--{% include "partials/nav.html" %}-->
-
-                <header class="flex items-center">
-                  {% block nav-icons %}
-                      <button type="button" style="color: #999999;" class="search_button p-1 mr-3 text-22px focus:outline-none mobile:text-20px mobile:mr-2"><i class="fas fa-search"></i></button>
-                      
-                      {% if page_sorted == "created" %}
-                          <button type="button" id="distance_sort_btn" style="color: #999999;" class="NOT_DISTANCE p-1 mr-4 text-22px focus:outline-none mobile:text-20px mobile:mr-3"><i class="fas fa-map-marker-alt"></i></button>
-                      {% elif page_sorted == "like" %}
-                          <button type="button" id="distance_sort_btn" style="color: #999999;" class="NOT_DISTANCE p-1 mr-4 text-22px focus:outline-none mobile:text-20px mobile:mr-3"><i class="fas fa-map-marker-alt"></i></button>
-                      {% elif page_sorted == "distance" %}
-                          <button type="button" id="distance_sort_btn" class="text-gray-900 p-1 mr-3 text-22px focus:outline-none mobile:text-20px"><i class="fas fa-map-marker-alt"></i></button>
-                      {% elif page_sorted == "search" %}
-                      {% endif %}
-                  {% endblock nav-icons %}
-                  
-                  {% if user.is_authenticated %}
-                      <a href="{{user.get_absolute_url}}">
-                          {%include "mixins/user/user_avatar.html"%}
-                      </a>
-                          
-                  {% else %}
-                      <a class="text-sm text-gray-600 font-semibold hover:text-black " href="{% url "users:login"%}">
-                          <div>로그인</div>
-                      </a> 
-                  {% endif %}
-              </header>
+                {% block search-icons %}
+                <header class="flex items-center absolute right-0">
+                      <button style="width: 1.5rem;" type="button" class="search_button focus:outline-none mx-4"><img src="https://img.icons8.com/fluency-systems-filled/100/777777/search.png"/></button>
+                </header>
+                {% endblock search-icons %}
         </div>
-
   </header> 
   {% endblock nav-bar %}
 
@@ -150,13 +174,24 @@
     //돋보기 버튼
     const searchButton = document.querySelector(".search_button");
     const searchBar = document.querySelector(".search_bar");
-    const toggleSearchBar = () => {
+    const cancelButton = document.querySelector(".cancel_button");
+    const logo = document.querySelector(".logo");
+    const openSearchBar = () => {
         searchBar.classList.remove("hidden");
         searchBar.classList.add("fade-in-box");
         searchButton.classList.toggle("hidden");
+        logo.classList.toggle("hidden");
     }
-    searchButton.addEventListener("click", toggleSearchBar)
-    
+    const cancelSearchBar = () => {
+      searchBar.classList.add("hidden");
+      searchButton.classList.toggle("hidden");
+      logo.classList.toggle("hidden");
+    }
+
+    searchButton.addEventListener("click", openSearchBar)
+    cancelButton.addEventListener("click", cancelSearchBar)
+
+
     //map_maker_btn
     $("#distance_sort_btn").click((request)=>{
         console.log("kkkk")   
@@ -168,12 +203,12 @@
                       var lng1 = position.coords.longitude;
                       sessionStorage.setItem("lat",lat1);
                       sessionStorage.setItem("lng",lng1);
-                      location.href="/distance/?lat="+lat1+"&lng="+lng1
+                      location.href="/photo/distance/?lat="+lat1+"&lng="+lng1
                   }
               )}
           }
         else{
-          var url="{% url 'core:home' %}"
+          var url="{% url 'core:photo_home' %}"
               window.location.href = url 
         }
     })

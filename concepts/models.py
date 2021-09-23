@@ -1,16 +1,21 @@
 from django.db import models
 from core import models as core_models
 from django_resized import ResizedImageField
+import random
+
 # Create your models here.
 
 
 class Photo(core_models.TimeStampedModel):
     """Photo Model Definition"""
 
-    caption = models.CharField(max_length=80, default="")
+    caption = models.CharField(max_length=80, default="", blank=True)
     # file = models.ImageField(
     #     upload_to="concept_photos",
     # )
+
+    button_filter = models.CharField(max_length=80, default="", blank=True)
+
     file = ResizedImageField(
         size=[1024, 1024],
         upload_to="concept_photos",
@@ -27,6 +32,11 @@ class Photo(core_models.TimeStampedModel):
         blank=True,
     )
 
+    def random_string():
+        return str(random.randint(100000, 999999))
+
+    random_int = models.CharField(max_length=6, default="random_string", blank=True)
+
     def __str__(self):
         return self.caption
 
@@ -35,8 +45,7 @@ class Concept(core_models.TimeStampedModel, models.Model):
     """Concept Model Definition"""
 
     name = models.CharField(max_length=15)
-    concept_description = models.TextField(
-        max_length=160, default="", blank=False)
+    concept_description = models.TextField(max_length=160, default="", blank=True)
     service_config = models.TextField(default="", blank=False)
     price = models.DecimalField(max_digits=6, decimal_places=0)
     studio = models.ForeignKey(

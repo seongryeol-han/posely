@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+{% load humanize %}
+
+{%block page_title%}반려동물 사진관 예약하기{%endblock page_title%}
+
+
+{% block content %}
+
+<style>
+    @media (min-width:600px) {
+        .invertal { width: 6rem;}  
+      }
+</style>
+   
+<div class="container mx-auto flex flex-col items-center overflow-auto mt-16 mobile:mt-12 mb-10 mobile:mb-10">
+    <div class="h-14 w-600px small:w-full" style="padding-left:0.4rem; padding-right:0.4rem;">
+        <div class="flex items-center justify-center bg-gray-200 w-full h-14 rounded-lg" style="">
+            <div class="flex flex-col text-gray-800 " style="width:13rem">
+                <span class="" style="font-family:'Nanum Gothic' !important; font-size:0.8rem; font-weight:700;">
+                    반려동물 사진촬영 예약 플랫폼
+                </span>
+                <div class="" style="font-family:'Nanum Gothic' !important; font-size:0.7rem; font-weight:400;">
+                    포즐리에서 사진작가님을 모집해요
+                </div>
+            </div>
+            <div style="width: 0.5rem;" class="h-full"></div>
+            <div class="invertal"></div>
+            <a class="flex items-center justify-center h-full" href="https://form.office.naver.com/form/responseView.cmd?formkey=NzE3NDc0MWEtYWEyMS00ZjQyLTg1ZWUtMzM3YTYwYzcxZTZk&sourceId=urlshare" target="_blank">
+                <div class="w-full text-center rounded-xl" style="font-family:'Nanum Gothic' !important; font-size:0.8rem; font-weight:800; text-decoration: underline; padding-top:0.6rem; padding-bottom:0.6rem;">작가 등록하기</div>
+                <img style="width: 1.5rem;" src="https://img.icons8.com/fluency-systems-regular/100/000000/nui2.png"/>
+            </a>
+        </div>
+    </div>
+    <div class="w-600px small:w-full"  style="padding-left: 6px; padding-right: 6px;">
+        <div class ="grid opacity-0 mt-4" style="width: 100%;">
+            <div class="grid__col-sizer" style="width: 49%"></div>
+            <div class="grid__gutter-sizer" style="width: 2%"></div>
+            {% for studio in studios %}
+                {%include "mixins/studio/photo_studio_card.html" with studio=studio%}
+            {% endfor %}
+            
+
+            {% if page_obj.has_next %}
+            <p class="pagination1">
+                <a class="next-page3" href="?page={{ page_obj.next_page_number }}"></a>
+            </p>
+            {% endif %}
+        </div>
+                
+
+    </div>
+</div>
+
+<!--<button type="button" onclick="$('html').animate({scrollTop:0}, 500)">위로이동</button>-->
+<!--여기가 하단 메뉴바-->
+<div class="fixed bottom-0 left-0 w-full flex justify-center items-end border-t" style="z-index: 9999;">
+    <div class="relative flex justify-center top-0 bg-white w-600px ">
+        <div class="flex justify-between h-full w-full py-1 mobile:pb-0 px-3" style="font-size: 0.6rem;">
+            <div style="width: 33.333%;">
+                <a class=" flex flex-col items-center" href="{% url "core:photo_home" %}">
+                    <!--<img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/home.png"/>-->
+                    <img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/home.png"/>
+                    <p style="color:#666666">홈</p>
+                </a>
+            </div>
+            <div style="width: 33.333%;">
+                <a class=" flex flex-col items-center" href="">
+                    <img class="w-6" src="https://img.icons8.com/fluency-systems-filled/100/FE82B1/marker.png"/>
+                    <p style="color:#FE82B1">근처사진관</p>
+                </a>
+            </div>
+                {% if user.is_authenticated %}
+                    <div style="width: 33.333%;" >
+                        <a class="flex flex-col items-center" href="{{user.get_absolute_url}}">
+                            <img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/user.png"/>
+                            <p style="color:#666666">프로필</p>
+                        </a>
+                    </div>
+                          
+                {% else %}
+                    <div style="width: 33.333%;" >
+                        <a class="flex flex-col items-center" href="{% url "users:login"%}">
+                            <img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/user.png"/>
+                            <p style="color:#666666">로그인</p>
+                        </a>
+                    </div>
+                {% endif %}
+        </div>
+    </div>
+</div>
+<script>
+
+    
+    var $grid = $('.grid').isotope({
+    // options
+    itemSelector: 'none',
+    masonry:{
+        columnWidth: '.grid__col-sizer',
+        gutter: '.grid__gutter-sizer',
+    },
+    percentPosition: true,
+    stagger: 30,
+    });
+    // get Masonry instance
+
+    // initial items reveal
+    $grid.imagesLoaded( function() {
+    console.log("2222222222222");
+    $grid.removeClass('opacity-0');
+    $grid.isotope( 'option', { itemSelector: '.grid-item' });
+    var $items = $grid.find('.grid-item');
+    
+    $grid.isotope( 'appended', $items );
+    });
+
+    var iso = $grid.data('isotope');
+
+    //inifinite scroll
+    var $grid2 = $('.grid').infiniteScroll({
+        path: '.next-page3',
+        append: '.grid-item',
+        outlayer: iso,
+      });
+
+      var infScroll = $grid2.data('infiniteScroll');
+
+      $grid2.on( 'load.infiniteScroll', function() {
+        console.log("111111111111");
+      });
+
+      
+
+</script>
+
+{% endblock content %}
+    

@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+
+
+{% block page_title %}검색{% endblock page_title %}
+
+
+{% block content %}
+<div class="container mx-auto flex flex-col items-center overflow-auto mt-14 mobile:mt-12 mb-10 mobile:mb-10">
+    <div class="bg-red-200 h-14 w-600px small:w-full"></div>
+    <div class="w-600px small:w-full mt-4" style="padding-left: 6px; padding-right: 6px;">
+        {% if empty_search %}
+        <div class="pt-40 flex flex-col justify-center items-center">
+            <div class="text-gray-800" style="font-size:1.3rem; font-weight: 500;">요청하신 검색 결과가 없습니다.</div>
+            <div class="mt-2 text-red-500" style="font-size:1rem;">정확한 사진관 이름, 지역을 적어주세요.</div>
+        </div>
+                
+        {% elif studios %}
+        <div class ="grid opacity-0" style="width: 100%;">
+            <div class="grid__col-sizer" style="width: 49%"></div>
+            <div class="grid__gutter-sizer" style="width: 2%"></div>
+                {% for studio in studios %}
+                    {% if studio.first_concept.first_photo%} <!--사진관 컨셉 없을때 검색시 뜨는거 방지-->
+                        {%include "mixins/studio/photo_studio_card.html" with studio=studio%}
+                    {% endif %}
+                {% endfor %}
+                {% if page_obj.has_next %}
+                    <p class="pagination">
+                        <a class="next-page" href="?page={{ page_obj.next_page_number }}">다음으로</a>
+                    </p>
+                {% endif %}
+            
+        </div>
+        {% endif %}
+    </div>
+</div> 
+
+
+<!-- ajax jqeury 통신 -->
+<div class="fixed bottom-0 left-0 w-full flex justify-center items-end border-t" style="z-index: 9999;">
+    <div class="relative flex justify-center top-0 bg-white w-600px ">
+        <div class="flex justify-between h-full w-full py-1 mobile:pb-0 px-3" style="">
+            <div style="width: 33.333%;">
+                <a class=" flex flex-col items-center" href="{% url "core:photo_home" %}">
+                    <!--<img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/home.png"/>-->
+                    <img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/home.png"/>
+                    <p style="font-size: 10px; color:#666666">홈</p>
+                </a>
+            </div>
+            <div style="width: 33.333%;">
+                <a class=" flex flex-col items-center NOT_DISTANCE" id="distance_sort_btn" style="cursor: pointer;">
+                    <img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/marker--v1.png"/>
+                    <p style="font-size: 10px; color:#666666">근처사진관</p>
+                </a>
+            </div>
+                {% if user.is_authenticated %}
+                    <div style="width: 33.333%;" >
+                        <a class="flex flex-col items-center" href="{{user.get_absolute_url}}">
+                            <img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/user.png"/>
+                            <p style="font-size: 10px; color:#666666">프로필</p>
+                        </a>
+                    </div>
+                          
+                {% else %}
+                    <div style="width: 33.333%;" >
+                        <a class="flex flex-col items-center" href="{% url "users:login"%}">
+                            <img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/user.png"/>
+                            <p style="font-size: 10px; color:#666666">로그인</p>
+                        </a>
+                    </div> 
+                {% endif %}
+
+                {% if page_obj.has_next %}
+                    <p class="pagination1">
+                        <a class="next-page3" href="?page={{ page_obj.next_page_number }}"></a>
+                    </p>
+                {% endif %}
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    
+    var $grid = $('.grid').isotope({
+    // options
+    itemSelector: 'none',
+    masonry:{
+        columnWidth: '.grid__col-sizer',
+        gutter: '.grid__gutter-sizer',
+    },
+    percentPosition: true,
+    stagger: 30,
+    });
+    // get Masonry instance
+
+    // initial items reveal
+    $grid.imagesLoaded( function() {
+    console.log("2222222222222");
+    $grid.removeClass('opacity-0');
+    $grid.isotope( 'option', { itemSelector: '.grid-item' });
+    var $items = $grid.find('.grid-item');
+    
+    $grid.isotope( 'appended', $items );
+    });
+
+    var iso = $grid.data('isotope');
+
+    //inifinite scroll
+    var $grid2 = $('.grid').infiniteScroll({
+        path: '.next-page3',
+        append: '.grid-item',
+        outlayer: iso,
+      });
+
+      var infScroll = $grid2.data('infiniteScroll');
+
+      $grid2.on( 'load.infiniteScroll', function() {
+        console.log("111111111111");
+      });
+
+      
+
+</script>
+
+{% endblock content %}

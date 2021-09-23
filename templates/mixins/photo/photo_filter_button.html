@@ -1,0 +1,449 @@
+{% if request.GET.photo_filter == none %}
+
+    <a href="{% url "core:photo_home" %}" style="" class="on mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            전체사진
+        </p>
+    </a>
+    <button type="submit" name="photo_filter" value="보호자와함께" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            보호자와 함께
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="강아지" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            강아지
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="고양이" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            고양이
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="스냅촬영" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            스냅촬영
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="귀여운" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            귀여운
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="분위기있는" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            분위기있는
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="단정한" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            단정한
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="창의적인" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            창의적인
+        </p>
+    </button>
+{% endif %}
+
+
+{% if request.GET.photo_filter == "보호자와함께" %}
+    <button type="submit" name="photo_filter" value="보호자와함께" style="" class="on mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            보호자와 함께
+        </p>
+    </button>
+
+    <a href="{% url "core:photo_home" %}" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            전체사진
+        </p>
+    </a>
+    
+    <button type="submit" name="photo_filter" value="강아지" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            강아지
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="고양이" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            고양이
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="스냅촬영" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            스냅촬영
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="귀여운" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            귀여운
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="분위기있는" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            분위기있는
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="단정한" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            단정한
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="창의적인" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            창의적인
+        </p>
+    </button>
+{% endif %}
+
+{% if request.GET.photo_filter == "강아지" %}
+    <button type="submit" name="photo_filter" value="강아지" style="" class="on mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            강아지
+        </p>
+    </button>
+
+    <a href="{% url "core:photo_home" %}" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            전체사진
+        </p>
+    </a>
+    
+    <button type="submit" name="photo_filter" value="보호자와함께" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            보호자와 함께
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="고양이" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            고양이
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="스냅촬영" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            스냅촬영
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="귀여운" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            귀여운
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="분위기있는" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            분위기있는
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="단정한" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            단정한
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="창의적인" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            창의적인
+        </p>
+    </button>
+{% endif %}
+
+{% if request.GET.photo_filter == "고양이" %}
+    <button type="submit" name="photo_filter" value="고양이" style="" class="on mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            고양이
+        </p>
+    </button>
+
+    <a href="{% url "core:photo_home" %}" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            전체사진
+        </p>
+    </a>
+    
+    <button type="submit" name="photo_filter" value="보호자와함께" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            보호자와 함께
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="강아지" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            강아지
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="스냅촬영" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            스냅촬영
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="귀여운" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            귀여운
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="분위기있는" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            분위기있는
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="단정한" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            단정한
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="창의적인" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            창의적인
+        </p>
+    </button>
+{% endif %}
+
+{% if request.GET.photo_filter == "스냅촬영" %}
+    <button type="submit" name="photo_filter" value="스냅촬영" style="" class="on mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            스냅촬영
+        </p>
+    </button>
+
+    <a href="{% url "core:photo_home" %}" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            전체사진
+        </p>
+    </a>
+    
+    <button type="submit" name="photo_filter" value="보호자와함께" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            보호자와 함께
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="강아지" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            강아지
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="고양이" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            고양이
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="귀여운" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            귀여운
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="분위기있는" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            분위기있는
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="단정한" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            단정한
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="창의적인" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            창의적인
+        </p>
+    </button>
+{% endif %}
+
+{% if request.GET.photo_filter == "귀여운" %}
+    <button type="submit" name="photo_filter" value="귀여운" style="" class="on mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            귀여운
+        </p>
+    </button>
+
+    <a href="{% url "core:photo_home" %}" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            전체사진
+        </p>
+    </a>
+    
+    <button type="submit" name="photo_filter" value="보호자와함께" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            보호자와 함께
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="강아지" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            강아지
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="고양이" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            고양이
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="스냅촬영" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            스냅촬영
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="분위기있는" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            분위기있는
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="단정한" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            단정한
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="창의적인" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            창의적인
+        </p>
+    </button>
+{% endif %}
+
+{% if request.GET.photo_filter == "분위기있는" %}
+    <button type="submit" name="photo_filter" value="분위기있는" style="" class="on mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            분위기있는
+        </p>
+    </button>
+
+    <a href="{% url "core:photo_home" %}" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            전체사진
+        </p>
+    </a>
+    
+    <button type="submit" name="photo_filter" value="보호자와함께" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            보호자와 함께
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="강아지" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            강아지
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="고양이" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            고양이
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="스냅촬영" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            스냅촬영
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="귀여운" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            귀여운
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="단정한" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            단정한
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="창의적인" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            창의적인
+        </p>
+    </button>
+{% endif %}
+
+{% if request.GET.photo_filter == "단정한" %}
+    <button type="submit" name="photo_filter" value="단정한" style="" class="on mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            단정한
+        </p>
+    </button>
+
+    <a href="{% url "core:photo_home" %}" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            전체사진
+        </p>
+    </a>
+    
+    <button type="submit" name="photo_filter" value="보호자와함께" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            보호자와 함께
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="강아지" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            강아지
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="고양이" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            고양이
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="스냅촬영" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            스냅촬영
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="귀여운" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            귀여운
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="분위기있는" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            분위기있는
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="창의적인" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            창의적인
+        </p>
+    </button>
+{% endif %}
+
+{% if request.GET.photo_filter == "창의적인" %}
+    <button type="submit" name="photo_filter" value="창의적인" style="" class="on mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            창의적인
+        </p>
+    </button>
+
+    <a href="{% url "core:photo_home" %}" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            전체사진
+        </p>
+    </a>
+    
+    <button type="submit" name="photo_filter" value="보호자와함께" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            보호자와 함께
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="강아지" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            강아지
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="고양이" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            고양이
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="스냅촬영" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            스냅촬영
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="귀여운" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            귀여운
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="분위기있는" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            분위기있는
+        </p>
+    </button>
+    <button type="submit" name="photo_filter" value="단정한" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            단정한
+        </p>
+    </button>
+{% endif %}

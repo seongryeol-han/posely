@@ -11,6 +11,7 @@ from django.shortcuts import get_object_or_404
 from users import mixins as user_mixins
 from django.db.models import Count, F, Func
 import math
+import random
 
 # sort by default
 
@@ -59,6 +60,13 @@ class HomeView2(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
+        # test_idx가 세션있나 없나 체크
+        if "test_idx" in self.request.session:
+            del self.request.session["test_idx"]
+            self.request.session["test_idx"] = random.randrange(1, 3)
+        else:
+            self.request.session["test_idx"] = random.randrange(1, 3)
+
         # print(self.request.user)
         temp = {}
         if self.request.user.is_authenticated:  # 로그인 되면 실행됨 # 로그인 X 시 스킵
@@ -73,9 +81,11 @@ class HomeView2(ListView):
         return context
 
     def get_queryset(self):
-        ps_with_avg = models.Studio.objects.annotate(like_count=Count("likes_user")).order_by(
-            "-like_count"
-        ).distinct()
+        ps_with_avg = (
+            models.Studio.objects.annotate(like_count=Count("likes_user"))
+            .order_by("-like_count")
+            .distinct()
+        )
         return ps_with_avg
 
 
@@ -100,9 +110,57 @@ class HomeView3(ListView):
     """StudioView Definition"""
 
     model = models.Studio
-    paginate_by = 1
+    paginate_by = 10
     context_object_name = "studios"
     template_name = "studios/studio_list.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        print("sort by distance_get_context_data_part")
+        print(self.request.user)
+        temp = {}
+        if self.request.user.is_authenticated:  # 로그인 되면 실행됨 # 로그인 X 시 스킵
+            aa = models.Studio.objects.filter(likes_user=self.request.user).values_list(
+                "pk", flat=True
+            )
+            context["check_exist"] = aa
+        else:
+            context["check_exist"] = temp
+        context["page_sorted"] = "distance"
+        return context
+
+    def get_queryset(self):
+        if self.request.GET.get("lat"):
+            now_lat = float(self.request.GET.get("lat"))
+            now_lng = float(self.request.GET.get("lng"))
+
+            self.request.session["lat"] = now_lat
+            self.request.session["lng"] = now_lng
+
+        lng1 = self.request.session.get("lng")
+        lat1 = self.request.session.get("lat")
+        radlat = Radians(lat1)  # given latitude
+        radlong = Radians(lng1)  # given longitude
+        radflat = Radians(F("studio_lat"))
+        radflong = Radians(F("studio_lng"))
+        Expression = 3959.0 * Acos(
+            Cos(radlat) * Cos(radflat) * Cos(radflong - radlong)
+            + Sin(radlat) * Sin(radflat)
+        )
+        ps_with_avg = models.Studio.objects.annotate(distance=Expression).order_by(
+            "distance"
+        )
+        return ps_with_avg
+
+
+class HomeView4(ListView):
+    """StudioView Definition"""
+
+    model = models.Studio
+    paginate_by = 10
+    context_object_name = "studios"
+    template_name = "studios/photo_studio_list.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -220,8 +278,7 @@ class SearchView(View):
                     return render(
                         request,
                         "studios/search.html",
-                        {"form": form, "empty_search": "ok",
-                            "page_sorted": "search"},
+                        {"form": form, "empty_search": "ok", "page_sorted": "search"},
                     )
         form = forms.SearchForm()
         return render(
@@ -277,8 +334,7 @@ class EditStudioView(user_mixins.LoggedInOnlyView, UpdateView):
 
     def get_form(self, form_class=None):
         form = super().get_form(form_class=form_class)
-        form.fields["phone_number"].widget.attrs = {
-            "placeholder": "- 를 포함해주세요."}
+        form.fields["phone_number"].widget.attrs = {"placeholder": "- 를 포함해주세요."}
         form.fields["open_time"].widget.attrs = {"placeholder": "10:00"}
         form.fields["close_time"].widget.attrs = {"placeholder": "20:00"}
         form.fields["address"].widget.attrs = {"readonly": True}
@@ -435,3 +491,55 @@ class ConceptSelectView(DetailView):
     model = models.Studio
     template_name = "concepts/concept_select.html"
     ordering = "created"
+
+
+class Search2View(View):
+    """SearchView Definition"""
+
+    def get(self, request):
+        form = forms.Search2Form(request.GET)
+        if form.is_valid():
+            search_data = form.cleaned_data.get("search_name_address2")
+            if len(search_data) != 0:
+                filter_args1 = {}
+                filter_args2 = {}
+                filter_args1["name__startswith"] = search_data
+                filter_args2["address__contains"] = search_data
+                qs1 = (
+                    models.Studio.objects.filter(**filter_args1)
+                    .annotate(like_count=Count("likes_user"))
+                    .order_by(
+                        "-like_count",
+                    )
+                )
+                qs2 = (
+                    models.Studio.objects.filter(**filter_args2)
+                    .annotate(like_count=Count("likes_user"))
+                    .order_by(
+                        "-like_count",
+                    )
+                )
+                qs = qs1 | qs2
+
+                paginator = Paginator(qs, 10, orphans=5)
+                page = request.GET.get("page", 1)
+                studios = paginator.get_page(page)
+                if qs.count() > 0:
+                    return render(
+                        request,
+                        "studios/search2.html",
+                        {"form": form, "studios": studios, "page_sorted": "search"},
+                    )
+                elif qs.count() == 0:
+                    form = forms.Search2Form()
+                    return render(
+                        request,
+                        "studios/search2.html",
+                        {"form": form, "empty_search": "ok", "page_sorted": "search"},
+                    )
+        form = forms.Search2Form()
+        return render(
+            request,
+            "studios/search2.html",
+            {"form": form, "empty_search": "ok", "page_sorted": "search"},
+        )
