@@ -20,7 +20,6 @@
     .wrap button {
         display:inline-block;
         list-style:none;
-        font-weight: 500;
     }
 
     .wrap a {
@@ -33,6 +32,7 @@
         color: white;
         border: none;
         padding: 7px 8px;
+        font-weight: 500;
     }
 
     .clicked {
@@ -57,7 +57,7 @@
         {{request.GET.photo_filter}}
     </div>
     <div class="h-12 my-1 w-600px small:w-full">
-        <form id="scroll" class="wrap px-2 py-1 text-gray-800" style="font-weight: 500;"  method="get" action="{% url "core:photo_filter" %}">
+        <form id="scroll" class="wrap px-2 py-1 text-gray-800" style="font-weight: 400;"  method="get" action="{% url "core:photo_filter" %}">
             {% include "mixins/photo/photo_filter_button.html"%}
         </form>
     </div>
@@ -68,51 +68,51 @@
                 {% for photo in photos %}
                 <a class="grid-item mb-9 mobile:mb-7" style="width: 49%;" href="{% url "concepts:detail" photo.concept.pk %}">
                     <img src="{{photo.file.url}}" alt="image" style="border-radius: 18px;">
-                    <div class="px-2 " style="margin-top: 7px;">
-                        <div class=" text-sm mobile:text-xs flex font-semibold">
-                            <p class="mr-2 mobile:mr-1 text-blue-600 ">
+                    <div class="px-2 " style="margin-top: 0.3rem">
+                        <div class="flex flex-wrap items-end" style="font-size: 0.75rem; font-weight:500;">
+                            <p class="mr-1 text-blue-600 " style="">
                                 {{photo.studio.location}}
                             </p>
                             <p class="text-gray-600">
                                 {{photo.studio}}
-                            </p>    
+                            </p>
                         </div>
-                        <div style="" class="text-xs mobile:text-10px mt-0.5 mobile:mt-0 text-blue-400 flex h-3 font-semibold" >
+                        <div style="font-size: 0.7rem; font-weight: 400;" class=" text-blue-400 flex" >
                             {% for a in photo.studio.studio_badge.all %}
                             {% if a.pk == 2 %}
-                                <div class="mr-1 flex items-center"><p>#{{a}}</p></div>
+                                #프로
                             {% endif %}
                             {% if a.pk == 3 %}
-                                <div class="mr-1 flex items-center"><p>#{{a}}</p></div>
+                                #슈퍼루키
                             {% endif %}
                             {% if a.pk == 4 %}
-                                <div class="mr-1 flex items-center"><p>#{{a}}</p></div>
+                                #펫마스터
                             {% endif %}
                             {% if a.pk == 5 %}
-                                <div class="mr-1 flex items-center"><p>#{{a}}</p></div>
+                                #맞춤형
                             {% endif %}
                             {% if a.pk == 6 %}
-                                <div class="mr-1 flex items-center"><p>#{{a}}</p></div>
+                                #친절한
                             {% endif %}
                             {% if a.pk == 7 %}
-                                <div class="mr-1 flex items-center"><p>#{{a}}</p></div>
+                                #쾌적한
                             {% endif %}
                             {% if a.pk == 8 %}
-                                <div class="mr-1 flex items-center"><p>#{{a}}</p></div>
+                                #꼼꼼한
                             {% endif %}
                             {% if a.pk == 9 %}
-                                <div class="mr-1 flex items-center"><p>#{{a}}</p></div>
+                                #다양한
                             {% endif %}
                             {% if a.pk == 10 %}
-                                <div class="mr-1 flex items-center"><p>#{{a}}</p></div>
+                                #제휴가능
                             {% endif %}
                         {% endfor %}    
                         </div>
-                        <div style=" font-size:12px;" class="text-gray-600 font-semibold flex mt-0.5" >
-                            <p class=" mobile:text-xs">
+                        <div style=" font-size: 0.75rem;  font-weight:500;" class="text-gray-600 flex" >
+                            <p class=>
                                 {{photo.concept}}
                             </p>
-                            <p class=" mobile:text-xs">
+                            <p class=>
                                 &nbsp;&nbsp;₩{{photo.concept.price|intcomma}}
                             </p>
                         </div>

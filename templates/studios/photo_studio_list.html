@@ -32,25 +32,25 @@
 <!--여기가 하단 메뉴바-->
 <div class="fixed bottom-0 left-0 w-full flex justify-center items-end border-t" style="z-index: 9999;">
     <div class="relative flex justify-center top-0 bg-white w-600px ">
-        <div class="flex justify-between h-full w-full py-1 mobile:pb-0 px-3" style="">
+        <div class="flex justify-between h-full w-full py-1 mobile:pb-0 px-3" style="font-size: 0.6rem;">
             <div style="width: 33.333%;">
                 <a class=" flex flex-col items-center" href="{% url "core:photo_home" %}">
                     <!--<img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/home.png"/>-->
                     <img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/home.png"/>
-                    <p style="font-size: 10px; color:#666666">홈</p>
+                    <p style="color:#666666">홈</p>
                 </a>
             </div>
             <div style="width: 33.333%;">
                 <a class=" flex flex-col items-center" href="">
                     <img class="w-6" src="https://img.icons8.com/fluency-systems-filled/100/FE82B1/marker.png"/>
-                    <p style="font-size: 10px; color:#FE82B1">근처사진관</p>
+                    <p style="color:#FE82B1">근처사진관</p>
                 </a>
             </div>
                 {% if user.is_authenticated %}
                     <div style="width: 33.333%;" >
                         <a class="flex flex-col items-center" href="{{user.get_absolute_url}}">
                             <img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/user.png"/>
-                            <p style="font-size: 10px; color:#666666">프로필</p>
+                            <p style="color:#666666">프로필</p>
                         </a>
                     </div>
                           
@@ -58,9 +58,9 @@
                     <div style="width: 33.333%;" >
                         <a class="flex flex-col items-center" href="{% url "users:login"%}">
                             <img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/user.png"/>
-                            <p style="font-size: 10px; color:#666666">로그인</p>
+                            <p style="color:#666666">로그인</p>
                         </a>
-                    </div> 
+                    </div>
                 {% endif %}
         </div>
     </div>

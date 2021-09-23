@@ -11,8 +11,8 @@
     <div class="container w-350px mobile:w-full mx-auto flex flex-col items-center justify-center border p-6 bg-white border-gray-400 mobile:border-none">
         {% include "mixins/auth/auth_form.html" with form=form cta="회원가입"%}
         <div class="mt-5">
-            <span class="text-sm">계정이 있으신가요?</span>
-            <a href="{% url 'users:login' %}" class="text-blue-400 hover:text-blue-600 font-semibold text-sm">로그인</a>
+            <span style="font-size:0.9rem;">계정이 있으신가요?</span>
+            <a href="{% url 'users:login' %}" class="text-blue-400 hover:text-blue-600" style="font-size:0.9rem; font-weight:500;">로그인</a>
         </div>
     </div>
     

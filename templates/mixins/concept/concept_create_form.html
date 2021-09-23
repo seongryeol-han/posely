@@ -12,7 +12,7 @@
     
 
     {% for field in form %}
-        <div class="mb-1 ml-1 text-xs font-semibold">
+        <div class="mb-1 ml-1 text-xs">
             {{field.label}}
         </div>
         {% include "mixins/concept/concept_input.html" with field=field %}   

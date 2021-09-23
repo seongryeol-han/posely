@@ -1,11 +1,19 @@
+<style>
+    @media (max-width:300px) {
+        .margin1{
+            margin-bottom: 0.2rem;
+        }  
+    }
+</style>
+
 <a class="grid-item mb-9 mobile:mb-7" style="width: 49%;" href="{% url 'studios:profile' studio.pk%}">
     <img src="{{studio.first_concept.first_photo.url}}" alt="image" style="border-radius: 18px;">
-    <div class="px-2" style="margin-top: 10px;">
+    <div class="px-2" style="margin-top: 0.4rem">
         <div>
-            <div class=" text-sm mobile:text-xs flex font-semibold mb-0.5">
+            <div class="flex">
                 <div class="mr-0.5">
                     {% if studio.studio_avatar %}
-                        <div class= "h-9 w-9 mobile:h-7 mobile:w-7 rounded-full bg-cover" style="background-image: url({{studio.studio_avatar.url}});">
+                        <div class= "h-9 w-9 mobile:h-8 mobile:w-8 rounded-full bg-cover" style="background-image: url({{studio.studio_avatar.url}});">
                     {% else %}
                         <div class="h-9 w-9 mobile:h-7 mobile:w-7 bg-gray-600 rounded-full text-white flex justify-center items-center overflow-hidden">
                         <span class="{{text|default:'text-3xl'}}">{{studio.name|first}}</span>
@@ -13,43 +21,43 @@
                         </div>                 
                 </div>
                 <div class="flex flex-col justify-center ml-1">
-                    <p class="text-blue-600" style="height: 13px; font-size: 10px;">
+                    <p  style="font-size: 0.6rem; height:0.8rem" class="text-blue-600 margin1">
                         {{studio.location}} {{studio.location_dong}}
                     </p>
-                    <p class="text-gray-600" style="">
+                    <p style="font-size: 0.75rem; font-weight: 500;" class="text-gray-600" >
                         {{studio}}
                     </p>
                 </div>
                     
             </div>
-            <div style="" class="text-xs mobile:text-10px mt-1 mobile:mt-0 pl-1 text-blue-400 flex h-3 font-semibold" >
+            <div style="font-size: 0.6rem; font-weight: 500;" class="ml-1 text-blue-400 flex" >
                 {% for a in studio.studio_badge.all %}
                 {% if a.pk == 2 %}
-                    <div class="mr-1 flex items-center"><p>#{{a}}</p></div>
+                    #프로페셔널
                 {% endif %}
                 {% if a.pk == 3 %}
-                    <div class="mr-1 flex items-center"><p>#{{a}}</p></div>
+                    #슈퍼루키
                 {% endif %}
                 {% if a.pk == 4 %}
-                    <div class="mr-1 flex items-center"><p>#{{a}}</p></div>
+                    #펫마스터
                 {% endif %}
                 {% if a.pk == 5 %}
-                    <div class="mr-1 flex items-center"><p>#{{a}}</p></div>
+                    #맞춤형
                 {% endif %}
                 {% if a.pk == 6 %}
-                    <div class="mr-1 flex items-center"><p>#{{a}}</p></div>
+                    #친절해요
                 {% endif %}
                 {% if a.pk == 7 %}
-                    <div class="mr-1 flex items-center"><p>#{{a}}</p></div>
+                    #쾌적해요
                 {% endif %}
                 {% if a.pk == 8 %}
-                    <div class="mr-1 flex items-center"><p>#{{a}}</p></div>
+                    #꼼꼼해요
                 {% endif %}
                 {% if a.pk == 9 %}
-                    <div class="mr-1 flex items-center"><p>#{{a}}</p></div>
+                    #다양한소품
                 {% endif %}
                 {% if a.pk == 10 %}
-                    <div class="mr-1 flex items-center"><p>#{{a}}</p></div>
+                    #제휴가능
                 {% endif %}
             {% endfor %}    
             </div>

@@ -39,6 +39,36 @@
     <meta property="og:image" content="https://posely-bucket.s3.ap-northeast-2.amazonaws.com/static/img/rev_포즐리로고_share.png">
     <meta property="og:title" content="포즐리">
     <meta property="og:description" content="반려동물의 가장 사랑스러운 순간">
+    
+    <!--구글폰트-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+      html {
+        font-family: 'Noto Sans KR', sans-serif !important;
+        font-size: 16px;
+      }
+      
+      @media (max-width:300px) {
+        html{ font-size: 12px;}
+        p{ font-size: 8px;}  
+      }
+
+      @media (min-width:300px) {
+        html{ font-size: 14px;}  
+      }
+
+      @media (min-width:360px) {
+        html{ font-size: 16px;}  
+      }
+
+      @media (min-width:600px) {
+        html{ font-size: 18px;}  
+      }
+          
+      </style>
 
 
 </head>
@@ -49,9 +79,9 @@
         <div class="flex items-center justify-center w-600px small:px-0 relative">
 
                 <a class="logo flex items-center absolute" style="left: 14px;" href="{% url "core:photo_home" %}">
-                  <img style="width: 25px;" src="{%static 'img/posely_logo2.svg' %}" />
+                  <img style="width: 1.5rem;" src="{%static 'img/posely_logo2.svg' %}" />
                   {% block logo_name %}
-                  <img style="width: 90px;" src="{%static 'img/포즐리로고05.svg' %}" class="ml-1"/>
+                  <img style="width: 5rem;" src="{%static 'img/포즐리로고05.svg' %}" class="ml-1"/>
                   {% endblock logo_name %}   
                 </a>
 
@@ -60,7 +90,7 @@
                   <div class="border rounded-lg flex items-center justify-center">
                     <div class="flex items-center">
                       <div class="w-5 ml-3 mr-2"><img src="https://img.icons8.com/fluency-systems-filled/100/888888/search.png"/></div>
-                      <input class="text-sm text-gray-900 placeholder-gray-500 py-1 rounded-md focus:outline-none" style="width:150px" name="search_name_address2" placeholder="사진관 이름, 지역 검색" />
+                      <input class="text-sm text-gray-900 placeholder-gray-500 py-1 rounded-md focus:outline-none" style="width:10rem" name="search_name_address2" placeholder="사진관 이름, 지역 검색" />
                       <div class="w-5 ml-3 mr-2 cancel_button"><img src="https://img.icons8.com/fluency-systems-filled/100/bbbbbb/cancel.png"/></div>
                     </div>
                   </div>
@@ -70,7 +100,7 @@
                 <!--{% include "partials/nav.html" %}-->
                 {% block search-icons %}
                 <header class="flex items-center absolute right-0">
-                      <button type="button" class="search_button focus:outline-none w-7 mx-4"><img src="https://img.icons8.com/fluency-systems-filled/100/777777/search.png"/></button>
+                      <button style="width: 1.5rem;" type="button" class="search_button focus:outline-none mx-4"><img src="https://img.icons8.com/fluency-systems-filled/100/777777/search.png"/></button>
                 </header>
                 {% endblock search-icons %}
         </div>

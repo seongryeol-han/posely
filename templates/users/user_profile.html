@@ -6,7 +6,7 @@
 {% endblock logo_name %}   
 
 {% block search-bar %}
-    <div class="font-semibold text-sm">{{user_obj.nickname}}</div>
+    <div style="font-size:0.9rem; font-weight:500">{{user_obj.nickname}}</div>
 {% endblock search-bar %}
 
 {% block search-icons %}
@@ -28,7 +28,7 @@
                         </div>
                         {%if user_obj == user %}
                         <div class="flex" >    
-                            <a href="{%url "users:edit" %}" class="border rounded-md text-center text-white py-1 px-14 mr-2 bg-blue-500 mobile:text-sm mobile:py-0.5">
+                            <a href="{%url "users:edit" %}" class="border rounded-md text-center text-white py-1 px-14 mr-2 bg-blue-500 mobile:py-0.5" style="font-size:0.9rem; font-weight:500;">
                                 <p>프로필 설정</p>
                             </a>
                         </div>
@@ -49,7 +49,7 @@
                     {%if user.studios.count > 0%}
                         {% for studio in user_obj.studios.all %}
                         <a href="{% url 'studios:profile' studio.pk %}">    
-                            <div  class="border border-gray-400 rounded-md text-center font-semibold py-1 px-4 mobile:text-sm">
+                            <div  class="border border-gray-400 rounded-md text-center py-1 px-4" style="font-size:0.9rem; font-weight:500;">
                                 내 사진관
                             </div>
                         </a>

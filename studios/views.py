@@ -110,7 +110,7 @@ class HomeView3(ListView):
     """StudioView Definition"""
 
     model = models.Studio
-    paginate_by = 1
+    paginate_by = 10
     context_object_name = "studios"
     template_name = "studios/studio_list.html"
 
@@ -158,7 +158,7 @@ class HomeView4(ListView):
     """StudioView Definition"""
 
     model = models.Studio
-    paginate_by = 6
+    paginate_by = 10
     context_object_name = "studios"
     template_name = "studios/photo_studio_list.html"
 

@@ -118,7 +118,7 @@ class PhotoHomeView(ListView):
     """photoHomeView Definition"""
 
     model = models.Photo
-    paginate_by = 6
+    paginate_by = 10
     context_object_name = "photos"
     template_name = "photos/photo_list.html"
 
@@ -246,7 +246,7 @@ class ButtonFilterView(View):
                     print("sort_idx==0")
                     qs = models.Photo.objects.filter(**filter_args)
 
-                paginator = Paginator(qs, 6, orphans=3)
+                paginator = Paginator(qs, 10, orphans=3)
                 page = request.GET.get("page", 1)
                 photos = paginator.get_page(page)
                 if qs.count() > 0:
