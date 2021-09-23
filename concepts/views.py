@@ -153,31 +153,31 @@ class PhotoHomeView(ListView):
             ps_with_avg = models.Photo.objects.all().order_by("random_int")
         if sort_idx == 2:
             print("sort_idx==2")
-            ps_with_avg = models.Photo.objects.all().order_by("-created")
+            ps_with_avg = models.Photo.objects.all().order_by("-random_int")
         if sort_idx == 3:
             print("sort_idx==3")
-            ps_with_avg = models.Photo.objects.all().order_by("created")
+            ps_with_avg = models.Photo.objects.all().order_by("random_int")
         if sort_idx == 4:
             print("sort_idx==4")
-            ps_with_avg = models.Photo.objects.all()
+            ps_with_avg = models.Photo.objects.all().order_by("random_int")
         if sort_idx == 5:
             print("sort_idx==5")
-            ps_with_avg = models.Photo.objects.all().order_by("created")
+            ps_with_avg = models.Photo.objects.all().order_by("random_int")
         if sort_idx == 6:
             print("sort_idx==6")
-            ps_with_avg = models.Photo.objects.all()
+            ps_with_avg = models.Photo.objects.all().order_by("random_int")
         if sort_idx == 7:
             print("sort_idx==7")
             ps_with_avg = models.Photo.objects.all().order_by("random_int")
         if sort_idx == 8:
             print("sort_idx==8")
-            ps_with_avg = models.Photo.objects.all().order_by("created")
+            ps_with_avg = models.Photo.objects.all().order_by("random_int")
         if sort_idx == 9:
             print("sort_idx==9")
-            ps_with_avg = models.Photo.objects.all().order_by("-created")
+            ps_with_avg = models.Photo.objects.all().order_by("random_int")
         if sort_idx == 0:
             print("sort_idx==0")
-            ps_with_avg = models.Photo.objects.all()
+            ps_with_avg = models.Photo.objects.all().order_by("random_int")
         return ps_with_avg
 
 
@@ -218,19 +218,19 @@ class ButtonFilterView(View):
                     )
                 if sort_idx == 2:
                     print("sort_idx==2")
-                    qs = models.Photo.objects.filter(**filter_args).order_by("-created")
+                    qs = models.Photo.objects.filter(**filter_args).order_by("random_int")
                 if sort_idx == 3:
                     print("sort_idx==3")
-                    qs = models.Photo.objects.filter(**filter_args).order_by("created")
+                    qs = models.Photo.objects.filter(**filter_args).order_by("random_int")
                 if sort_idx == 4:
                     print("sort_idx==4")
-                    qs = models.Photo.objects.filter(**filter_args)
+                    qs = models.Photo.objects.filter(**filter_args).order_by("random_int")
                 if sort_idx == 5:
                     print("sort_idx==5")
-                    qs = models.Photo.objects.filter(**filter_args).order_by("created")
+                    qs = models.Photo.objects.filter(**filter_args).order_by("random_int")
                 if sort_idx == 6:
                     print("sort_idx==6")
-                    qs = models.Photo.objects.filter(**filter_args)
+                    qs = models.Photo.objects.filter(**filter_args).order_by("random_int")
                 if sort_idx == 7:
                     print("sort_idx==7")
                     qs = models.Photo.objects.filter(**filter_args).order_by(
@@ -238,13 +238,13 @@ class ButtonFilterView(View):
                     )
                 if sort_idx == 8:
                     print("sort_idx==8")
-                    qs = models.Photo.objects.filter(**filter_args).order_by("created")
+                    qs = models.Photo.objects.filter(**filter_args).order_by("random_int")
                 if sort_idx == 9:
                     print("sort_idx==9")
-                    qs = models.Photo.objects.filter(**filter_args).order_by("-created")
+                    qs = models.Photo.objects.filter(**filter_args).order_by("random_int")
                 if sort_idx == 0:
                     print("sort_idx==0")
-                    qs = models.Photo.objects.filter(**filter_args)
+                    qs = models.Photo.objects.filter(**filter_args).order_by("random_int")
 
                 paginator = Paginator(qs, 10, orphans=3)
                 page = request.GET.get("page", 1)
