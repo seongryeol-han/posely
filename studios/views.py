@@ -475,7 +475,6 @@ class CreateConceptView(user_mixins.LoggedInOnlyView, FormView):
         form = super().get_form(form_class=form_class)
 
         form.fields["name"].label = "컨셉 이름"
-        form.fields["concept_description"].label = "컨셉 설명"
         form.fields["service_config"].label = "컨셉 이용안내"
         form.fields["price"].label = "가격"
         return form

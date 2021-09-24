@@ -36,7 +36,6 @@ class CreateConceptForm(forms.ModelForm):
         model = concept_model.Concept
         fields = (
             "name",
-            "concept_description",
             "service_config",
             "price",
         )
