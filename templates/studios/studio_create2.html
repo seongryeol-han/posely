@@ -3,8 +3,11 @@
 
 {%block page_title%}사진관 만들기{%endblock page_title%}
 
+{% block logo_name %} 
+{%endblock logo_name %} 
+
 {% block search-bar %}
-    <div class="font-semibold text-sm">사진관 만들기</div>
+    <div style="font-size:0.9rem; font-weight:500">사진관 만들기</div> 
 {% endblock search-bar %}
 
 {% block search-icons %}
@@ -17,20 +20,20 @@
         <form class="w-full" action="{% url 'studios:create' %}" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
 
-            <div class="mb-1 ml-1 text-xs font-semibold">
+            <div class="mb-1 ml-1 text-xs">
                 <label for="name">사진관 이름</label>
             </div>
             <div class="border rounded px-2 py-1 bg-gray-100 input-click mb-4 text-xs">
                 <input class="studio-input-field" name="name" type="text"  id="name" required placeholder="사진관 이름을 입력해주세요.">
             </div>
-            <div class="mb-1 ml-1 text-xs font-semibold">
+            <div class="mb-1 ml-1 text-xs ">
                 <label for="studio_avatar">사진관 프로필 사진</label>
             </div>
             <div class="border rounded px-2 py-1 bg-gray-100 input-click mb-4 text-xs">
                 <input class="studio-input-field" name="studio_avatar" type="file" id="studio_avatar" required>
             </div>
 
-            <div class="mb-1 ml-1 text-xs font-semibold">
+            <div class="mb-1 ml-1 text-xs ">
                 <label for="address">사진관 주소</label>
             </div>
             
@@ -46,37 +49,37 @@
                 <input class="studio-input-field" type="text" name="addr_detail" id="addr_detail" required placeholder="상세주소를 입력해주세요.">
             </div>
 
-            <div class="mb-1 ml-1 text-xs font-semibold">
+            <div class="mb-1 ml-1 text-xs">
                 <label for="phone_number">전화번호</label>
             </div>
             <div class="border rounded px-2 py-1 bg-gray-100 input-click mb-4 text-xs">
                 <input class="studio-input-field" name="phone_number" type="text"  id="phone_number" placeholder=" - 를 포함해주세요.">
             </div>
-            <div class="mb-1 ml-1 text-xs font-semibold">
+            <div class="mb-1 ml-1 text-xs">
                 <label for="kakao_chat">카카오 오픈채팅 주소</label>
             </div>
             <div class="border rounded px-2 py-1 bg-gray-100 input-click mb-4 text-xs">
                 <input class="studio-input-field" name="kakao_chat" type="text"  id="kakao_chat" placeholder="오픈 채팅방 주소(URL)를 등록해주세요.">
             </div>
-            <div class="mb-1 ml-1 text-xs font-semibold">
+            <div class="mb-1 ml-1 text-xs">
                 <label for="open_time">오픈 시간</label>
             </div>
               <div class="border rounded px-2 py-1 bg-gray-100 input-click mb-4 text-xs">
                 <input class="studio-input-field" name="open_time" type="text"  id="open_time" required placeholder="10:00">
             </div>
-            <div class="mb-1 ml-1 text-xs font-semibold">
+            <div class="mb-1 ml-1 text-xs">
                 <label for="close_time">마감 시간</label>
             </div>
               <div class="border rounded px-2 py-1 bg-gray-100 input-click mb-4 text-xs">
                 <input class="studio-input-field" name="close_time" type="text"  id="close_time" required placeholder="20:00"  >
             </div>
-            <div class="mb-1 ml-1 text-xs font-semibold">
+            <div class="mb-1 ml-1 text-xs">
                 <label for="introduction">사진관 소개</label>
             </div>
               <div class="border rounded px-2 py-1 bg-gray-100 input-click mb-4 text-xs">
                 <textarea class="studio-input-field" style="height: 120px;" name="introduction" type="text"  id="introduction" required placeholder=""></textarea>
             </div>
-            <div class="mb-1 ml-1 text-xs font-semibold">
+            <div class="mb-1 ml-1 text-xs">
                 <label for="using_info">사진관 이용안내</label>
             </div>
               <div class="border rounded px-2 py-1 bg-gray-100 input-click mb-4 text-xs">

@@ -36,7 +36,6 @@ class EditConceptView(user_mixins.LoggedInOnlyView, UpdateView):
     template_name = "concepts/concept_edit.html"
     fields = (
         "name",
-        "concept_description",
         "service_config",
         "price",
     )
@@ -56,7 +55,6 @@ class EditConceptView(user_mixins.LoggedInOnlyView, UpdateView):
         form = super().get_form(form_class=form_class)
 
         form.fields["name"].label = "컨셉 이름"
-        form.fields["concept_description"].label = "컨셉 설명"
         form.fields["service_config"].label = "컨셉 이용안내"
         form.fields["price"].label = "가격"
         return form
@@ -153,13 +151,13 @@ class PhotoHomeView(ListView):
             ps_with_avg = models.Photo.objects.all().order_by("random_int")
         if sort_idx == 2:
             print("sort_idx==2")
-            ps_with_avg = models.Photo.objects.all().order_by("-random_int")
+            ps_with_avg = models.Photo.objects.all().order_by("random_int")
         if sort_idx == 3:
             print("sort_idx==3")
-            ps_with_avg = models.Photo.objects.all().order_by("random_int")
+            ps_with_avg = models.Photo.objects.all().order_by("-random_int")
         if sort_idx == 4:
             print("sort_idx==4")
-            ps_with_avg = models.Photo.objects.all().order_by("random_int")
+            ps_with_avg = models.Photo.objects.all().order_by("-random_int")
         if sort_idx == 5:
             print("sort_idx==5")
             ps_with_avg = models.Photo.objects.all().order_by("random_int")
@@ -168,10 +166,10 @@ class PhotoHomeView(ListView):
             ps_with_avg = models.Photo.objects.all().order_by("random_int")
         if sort_idx == 7:
             print("sort_idx==7")
-            ps_with_avg = models.Photo.objects.all().order_by("random_int")
+            ps_with_avg = models.Photo.objects.all().order_by("-random_int")
         if sort_idx == 8:
             print("sort_idx==8")
-            ps_with_avg = models.Photo.objects.all().order_by("random_int")
+            ps_with_avg = models.Photo.objects.all().order_by("-random_int")
         if sort_idx == 9:
             print("sort_idx==9")
             ps_with_avg = models.Photo.objects.all().order_by("random_int")
@@ -214,7 +212,7 @@ class ButtonFilterView(View):
                 if sort_idx == 1:
                     print("sort_idx==1")
                     qs = models.Photo.objects.filter(**filter_args).order_by(
-                        "random_int"
+                        "-random_int"
                     )
                 if sort_idx == 2:
                     print("sort_idx==2")
@@ -224,10 +222,10 @@ class ButtonFilterView(View):
                     qs = models.Photo.objects.filter(**filter_args).order_by("random_int")
                 if sort_idx == 4:
                     print("sort_idx==4")
-                    qs = models.Photo.objects.filter(**filter_args).order_by("random_int")
+                    qs = models.Photo.objects.filter(**filter_args).order_by("-random_int")
                 if sort_idx == 5:
                     print("sort_idx==5")
-                    qs = models.Photo.objects.filter(**filter_args).order_by("random_int")
+                    qs = models.Photo.objects.filter(**filter_args).order_by("-random_int")
                 if sort_idx == 6:
                     print("sort_idx==6")
                     qs = models.Photo.objects.filter(**filter_args).order_by("random_int")
@@ -238,10 +236,10 @@ class ButtonFilterView(View):
                     )
                 if sort_idx == 8:
                     print("sort_idx==8")
-                    qs = models.Photo.objects.filter(**filter_args).order_by("random_int")
+                    qs = models.Photo.objects.filter(**filter_args).order_by("-random_int")
                 if sort_idx == 9:
                     print("sort_idx==9")
-                    qs = models.Photo.objects.filter(**filter_args).order_by("random_int")
+                    qs = models.Photo.objects.filter(**filter_args).order_by("-random_int")
                 if sort_idx == 0:
                     print("sort_idx==0")
                     qs = models.Photo.objects.filter(**filter_args).order_by("random_int")

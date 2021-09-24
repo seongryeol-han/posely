@@ -35,7 +35,7 @@ class Photo(core_models.TimeStampedModel):
     def random_string():
         return str(random.randint(100000, 999999))
 
-    random_int = models.CharField(max_length=6, default="random_string", blank=True)
+    random_int = models.CharField(max_length=6, default=random_string, blank=True)
 
     def __str__(self):
         return self.caption
