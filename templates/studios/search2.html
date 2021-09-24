@@ -48,8 +48,8 @@
                     {% endif %}
                 {% endfor %}
                 {% if page_obj.has_next %}
-                    <p class="pagination">
-                        <a class="next-page" href="?page={{ page_obj.next_page_number }}">다음으로</a>
+                    <p class="pagination2">
+                        <a class="next-page3" href="?search_name_address2={{request.GET.search_name_address2}}&page={{ page_obj.next_page_number }}">111111</a>
                     </p>
                 {% endif %}
             
@@ -91,12 +91,6 @@
                             <p style="font-size: 10px; color:#666666">로그인</p>
                         </a>
                     </div> 
-                {% endif %}
-
-                {% if page_obj.has_next %}
-                    <p class="pagination1">
-                        <a class="next-page3" href="?page={{ page_obj.next_page_number }}"></a>
-                    </p>
                 {% endif %}
         </div>
     </div>
