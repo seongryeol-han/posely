@@ -502,32 +502,31 @@ class Search2View(View):
             if len(search_data) != 0:
                 filter_args1 = {}
                 filter_args2 = {}
-                filter_args1["name__startswith"] = search_data
+                filter_args1["name__contains"] = search_data
                 filter_args2["address__contains"] = search_data
                 qs1 = (
                     models.Studio.objects.filter(**filter_args1)
-                    .annotate(like_count=Count("likes_user"))
                     .order_by(
-                        "-like_count",
+                        "-created",
                     )
                 )
                 qs2 = (
                     models.Studio.objects.filter(**filter_args2)
-                    .annotate(like_count=Count("likes_user"))
                     .order_by(
-                        "-like_count",
+                        "-created",
                     )
                 )
                 qs = qs1 | qs2
 
-                paginator = Paginator(qs, 10, orphans=5)
+                paginator = Paginator(qs, 10)
                 page = request.GET.get("page", 1)
                 studios = paginator.get_page(page)
                 if qs.count() > 0:
+                    print("@@@@@@@@@@@")
                     return render(
                         request,
                         "studios/search2.html",
-                        {"form": form, "studios": studios, "page_sorted": "search"},
+                        {"form": form, "studios": studios, "page_obj": studios,"page_sorted": "search"},
                     )
                 elif qs.count() == 0:
                     form = forms.Search2Form()

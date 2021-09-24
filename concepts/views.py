@@ -244,14 +244,14 @@ class ButtonFilterView(View):
                     print("sort_idx==0")
                     qs = models.Photo.objects.filter(**filter_args).order_by("random_int")
 
-                paginator = Paginator(qs, 10, orphans=3)
+                paginator = Paginator(qs, 10)
                 page = request.GET.get("page", 1)
                 photos = paginator.get_page(page)
                 if qs.count() > 0:
                     return render(
                         request,
                         "photos/photo_list.html",
-                        {"form": form, "photos": photos},
+                        {"form": form, "photos": photos, "page_obj": photos},
                     )
                 elif qs.count() == 0:
                     form = forms.PhotoFilterForm()

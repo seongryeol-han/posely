@@ -16,24 +16,39 @@
 
 <div class="mx-auto flex flex-col items-center overflow-auto mobile:mb-4">
   <div class="absolute w-600px mobile:w-full mx-auto flex flex-col items-center justify-center p-4 px-4 bg-white mobile:p-4 mobile:mt-2">
-    <div class="w-full pl-1" style="color:#1a202c; font-size: 1.2rem; font-weight: 500;">
-      {{concept.name}}
-      <a
-        href="{% url 'studios:profile' concept.studio.pk%}"
-        class="mr-1 text-gray-600"
-        style="font-size: 0.75rem"
-        >{{concept.studio}}&nbsp;<i class="fas fa-chevron-circle-right"></i
-      ></a>
-    </div>
-
-    <div class="w-full mb-2 pl-1" style="font-size: 0.75rem">
-      <div class="text-blue-400 hover:text-blue-600">
-        <a href="{% url 'studios:profile' concept.studio.pk%}#location">
-          <i class="fas fa-map-marker-alt"></i
-          >&nbsp;{{concept.studio.addr_short}} {{concept.studio.addr_detail}}
-        </a>
+    <div class="flex items-center w-full" style="height: 3rem;">
+      <a class="mr-0.5" href="{% url 'studios:profile' concept.studio.pk%}">
+          {% if concept.studio.studio_avatar %}
+              <div class= "w-10 h-10 rounded-full bg-cover" style="background-image: url({{concept.studio.studio_avatar.url}});">
+          {% else %}
+              <div class="w-10 h-10 bg-gray-600 rounded-full text-white flex justify-center items-center overflow-hidden">
+              <span class="{{text|default:'text-3xl'}}">{{concept.studio.name|first}}</span>
+          {% endif %}
+              </div>                 
+      </a>
+      <div class="flex flex-col justify-center ml-1">
+          
+          <a href="{% url 'studios:profile' concept.studio.pk%}" style="font-size: 0.95rem; font-weight: 500; height:1.3rem;" class="text-gray-600" >
+              {{concept.studio}} 바로가기&nbsp;<i class="fas fa-chevron-circle-right"></i>
+          </a>
+          <p  style="font-size: 0.75rem; height:1rem;" class="text-blue-600 margin1">
+            <a href="{% url 'studios:profile' concept.studio.pk%}#location">
+              <i class="fas fa-map-marker-alt"></i
+              >&nbsp;{{concept.studio.addr_short}} {{concept.studio.addr_detail}}
+            </a>
+          </p>
       </div>
+          
+  </div>
+    
+    <div class="w-full pl-1 mt-5 mb-1" style="color:#1a202c; font-size: 0.9rem; font-weight: 600;">
+      
+      {{concept.name}}
     </div>
+    
+    
+
+    
 
     <div class="w-full mb-4 border-b pb-4">
       <div class="swiper-container">
