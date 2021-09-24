@@ -246,7 +246,7 @@ class SearchView(View):
             if len(search_data) != 0:
                 filter_args1 = {}
                 filter_args2 = {}
-                filter_args1["name__startswith"] = search_data
+                filter_args1["name__contains"] = search_data
                 filter_args2["address__contains"] = search_data
                 qs1 = (
                     models.Studio.objects.filter(**filter_args1)
