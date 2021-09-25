@@ -1,3 +1,4 @@
+{% load humanize %}
 <style>
     @media (max-width:300px) {
         .margin1{
@@ -6,68 +7,29 @@
     }
 </style>
 
-<a class="grid-item mb-9 mobile:mb-7" style="width: 49%;" href="{% url "concepts:detail" concept.pk %}">
+<a class="grid-item mb-8" style="width: 49%;" href="{% url "concepts:detail" concept.pk %}">
     <img src="{{concept.first_photo.url}}" alt="image" style="border-radius: 18px;">
+    
     <div class="px-2" style="margin-top: 0.4rem">
         <div>
-            <div class="flex justify-between text-xs bg-gray-200">
+            <div class="flex justify-between text-gray-600" style="font-size: 0.75rem; font-weight:500;">
                 <div>
-                    {{concept}} &nbsp;₩{{concept.price}}
+                    {{concept}}&nbsp;&nbsp;
                 </div>
-                <p class="text-blue-400 hover:text-blue-600"> 컨셉 보기 <i class="fas fa-chevron-circle-right"></i> </p>
-            </div>
-            <div class="flex">
-                <div class="mr-0.5">
-                    {% if concept.studio.studio_avatar %}
-                        <div class= "h-9 w-9 mobile:h-8 mobile:w-8 rounded-full bg-cover" style="background-image: url({{studio.studio_avatar.url}});">
-                    {% else %}
-                        <div class="h-9 w-9 mobile:h-7 mobile:w-7 bg-gray-600 rounded-full text-white flex justify-center items-center overflow-hidden">
-                        <span class="{{text|default:'text-3xl'}}">{{conceptstudio.name|first}}</span>
-                    {% endif %}
-                        </div>                 
-                </div>
-                <div class="flex flex-col justify-center ml-1">
-                    <p  style="font-size: 0.6rem; height:0.8rem" class="text-blue-600 margin1">
-                        {{concept.studio.location}} {{concept.studio.location_dong}}
-                    </p>
-                    <p style="font-size: 0.75rem; font-weight: 500;" class="text-gray-600" >
-                        {{concept.studio}}
-                    </p>
-                </div>
-                    
-            </div>
-            <div style="font-size: 0.6rem; font-weight: 500;" class="hidden ml-1 text-blue-400 flex" >
-                {% for a in concept.studio.studio_badge.all %}
-                {% if a.pk == 2 %}
-                    #프로페셔널
-                {% endif %}
-                {% if a.pk == 3 %}
-                    #슈퍼루키
-                {% endif %}
-                {% if a.pk == 4 %}
-                    #펫마스터
-                {% endif %}
-                {% if a.pk == 5 %}
-                    #맞춤형
-                {% endif %}
-                {% if a.pk == 6 %}
-                    #친절해요
-                {% endif %}
-                {% if a.pk == 7 %}
-                    #쾌적해요
-                {% endif %}
-                {% if a.pk == 8 %}
-                    #꼼꼼해요
-                {% endif %}
-                {% if a.pk == 9 %}
-                    #다양한소품
-                {% endif %}
-                {% if a.pk == 10 %}
-                    #제휴가능
-                {% endif %}
-            {% endfor %}    
+                <p class="">₩{{concept.price|intcomma}} <i class="fas fa-chevron-circle-right"></i> </p>
             </div>
         </div>
-        
+    </div>
+
+    <div class="flex ml-1" style="margin-top: 0.1rem;">
+        <div class="flex flex-wrap items-end ml-1">
+            <p  style="font-size: 0.75rem; bg-gray-200;" class="text-blue-600 margin1">
+                {{concept.studio.location}} {{concept.studio.location_dong}}&nbsp;
+            </p>
+            <p style="font-size: 0.75rem; font-weight:500;" class="text-gray-600" >
+                {{concept.studio}}
+            </p>
+            
+        </div>
     </div>
 </a>
