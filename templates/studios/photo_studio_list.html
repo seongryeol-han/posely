@@ -36,7 +36,9 @@
             <div class="grid__col-sizer" style="width: 49%"></div>
             <div class="grid__gutter-sizer" style="width: 2%"></div>
             {% for studio in studios %}
-                {%include "mixins/studio/photo_studio_card.html" with studio=studio%}
+                {% for concept in studio.concepts.all %}
+                    {%include "mixins/studio/photo_studio_card.html" with concept=concept%}
+                {% endfor %}        
             {% endfor %}
             
 

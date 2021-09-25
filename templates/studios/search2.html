@@ -43,9 +43,9 @@
             <div class="grid__col-sizer" style="width: 49%"></div>
             <div class="grid__gutter-sizer" style="width: 2%"></div>
                 {% for studio in studios %}
-                    {% if studio.first_concept.first_photo%} <!--사진관 컨셉 없을때 검색시 뜨는거 방지-->
-                        {%include "mixins/studio/photo_studio_card.html" with studio=studio%}
-                    {% endif %}
+                    {% for concept in studio.concepts.all %}
+                        {%include "mixins/studio/photo_studio_card.html" with concept=concept%}
+                    {% endfor %}        
                 {% endfor %}
                 {% if page_obj.has_next %}
                     <p class="pagination2">

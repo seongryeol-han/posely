@@ -45,7 +45,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
-
+    
+    <!--GA-->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-28S5CRDF0J"></script>
 
     <style>
       html {
@@ -213,7 +215,13 @@
         }
     })
 
-  </script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-28S5CRDF0J');
+
+</script>
     
 </body>
 </html>
