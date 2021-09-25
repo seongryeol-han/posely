@@ -36,7 +36,9 @@
             <div class="grid__col-sizer" style="width: 49%"></div>
             <div class="grid__gutter-sizer" style="width: 2%"></div>
             {% for studio in studios %}
-                {%include "mixins/studio/photo_studio_card.html" with studio=studio%}
+                {% for concept in studio.concepts.all %}
+                    {%include "mixins/studio/photo_studio_card.html" with concept=concept%}
+                {% endfor %}        
             {% endfor %}
             
 
@@ -66,7 +68,7 @@
             <div style="width: 33.333%;">
                 <a class=" flex flex-col items-center" href="">
                     <img class="w-6" src="https://img.icons8.com/fluency-systems-filled/100/FE82B1/marker.png"/>
-                    <p style="color:#FE82B1">근처사진관</p>
+                    <p style="color:#FE82B1">내주변컨셉</p>
                 </a>
             </div>
                 {% if user.is_authenticated %}

@@ -158,7 +158,7 @@ class HomeView4(ListView):
     """StudioView Definition"""
 
     model = models.Studio
-    paginate_by = 10
+    paginate_by = 4
     context_object_name = "studios"
     template_name = "studios/photo_studio_list.html"
 
