@@ -1,32 +1,25 @@
 {% load humanize %}
-<style>
-    @media (max-width:300px) {
-        .margin1{
-            margin-bottom: 0.2rem;
-        }  
-    }
-</style>
 
 <a class="grid-item mb-8" style="width: 49%;" href="{% url "concepts:detail" concept.pk %}">
     <img src="{{concept.first_photo.url}}" alt="image" style="border-radius: 18px;">
     
-    <div class="px-2" style="margin-top: 0.4rem">
-        <div>
-            <div class="flex justify-between text-gray-600" style="font-size: 0.75rem; font-weight:500;">
-                <div>
-                    {{concept}}&nbsp;&nbsp;
-                </div>
-                <p class="">₩{{concept.price|intcomma}} <i class="fas fa-chevron-circle-right"></i> </p>
+    <div class="px-2" style="margin-top: 0.2rem; height:1.2rem;">
+        <div class="flex justify-between text-gray-600" style="font-size: 0.8rem; font-weight:500;">
+            <div>
+                {{concept}}&nbsp;&nbsp;
+            </div>
+            <div class="text-gray-500">
+                <span class="text-gray-600">₩{{concept.price|intcomma}}</span> <i class="fas fa-chevron-circle-right"></i> 
             </div>
         </div>
     </div>
 
-    <div class="flex ml-1" style="margin-top: 0.1rem;">
-        <div class="flex flex-wrap items-end ml-1">
-            <p  style="font-size: 0.75rem; bg-gray-200;" class="text-blue-600 margin1">
+    <div class="flex ml-1" style="">
+        <div class="flex flex-wrap items-end ml-1" style="">
+            <p  style="font-size: 0.75rem; bg-gray-200; height:0.9rem;" class="text-blue-600">
                 {{concept.studio.location}} {{concept.studio.location_dong}}&nbsp;
             </p>
-            <p style="font-size: 0.75rem; font-weight:500;" class="text-gray-600" >
+            <p style="font-size: 0.75rem; font-weight:500; height:0.9rem;" class="text-gray-600" >
                 {{concept.studio}}
             </p>
             
