@@ -81,7 +81,7 @@
                 <a class="grid-item mb-9 mobile:mb-7" style="width: 49%;" href="{% url "concepts:detail" photo.concept.pk %}">
                     <img src="{{photo.file.url}}" alt="image" style="border-radius: 18px;">
                     <div class="px-2 " style="margin-top: 0.3rem">
-                        <div class="flex flex-wrap items-end" style="font-size: 0.75rem; font-weight:500;">
+                        <div class="flex flex-wrap items-end" style="font-size: 0.7rem; font-weight:400; height:0.8rem;">
                             <p class="mr-1 text-blue-600 " style="">
                                 {{photo.studio.location}}
                             </p>
@@ -89,7 +89,7 @@
                                 {{photo.studio}}
                             </p>
                         </div>
-                        <div style="font-size: 0.7rem; font-weight: 400;" class=" text-blue-400 flex" >
+                        <div style="font-size: 0.65rem; font-weight: 400; height: 0.8rem;" class=" text-blue-400 flex" >
                             {% for a in photo.studio.studio_badge.all %}
                             {% if a.pk == 2 %}
                                 #프로
@@ -120,7 +120,7 @@
                             {% endif %}
                         {% endfor %}    
                         </div>
-                        <div style=" font-size: 0.75rem;  font-weight:500;" class="text-gray-600 flex" >
+                        <div style=" font-size: 0.7rem;  font-weight:400; margin-top: 0.2rem;" class="text-gray-700 flex flex-wrap justify-between" >
                             <p class=>
                                 {{photo.concept}}
                             </p>
