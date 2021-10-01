@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import (
 )
 from users import mixins as user_mixins
 import datetime, random
+from django.db.models.functions import Substr
 
 # Create your views here.
 
@@ -148,34 +149,34 @@ class PhotoHomeView(ListView):
         ps_with_avg = None
         if sort_idx == 1:
             print("sort_idx==1")
-            ps_with_avg = models.Photo.objects.all().order_by("random_int")
+            ps_with_avg = models.Photo.objects.annotate(random_int_split=Substr("random_int",1)).order_by("random_int_split")
         if sort_idx == 2:
             print("sort_idx==2")
-            ps_with_avg = models.Photo.objects.all().order_by("random_int")
+            ps_with_avg = models.Photo.objects.annotate(random_int_split=Substr("random_int",2)).order_by("random_int_split")
         if sort_idx == 3:
             print("sort_idx==3")
-            ps_with_avg = models.Photo.objects.all().order_by("-random_int")
+            ps_with_avg = models.Photo.objects.annotate(random_int_split=Substr("random_int",3)).order_by("random_int_split")
         if sort_idx == 4:
             print("sort_idx==4")
-            ps_with_avg = models.Photo.objects.all().order_by("-random_int")
+            ps_with_avg = models.Photo.objects.annotate(random_int_split=Substr("random_int",4)).order_by("random_int_split")
         if sort_idx == 5:
             print("sort_idx==5")
-            ps_with_avg = models.Photo.objects.all().order_by("random_int")
+            ps_with_avg = models.Photo.objects.annotate(random_int_split=Substr("random_int",5)).order_by("random_int_split")
         if sort_idx == 6:
             print("sort_idx==6")
-            ps_with_avg = models.Photo.objects.all().order_by("random_int")
+            ps_with_avg = models.Photo.objects.annotate(random_int_split=Substr("random_int",5)).order_by("-random_int_split")
         if sort_idx == 7:
             print("sort_idx==7")
-            ps_with_avg = models.Photo.objects.all().order_by("-random_int")
+            ps_with_avg = models.Photo.objects.annotate(random_int_split=Substr("random_int",4)).order_by("-random_int_split")
         if sort_idx == 8:
             print("sort_idx==8")
-            ps_with_avg = models.Photo.objects.all().order_by("-random_int")
+            ps_with_avg = models.Photo.objects.annotate(random_int_split=Substr("random_int",3)).order_by("-random_int_split")
         if sort_idx == 9:
             print("sort_idx==9")
-            ps_with_avg = models.Photo.objects.all().order_by("random_int")
+            ps_with_avg = models.Photo.objects.annotate(random_int_split=Substr("random_int",2)).order_by("-random_int_split")
         if sort_idx == 0:
             print("sort_idx==0")
-            ps_with_avg = models.Photo.objects.all().order_by("random_int")
+            ps_with_avg = models.Photo.objects.annotate(random_int_split=Substr("random_int",1)).order_by("-random_int_split")
         return ps_with_avg
 
 
@@ -211,38 +212,54 @@ class ButtonFilterView(View):
                 sort_idx = self.request.session.get("test_idx")
                 if sort_idx == 1:
                     print("sort_idx==1")
-                    qs = models.Photo.objects.filter(**filter_args).order_by(
-                        "-random_int"
+                    qs = models.Photo.objects.annotate(random_int_split=Substr("random_int",1)).filter(**filter_args).order_by(
+                        "-random_int_split"
                     )
                 if sort_idx == 2:
                     print("sort_idx==2")
-                    qs = models.Photo.objects.filter(**filter_args).order_by("random_int")
+                    qs = models.Photo.objects.annotate(random_int_split=Substr("random_int",2)).filter(**filter_args).order_by(
+                        "-random_int_split"
+                    )
                 if sort_idx == 3:
                     print("sort_idx==3")
-                    qs = models.Photo.objects.filter(**filter_args).order_by("random_int")
+                    qs = models.Photo.objects.annotate(random_int_split=Substr("random_int",3)).filter(**filter_args).order_by(
+                        "-random_int_split"
+                    )
                 if sort_idx == 4:
                     print("sort_idx==4")
-                    qs = models.Photo.objects.filter(**filter_args).order_by("-random_int")
+                    qs = models.Photo.objects.annotate(random_int_split=Substr("random_int",4)).filter(**filter_args).order_by(
+                        "-random_int_split"
+                    )
                 if sort_idx == 5:
                     print("sort_idx==5")
-                    qs = models.Photo.objects.filter(**filter_args).order_by("-random_int")
+                    qs = models.Photo.objects.annotate(random_int_split=Substr("random_int",5)).filter(**filter_args).order_by(
+                        "-random_int_split"
+                    )
                 if sort_idx == 6:
                     print("sort_idx==6")
-                    qs = models.Photo.objects.filter(**filter_args).order_by("random_int")
+                    qs = models.Photo.objects.annotate(random_int_split=Substr("random_int",5)).filter(**filter_args).order_by(
+                        "random_int_split"
+                    )
                 if sort_idx == 7:
                     print("sort_idx==7")
-                    qs = models.Photo.objects.filter(**filter_args).order_by(
-                        "random_int"
+                    qs = models.Photo.objects.annotate(random_int_split=Substr("random_int",4)).filter(**filter_args).order_by(
+                        "random_int_split"
                     )
                 if sort_idx == 8:
                     print("sort_idx==8")
-                    qs = models.Photo.objects.filter(**filter_args).order_by("-random_int")
+                    qs = models.Photo.objects.annotate(random_int_split=Substr("random_int",3)).filter(**filter_args).order_by(
+                        "random_int_split"
+                    )
                 if sort_idx == 9:
                     print("sort_idx==9")
-                    qs = models.Photo.objects.filter(**filter_args).order_by("-random_int")
+                    qs = models.Photo.objects.annotate(random_int_split=Substr("random_int",2)).filter(**filter_args).order_by(
+                        "random_int_split"
+                    )
                 if sort_idx == 0:
                     print("sort_idx==0")
-                    qs = models.Photo.objects.filter(**filter_args).order_by("random_int")
+                    qs = models.Photo.objects.annotate(random_int_split=Substr("random_int",1)).filter(**filter_args).order_by(
+                        "random_int_split"
+                    )
 
                 paginator = Paginator(qs, 10)
                 page = request.GET.get("page", 1)
