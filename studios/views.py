@@ -482,7 +482,7 @@ class CreateConceptView(user_mixins.LoggedInOnlyView, FormView):
     def form_valid(self, form):
         pk = self.kwargs.get("pk")  # form으로 pk를 갖다줘야해서 pk를 설정 (concept의 pk).
         concept = form.save(pk)  # pk를 줌
-        return redirect(reverse("concepts:photos", kwargs={"pk": concept.pk}))
+        return redirect(reverse("studios:concept_photos", kwargs={"pk": concept.pk}))
 
 
 class ConceptSelectView(DetailView):

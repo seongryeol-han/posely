@@ -18,10 +18,10 @@
     <div class="mt-4 w-600px small:w-full mx-auto flex flex-col items-center justify-center border rounded-md p-6 px-4 bg-white border-gray-400 mobile:border-none">
             
         <div class="mb-4 w-3/4 flex items-center justify-between mobile:w-full">
-            <a href="{% url 'concepts:add-photo' concept.pk %}">
+            <a href="{% url 'studios:concept_add-photo' concept.pk %}">
                 <div class="border rounded-md text-center text-sm text-white py-1 px-4 bg-blue-500">사진 추가</div>
             </a>
-            <a href="{% url 'concepts:edit-list' %}">
+            <a href="{% url 'studios:concept_edit-list' %}">
                 <div class="bg-white border border-gray-500 text-gray-800 text-sm rounded-md px-4 py-1">수정 완료</div>
             </a>
             
@@ -34,7 +34,7 @@
                 <div class="p-3">
                     <img src="{{photo.file.url}}" class="w-full mb-1" />
                     <div class=" flex justify-end">
-                        <a class="border rounded-md text-center text-xs text-white px-4 py-1 bg-red-500" href="{%url "concepts:delete-photo" concept.pk photo.pk%}">삭제</a>
+                        <a class="border rounded-md text-center text-xs text-white px-4 py-1 bg-red-500" href="{%url "studios:concept_delete-photo" concept.pk photo.pk%}">삭제</a>
                     </div>
                 </div>
             {% endfor %}
