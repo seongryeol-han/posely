@@ -90,11 +90,11 @@
                 </a>
 
                 {% block search-bar %}
-                <form class="search_bar hidden fade-in-box flex items-center" method="get" action="{% url "studios:photo_studio_search" %}">
+                <form class="search_bar hidden fade-in-box flex items-center" method="get" action="{% url "studios:studio_search" %}">
                   <div class="border rounded-lg flex items-center justify-center">
                     <div class="flex items-center">
                       <div class="w-5 ml-3 mr-2"><img src="https://img.icons8.com/fluency-systems-filled/100/888888/search.png"/></div>
-                      <input class="text-sm text-gray-900 placeholder-gray-500 py-1 rounded-md focus:outline-none" style="width:10rem" name="search_name_address2" placeholder="사진관 이름, 지역 검색" />
+                      <input class="text-sm text-gray-900 placeholder-gray-500 py-1 rounded-md focus:outline-none" style="width:10rem" name="studio_search" placeholder="사진관 이름, 지역 검색" />
                       <div class="w-5 ml-3 mr-2 cancel_button"><img src="https://img.icons8.com/fluency-systems-filled/100/bbbbbb/cancel.png"/></div>
                     </div>
                   </div>

@@ -230,12 +230,6 @@ class HomeView4(ListView):
 #         },
 #     )
 
-
-class SelectStudio(DetailView):
-    model = models.Studio
-    pk_url_kwarg = "pk"
-
-
 class SearchView(View):
     """SearchView Definition"""
 
@@ -492,13 +486,13 @@ class ConceptSelectView(DetailView):
     ordering = "created"
 
 
-class Search2View(View):
+class StudioSearchView(View):
     """SearchView Definition"""
 
     def get(self, request):
-        form = forms.Search2Form(request.GET)
+        form = forms.StudioSearchForm(request.GET)
         if form.is_valid():
-            search_data = form.cleaned_data.get("search_name_address2")
+            search_data = form.cleaned_data.get("studio_search")
             if len(search_data) != 0:
                 filter_args1 = {}
                 filter_args2 = {}
@@ -529,13 +523,13 @@ class Search2View(View):
                         {"form": form, "studios": studios, "page_obj": studios,"page_sorted": "search"},
                     )
                 elif qs.count() == 0:
-                    form = forms.Search2Form()
+                    form = forms.StudioSearchForm()
                     return render(
                         request,
                         "studios/search2.html",
                         {"form": form, "empty_search": "ok", "page_sorted": "search"},
                     )
-        form = forms.Search2Form()
+        form = forms.StudioSearchForm()
         return render(
             request,
             "studios/search2.html",

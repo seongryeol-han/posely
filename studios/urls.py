@@ -6,8 +6,7 @@ app_name = "studios"
 
 urlpatterns = [
     #studio
-    path("<int:pk>", views.SelectStudio.as_view(), name="studio"),
-    path("search/", views.Search2View.as_view(), name="photo_studio_search"),
+    path("search/", views.StudioSearchView.as_view(), name="studio_search"),
     path("filter/", concept_view.ButtonFilterView.as_view(), name="photo_filter"),
     path(
         "like/", views.studio_like, name="studio_like"
