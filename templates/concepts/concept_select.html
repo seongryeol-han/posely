@@ -18,7 +18,7 @@
             
             {% if concept.first_photo %}
               
-                <a href="{% url "concepts:detail" concept.pk %}" class="w-full mb-6 pb-6 border-b flex justify-between cursor-pointer">
+                <a href="{% url "studios:concept_detail" concept.pk %}" class="w-full mb-6 pb-6 border-b flex justify-between cursor-pointer">
                     <div class="h-64 w-1/2 rounded-3xl bg-cover bg-center" style="background-image: url({{concept.first_photo}});"></div>
                     <div class=" w-1/2 p-3 pl-5 pb-4 flex flex-col">
                         <div>

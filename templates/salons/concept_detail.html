@@ -1,0 +1,225 @@
+{% extends "base.html" %} 
+
+{% load humanize %} 
+
+{%block page_title%}{{concept.name}}{%endblock page_title%} 
+
+{% block logo_name %} 
+{%endblock logo_name %} 
+
+{% block search-bar %}
+<div style="font-size:0.9rem; font-weight:500">미용 예약</div>
+{% endblock search-bar %} 
+
+{% block search-icons %} {% endblock search-icons %}
+{% block content %}
+
+<div class="mx-auto flex flex-col items-center overflow-auto mobile:mb-4">
+  <div class="absolute w-600px mobile:w-full mx-auto flex flex-col items-center justify-center p-4 px-4 bg-white mobile:p-4 mobile:mt-2">
+    <div class="flex items-center w-full" style="height: 3rem;">
+      <a class="mr-0.5" href="{% url 'salons:profile' concept.salon.pk%}">
+          {% if concept.salon.salon_avatar %}
+              <div class= "w-10 h-10 rounded-full bg-cover" style="background-image: url({{concept.salon.salon_avatar.url}});">
+          {% else %}
+              <div class="w-10 h-10 bg-gray-600 rounded-full text-white flex justify-center items-center overflow-hidden">
+              <span class="{{text|default:'text-3xl'}}">{{concept.salon.name|first}}</span>
+          {% endif %}
+              </div>                 
+      </a>
+      <div class="flex flex-col justify-center ml-1">
+          
+          <a href="{% url 'salons:profile' concept.salon.pk%}" style="font-size: 0.95rem; font-weight: 500; height:1.3rem;" class="text-gray-600" >
+              {{concept.salon}} 바로가기&nbsp;<i class="fas fa-chevron-circle-right"></i>
+          </a>
+          <p  style="font-size: 0.75rem; height:1rem;" class="text-blue-400">
+            <a href="{% url 'salons:profile' concept.salon.pk%}#location">
+              <i class="fas fa-map-marker-alt"></i
+              >&nbsp;{{concept.salon.addr_short}} {{concept.salon.addr_detail}}
+            </a>
+          </p>
+      </div>
+          
+  </div>
+    
+    <div class="w-full pl-1 mt-5 mb-1" style="color:#1a202c; font-size: 0.9rem; font-weight: 600;">
+      
+      {{concept.name}}
+    </div>
+    
+    
+
+    
+
+    <div class="w-full mb-4 border-b pb-4">
+      <div class="swiper-container">
+        <div class="swiper-wrapper">
+          {% for photo in concept.all_photo %}
+          <div class="swiper-slide">
+            <img
+              src="{{photo.file.url}}"
+              style="width: 100%;"
+              class="rounded-lg"
+            />
+          </div>
+          {% endfor %}
+        </div>
+
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+      </div>
+      <div
+        class="flex justify-between items-end mt-2 px-1 h-6"
+        style="color:#1a202c; font-size: 0.9rem; font-weight: 500;"
+      >
+        <div class="">미용 가격</div>
+        <div class="">{{concept.price|intcomma}}원~</div>
+      </div>
+    </div>
+
+    <div class="w-full mb-4 border-b pb-4 px-1">
+      <div class="mb-2 mobile:mb-1" style="color:#1a202c; font-size: 0.9rem; font-weight: 500;">
+        컨셉 설명
+      </div>
+      <div
+        class=" text-gray-800"
+        style="font-size:0.8rem; line-height: 130%; word-break: keep-all;"
+      >
+        {{concept.service_config | linebreaksbr}}
+      </div>
+    </div>
+
+    <div class="w-full mb-4 border-b pb-4 px-1">
+      <div class="mb-2 mobile:mb-1" style="color:#1a202c; font-size: 0.9rem; font-weight: 500;">
+        미용실 이용안내
+      </div>
+      <div
+        class="text-gray-800"
+        style="font-size:0.8rem; line-height: 130%; word-break: keep-all;"
+      >
+        {{concept.salon.using_info | linebreaksbr}}
+      </div>
+    </div>
+
+    <div class="h-8 mobile:h-10"></div>
+  </div>
+</div>
+
+<div class="fixed bottom-0 left-0 w-full flex justify-center items-end">
+  <div class="relative top-0 bg-white w-600px px-4">
+    <div class="flex flex-col justify-center h-full pt-2 pb-4">
+      <div
+        id="reservation_button"
+        class="
+          rounded-md
+          py-2
+          text-white text-center
+          cursor-pointer
+        "
+        style="font-size:0.9rem; font-weight:500; background-color: #FE82B1;"
+      >
+        촬영 문의하기
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="
+    modal
+    hidden
+    fixed
+    top-0
+    left-0
+    w-full
+    h-full
+    flex
+    justify-center
+    items-center
+  "
+>
+  <div class="modal_overlay bg-black opacity-50 w-full h-full absolute"></div>
+  <div
+    class="
+      modal_content
+      relative
+      top-0
+      shadow-2xl
+      rounded-xl
+      bg-white
+      p-6
+    "
+    style="width: 20rem;"
+  >
+    <div class="flex justify-between">
+      <div style="font-size:0.9rem; font-weight:500">촬영 예약 문의</div>
+      <div class="modal_close_button cursor-pointer" style="font-size:0.8rem;">
+        <i class="fas fa-times"></i>
+      </div>
+    </div>
+    <div class="flex flex-col justify-center h-full py-4">
+      {% if concept.salon.kakao_chat %}
+      <a
+        href="{{concept.salon.kakao_chat}}"
+        target="popup"
+        class="bg-yellow-500 text-white text-center py-2 rounded-md" >
+
+        <i class="fas fa-comment"></i>
+        <p style="font-size:0.8rem; font-weight:500" class="inline ml-2">카카오톡 문의</p>
+        </a>
+      {% endif %} {% if concept.salon.phone_number %}
+      <a
+        href="sms:{{concept.salon.phone_number}}"
+        class="
+          bg-green-500
+          text-white text-center
+          py-2
+          mt-3
+          rounded-md
+          hidden
+          mobile:block
+        "
+        ><i class="fas fa-envelope"></i>
+        <p style="font-size:0.8rem; font-weight:500" class="inline ml-2">문자 문의</p></a
+      >
+      <a
+        href="tel:{{concept.salon.phone_number}}"
+        class="
+          bg-blue-500
+          text-white text-center
+          py-2
+          mt-3
+          rounded-md
+          hidden
+          mobile:block
+        "
+        ><i class="fas fa-phone-alt"></i>
+        <p style="font-size:0.8rem; font-weight:500" class="inline ml-2">전화 문의</p></a
+      >
+      <a
+        class="text-center py-2 rounded-md font-semibold mobile:hidden" style="font-size:0.8rem; font-weight:500"
+      >
+        전화번호 {{concept.salon.phone_number}}</a
+      >
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<script>
+  const openButton = document.getElementById("reservation_button");
+  const modal = document.querySelector(".modal");
+  const modalCloseButton = document.querySelector(".modal_close_button");
+  const overlay = modal.querySelector(".modal_overlay");
+  const openModal = () => {
+    modal.classList.remove("hidden");
+  };
+  const closeModal = () => {
+    modal.classList.add("hidden");
+  };
+  overlay.addEventListener("click", closeModal);
+  modalCloseButton.addEventListener("click", closeModal);
+  openButton.addEventListener("click", openModal);
+</script>
+
+{% endblock content %}

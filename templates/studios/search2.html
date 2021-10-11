@@ -44,12 +44,12 @@
             <div class="grid__gutter-sizer" style="width: 2%"></div>
                 {% for studio in studios %}
                     {% for concept in studio.concepts.all %}
-                        {%include "mixins/studio/photo_studio_card.html" with concept=concept%}
+                        {%include "mixins/studio/studio_concept_card.html" with concept=concept%}
                     {% endfor %}        
                 {% endfor %}
                 {% if page_obj.has_next %}
                     <p class="pagination2">
-                        <a class="next-page3" href="?search_name_address2={{request.GET.search_name_address2}}&page={{ page_obj.next_page_number }}">111111</a>
+                        <a class="next-page3" href="?studio_search={{request.GET.studio_search}}&page={{ page_obj.next_page_number }}">111111</a>
                     </p>
                 {% endif %}
             

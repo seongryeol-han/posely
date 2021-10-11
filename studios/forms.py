@@ -2,13 +2,8 @@ from django import forms
 from . import models
 from concepts import models as concept_model
 
-
-class SearchForm(forms.Form):
-    search_name_address = forms.CharField(required=False, label="search!")
-
-
-class Search2Form(forms.Form):
-    search_name_address2 = forms.CharField(required=False, label="search!")
+class StudioSearchForm(forms.Form):
+    studio_search = forms.CharField(required=False, label="search!")
 
 
 class CreateStudioForm(forms.ModelForm):

@@ -69,7 +69,7 @@
         </div>
     </div>
     <div class="h-12 mt-2 mb-1 w-600px small:w-full">
-        <form id="scroll" class="wrap px-2 py-1 text-gray-800" style="font-weight: 400;"  method="get" action="{% url "core:photo_filter" %}">
+        <form id="scroll" class="wrap px-2 py-1 text-gray-800" style="font-weight: 400;"  method="get" action="{% url "studios:photo_filter" %}">
             {% include "mixins/photo/photo_filter_button.html"%}
         </form>
     </div>
@@ -78,7 +78,7 @@
                 <div class="grid__col-sizer" style="width: 49%"></div>
                 <div class="grid__gutter-sizer" style="width: 2%"></div>
                 {% for photo in photos %}
-                <a class="grid-item mb-9 mobile:mb-7" style="width: 49%;" href="{% url "concepts:detail" photo.concept.pk %}">
+                <a class="grid-item mb-9 mobile:mb-7" style="width: 49%;" href="{% url "studios:concept_detail" photo.concept.pk %}">
                     <img src="{{photo.file.url}}" alt="image" style="border-radius: 18px;">
                     <div class="px-2 " style="margin-top: 0.3rem">
                         <div class="flex flex-wrap items-end" style="font-size: 0.7rem; font-weight:400; height:0.8rem;">

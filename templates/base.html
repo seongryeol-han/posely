@@ -39,7 +39,8 @@
     <meta property="og:image" content="https://posely-bucket.s3.ap-northeast-2.amazonaws.com/static/img/rev_포즐리로고_share.png">
     <meta property="og:title" content="포즐리">
     <meta property="og:description" content="반려동물의 가장 사랑스러운 순간">
-    
+    <meta name="google-site-verification" content="BY1kQvwqL0hgwq11wS6EqWO6gjq8B-Jx2ygmgZeeYwc" />
+
     <!--구글폰트-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -90,11 +91,11 @@
                 </a>
 
                 {% block search-bar %}
-                <form class="search_bar hidden fade-in-box flex items-center" method="get" action="{% url "studios:photo_studio_search" %}">
+                <form class="search_bar hidden fade-in-box flex items-center" method="get" action="{% url "studios:studio_search" %}">
                   <div class="border rounded-lg flex items-center justify-center">
                     <div class="flex items-center">
                       <div class="w-5 ml-3 mr-2"><img src="https://img.icons8.com/fluency-systems-filled/100/888888/search.png"/></div>
-                      <input class="text-sm text-gray-900 placeholder-gray-500 py-1 rounded-md focus:outline-none" style="width:10rem" name="search_name_address2" placeholder="사진관 이름, 지역 검색" />
+                      <input class="text-sm text-gray-900 placeholder-gray-500 py-1 rounded-md focus:outline-none" style="width:10rem" name="studio_search" placeholder="사진관 이름, 지역 검색" />
                       <div class="w-5 ml-3 mr-2 cancel_button"><img src="https://img.icons8.com/fluency-systems-filled/100/bbbbbb/cancel.png"/></div>
                     </div>
                   </div>
@@ -205,7 +206,7 @@
                       var lng1 = position.coords.longitude;
                       sessionStorage.setItem("lat",lat1);
                       sessionStorage.setItem("lng",lng1);
-                      location.href="/photo/distance/?lat="+lat1+"&lng="+lng1
+                      location.href="/studios/distance/?lat="+lat1+"&lng="+lng1
                   }
               )}
           }

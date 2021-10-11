@@ -1,6 +1,6 @@
 {% load humanize %}
 
-<a class="grid-item mb-9" style="width: 49%;" href="{% url "concepts:detail" concept.pk %}">
+<a class="grid-item mb-9" style="width: 49%;" href="{% url "studios:concept_detail" concept.pk %}">
     <img src="{{concept.first_photo.url}}" alt="image" style="border-radius: 18px;">
 
     <div class="flex ml-1" style="margin-top: 0.3rem;">
