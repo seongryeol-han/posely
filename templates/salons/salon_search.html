@@ -38,18 +38,18 @@
             <div class="mt-2 text-red-500" style="font-size:1rem;">정확한 사진관 이름, 지역을 적어주세요.</div>
         </div>
                 
-        {% elif studios %}
+        {% elif salons %}
         <div class ="grid opacity-0" style="width: 100%;">
             <div class="grid__col-sizer" style="width: 49%"></div>
             <div class="grid__gutter-sizer" style="width: 2%"></div>
-                {% for studio in studios %}
-                    {% for concept in studio.concepts.all %}
-                        {%include "mixins/studio/photo_studio_card.html" with concept=concept%}
+                {% for salon in salons %}
+                    {% for concept in salon.concepts.all %}
+                        {%include "mixins/salon/salon_concept_card.html" with concept=concept%}
                     {% endfor %}        
                 {% endfor %}
                 {% if page_obj.has_next %}
                     <p class="pagination2">
-                        <a class="next-page3" href="?studio_search={{request.GET.studio_search}}&page={{ page_obj.next_page_number }}">111111</a>
+                        <a class="next-page3" href="?salon_search={{request.GET.studio_search}}&page={{ page_obj.next_page_number }}"></a>
                     </p>
                 {% endif %}
             

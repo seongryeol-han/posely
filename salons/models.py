@@ -128,7 +128,7 @@ class Concept(core_models.TimeStampedModel, models.Model):
     name = models.CharField(max_length=15)
     concept_description = models.TextField(max_length=160, default="", blank=True)
     service_config = models.TextField(default="", blank=False)
-    price = models.TextField(max_length=160, default="", blank=True)
+    price = models.DecimalField(max_digits=6, decimal_places=0)
     salon = models.ForeignKey(
         "salons.Salon",
         related_name="concepts",  # salon에서 concept을 "concepts"으로 사용하면 된다.

@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block page_title %}컨셉 사진{% endblock page_title %}
+
+{% block logo_name %} 
+{%endblock logo_name %} 
+
+{% block search-bar %}
+    <div style="font-size:0.9rem; font-weight:500">{{concept}}</div>
+{% endblock search-bar %}
+
+{% block search-icons %}
+{% endblock search-icons %}
+
+{% block content %}
+
+<div class="mx-auto flex flex-col items-center overflow-auto mobile:mb-4">
+    <div class="mt-4 w-600px small:w-full mx-auto flex flex-col items-center justify-center border rounded-md p-6 px-4 bg-white border-gray-400 mobile:border-none">
+            
+        <div class="mb-4 w-3/4 flex items-center justify-between mobile:w-full">
+            <a href="{% url 'salons:concept_add-photo' concept.pk %}">
+                <div class="border rounded-md text-center text-sm text-white py-1 px-4 bg-blue-500">사진 추가</div>
+            </a>
+            <a href="{% url 'salons:concept_edit-list' %}">
+                <div class="bg-white border border-gray-500 text-gray-800 text-sm rounded-md px-4 py-1">수정 완료</div>
+            </a>
+            
+        </div>
+
+        <div class="flex flex-col items-center w-3/4">
+        
+        {% if concept.first_photo %}
+            {% for photo in concept.photos.all  %}
+                <div class="p-3">
+                    <img src="{{photo.file.url}}" class="w-full mb-1" />
+                    <div class=" flex justify-end">
+                        <a class="border rounded-md text-center text-xs text-white px-4 py-1 bg-red-500" href="{%url "salons:concept_delete-photo" concept.pk photo.pk%}">삭제</a>
+                    </div>
+                </div>
+            {% endfor %}
+        
+        {% else %}
+            <div class="text-xl text-gray-600 mt-10 mb-1">컨셉 사진이 없습니다.</div>
+            <div class="text-xl text-gray-600 mb-10">사진을 추가해주세요.</div>
+        {% endif %}
+
+        
+        </div>
+          
+
+    </div>
+</div>
+
+{% endblock content %} 
