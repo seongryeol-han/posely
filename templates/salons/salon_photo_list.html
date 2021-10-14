@@ -1,0 +1,285 @@
+{% extends "base.html" %}
+{% load humanize %}
+
+{%block page_title%}반려동물 미용실 예약하기{%endblock page_title%}
+
+
+{% block content %}
+
+<style>
+    .wrap {
+        overflow-x:scroll;
+        white-space: nowrap;
+        -ms-overflow-style: none;
+    }
+    .wrap::-webkit-scrollbar{ 
+        display:none; 
+    }
+
+
+    .wrap button {
+        display:inline-block;
+        list-style:none;
+    }
+
+    .wrap a {
+        display:inline-block;
+        list-style:none;
+    }
+
+    .on{
+        background-color: rgb(128, 185, 255);
+        color: white;
+        border: none;
+        padding: 7px 8px;
+        font-weight: 500;
+    }
+
+    .clicked {
+        color: gold;
+      }
+
+    .wrap button:focus {
+        outline: 0;
+    }
+
+    @media (min-width:600px) {
+        .invertal { width: 6rem;}  
+      }
+</style>
+
+   
+<div class="container mx-auto flex flex-col items-center overflow-auto mt-16 mobile:mt-12 mb-10 mobile:mb-10">
+    <div class="h-14 w-600px small:w-full" style="padding-left:0.4rem; padding-right:0.4rem;">
+        <div class="flex items-center justify-center bg-gray-200 w-full h-14 rounded-lg" style="">
+            <div class="flex flex-col text-gray-800 " style="width:13rem">
+                <span class="" style="font-family:'Nanum Gothic' !important; font-size:0.8rem; font-weight:700;">
+                    반려동물 사진촬영 예약 플랫폼
+                </span>
+                <div class="" style="font-family:'Nanum Gothic' !important; font-size:0.7rem; font-weight:400;">
+                    포즐리에서 사진작가님을 모집해요
+                </div>
+            </div>
+            <div style="width: 0.5rem;" class="h-full"></div>
+            <div class="invertal"></div>
+            <a class="flex items-center justify-center h-full" href="https://bit.ly/포즐리등록신청하기" target="_blank">
+                <div class="w-full text-center rounded-xl" style="font-family:'Nanum Gothic' !important; font-size:0.8rem; font-weight:800; text-decoration: underline; padding-top:0.6rem; padding-bottom:0.6rem;">작가 등록하기</div>
+                <img style="width: 1.5rem;" src="https://img.icons8.com/fluency-systems-regular/100/000000/nui2.png"/>
+            </a>
+        </div>
+    </div>
+    <div class="h-12 mt-2 mb-1 w-600px small:w-full">
+        <form id="scroll" class="wrap px-2 py-1 text-gray-800" style="font-weight: 400;"  method="get" action="{% url "studios:photo_filter" %}">
+            {% include "mixins/photo/photo_filter_button.html"%}
+        </form>
+    </div>
+    <div class="w-600px small:w-full " style="padding-left: 0.4rem; padding-right: 0.4rem;"> 
+        <div class ="grid opacity-0" style="width: 100%;">
+                <div class="grid__col-sizer" style="width: 49%"></div>
+                <div class="grid__gutter-sizer" style="width: 2%"></div>
+                {% for photo in photos %}
+                <a class="grid-item mb-9 mobile:mb-7" style="width: 49%;" href="{% url "salons:concept_detail" photo.concept.pk %}">
+                    <img src="{{photo.file.url}}" alt="image" style="border-radius: 18px;">
+                    <div class="px-2 " style="margin-top: 0.3rem">
+                        <div class="flex flex-wrap items-end" style="font-size: 0.7rem; font-weight:400; height:0.8rem;">
+                            <p class="mr-1 text-blue-600 " style="">
+                                {{photo.salon.location}}
+                            </p>
+                            <p class="text-gray-600">
+                                {{photo.salon}}
+                            </p>
+                        </div>
+                        <div style="font-size: 0.65rem; font-weight: 400; height: 0.8rem;" class=" text-blue-400 flex" >
+                            {% for a in photo.salon.salon_badge.all %}
+                            {% if a.pk == 2 %}
+                                #프로
+                            {% endif %}
+                            {% if a.pk == 3 %}
+                                #슈퍼루키
+                            {% endif %}
+                            {% if a.pk == 4 %}
+                                #펫마스터
+                            {% endif %}
+                            {% if a.pk == 5 %}
+                                #맞춤형
+                            {% endif %}
+                            {% if a.pk == 6 %}
+                                #친절한
+                            {% endif %}
+                            {% if a.pk == 7 %}
+                                #쾌적한
+                            {% endif %}
+                            {% if a.pk == 8 %}
+                                #꼼꼼한
+                            {% endif %}
+                            {% if a.pk == 9 %}
+                                #다양한
+                            {% endif %}
+                            {% if a.pk == 10 %}
+                                #제휴가능
+                            {% endif %}
+                        {% endfor %}    
+                        </div>
+                        <div style=" font-size: 0.7rem;  font-weight:400; margin-top: 0.2rem;" class="text-gray-700 flex flex-wrap justify-between" >
+                            <p class=>
+                                {{photo.concept}}
+                            </p>
+                            <p class=>
+                                &nbsp;&nbsp;₩{{photo.concept.price|intcomma}}
+                            </p>
+                        </div>
+
+                    </div>
+                </a>
+                {% endfor %}
+
+                {% if request.GET.photo_filter %}
+                    {% if photos.has_next %}
+                        <p class="pagination1">
+                            <a class="next-page2" href="?photo_filter={{request.GET.photo_filter}}&page={{photos.next_page_number }}"></a>
+                        </p>
+                    {% endif %}
+                {% else %}
+                    {% if page_obj.has_next %}
+                        <p class="pagination1">
+                            <a class="next-page2" href="?page={{ page_obj.next_page_number }}"></a>
+                        </p>
+                    {% endif %}
+                {% endif %}
+                    
+                
+        
+        </div>
+    </div>
+</div>
+
+<!--<button type="button" onclick="$('html').animate({scrollTop:0}, 500)">위로이동</button>-->
+<!--여기가 하단 메뉴바-->
+<div class="fixed bottom-0 left-0 w-full flex justify-center items-end border-t" style="z-index: 9999;">
+    <div class="relative flex justify-center top-0 bg-white w-600px ">
+        <div class="flex justify-between h-full w-full py-1 mobile:pb-0 px-3" style="">
+            <div style="width: 33.333%;">
+                <a class=" flex flex-col items-center" href="{% url "core:studio_home" %}">
+                    <!--<img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/home.png"/>-->
+                    <img class="w-6" src="https://img.icons8.com/fluency-systems-filled/100/FE82B1/home.png"/>
+                    <p style="font-size: 10px; color:#FE82B1">홈</p>
+                </a>
+            </div>
+            <div style="width: 33.333%;">
+                <a class=" flex flex-col items-center NOT_DISTANCE" id="salon_distance_sort_btn" style="cursor: pointer;">
+                    <img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/marker--v1.png"/>
+                    <p style="font-size: 10px; color:#666666">근처미용실</p>
+                </a>
+            </div>
+                {% if user.is_authenticated %}
+                    <div style="width: 33.333%;" >
+                        <a class="flex flex-col items-center" href="{{user.get_absolute_url}}">
+                            <img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/user.png"/>
+                            <p style="font-size: 10px; color:#666666">프로필</p>
+                        </a>
+                    </div>
+                          
+                {% else %}
+                    <div style="width: 33.333%;" >
+                        <a class="flex flex-col items-center" href="{% url "users:login"%}">
+                            <img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/user.png"/>
+                            <p style="font-size: 10px; color:#666666">로그인</p>
+                        </a>
+                    </div> 
+                {% endif %}
+        </div>
+    </div>
+</div>
+
+{% block search-bar %}
+    <form class="search_bar hidden fade-in-box flex items-center" method="get" action="{% url "salons:salon_search" %}">
+        <div class="border rounded-lg flex items-center justify-center">
+        <div class="flex items-center">
+            <div class="w-5 ml-3 mr-2"><img src="https://img.icons8.com/fluency-systems-filled/100/888888/search.png"/></div>
+            <input class="text-sm text-gray-900 placeholder-gray-500 py-1 rounded-md focus:outline-none" style="width:10rem" name="salon_search" placeholder="미용실 이름, 지역 검색" />
+            <div class="w-5 ml-3 mr-2 cancel_button"><img src="https://img.icons8.com/fluency-systems-filled/100/bbbbbb/cancel.png"/></div>
+        </div>
+        </div>
+    </form>
+{% endblock search-bar %}
+    
+    <!--{% include "partials/nav.html" %}-->
+{% block search-icons %}
+    <header class="flex items-center absolute right-0">
+            <button style="width: 1.5rem;" type="button" class="search_button focus:outline-none mx-4"><img src="https://img.icons8.com/fluency-systems-filled/100/777777/search.png"/></button>
+    </header>
+{% endblock search-icons %}
+
+
+<a style="display: none;" href="https://icons8.com/icon/i6fZC6wuprSu/home">Home icon by Icons8</a>
+<script>
+    
+    var $grid = $('.grid').isotope({
+    // options
+    itemSelector: 'none',
+    masonry:{
+        columnWidth: '.grid__col-sizer',
+        gutter: '.grid__gutter-sizer',
+    },
+    percentPosition: true,
+    stagger: 30,
+    });
+    // get Masonry instance
+
+    // initial items reveal
+    $grid.imagesLoaded( function() {
+        console.log("2222222222222");
+        $grid.removeClass('opacity-0');
+        $grid.isotope( 'option', { itemSelector: '.grid-item' });
+        var $items = $grid.find('.grid-item');
+        
+        $grid.isotope( 'appended', $items );
+    });
+
+    var iso = $grid.data('isotope');
+
+    //inifinite scroll
+    var $grid2 = $('.grid').infiniteScroll({
+        path: '.next-page2',
+        append: '.grid-item',
+        outlayer: iso,
+      });
+
+      var infScroll = $grid2.data('infiniteScroll');
+
+      $grid2.on( 'load.infiniteScroll', function() {
+        console.log("111111111111");
+      });
+    
+
+
+      //좌우 스크롤
+    $.fn.hasScrollBar = function() {
+        return (this.prop("scrollWidth") == 0 && this.prop("clientWidth") == 0)
+                || (this.prop("scrollWidth") > this.prop("clientWidth"));
+    }; // 좌우 스크롤이 있는지 없는지 여부 검사
+
+    function wheel(name){
+    $(name).on('mousewheel',function(e){
+        var hasScroll = $(this).hasScrollBar();
+        if(!hasScroll){ //스크롤이 없으면 그냥 일반 스크롤
+        }else{ //있으면 아래 스크롤 받는값을 없애고 좌우스크롤
+            e.preventDefault(); 
+            var wheelDelta = e.originalEvent.wheelDelta;
+            if(wheelDelta > 0){
+                $(this).scrollLeft(-wheelDelta + $(this).scrollLeft());
+            }else{
+                $(this).scrollLeft(-wheelDelta + $(this).scrollLeft());
+            }
+        }
+    });
+    }
+    $(function(){
+        wheel('#scroll');
+    });
+
+</script>
+
+{% endblock content %}
+
+

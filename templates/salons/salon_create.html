@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+
+
+{%block page_title%}미용실 만들기{%endblock page_title%}
+
+{% block logo_name %} 
+{%endblock logo_name %} 
+
+{% block search-bar %}
+    <div style="font-size:0.9rem; font-weight:500">미용실 만들기</div> 
+{% endblock search-bar %}
+
+{% block search-icons %}
+{% endblock search-icons %}
+
+{%block content%}
+<div class="mx-auto flex flex-col items-center overflow-auto mobile:mb-4">
+    <div class="mt-4 w-600px mobile:w-full mx-auto flex flex-col items-center justify-center border rounded-md p-6 px-4 bg-white border-gray-400 mobile:border-none">
+     
+        <form class="w-full" action="{% url 'salons:create' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="mb-1 ml-1 text-xs">
+                <label for="name">미용실 이름</label>
+            </div>
+            <div class="border rounded px-2 py-1 bg-gray-100 input-click mb-4 text-xs">
+                <input class="studio-input-field" name="name" type="text"  id="name" required placeholder="미용실 이름을 입력해주세요.">
+            </div>
+            <div class="mb-1 ml-1 text-xs ">
+                <label for="salon_avatar">미용실 프로필 사진</label>
+            </div>
+            <div class="border rounded px-2 py-1 bg-gray-100 input-click mb-4 text-xs">
+                <input class="studio-input-field" name="salon_avatar" type="file" id="salon_avatar" required>
+            </div>
+
+            <div class="mb-1 ml-1 text-xs ">
+                <label for="address">미용실 주소</label>
+            </div>
+            
+            <input style="background-color: #E5E5E5;" class="w-16 my-1 text-xs border rounded-sm text-black border-gray-700 cursor-pointer py-1" type="button" id="find_button" value="주소 찾기" required>
+            
+            <div class="border rounded px-2 py-1 bg-gray-100 mb-4 text-xs">  
+                <input class="readonly studio-input-field" type="text" name="zonecode" id="zonecode" placeholder="우편번호"  required >
+            </div>
+            <div class="border rounded px-2 py-1 bg-gray-100 mb-4 text-xs">  
+                <input class="readonly studio-input-field" type="text" name="addr_short" id="addr_short" placeholder="도로명주소" required >
+            </div>
+            <div class="border rounded px-2 py-1 bg-gray-100 input-click mb-4 text-xs">
+                <input class="studio-input-field" type="text" name="addr_detail" id="addr_detail" required placeholder="상세주소를 입력해주세요.">
+            </div>
+
+            <div class="mb-1 ml-1 text-xs">
+                <label for="phone_number">전화번호</label>
+            </div>
+            <div class="border rounded px-2 py-1 bg-gray-100 input-click mb-4 text-xs">
+                <input class="studio-input-field" name="phone_number" type="text"  id="phone_number" placeholder=" - 를 포함해주세요.">
+            </div>
+            <div class="mb-1 ml-1 text-xs">
+                <label for="kakao_chat">카카오 오픈채팅 주소</label>
+            </div>
+            <div class="border rounded px-2 py-1 bg-gray-100 input-click mb-4 text-xs">
+                <input class="studio-input-field" name="kakao_chat" type="text"  id="kakao_chat" placeholder="오픈 채팅방 주소(URL)를 등록해주세요.">
+            </div>
+            <div class="mb-1 ml-1 text-xs">
+                <label for="open_time">오픈 시간</label>
+            </div>
+              <div class="border rounded px-2 py-1 bg-gray-100 input-click mb-4 text-xs">
+                <input class="studio-input-field" name="open_time" type="text"  id="open_time" required placeholder="10:00">
+            </div>
+            <div class="mb-1 ml-1 text-xs">
+                <label for="close_time">마감 시간</label>
+            </div>
+              <div class="border rounded px-2 py-1 bg-gray-100 input-click mb-4 text-xs">
+                <input class="studio-input-field" name="close_time" type="text"  id="close_time" required placeholder="20:00"  >
+            </div>
+            <div class="mb-1 ml-1 text-xs">
+                <label for="introduction">미용실 소개</label>
+            </div>
+              <div class="border rounded px-2 py-1 bg-gray-100 input-click mb-4 text-xs">
+                <textarea class="studio-input-field" style="height: 120px;" name="introduction" type="text"  id="introduction" required placeholder=""></textarea>
+            </div>
+            <div class="mb-1 ml-1 text-xs">
+                <label for="using_info">미용실 이용안내</label>
+            </div>
+              <div class="border rounded px-2 py-1 bg-gray-100 input-click mb-4 text-xs">
+                <textarea class="studio-input-field" style="height: 120px;" name="using_info" type="text"  id="using_info" required placeholder=""></textarea>
+            </div>
+
+            <input type="hidden" id="salon_lat" name ="salon_lat" value="">
+            <input type="hidden" id="salon_lng" name ="salon_lng" value="">
+            <div class="flex justify-end">
+                <button type="submit" class=" bg-blue-500 text-white text-sm rounded-md px-4 py-1">생성하기</button> 
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    $(window).on("load",function(){
+        $("#find_button").click(function(){
+            new daum.Postcode({
+                oncomplete: function(data) {
+                    jQuery('#zonecode').val(data.zonecode);
+                    jQuery('#addr_short').val(data.address);
+                    jQuery('#addr_detail').focus();
+                    var geocoder = new kakao.maps.services.Geocoder();
+                    
+                    geocoder.addressSearch(data.address, function(result, status) {
+
+                    // 정상적으로 검색이 완료됐으면 
+                    if (status === kakao.maps.services.Status.OK) {
+                        jQuery('#salon_lat').val(result[0].y);
+                        jQuery('#salon_lng').val(result[0].x);
+                        console.log(result[0].y)
+                        console.log(result[0].x)
+                    } 
+                });
+  
+                }
+             }).open();
+        });
+    })
+
+    //readonly랑  required랑 같이 안써져서 이거 추가함 (class="readonly")
+    $(".readonly").keydown(function(e){
+        e.preventDefault();
+    });
+</script>
+{%endblock content%}
+    

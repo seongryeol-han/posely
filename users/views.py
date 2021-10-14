@@ -30,18 +30,18 @@ class LoginView(mixins.LoggedOutOnlyView, FormView):
         if next_arg is not None:
             return next_arg
         else:
-            return reverse("core:photo_home")
+            return reverse("core:studio_home")
 
 
 def log_out(request):
     logout(request)
-    return redirect(reverse("core:photo_home"))
+    return redirect(reverse("core:studio_home"))
 
 
 class SignUpView(mixins.LoggedOutOnlyView, FormView):
     template_name = "users/signup.html"
     form_class = forms.SignUpForm
-    success_url = reverse_lazy("core:photo_home")
+    success_url = reverse_lazy("core:studio_home")
 
     def form_valid(
         self, form
@@ -119,7 +119,7 @@ def kakao_callback(request):
                     f"{nickname}-avatar", ContentFile(photo_request.content)
                 )
         login(request, user)
-        return redirect(reverse("core:photo_home"))
+        return redirect(reverse("core:studio_home"))
     except KakaoException:
         return redirect(reverse("users:login"))
 

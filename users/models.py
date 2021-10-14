@@ -38,6 +38,7 @@ class User(AbstractUser):
     )
     petname = models.CharField(max_length=30, blank=True)
     studio = models.BooleanField(default=False)
+    salon = models.BooleanField(default=False)
     bio = models.TextField(default="", blank=True)
 
     # 05.09 social login check
@@ -46,6 +47,13 @@ class User(AbstractUser):
     has_studio = models.ForeignKey(
         "studios.Studio",
         related_name="has_studio",
+        on_delete=SET_NULL,
+        blank=True,
+        null=True,
+    )
+    has_salon = models.ForeignKey(
+        "salons.Salon",
+        related_name="has_salon",
         on_delete=SET_NULL,
         blank=True,
         null=True,

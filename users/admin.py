@@ -18,8 +18,10 @@ class CustomUserAdmin(UserAdmin):
                     "petname",
                     "phone_number",
                     "studio",
+                    "salon",
                     "bio",
                     "has_studio",
+                    "has_salon",
                 )
             },
         ),
@@ -30,4 +32,5 @@ class CustomUserAdmin(UserAdmin):
         "nickname",
         "petname",
         "studio",
+        "salon",
     )

@@ -5,6 +5,7 @@ app_name = "salons"
 
 urlpatterns = [
     #salon
+    path("", views.SalonHomeView.as_view(), name="salon_home"),
     path("search/", views.SalonSearchView.as_view(), name="salon_search"),
     #path("filter/", concept_view.ButtonFilterView.as_view(), name="photo_filter"),
     #path("like/", views.studio_like, name="studio_like"),  
@@ -12,9 +13,9 @@ urlpatterns = [
     
     path("<int:pk>/", views.SalonProfileView.as_view(), name="profile"),
     path("<int:pk>/edit/", views.EditSalonView.as_view(), name="edit"),
-    #path("create/", views.CreateStudioView2.as_view(), name="create"),
+    path("create/", views.CreateSalonView.as_view(), name="create"),
     path("<int:pk>/concept-create/", views.CreateConceptView.as_view(), name="concept-create"),
-    #path("distance/", views.HomeView4.as_view(), name="studio_sorted_distance",),
+    path("distance/", views.SalonDistanceView.as_view(), name="salon_sorted_distance",),
 
     #concept
     path("concept/<int:pk>", views.ConceptDetail.as_view(), name="concept_detail"),

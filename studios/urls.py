@@ -21,7 +21,7 @@ urlpatterns = [
     ),
     path(
         "distance/",
-        views.HomeView4.as_view(),
+        views.StudioDistanceView.as_view(),
         name="studio_sorted_distance",
     ),
 

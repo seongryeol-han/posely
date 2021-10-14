@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
-    <title>포즐리 - {% block page_title %}반려동물 사진촬영 예약 플랫폼{% endblock page_title %}</title>
+    <title>포즐리 - {% block page_title %}{% endblock page_title %}</title>
     <meta name="description" content="반려동물의 가장 사랑스러운 순간">
     <meta property="og:image" content="https://posely-bucket.s3.ap-northeast-2.amazonaws.com/static/img/rev_포즐리로고_share.png">
     <meta property="og:title" content="포즐리">
@@ -88,7 +88,7 @@
 <header style="z-index: 9999;" class="container max-w-full inset-0 flex justify-center h-14 mobile:h-12 border-b mobile:border-none border-gray-400 fixed bg-white">
         <div class="flex items-center justify-center w-600px small:px-0 relative">
 
-                <a class="logo flex items-center absolute" style="left: 14px;" href="{% url "core:photo_home" %}">
+                <a class="logo flex items-center absolute" style="left: 14px;" href="{% url "core:studio_home" %}">
                   <img style="width: 1.5rem;" src="{%static 'img/posely_logo2.svg' %}" />
                   {% block logo_name %}
                   <img style="width: 5rem;" src="{%static 'img/포즐리로고05.svg' %}" class="ml-1"/>
@@ -201,9 +201,9 @@
 
 
     //map_maker_btn
-    $("#distance_sort_btn").click((request)=>{
+    $("#studio_distance_sort_btn").click((request)=>{
         console.log("kkkk")   
-        if($("#distance_sort_btn").hasClass("NOT_DISTANCE")){
+        if($("#studio_distance_sort_btn").hasClass("NOT_DISTANCE")){
               console.log("mmmm")
               if('geolocation' in navigator){
                       navigator.geolocation.getCurrentPosition(function(position,request){ //position에 위도와 경도같은 정보가 담김 
@@ -216,9 +216,29 @@
               )}
           }
         else{
-          var url="{% url 'core:photo_home' %}"
+          var url="{% url 'core:studio_home' %}"
               window.location.href = url 
         }
+    })
+
+    $("#salon_distance_sort_btn").click((request)=>{
+      console.log("kkkk")   
+      if($("#salon_distance_sort_btn").hasClass("NOT_DISTANCE")){
+            console.log("mmmm")
+            if('geolocation' in navigator){
+                    navigator.geolocation.getCurrentPosition(function(position,request){ //position에 위도와 경도같은 정보가 담김 
+                    var lat1 = position.coords.latitude;
+                    var lng1 = position.coords.longitude;
+                    sessionStorage.setItem("lat",lat1);
+                    sessionStorage.setItem("lng",lng1);
+                    location.href="/salons/distance/?lat="+lat1+"&lng="+lng1
+                }
+            )}
+        }
+      else{
+        var url="{% url 'core:studio_home' %}"
+            window.location.href = url 
+      }
     })
 
     window.dataLayer = window.dataLayer || [];
