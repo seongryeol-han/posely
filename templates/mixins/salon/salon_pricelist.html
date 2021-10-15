@@ -1,0 +1,23 @@
+    <div class="flex items-center justify-left mt-4 mb-2 px-1">
+        <div class="flex items-center ">
+            <div class="" style="color:#1a202c; font-size: 0.95rem; font-weight:500;" >가격표</div>
+        </div>
+    </div>
+    
+    
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            {% for pricelist in salon.all_pricelist %}
+            <div class="swiper-slide">
+                <img src="{{pricelist.file.url}}" style="width: 100%;" class="rounded-lg">
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+       
+        
+    </div>
+

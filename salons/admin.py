@@ -17,12 +17,15 @@ class PhotoInline(admin.TabularInline):
     model = models.Photo
     raw_id_fields = ("salon",)  # inline에 검색기능.
 
+class PriceListInline(admin.TabularInline):
+    model = models.PriceList
+
 
 @admin.register(models.Salon)
 class SalonAdmin(admin.ModelAdmin):
     """Salon Admin Definition"""
 
-    inlines = (ConceptInline,)
+    inlines = (PriceListInline,ConceptInline,)
 
     list_display = (
         "name",
@@ -73,6 +76,25 @@ class PhotoAdmin(admin.ModelAdmin):
         "salon",
         "get_thumbnail",
         "random_int",
+    )
+
+    raw_id_fields = ("salon",)
+    search_fields = ("salon__name",)
+
+    def get_thumbnail(self, obj):
+        return mark_safe(f'<img width="50px" src="{obj.file.url}"/>')
+
+    get_thumbnail.short_description = "Thumbnail"
+
+
+@admin.register(models.PriceList)
+class PriceListAdmin(admin.ModelAdmin):
+
+    """Photo Admin Definition"""
+
+    list_display = (
+        "salon",
+        "get_thumbnail",
     )
 
     raw_id_fields = ("salon",)

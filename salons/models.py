@@ -86,6 +86,27 @@ class Salon(core_models.TimeStampedModel):
         except ValueError:
             return None
 
+    def all_pricelist(self):
+        pricelist_photo = self.pricelists.all()  # ,를 찍으면 파이썬이 첫번째 array 요소를 원하는구나라는것을 알게됨
+        return pricelist_photo
+
+
+class PriceList(core_models.TimeStampedModel):
+    """Photo Model Definition"""
+
+    file = ResizedImageField(
+        size=[1024, 1024],
+        upload_to="salon_pricelist",
+        quality=95,
+    )
+    salon = models.ForeignKey(
+        "salons.Salon",
+        related_name="pricelists",
+        on_delete=models.CASCADE,
+        default="",
+        blank=True,
+    )
+
 
 class Photo(core_models.TimeStampedModel):
     """Photo Model Definition"""

@@ -42,24 +42,14 @@
   </div>
     
     <div class="w-full pl-1 mt-5 mb-1" style="color:#1a202c; font-size: 0.9rem; font-weight: 600;">
-      
       {{concept.name}}
     </div>
-    
-    
-
-    
-
     <div class="w-full mb-4 border-b pb-4">
       <div class="swiper-container">
         <div class="swiper-wrapper">
           {% for photo in concept.all_photo %}
           <div class="swiper-slide">
-            <img
-              src="{{photo.file.url}}"
-              style="width: 100%;"
-              class="rounded-lg"
-            />
+            <img src="{{photo.file.url}}" style="width: 100%;" class="rounded-lg"/>
           </div>
           {% endfor %}
         </div>
@@ -68,10 +58,7 @@
         <div class="swiper-button-next"></div>
         <div class="swiper-button-prev"></div>
       </div>
-      <div
-        class="flex justify-between items-end mt-2 px-1 h-6"
-        style="color:#1a202c; font-size: 0.9rem; font-weight: 500;"
-      >
+      <div class="flex justify-between items-end mt-2 px-1 h-6" style="color:#1a202c; font-size: 0.9rem; font-weight: 500;">
         <div class="">미용 가격</div>
         <div class="">{{concept.price|intcomma}}원~</div>
       </div>
@@ -79,7 +66,26 @@
 
     <div class="w-full mb-4 border-b pb-4 px-1">
       <div class="mb-2 mobile:mb-1" style="color:#1a202c; font-size: 0.9rem; font-weight: 500;">
-        컨셉 설명
+        가격표
+      </div>
+      <div class="swiper-container">
+        <div class="swiper-wrapper">
+          {% for pricelist in concept.salon.all_pricelist %}
+            <div class="swiper-slide">
+                <img src="{{pricelist.file.url}}" style="width: 100%;" class="rounded-lg">
+            </div>
+          {% endfor %}
+        </div>
+
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+      </div>
+    </div>
+
+    <div class="w-full mb-4 border-b pb-4 px-1">
+      <div class="mb-2 mobile:mb-1" style="color:#1a202c; font-size: 0.9rem; font-weight: 500;">
+        미용 설명
       </div>
       <div
         class=" text-gray-800"
