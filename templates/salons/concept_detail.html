@@ -48,8 +48,9 @@
       <div class="swiper-container">
         <div class="swiper-wrapper">
           {% for photo in concept.all_photo %}
-          <div class="swiper-slide">
+          <div class="swiper-slide relative">
             <img src="{{photo.file.url}}" style="width: 100%;" class="rounded-lg"/>
+            <div class="absolute text-white text-center" style="opacity: 0.8; background-color: gray; border-radius:25px; padding: 3px 6px 4px 6px; font-size:0.75rem; font-weight: 400; top:10px; left:10px;">{{photo.caption}}</div>
           </div>
           {% endfor %}
         </div>

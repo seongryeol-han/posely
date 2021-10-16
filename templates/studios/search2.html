@@ -63,35 +63,35 @@
 <div class="fixed bottom-0 left-0 w-full flex justify-center items-end border-t" style="z-index: 9999;">
     <div class="relative flex justify-center top-0 bg-white w-600px ">
         <div class="flex justify-between h-full w-full py-1 mobile:pb-0 px-3" style="">
-            <div style="width: 20%;">
+            <div style="width: 15%;">
                 <a class=" flex flex-col items-center" href="{% url "core:studio_home" %}">
                     <!--<img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/home.png"/>-->
                     <img class="w-6" src="https://img.icons8.com/fluency-systems-filled/100/FE82B1/camera.png"/>
                     <p style="font-size: 10px; color:#FE82B1">사진관</p>
                 </a>
             </div>
-            <div style="width: 20%;">
-                <a class=" flex flex-col items-center" href="{% url "core:studio_home" %}">
+            <div style="width: 15%;">
+                <a class=" flex flex-col items-center" href="{% url "salons:salon_home" %}">
                     <!--<img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/home.png"/>-->
-                    <img class="w-6" src="https://img.icons8.com/fluency-systems-filled/100/FE82B1/home.png"/>
-                    <p style="font-size: 10px; color:#FE82B1">홈</p>
+                    <img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/cut.png"/>
+                    <p style="font-size: 10px; color:#666666">미용실</p>
                 </a>
             </div>
-            <div style="width: 20%;">
+            <div style="width: 15%;">
                 <a class=" flex flex-col items-center NOT_DISTANCE" id="studio_distance_sort_btn" style="cursor: pointer;">
                     <img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/marker--v1.png"/>
                     <p style="font-size: 10px; color:#666666">근처사진관</p>
                 </a>
             </div>
-            <div style="width: 20%;">
+            <div style="width: 15%;">
                 <a class=" flex flex-col items-center" href="{% url "core:studio_home" %}">
                     <!--<img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/home.png"/>-->
-                    <img class="w-6" src="https://img.icons8.com/fluency-systems-filled/100/FE82B1/home.png"/>
-                    <p style="font-size: 10px; color:#FE82B1">홈</p>
+                    <img class="w-6" src="https://img.icons8.com/fluency-systems-regular/48/888888/add-rule.png"/>
+                    <p style="font-size: 10px; color:#666666">입점신청</p>
                 </a>
             </div>
                 {% if user.is_authenticated %}
-                    <div style="width: 20%;" >
+                    <div style="width: 15%;" >
                         <a class="flex flex-col items-center" href="{{user.get_absolute_url}}">
                             <img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/user.png"/>
                             <p style="font-size: 10px; color:#666666">프로필</p>
@@ -99,7 +99,7 @@
                     </div>
                           
                 {% else %}
-                    <div style="width: 20%;" >
+                    <div style="width: 15%;" >
                         <a class="flex flex-col items-center" href="{% url "users:login"%}">
                             <img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/user.png"/>
                             <p style="font-size: 10px; color:#666666">로그인</p>

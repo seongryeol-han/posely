@@ -72,6 +72,7 @@ class PhotoAdmin(admin.ModelAdmin):
 
     list_display = (
         "concept",
+        "caption",
         "button_filter",
         "salon",
         "get_thumbnail",
@@ -82,7 +83,7 @@ class PhotoAdmin(admin.ModelAdmin):
     search_fields = ("salon__name",)
 
     def get_thumbnail(self, obj):
-        return mark_safe(f'<img width="50px" src="{obj.file.url}"/>')
+        return mark_safe(f'<img width="200px" src="{obj.file.url}"/>')
 
     get_thumbnail.short_description = "Thumbnail"
 
@@ -101,6 +102,6 @@ class PriceListAdmin(admin.ModelAdmin):
     search_fields = ("salon__name",)
 
     def get_thumbnail(self, obj):
-        return mark_safe(f'<img width="50px" src="{obj.file.url}"/>')
+        return mark_safe(f'<img width=50px" src="{obj.file.url}"/>')
 
     get_thumbnail.short_description = "Thumbnail"
