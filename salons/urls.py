@@ -7,7 +7,7 @@ urlpatterns = [
     #salon
     path("", views.SalonHomeView.as_view(), name="salon_home"),
     path("search/", views.SalonSearchView.as_view(), name="salon_search"),
-    #path("filter/", concept_view.ButtonFilterView.as_view(), name="photo_filter"),
+    path("filter/", views.SalonButtonFilterView.as_view(), name="salon_photo_filter"),
     #path("like/", views.studio_like, name="studio_like"),  
     # 좋아요 누를시 통신하는 url 따로 페이지가 뜨는 것은 아닙니다.
     

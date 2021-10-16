@@ -423,3 +423,108 @@ class SalonDistanceView(ListView):
             "distance"
         )
         return ps_with_avg
+
+
+class SalonButtonFilterView(View):
+    """SearchView Definition"""
+
+    def get(self, request):
+        form = forms.SalonPhotoFilterForm(request.GET)
+        if form.is_valid():
+            search_data = form.cleaned_data.get("salon_photo_filter")
+            if len(search_data) != 0:
+                filter_args = {}
+                filter_args["button_filter__contains"] = search_data
+
+                now = datetime.datetime.now()
+                nowTime = now.strftime("%M")
+                if len(nowTime) == 1:
+                    nowTime = "0" + nowTime
+                nowTime = nowTime[1:2]
+                # print(nowTime)
+                target_idx = int(nowTime)
+                print(target_idx)
+                print(type(target_idx))
+
+                # test_idx가 세션있나 없나 체크
+                if "test_idx" in self.request.session:
+                    if target_idx != self.request.session["test_idx"]:
+                        del self.request.session["test_idx"]
+                        self.request.session["test_idx"] = target_idx
+                else:
+                    self.request.session["test_idx"] = target_idx  # 0~6
+
+                sort_idx = self.request.session.get("test_idx")
+                if sort_idx == 1:
+                    print("sort_idx==1")
+                    qs = models.Photo.objects.annotate(random_int_split=Substr("random_int",1)).filter(**filter_args).order_by(
+                        "-random_int_split"
+                    )
+                if sort_idx == 2:
+                    print("sort_idx==2")
+                    qs = models.Photo.objects.annotate(random_int_split=Substr("random_int",2)).filter(**filter_args).order_by(
+                        "-random_int_split"
+                    )
+                if sort_idx == 3:
+                    print("sort_idx==3")
+                    qs = models.Photo.objects.annotate(random_int_split=Substr("random_int",3)).filter(**filter_args).order_by(
+                        "-random_int_split"
+                    )
+                if sort_idx == 4:
+                    print("sort_idx==4")
+                    qs = models.Photo.objects.annotate(random_int_split=Substr("random_int",4)).filter(**filter_args).order_by(
+                        "-random_int_split"
+                    )
+                if sort_idx == 5:
+                    print("sort_idx==5")
+                    qs = models.Photo.objects.annotate(random_int_split=Substr("random_int",5)).filter(**filter_args).order_by(
+                        "-random_int_split"
+                    )
+                if sort_idx == 6:
+                    print("sort_idx==6")
+                    qs = models.Photo.objects.annotate(random_int_split=Substr("random_int",5)).filter(**filter_args).order_by(
+                        "random_int_split"
+                    )
+                if sort_idx == 7:
+                    print("sort_idx==7")
+                    qs = models.Photo.objects.annotate(random_int_split=Substr("random_int",4)).filter(**filter_args).order_by(
+                        "random_int_split"
+                    )
+                if sort_idx == 8:
+                    print("sort_idx==8")
+                    qs = models.Photo.objects.annotate(random_int_split=Substr("random_int",3)).filter(**filter_args).order_by(
+                        "random_int_split"
+                    )
+                if sort_idx == 9:
+                    print("sort_idx==9")
+                    qs = models.Photo.objects.annotate(random_int_split=Substr("random_int",2)).filter(**filter_args).order_by(
+                        "random_int_split"
+                    )
+                if sort_idx == 0:
+                    print("sort_idx==0")
+                    qs = models.Photo.objects.annotate(random_int_split=Substr("random_int",1)).filter(**filter_args).order_by(
+                        "random_int_split"
+                    )
+
+                paginator = Paginator(qs, 10)
+                page = request.GET.get("page", 1)
+                photos = paginator.get_page(page)
+                if qs.count() > 0:
+                    return render(
+                        request,
+                        "salons/salon_photo_list.html",
+                        {"form": form, "photos": photos, "page_obj": photos},
+                    )
+                elif qs.count() == 0:
+                    form = forms.SalonPhotoFilterForm()
+                    return render(
+                        request,
+                        "salons/salon_photo_list.html",
+                        {"form": form},
+                    )
+        form = forms.SalonPhotoFilterForm()
+        return render(
+            request,
+            "salons/salon_photo_list.html",
+            {"form": form},
+        )

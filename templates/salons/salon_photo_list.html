@@ -69,8 +69,8 @@
         </div>
     </div>
     <div class="h-12 mt-2 mb-1 w-600px small:w-full">
-        <form id="scroll" class="wrap px-2 py-1 text-gray-800" style="font-weight: 400;"  method="get" action="{% url "studios:photo_filter" %}">
-            {% include "mixins/photo/photo_filter_button.html"%}
+        <form id="scroll" class="wrap px-2 py-1 text-gray-800" style="font-weight: 400;"  method="get" action="{% url "salons:salon_photo_filter" %}">
+            {% include "mixins/salon/salon_photo_filter_button.html"%}
         </form>
     </div>
     <div class="w-600px small:w-full " style="padding-left: 0.4rem; padding-right: 0.4rem;"> 
@@ -125,7 +125,7 @@
                                 {{photo.concept}}
                             </p>
                             <p class=>
-                                &nbsp;&nbsp;₩{{photo.concept.price|intcomma}}
+                                &nbsp;&nbsp;₩{{photo.concept.price|intcomma}}~
                             </p>
                         </div>
 
@@ -133,10 +133,10 @@
                 </a>
                 {% endfor %}
 
-                {% if request.GET.photo_filter %}
+                {% if request.GET.salon_photo_filter %}
                     {% if photos.has_next %}
                         <p class="pagination1">
-                            <a class="next-page2" href="?photo_filter={{request.GET.photo_filter}}&page={{photos.next_page_number }}"></a>
+                            <a class="next-page2" href="?salon_photo_filter={{request.GET.salon_photo_filter}}&page={{photos.next_page_number }}"></a>
                         </p>
                     {% endif %}
                 {% else %}
@@ -158,21 +158,35 @@
 <div class="fixed bottom-0 left-0 w-full flex justify-center items-end border-t" style="z-index: 9999;">
     <div class="relative flex justify-center top-0 bg-white w-600px ">
         <div class="flex justify-between h-full w-full py-1 mobile:pb-0 px-3" style="">
-            <div style="width: 33.333%;">
+            <div style="width: 20%;">
                 <a class=" flex flex-col items-center" href="{% url "core:studio_home" %}">
                     <!--<img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/home.png"/>-->
-                    <img class="w-6" src="https://img.icons8.com/fluency-systems-filled/100/FE82B1/home.png"/>
-                    <p style="font-size: 10px; color:#FE82B1">홈</p>
+                    <img class="w-6" src="https://img.icons8.com/fluency-systems-filled/100/888888/camera.png"/>
+                    <p style="font-size: 10px; color:#666666">사진관</p>
                 </a>
             </div>
-            <div style="width: 33.333%;">
-                <a class=" flex flex-col items-center NOT_DISTANCE" id="salon_distance_sort_btn" style="cursor: pointer;">
+            <div style="width: 20%;">
+                <a class=" flex flex-col items-center" href="{% url "core:studio_home" %}">
+                    <!--<img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/home.png"/>-->
+                    <img class="w-6" src="https://img.icons8.com/fluency-systems-filled/100/FE82B1/cut.png"/>
+                    <p style="font-size: 10px; color:#FE82B1">미용실</p>
+                </a>
+            </div>
+            <div style="width: 20%;">
+                <a class=" flex flex-col items-center NOT_DISTANCE" id="studio_distance_sort_btn" style="cursor: pointer;">
                     <img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/marker--v1.png"/>
                     <p style="font-size: 10px; color:#666666">근처미용실</p>
                 </a>
             </div>
+            <div style="width: 20%;">
+                <a class=" flex flex-col items-center" href="{% url "core:studio_home" %}">
+                    <!--<img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/home.png"/>-->
+                    <img class="w-6" src="https://img.icons8.com/fluency-systems-regular/48/888888/add-rule.png"/>
+                    <p style="font-size: 10px; color:#666666">입점신청</p>
+                </a>
+            </div>
                 {% if user.is_authenticated %}
-                    <div style="width: 33.333%;" >
+                    <div style="width: 20%;" >
                         <a class="flex flex-col items-center" href="{{user.get_absolute_url}}">
                             <img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/user.png"/>
                             <p style="font-size: 10px; color:#666666">프로필</p>
@@ -180,7 +194,7 @@
                     </div>
                           
                 {% else %}
-                    <div style="width: 33.333%;" >
+                    <div style="width: 20%;" >
                         <a class="flex flex-col items-center" href="{% url "users:login"%}">
                             <img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/user.png"/>
                             <p style="font-size: 10px; color:#666666">로그인</p>
@@ -204,12 +218,6 @@
 {% endblock search-bar %}
     
     <!--{% include "partials/nav.html" %}-->
-{% block search-icons %}
-    <header class="flex items-center absolute right-0">
-            <button style="width: 1.5rem;" type="button" class="search_button focus:outline-none mx-4"><img src="https://img.icons8.com/fluency-systems-filled/100/777777/search.png"/></button>
-    </header>
-{% endblock search-icons %}
-
 
 <a style="display: none;" href="https://icons8.com/icon/i6fZC6wuprSu/home">Home icon by Icons8</a>
 <script>

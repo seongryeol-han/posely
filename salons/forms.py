@@ -31,3 +31,6 @@ class CreatePhotoForm(forms.ModelForm):
         photo.concept = concept
         photo.salon = concept.salon
         photo.save()
+
+class SalonPhotoFilterForm(forms.Form):
+    salon_photo_filter = forms.CharField(required=False)

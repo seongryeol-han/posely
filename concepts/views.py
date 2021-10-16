@@ -180,11 +180,11 @@ class StudioHomeView(ListView):
         return ps_with_avg
 
 
-class ButtonFilterView(View):
+class StudioButtonFilterView(View):
     """SearchView Definition"""
 
     def get(self, request):
-        form = forms.PhotoFilterForm(request.GET)
+        form = forms.StudioPhotoFilterForm(request.GET)
         if form.is_valid():
             search_data = form.cleaned_data.get("photo_filter")
             if len(search_data) != 0:
@@ -271,13 +271,13 @@ class ButtonFilterView(View):
                         {"form": form, "photos": photos, "page_obj": photos},
                     )
                 elif qs.count() == 0:
-                    form = forms.PhotoFilterForm()
+                    form = forms.StudioPhotoFilterForm()
                     return render(
                         request,
                         "studios/studio_photo_list.html",
                         {"form": form},
                     )
-        form = forms.PhotoFilterForm()
+        form = forms.StudioPhotoFilterForm()
         return render(
             request,
             "studios/studio_photo_list.html",

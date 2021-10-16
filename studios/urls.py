@@ -7,7 +7,7 @@ app_name = "studios"
 urlpatterns = [
     #studio
     path("search/", views.StudioSearchView.as_view(), name="studio_search"),
-    path("filter/", concept_view.ButtonFilterView.as_view(), name="photo_filter"),
+    path("filter/", concept_view.StudioButtonFilterView.as_view(), name="photo_filter"),
     path(
         "like/", views.studio_like, name="studio_like"
     ),  # 좋아요 누를시 통신하는 url 따로 페이지가 뜨는 것은 아닙니다.

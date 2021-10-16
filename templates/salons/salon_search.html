@@ -59,25 +59,38 @@
 </div> 
 
 
-<!-- ajax jqeury 통신 -->
 <div class="fixed bottom-0 left-0 w-full flex justify-center items-end border-t" style="z-index: 9999;">
     <div class="relative flex justify-center top-0 bg-white w-600px ">
         <div class="flex justify-between h-full w-full py-1 mobile:pb-0 px-3" style="">
-            <div style="width: 33.333%;">
+            <div style="width: 20%;">
                 <a class=" flex flex-col items-center" href="{% url "core:studio_home" %}">
                     <!--<img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/home.png"/>-->
-                    <img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/home.png"/>
-                    <p style="font-size: 10px; color:#666666">홈</p>
+                    <img class="w-6" src="https://img.icons8.com/fluency-systems-filled/100/FE82B1/camera.png"/>
+                    <p style="font-size: 10px; color:#FE82B1">사진관</p>
                 </a>
             </div>
-            <div style="width: 33.333%;">
-                <a class=" flex flex-col items-center NOT_DISTANCE" id="salon_distance_sort_btn" style="cursor: pointer;">
+            <div style="width: 20%;">
+                <a class=" flex flex-col items-center" href="{% url "core:studio_home" %}">
+                    <!--<img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/home.png"/>-->
+                    <img class="w-6" src="https://img.icons8.com/fluency-systems-filled/100/FE82B1/home.png"/>
+                    <p style="font-size: 10px; color:#FE82B1">홈</p>
+                </a>
+            </div>
+            <div style="width: 20%;">
+                <a class=" flex flex-col items-center NOT_DISTANCE" id="studio_distance_sort_btn" style="cursor: pointer;">
                     <img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/marker--v1.png"/>
                     <p style="font-size: 10px; color:#666666">근처사진관</p>
                 </a>
             </div>
+            <div style="width: 20%;">
+                <a class=" flex flex-col items-center" href="{% url "core:studio_home" %}">
+                    <!--<img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/home.png"/>-->
+                    <img class="w-6" src="https://img.icons8.com/fluency-systems-filled/100/FE82B1/home.png"/>
+                    <p style="font-size: 10px; color:#FE82B1">홈</p>
+                </a>
+            </div>
                 {% if user.is_authenticated %}
-                    <div style="width: 33.333%;" >
+                    <div style="width: 20%;" >
                         <a class="flex flex-col items-center" href="{{user.get_absolute_url}}">
                             <img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/user.png"/>
                             <p style="font-size: 10px; color:#666666">프로필</p>
@@ -85,7 +98,7 @@
                     </div>
                           
                 {% else %}
-                    <div style="width: 33.333%;" >
+                    <div style="width: 20%;" >
                         <a class="flex flex-col items-center" href="{% url "users:login"%}">
                             <img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/user.png"/>
                             <p style="font-size: 10px; color:#666666">로그인</p>
@@ -95,6 +108,17 @@
         </div>
     </div>
 </div>
+{% block search-bar %}
+    <form class="search_bar hidden fade-in-box flex items-center" method="get" action="{% url "salons:salon_search" %}">
+        <div class="border rounded-lg flex items-center justify-center">
+        <div class="flex items-center">
+            <div class="w-5 ml-3 mr-2"><img src="https://img.icons8.com/fluency-systems-filled/100/888888/search.png"/></div>
+            <input class="text-sm text-gray-900 placeholder-gray-500 py-1 rounded-md focus:outline-none" style="width:10rem" name="salon_search" placeholder="미용실 이름, 지역 검색" />
+            <div class="w-5 ml-3 mr-2 cancel_button"><img src="https://img.icons8.com/fluency-systems-filled/100/bbbbbb/cancel.png"/></div>
+        </div>
+        </div>
+    </form>
+{% endblock search-bar %}
 
 
 <script>
