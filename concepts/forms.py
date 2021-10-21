@@ -15,5 +15,5 @@ class CreatePhotoForm(forms.ModelForm):
         photo.save()
 
 
-class PhotoFilterForm(forms.Form):
+class StudioPhotoFilterForm(forms.Form):
     photo_filter = forms.CharField(required=False)

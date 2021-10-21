@@ -83,7 +83,7 @@ def delete_photo(request, concept_pk, photo_pk):  # url.py에 등록되어있는
             models.Photo.objects.filter(pk=photo_pk).delete()
         return redirect(reverse("studios:concept_photos", kwargs={"pk": concept_pk}))
     except models.Concept.DoesNotExist:  # concept이 없음
-        return redirect(reverse("core:photo_home"))
+        return redirect(reverse("core:studio_home"))
 
 
 class AddPhotoView(user_mixins.LoggedInOnlyView, FormView):
@@ -110,16 +110,16 @@ def delete_concept(request, concept_pk):  # url.py에 등록되어있는거.
             models.Concept.objects.filter(pk=concept_pk).delete()
         return redirect(reverse("studios:concept_edit-list"))
     except models.Concept.studio.DoesNotExist:  # concept이 없음
-        return redirect(reverse("core:photo_home"))
+        return redirect(reverse("core:studio_home"))
 
 
-class PhotoHomeView(ListView):
-    """photoHomeView Definition"""
+class StudioHomeView(ListView):
+    """StudioHomeView Definition"""
 
     model = models.Photo
     paginate_by = 10
     context_object_name = "photos"
-    template_name = "photos/photo_list.html"
+    template_name = "studios/studio_photo_list.html"
 
     def get_context_data(self, **kwargs):
         # print(self.request.GET.get("page", 1))
@@ -180,11 +180,11 @@ class PhotoHomeView(ListView):
         return ps_with_avg
 
 
-class ButtonFilterView(View):
+class StudioButtonFilterView(View):
     """SearchView Definition"""
 
     def get(self, request):
-        form = forms.PhotoFilterForm(request.GET)
+        form = forms.StudioPhotoFilterForm(request.GET)
         if form.is_valid():
             search_data = form.cleaned_data.get("photo_filter")
             if len(search_data) != 0:
@@ -267,19 +267,19 @@ class ButtonFilterView(View):
                 if qs.count() > 0:
                     return render(
                         request,
-                        "photos/photo_list.html",
+                        "studios/studio_photo_list.html",
                         {"form": form, "photos": photos, "page_obj": photos},
                     )
                 elif qs.count() == 0:
-                    form = forms.PhotoFilterForm()
+                    form = forms.StudioPhotoFilterForm()
                     return render(
                         request,
-                        "photos/photo_list.html",
+                        "studios/studio_photo_list.html",
                         {"form": form},
                     )
-        form = forms.PhotoFilterForm()
+        form = forms.StudioPhotoFilterForm()
         return render(
             request,
-            "photos/photo_list.html",
+            "studios/studio_photo_list.html",
             {"form": form},
         )

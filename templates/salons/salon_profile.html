@@ -27,31 +27,25 @@
                 <div class="flex items-center" style="font-size: 0.8rem; font-weight:500; color: #ffcc00;">
                     {% for a in salon.salon_badge.all %}
                             {% if a.pk == 1 %}
-                                <div class="mr-2 flex items-center"><i class="fas fa-award"></i><p class="ml-1 " style="color:#757575;">{{a}}</p></div>
+                                <div class="mr-2 flex items-center"><i class="fas fa-video"></i><p class="ml-1 " style="color:#757575;">{{a}}</p></div>
                             {% endif %}
                             {% if a.pk == 2 %}
-                                <div class="mr-2 flex items-center"><i class="fas fa-asterisk"></i><p class="ml-1 " style="color:#757575;">{{a}}</p></div>
+                                <div class="mr-2 flex items-center"><i class="fas fa-car-side"></i><p class="ml-1 " style="color:#757575;">{{a}}</p></div>
                             {% endif %}
                             {% if a.pk == 3 %}
                                 <div class="mr-2 flex items-center"><i class="fas fa-dog"></i><p class="ml-1" style="color:#757575;">{{a}}</p></div>
                             {% endif %}
                             {% if a.pk == 4 %}
-                                <div class="mr-2 flex items-center"><i class="far fa-thumbs-up"></i><p class="ml-1" style="color:#757575;">{{a}}</p></div>
-                            {% endif %}
-                            {% if a.pk == 5 %}
                                 <div class="mr-2 flex items-center"><i class="far fa-smile"></i><p class="ml-1" style="color:#757575;">{{a}}</p></div>
                             {% endif %}
-                            {% if a.pk == 6 %}
-                                <div class="mr-2 flex items-center"><i class="far fa-star"></i><p class="ml-1" style="color:#757575;">{{a}}</p></div>
+                            {% if a.pk == 5 %}
+                                <div class="mr-2 flex items-center"><i class="far fa-thumbs-up"></i><p class="ml-1" style="color:#757575;">{{a}}</p></div>
                             {% endif %}
-                            {% if a.pk == 7 %}
+                            {% if a.pk == 6 %}
                                 <div class="mr-2 flex items-center"><i class="far fa-check-circle"></i><p class="ml-1" style="color:#757575;">{{a}}</p></div>
                             {% endif %}
-                            {% if a.pk == 8 %}
-                                <div class="mr-2 flex items-center"><i class="far fa-lightbulb"></i><p class="ml-1" style="color:#757575;">{{a}}</p></div>
-                            {% endif %}
-                            {% if a.pk == 9 %}
-                                <div class="mr-2 flex items-center"><i class="far fa-handshake"></i><p class="ml-1" style="color:#757575;">{{a}}</p></div>
+                            {% if a.pk == 7 %}
+                                <div class="mr-2 flex items-center"><i class="far fa-star"></i><p class="ml-1" style="color:#757575;">{{a}}</p></div>
                             {% endif %}
                         {% endfor %}
                 </div>
@@ -84,6 +78,8 @@
                     {% endif %}
 
                 {% endfor %}
+                {%include "mixins/salon/salon_pricelist.html"%}
+                <div class="pb-8 border-b mobile:pb-6"></div>
             </div>
             <div id="location" class="absolute" style="bottom: 47px;"></div> <!--여기에 location을 놓아야지 미용실 위치가 잘 나온다.-->
         </div>

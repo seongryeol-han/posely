@@ -65,6 +65,26 @@
                         {% endif %}
                             
                     {%endif%}
+
+                    {%if user.salons.count > 0%}
+                        {% for salon in user_obj.salons.all %}
+                        <a href="{% url 'salons:profile' salon.pk %}">    
+                            <div  class="border border-gray-400 rounded-md text-center py-1 px-4" style="font-size:0.9rem; font-weight:500;">
+                                내 미용실
+                            </div>
+                        </a>
+                        {%endfor%}
+                    {%else%}
+                        
+                        {% if user.salon == True %} 
+                        <a href="{% url 'salons:create' %}">    
+                            <div  class="border border-gray-400 rounded-md text-center py-1 px-4" style="font-size:0.9rem; font-weight:500;">
+                                미용실 만들기
+                            </div>
+                        </a>
+                        {% endif %}
+                            
+                    {%endif%}
                     
                 {%endif%}
             </div>

@@ -1,0 +1,553 @@
+{% if request.GET.salon_photo_filter == none %}
+
+    <a href="{% url "salons:salon_home" %}" style="" class="on mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            전체사진
+        </p>
+    </a>
+    <button type="submit" name="salon_photo_filter" value="말티즈" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            말티즈
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="푸들" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            푸들
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="포메" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            포메
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="비숑" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            비숑
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="시츄" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            시츄
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="치와와" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            치와와
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="꼬똥" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            꼬똥
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="중대형견" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            중대형견
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="그외견종" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            그외견종
+        </p>
+    </button>
+{% endif %}
+
+{% if request.GET.salon_photo_filter == "말티즈" %}
+
+    <button type="submit" name="salon_photo_filter" value="말티즈" style="padding: 6px 8px;" class="on mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            말티즈
+        </p>
+    </button>
+    <a href="{% url "salons:salon_home" %}" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            전체사진
+        </p>
+    </a>
+    
+    <button type="submit" name="salon_photo_filter" value="푸들" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            푸들
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="포메" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            포메
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="비숑" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            비숑
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="시츄" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            시츄
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="치와와" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            치와와
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="꼬똥" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            꼬똥
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="중대형견" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            중대형견
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="그외견종" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            그외견종
+        </p>
+    </button>
+{% endif %}
+
+{% if request.GET.salon_photo_filter == "푸들" %}
+
+    <button type="submit" name="salon_photo_filter" value="푸들" style="padding: 6px 8px;" class="on mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            푸들
+        </p>
+    </button>
+    <a href="{% url "salons:salon_home" %}" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            전체사진
+        </p>
+    </a>
+    
+    <button type="submit" name="salon_photo_filter" value="말티즈" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            말티즈
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="포메" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            포메
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="비숑" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            비숑
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="시츄" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            시츄
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="치와와" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            치와와
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="꼬똥" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            꼬똥
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="중대형견" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            중대형견
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="그외견종" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            그외견종
+        </p>
+    </button>
+{% endif %}
+
+{% if request.GET.salon_photo_filter == "포메" %}
+
+    <button type="submit" name="salon_photo_filter" value="포메" style="padding: 6px 8px;" class="on mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            포메
+        </p>
+    </button>
+    <a href="{% url "salons:salon_home" %}" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            전체사진
+        </p>
+    </a>
+    
+    <button type="submit" name="salon_photo_filter" value="말티즈" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            말티즈
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="푸들" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            푸들
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="비숑" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            비숑
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="시츄" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            시츄
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="치와와" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            치와와
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="꼬똥" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            꼬똥
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="중대형견" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            중대형견
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="그외견종" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            그외견종
+        </p>
+    </button>
+{% endif %}
+
+
+{% if request.GET.salon_photo_filter == "비숑" %}
+
+    <button type="submit" name="salon_photo_filter" value="비숑" style="padding: 6px 8px;" class="on mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            비숑
+        </p>
+    </button>
+    <a href="{% url "salons:salon_home" %}" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            전체사진
+        </p>
+    </a>
+    
+    <button type="submit" name="salon_photo_filter" value="말티즈" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            말티즈
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="푸들" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            푸들
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="포메" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            포메
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="시츄" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            시츄
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="치와와" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            치와와
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="꼬똥" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            꼬똥
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="중대형견" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            중대형견
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="그외견종" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            그외견종
+        </p>
+    </button>
+{% endif %}
+
+
+{% if request.GET.salon_photo_filter == "시츄" %}
+
+    <button type="submit" name="salon_photo_filter" value="시츄" style="padding: 6px 8px;" class="on mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            시츄
+        </p>
+    </button>
+    <a href="{% url "salons:salon_home" %}" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            전체사진
+        </p>
+    </a>
+    
+    <button type="submit" name="salon_photo_filter" value="말티즈" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            말티즈
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="푸들" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            푸들
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="포메" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            포메
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="비숑" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            비숑
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="치와와" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            치와와
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="꼬똥" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            꼬똥
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="중대형견" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            중대형견
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="그외견종" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            그외견종
+        </p>
+    </button>
+{% endif %}
+
+
+{% if request.GET.salon_photo_filter == "치와와" %}
+
+    <button type="submit" name="salon_photo_filter" value="치와와" style="padding: 6px 8px;" class="on mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            치와와
+        </p>
+    </button>
+    <a href="{% url "salons:salon_home" %}" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            전체사진
+        </p>
+    </a>
+    
+    <button type="submit" name="salon_photo_filter" value="말티즈" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            말티즈
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="푸들" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            푸들
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="포메" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            포메
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="비숑" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            비숑
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="시츄" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            시츄
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="꼬똥" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            꼬똥
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="중대형견" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            중대형견
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="그외견종" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            그외견종
+        </p>
+    </button>
+{% endif %}
+
+
+{% if request.GET.salon_photo_filter == "꼬똥" %}
+
+    <button type="submit" name="salon_photo_filter" value="꼬똥" style="padding: 6px 8px;" class="on mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            꼬똥
+        </p>
+    </button>
+    <a href="{% url "salons:salon_home" %}" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            전체사진
+        </p>
+    </a>
+    
+    <button type="submit" name="salon_photo_filter" value="말티즈" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            말티즈
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="푸들" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            푸들
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="포메" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            포메
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="비숑" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            비숑
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="시츄" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            시츄
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="치와와" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            치와와
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="중대형견" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            중대형견
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="그외견종" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            그외견종
+        </p>
+    </button>
+{% endif %}
+
+
+{% if request.GET.salon_photo_filter == "중대형견" %}
+
+    <button type="submit" name="salon_photo_filter" value="중대형견" style="padding: 6px 8px;" class="on mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            중대형견
+        </p>
+    </button>
+    <a href="{% url "salons:salon_home" %}" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            전체사진
+        </p>
+    </a>
+    
+    <button type="submit" name="salon_photo_filter" value="말티즈" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            말티즈
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="푸들" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            푸들
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="포메" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            포메
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="비숑" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            비숑
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="시츄" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            시츄
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="치와와" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            치와와
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="꼬똥" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            꼬똥
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="그외견종" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            그외견종
+        </p>
+    </button>
+{% endif %}
+
+{% if request.GET.salon_photo_filter == "그외견종" %}
+
+    <button type="submit" name="salon_photo_filter" value="그외견종" style="padding: 6px 8px;" class="on mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            그외견종
+        </p>
+    </button>
+    <a href="{% url "salons:salon_home" %}" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            전체사진
+        </p>
+    </a>
+    
+    <button type="submit" name="salon_photo_filter" value="말티즈" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            말티즈
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="푸들" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            푸들
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="포메" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            포메
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="비숑" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            비숑
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="시츄" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            시츄
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="치와와" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            치와와
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="꼬똥" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            꼬똥
+        </p>
+    </button>
+    <button type="submit" name="salon_photo_filter" value="중대형견" style="padding: 6px 8px;" class="mr-1 flex items-center text-xs rounded-lg border border-gray-400">
+        <p class="">
+            중대형견
+        </p>
+    </button>
+{% endif %}

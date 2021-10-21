@@ -14,22 +14,24 @@
    
 <div class="container mx-auto flex flex-col items-center overflow-auto mt-16 mobile:mt-12 mb-10 mobile:mb-10">
     <div class="h-14 w-600px small:w-full" style="padding-left:0.4rem; padding-right:0.4rem;">
-        <div class="flex items-center justify-center bg-gray-200 w-full h-14 rounded-lg" style="">
+        <a class="flex items-center justify-center bg-gray-200 w-full h-14 rounded-lg"  href="https://forms.gle/R2EidRKZmggfgXS38" target="_blank">
             <div class="flex flex-col text-gray-800 " style="width:13rem">
-                <span class="" style="font-family:'Nanum Gothic' !important; font-size:0.8rem; font-weight:700;">
-                    반려동물 사진촬영 예약 플랫폼
+                <span class="" style="font-family:'Nanum Gothic' !important; font-size:0.8rem; font-weight:800;">
+                    사진작가님을 대신 찾아드릴게요
                 </span>
                 <div class="" style="font-family:'Nanum Gothic' !important; font-size:0.7rem; font-weight:400;">
-                    포즐리에서 사진작가님을 모집해요
+                    반려동물과 소중한 추억, 지금 시작하세요!
                 </div>
             </div>
             <div style="width: 0.5rem;" class="h-full"></div>
             <div class="invertal"></div>
-            <a class="flex items-center justify-center h-full" href="https://bit.ly/포즐리등록신청하기" target="_blank">
-                <div class="w-full text-center rounded-xl" style="font-family:'Nanum Gothic' !important; font-size:0.8rem; font-weight:800; text-decoration: underline; padding-top:0.6rem; padding-bottom:0.6rem;">작가 등록하기</div>
+            <div class="flex items-center justify-center h-full">
+                <div>
+                    <div class="w-full text-center rounded-xl" style="font-family:'Nanum Gothic' !important; font-size:0.8rem; font-weight:700; text-decoration: underline;">사진관 추천 받기</div>
+                </div>
                 <img style="width: 1.5rem;" src="https://img.icons8.com/fluency-systems-regular/100/000000/nui2.png"/>
-            </a>
-        </div>
+            </div>
+        </a>
     </div>
     <div class="w-600px small:w-full"  style="padding-left: 6px; padding-right: 6px;">
         <div class ="grid opacity-0 mt-4" style="width: 100%;">
@@ -57,35 +59,49 @@
 <!--여기가 하단 메뉴바-->
 <div class="fixed bottom-0 left-0 w-full flex justify-center items-end border-t" style="z-index: 9999;">
     <div class="relative flex justify-center top-0 bg-white w-600px ">
-        <div class="flex justify-between h-full w-full py-1 mobile:pb-0 px-3" style="font-size: 0.6rem;">
-            <div style="width: 33.333%;">
-                <a class=" flex flex-col items-center" href="{% url "core:photo_home" %}">
+        <div class="flex justify-between h-full w-full py-1 mobile:pb-0 px-3" style="">
+            <div style="width: 15%;">
+                <a class=" flex flex-col items-center" href="{% url "core:studio_home" %}">
                     <!--<img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/home.png"/>-->
-                    <img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/home.png"/>
-                    <p style="color:#666666">홈</p>
+                    <img class="w-6" src="https://img.icons8.com/fluency-systems-filled/100/888888/camera.png"/>
+                    <p style="font-size: 10px; color:#666666">사진관</p>
                 </a>
             </div>
-            <div style="width: 33.333%;">
-                <a class=" flex flex-col items-center" href="">
-                    <img class="w-6" src="https://img.icons8.com/fluency-systems-filled/100/FE82B1/marker.png"/>
-                    <p style="color:#FE82B1">근처사진관</p>
+            <div style="width: 15%;">
+                <a class=" flex flex-col items-center" href="{% url "salons:salon_home" %}">
+                    <!--<img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/home.png"/>-->
+                    <img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/cut.png"/>
+                    <p style="font-size: 10px; color:#666666">미용실</p>
+                </a>
+            </div>
+            <div style="width: 15%;">
+                <a class=" flex flex-col items-center NOT_DISTANCE" id="studio_distance_sort_btn" style="cursor: pointer;">
+                    <img class="w-6" src="https://img.icons8.com/fluency-systems-filled/100/FE82B1/marker--v1.png"/>
+                    <p style="font-size: 10px; color:#FE82B1">근처사진관</p>
+                </a>
+            </div>
+            <div style="width: 15%;">
+                <a class=" flex flex-col items-center" href="https://forms.gle/7GL9KbttVYZT7Rar9" target="_blank">
+                    <!--<img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/home.png"/>-->
+                    <img class="w-6" src="https://img.icons8.com/fluency-systems-regular/48/888888/add-rule.png"/>
+                    <p style="font-size: 10px; color:#666666">입점신청</p>
                 </a>
             </div>
                 {% if user.is_authenticated %}
-                    <div style="width: 33.333%;" >
+                    <div style="width: 15%;" >
                         <a class="flex flex-col items-center" href="{{user.get_absolute_url}}">
                             <img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/user.png"/>
-                            <p style="color:#666666">프로필</p>
+                            <p style="font-size: 10px; color:#666666">프로필</p>
                         </a>
                     </div>
                           
                 {% else %}
-                    <div style="width: 33.333%;" >
+                    <div style="width: 15%;" >
                         <a class="flex flex-col items-center" href="{% url "users:login"%}">
                             <img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/user.png"/>
-                            <p style="color:#666666">로그인</p>
+                            <p style="font-size: 10px; color:#666666">로그인</p>
                         </a>
-                    </div>
+                    </div> 
                 {% endif %}
         </div>
     </div>

@@ -154,13 +154,13 @@ class HomeView3(ListView):
         return ps_with_avg
 
 
-class HomeView4(ListView):
+class StudioDistanceView(ListView):
     """StudioView Definition"""
 
     model = models.Studio
     paginate_by = 7
     context_object_name = "studios"
-    template_name = "studios/photo_studio_list.html"
+    template_name = "studios/studio_distance_list.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

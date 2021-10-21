@@ -1,0 +1,289 @@
+{% extends "base.html" %}
+{% load humanize %}
+
+{%block page_title%}반려동물 미용실 예약하기{%endblock page_title%}
+
+
+{% block content %}
+
+<style>
+    .wrap {
+        overflow-x:scroll;
+        white-space: nowrap;
+        -ms-overflow-style: none;
+    }
+    .wrap::-webkit-scrollbar{ 
+        display:none; 
+    }
+
+
+    .wrap button {
+        display:inline-block;
+        list-style:none;
+    }
+
+    .wrap a {
+        display:inline-block;
+        list-style:none;
+    }
+
+    .on{
+        background-color: rgb(128, 185, 255);
+        color: white;
+        border: none;
+        padding: 7px 8px;
+        font-weight: 500;
+    }
+
+    .clicked {
+        color: gold;
+      }
+
+    .wrap button:focus {
+        outline: 0;
+    }
+
+    @media (min-width:600px) {
+        .invertal { width: 6rem;}  
+      }
+</style>
+
+   
+<div class="container mx-auto flex flex-col items-center overflow-auto mt-16 mobile:mt-12 mb-10 mobile:mb-10">
+    <div class="h-14 w-600px small:w-full" style="padding-left:0.4rem; padding-right:0.4rem;">
+        <a class="flex items-center justify-center bg-gray-200 w-full h-14 rounded-lg"  href="https://forms.gle/BtfxYMwJmxejEkud8" target="_blank">
+            <div class="flex flex-col text-gray-800 " style="width:13rem">
+                <span class="" style="font-family:'Nanum Gothic' !important; font-size:0.8rem; font-weight:800;">
+                    미용실을 대신 찾아드릴게요
+                </span>
+                <div class="" style="font-family:'Nanum Gothic' !important; font-size:0.7rem; font-weight:400;">
+                    강아지를 위한 미용관리, 지금 시작하세요!
+                </div>
+            </div>
+            <div style="width: 0.5rem;" class="h-full"></div>
+            <div class="invertal"></div>
+            <div class="flex items-center justify-center h-full">
+                <div>
+                    <div class="w-full text-center rounded-xl" style="font-family:'Nanum Gothic' !important; font-size:0.8rem; font-weight:700; text-decoration: underline;">미용실 추천 받기</div>
+                </div>
+                <img style="width: 1.5rem;" src="https://img.icons8.com/fluency-systems-regular/100/000000/nui2.png"/>
+            </div>
+        </a>
+    </div>
+    <div class="h-12 mt-2 mb-1 w-600px small:w-full">
+        <form id="scroll" class="wrap px-2 py-1 text-gray-800" style="font-weight: 400;"  method="get" action="{% url "salons:salon_photo_filter" %}">
+            {% include "mixins/salon/salon_photo_filter_button.html"%}
+        </form>
+    </div>
+    <div class="w-600px small:w-full " style="padding-left: 0.4rem; padding-right: 0.4rem;"> 
+        <div class ="grid opacity-0" style="width: 100%;">
+                <div class="grid__col-sizer" style="width: 49%"></div>
+                <div class="grid__gutter-sizer" style="width: 2%"></div>
+                {% for photo in photos %}
+                <a class="grid-item mb-9 mobile:mb-7" style="width: 49%;" href="{% url "salons:concept_detail" photo.concept.pk %}">
+                    <img src="{{photo.file.url}}" alt="image" style="border-radius: 18px;">
+                    <div class="px-2 " style="margin-top: 0.3rem">
+                        <div class="flex flex-wrap items-end" style="font-size: 0.7rem; font-weight:400; height:0.8rem;">
+                            <p class="mr-1 text-blue-600 " style="">
+                                {{photo.salon.location}}
+                            </p>
+                            <p class="text-gray-600">
+                                {{photo.salon}}
+                            </p>
+                        </div>
+                        <div style="font-size: 0.65rem; font-weight: 400; height: 0.8rem;" class=" text-blue-400 flex" >
+                        {% for a in photo.salon.salon_badge.all %}
+                            {% if a.pk == 1 %}
+                                #CCTV
+                            {% endif %}
+                            {% if a.pk == 2 %}
+                                #픽업가능
+                            {% endif %}
+                            {% if a.pk == 3 %}
+                                #펫마스터
+                            {% endif %}
+                            {% if a.pk == 4 %}
+                                #친절한
+                            {% endif %}
+                            {% if a.pk == 5 %}
+                                #상처조심
+                            {% endif %}
+                            {% if a.pk == 6 %}
+                                #꼼꼼한
+                            {% endif %}
+                            {% if a.pk == 7 %}
+                                #청결한
+                            {% endif %}
+                        {% endfor %}    
+                        </div>
+                        <div style=" font-size: 0.7rem;  font-weight:400; margin-top: 0.2rem;" class="text-gray-700 flex flex-wrap justify-between" >
+                            <p class=>
+                                {{photo.caption}}
+                            </p>
+                            <p class=>
+                                &nbsp;&nbsp;₩{{photo.concept.price|intcomma}}~
+                            </p>
+                        </div>
+
+                    </div>
+                </a>
+                {% endfor %}
+
+                {% if request.GET.salon_photo_filter %}
+                    {% if photos.has_next %}
+                        <p class="pagination1">
+                            <a class="next-page2" href="?salon_photo_filter={{request.GET.salon_photo_filter}}&page={{photos.next_page_number }}"></a>
+                        </p>
+                    {% endif %}
+                {% else %}
+                    {% if page_obj.has_next %}
+                        <p class="pagination1">
+                            <a class="next-page2" href="?page={{ page_obj.next_page_number }}"></a>
+                        </p>
+                    {% endif %}
+                {% endif %}
+                    
+                
+        
+        </div>
+    </div>
+</div>
+
+<!--<button type="button" onclick="$('html').animate({scrollTop:0}, 500)">위로이동</button>-->
+<!--여기가 하단 메뉴바-->
+<div class="fixed bottom-0 left-0 w-full flex justify-center items-end border-t" style="z-index: 9999;">
+    <div class="relative flex justify-center top-0 bg-white w-600px ">
+        <div class="flex justify-between h-full w-full py-1 mobile:pb-0 px-3" style="">
+            <div style="width: 15%;">
+                <a class=" flex flex-col items-center" href="{% url "core:studio_home" %}">
+                    <!--<img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/home.png"/>-->
+                    <img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/camera.png"/>
+                    <p style="font-size: 10px; color:#666666">사진관</p>
+                </a>
+            </div>
+            <div style="width: 15%;">
+                <a class=" flex flex-col items-center" href="{% url "salons:salon_home" %}">
+                    <!--<img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/home.png"/>-->
+                    <img class="w-6" src="https://img.icons8.com/fluency-systems-filled/100/FE82B1/cut.png"/>
+                    <p style="font-size: 10px; color:#FE82B1">미용실</p>
+                </a>
+            </div>
+            <div style="width: 15%;">
+                <a class=" flex flex-col items-center NOT_DISTANCE" id="salon_distance_sort_btn" style="cursor: pointer;">
+                    <img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/marker--v1.png"/>
+                    <p style="font-size: 10px; color:#666666">근처미용실</p>
+                </a>
+            </div>
+            <div style="width: 15%;">
+                <a class=" flex flex-col items-center" href="https://forms.gle/7GL9KbttVYZT7Rar9" target="_blank">
+                    <!--<img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/home.png"/>-->
+                    <img class="w-6" src="https://img.icons8.com/fluency-systems-regular/48/888888/add-rule.png"/>
+                    <p style="font-size: 10px; color:#666666">입점신청</p>
+                </a>
+            </div>
+                {% if user.is_authenticated %}
+                    <div style="width: 15%;" >
+                        <a class="flex flex-col items-center" href="{{user.get_absolute_url}}">
+                            <img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/user.png"/>
+                            <p style="font-size: 10px; color:#666666">프로필</p>
+                        </a>
+                    </div>
+                          
+                {% else %}
+                    <div style="width: 15%;" >
+                        <a class="flex flex-col items-center" href="{% url "users:login"%}">
+                            <img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/user.png"/>
+                            <p style="font-size: 10px; color:#666666">로그인</p>
+                        </a>
+                    </div> 
+                {% endif %}
+        </div>
+    </div>
+</div>
+
+{% block search-bar %}
+    <form class="search_bar hidden fade-in-box flex items-center" method="get" action="{% url "salons:salon_search" %}">
+        <div class="border rounded-lg flex items-center justify-center">
+        <div class="flex items-center">
+            <div class="w-5 ml-3 mr-2"><img src="https://img.icons8.com/fluency-systems-filled/100/888888/search.png"/></div>
+            <input class="text-sm text-gray-900 placeholder-gray-500 py-1 rounded-md focus:outline-none" style="width:10rem" name="salon_search" placeholder="미용실 이름, 지역 검색" />
+            <div class="w-5 ml-3 mr-2 cancel_button"><img src="https://img.icons8.com/fluency-systems-filled/100/bbbbbb/cancel.png"/></div>
+        </div>
+        </div>
+    </form>
+{% endblock search-bar %}
+    
+    <!--{% include "partials/nav.html" %}-->
+
+<a style="display: none;" href="https://icons8.com/icon/i6fZC6wuprSu/home">Home icon by Icons8</a>
+<script>
+    
+    var $grid = $('.grid').isotope({
+    // options
+    itemSelector: 'none',
+    masonry:{
+        columnWidth: '.grid__col-sizer',
+        gutter: '.grid__gutter-sizer',
+    },
+    percentPosition: true,
+    stagger: 30,
+    });
+    // get Masonry instance
+
+    // initial items reveal
+    $grid.imagesLoaded( function() {
+        console.log("2222222222222");
+        $grid.removeClass('opacity-0');
+        $grid.isotope( 'option', { itemSelector: '.grid-item' });
+        var $items = $grid.find('.grid-item');
+        
+        $grid.isotope( 'appended', $items );
+    });
+
+    var iso = $grid.data('isotope');
+
+    //inifinite scroll
+    var $grid2 = $('.grid').infiniteScroll({
+        path: '.next-page2',
+        append: '.grid-item',
+        outlayer: iso,
+      });
+
+      var infScroll = $grid2.data('infiniteScroll');
+
+      $grid2.on( 'load.infiniteScroll', function() {
+        console.log("111111111111");
+      });
+    
+
+
+      //좌우 스크롤
+    $.fn.hasScrollBar = function() {
+        return (this.prop("scrollWidth") == 0 && this.prop("clientWidth") == 0)
+                || (this.prop("scrollWidth") > this.prop("clientWidth"));
+    }; // 좌우 스크롤이 있는지 없는지 여부 검사
+
+    function wheel(name){
+    $(name).on('mousewheel',function(e){
+        var hasScroll = $(this).hasScrollBar();
+        if(!hasScroll){ //스크롤이 없으면 그냥 일반 스크롤
+        }else{ //있으면 아래 스크롤 받는값을 없애고 좌우스크롤
+            e.preventDefault(); 
+            var wheelDelta = e.originalEvent.wheelDelta;
+            if(wheelDelta > 0){
+                $(this).scrollLeft(-wheelDelta + $(this).scrollLeft());
+            }else{
+                $(this).scrollLeft(-wheelDelta + $(this).scrollLeft());
+            }
+        }
+    });
+    }
+    $(function(){
+        wheel('#scroll');
+    });
+
+</script>
+
+{% endblock content %}
+
+
