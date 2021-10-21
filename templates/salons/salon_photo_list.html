@@ -51,22 +51,24 @@
    
 <div class="container mx-auto flex flex-col items-center overflow-auto mt-16 mobile:mt-12 mb-10 mobile:mb-10">
     <div class="h-14 w-600px small:w-full" style="padding-left:0.4rem; padding-right:0.4rem;">
-        <div class="flex items-center justify-center bg-gray-200 w-full h-14 rounded-lg" style="">
+        <a class="flex items-center justify-center bg-gray-200 w-full h-14 rounded-lg"  href="https://forms.gle/BtfxYMwJmxejEkud8" target="_blank">
             <div class="flex flex-col text-gray-800 " style="width:13rem">
-                <span class="" style="font-family:'Nanum Gothic' !important; font-size:0.8rem; font-weight:700;">
-                    반려동물 사진촬영 예약 플랫폼
+                <span class="" style="font-family:'Nanum Gothic' !important; font-size:0.8rem; font-weight:800;">
+                    미용실을 대신 찾아드릴게요
                 </span>
                 <div class="" style="font-family:'Nanum Gothic' !important; font-size:0.7rem; font-weight:400;">
-                    포즐리에서 사진작가님을 모집해요
+                    강아지를 위한 미용관리, 지금 시작하세요!
                 </div>
             </div>
             <div style="width: 0.5rem;" class="h-full"></div>
             <div class="invertal"></div>
-            <a class="flex items-center justify-center h-full" href="https://bit.ly/포즐리등록신청하기" target="_blank">
-                <div class="w-full text-center rounded-xl" style="font-family:'Nanum Gothic' !important; font-size:0.8rem; font-weight:800; text-decoration: underline; padding-top:0.6rem; padding-bottom:0.6rem;">작가 등록하기</div>
+            <div class="flex items-center justify-center h-full">
+                <div>
+                    <div class="w-full text-center rounded-xl" style="font-family:'Nanum Gothic' !important; font-size:0.8rem; font-weight:700; text-decoration: underline;">미용실 추천 받기</div>
+                </div>
                 <img style="width: 1.5rem;" src="https://img.icons8.com/fluency-systems-regular/100/000000/nui2.png"/>
-            </a>
-        </div>
+            </div>
+        </a>
     </div>
     <div class="h-12 mt-2 mb-1 w-600px small:w-full">
         <form id="scroll" class="wrap px-2 py-1 text-gray-800" style="font-weight: 400;"  method="get" action="{% url "salons:salon_photo_filter" %}">
@@ -90,33 +92,27 @@
                             </p>
                         </div>
                         <div style="font-size: 0.65rem; font-weight: 400; height: 0.8rem;" class=" text-blue-400 flex" >
-                            {% for a in photo.salon.salon_badge.all %}
+                        {% for a in photo.salon.salon_badge.all %}
+                            {% if a.pk == 1 %}
+                                #CCTV
+                            {% endif %}
                             {% if a.pk == 2 %}
-                                #프로
+                                #픽업가능
                             {% endif %}
                             {% if a.pk == 3 %}
-                                #슈퍼루키
-                            {% endif %}
-                            {% if a.pk == 4 %}
                                 #펫마스터
                             {% endif %}
-                            {% if a.pk == 5 %}
-                                #맞춤형
-                            {% endif %}
-                            {% if a.pk == 6 %}
+                            {% if a.pk == 4 %}
                                 #친절한
                             {% endif %}
-                            {% if a.pk == 7 %}
-                                #쾌적한
+                            {% if a.pk == 5 %}
+                                #상처조심
                             {% endif %}
-                            {% if a.pk == 8 %}
+                            {% if a.pk == 6 %}
                                 #꼼꼼한
                             {% endif %}
-                            {% if a.pk == 9 %}
-                                #다양한
-                            {% endif %}
-                            {% if a.pk == 10 %}
-                                #제휴가능
+                            {% if a.pk == 7 %}
+                                #청결한
                             {% endif %}
                         {% endfor %}    
                         </div>
@@ -179,7 +175,7 @@
                 </a>
             </div>
             <div style="width: 15%;">
-                <a class=" flex flex-col items-center" href="{% url "core:studio_home" %}">
+                <a class=" flex flex-col items-center" href="https://forms.gle/7GL9KbttVYZT7Rar9" target="_blank">
                     <!--<img class="w-6" src="https://img.icons8.com/fluency-systems-regular/100/888888/home.png"/>-->
                     <img class="w-6" src="https://img.icons8.com/fluency-systems-regular/48/888888/add-rule.png"/>
                     <p style="font-size: 10px; color:#666666">입점신청</p>
